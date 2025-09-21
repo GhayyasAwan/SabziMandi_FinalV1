@@ -48,6 +48,8 @@ namespace MandiPOS.CLasses
         public decimal DebitAmount { get; set; }
 
         public decimal CreditAmount { get; set; }
+        public decimal EnteredBy { get; set; }
+
 
     }
     public class JVCart
@@ -64,6 +66,8 @@ namespace MandiPOS.CLasses
         public decimal DebitAmount { get; set; }
         [DisplayName("رقم بنام")]
         public decimal CreditAmount { get; set; }
+        public int EnteredBy { get; set; }
+        public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }
     public class VoucherDetails
     {
@@ -79,6 +83,8 @@ namespace MandiPOS.CLasses
         public int CashAccountID { get; set; }
 
         public decimal Amount { get; set; }
+        public int EnteredBy { get; set; }
+
 
     }
     public class VoucherCart
@@ -97,6 +103,8 @@ namespace MandiPOS.CLasses
         public string Narration { get; set; }
         [DisplayName("رقم")]
         public decimal Amount { get; set; }
+        public int EnteredBy { get; set; }
+        public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }
     public class BardanaCart
     {
@@ -129,8 +137,9 @@ namespace MandiPOS.CLasses
         [DisplayName("رقم جمع")]
         public decimal CreditAmount { get; set; }
         [Browsable(false)]
-        public string ItemDescription { get { return $"{ItemName}_{ItemQty}*{ItemQty}={ItemRate * ItemQty}"; } }
-
+        public string ItemDescription { get { return $"{ItemName} {ItemQty}*{ItemRate}"; } }
+        public int EnteredBy { get; set; }
+        public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }
     public class VoucherBardanaDetails
     {
@@ -153,6 +162,7 @@ namespace MandiPOS.CLasses
         public decimal CreditAmount { get; set; }
 
         public string ItemDescription { get; set; }
+        public int EnteredBy { get; set; }
 
     }
     public static class VoucherService
@@ -175,14 +185,16 @@ p.AccountTitle as 'PartyName',
 CashAccountID,
 cp.AccountTitle as 'CashAccount',
 vd.Narration,
-vd.Amount
+vd.Amount, vd.EnteredBy
 from voucherDetails vd
 left join DetailAccounts cp on vd.cashAccountID=cp.ID
 left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
                     if (voucher.VoucherType == 3.ToString())
                     {
-                        sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription
+                        sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
+acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
+bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
 from VoucherBardanaDetails bd
 left join tblItems p on bd.itemID=p.ID
 left join DetailAccounts acc on bd.accountiD=acc.ID

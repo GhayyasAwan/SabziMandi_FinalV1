@@ -114,7 +114,6 @@
             this.xrTable1.StylePriority.UseBorderDashStyle = false;
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseBorderWidth = false;
-            this.xrTable1.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrTable1_BeforePrint);
             // 
             // xrTableRow1
             // 
@@ -144,7 +143,6 @@
             this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("calibri", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 10, 0, 0, 100F);
-            this.xrTableCell2.Scripts.OnPreviewClick = "xrTableCell2_PreviewClick";
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UsePadding = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
@@ -611,9 +609,7 @@
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
-            this.ScriptsSource = "\r\nprivate void xrTableCell2_PreviewClick(object sender, DevExpress.XtraReports.UI" +
-    ".PreviewMouseEventArgs e) \r\n{\r\n    }\r\n";
-            this.Version = "24.2";
+            this.Version = "25.2";
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
             xrWatermark1});

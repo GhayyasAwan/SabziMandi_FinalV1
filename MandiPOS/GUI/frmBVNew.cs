@@ -1,10 +1,17 @@
-﻿using Janus.Windows.GridEX;
+﻿using Dapper;
+
+using DevExpress.XtraEditors.Repository;
+
+using Janus.Windows.GridEX;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MandiPOS.GUI
 {
@@ -18,6 +25,15 @@ namespace MandiPOS.GUI
         public frmBVNew()
         {
             InitializeComponent();
+            _code.RegisterFocus(true);
+            _name.RegisterFocus(true);
+            _cr.RegisterFocus(false);
+            _dr.RegisterFocus(false);
+            _narration.RegisterFocus(true);
+            _items.RegisterFocus(true);
+            _qty.RegisterFocus(false);
+            _rate.RegisterFocus(false);
+            dtp.RegisterFocus(false);
             _narration.KeyDown += _narration_KeyDown;
             _qty.KeyDown += ((s, e) =>
             {
@@ -141,6 +157,29 @@ namespace MandiPOS.GUI
                 var data = dgv.CurrentRow.DataRow as BardanaCart;
                 if (data != null)
                 {
+                    if (!General.IsAdmin && data.EnteredBy != 0 && data.EnteredBy != General.CurrentUserID)
+                    {
+                        this.Error("You are not allowed to Edit/Delete Other User Entry.");
+                        return;
+                    }
+                    using (var db = new db())
+                    {
+                        using (var trx = db.BeginTransaction())
+                        {
+                            try
+                            {
+                                db.Delete<VoucherBardanaDetails>(data.ID, transaction: trx);
+                                trx.Commit();
+                                
+                            }
+                            catch (Exception ex)
+                            {
+                                trx.Rollback();
+                                ex.ExcError(null);return;
+                            }
+                        }
+                    }
+                    Refresh();
                     if (data.DebitAmount != 0)
                     {
                         rbDebit.Checked = true;
@@ -169,11 +208,8 @@ namespace MandiPOS.GUI
                     _items.SelectedValue = data.ItemID;
                     _qty.Value = data.ItemQty;
                     _rate.Value = data.ItemRate;
-                    bsCart.Remove(data);
-                    bsCart.ResetBindings(false);
                     _name.Select();
                     _name.SelectAll(); this.SwitchToUrdu();
-
                 }
             }
         }
@@ -188,6 +224,10 @@ namespace MandiPOS.GUI
             if (e.DownKey())
             {
                 dgvHelp.Select();
+            }
+            if(e.EscapeKey())
+            {
+                dgvHelp.Hide();
             }
         }
 
@@ -301,11 +341,52 @@ namespace MandiPOS.GUI
                 ID = 0,
                 VoucherID = main.VoucherID
             };
-            bsCart.Add(c);
-            isChanged = true;
-            bsCart.ResetBindings(false);
-            clearEntryPanel();
-            _name.Select();
+
+            using (var db = new db())
+            {
+                using (var trx = db.BeginTransaction())
+                {
+                    try
+                    {
+                        Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{vType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
+                        if (main.VoucherID == 0)
+                        {
+                            vmain = new Vouchers()
+                            {
+                                VoucherType = vType.ToString(),
+                                CreatedBy = General.CurrentUserID.ToString(),
+                                CreatedDate = DateTime.Now,
+                                VoucherDate = dtp.Value.Date,
+                                VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{vType}'", transaction: trx)
+                            };
+                            db.Insert<Vouchers>(vmain, transaction: trx);
+                        }
+                        VoucherBardanaDetails d = new VoucherBardanaDetails()
+                        {
+                            DebitAmount = c.DebitAmount,
+                            ItemRate = c.ItemRate,
+                            Narration = c.Narration,
+                            AccountID = c.AccountID,
+                            CreditAmount = c.CreditAmount,
+                            ItemDescription = c.ItemDescription,
+                            ItemID = c.ItemID,
+                            ItemQty = c.ItemQty,
+                            VoucherID = vmain.VoucherID, EnteredBy=General.CurrentUserID
+                        };
+                        db.Insert<VoucherBardanaDetails>(d, transaction: trx);
+                        trx.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        ex.ExcError(null);
+                        return;
+                    }
+                    
+                }
+            }
+            Refresh();
+            clearEntryPanel();_name.Select();
         }
         private void CalculateAmount(object sender, EventArgs e)
         {
@@ -347,25 +428,17 @@ namespace MandiPOS.GUI
         int current = 0;
         private void clearEntryPanel()
         {
-            _code.RegisterFocus(true);
-            _name.RegisterFocus(true);
-            _cr.RegisterFocus(false);
-            _dr.RegisterFocus(false);
-            _narration.RegisterFocus(true);
-            _items.RegisterFocus(true);
-            _qty.RegisterFocus(false);
-            _rate.RegisterFocus(false);
-            dtp.RegisterFocus(false);
-            _code.Clear();
-            _name.Clear();
-            current = 0;
-            SetPartybalance();
-            _cr.Clear();
-            _dr.Clear();
-            _narration.Clear();
-            _items.SelectedIndex = -1;
-            _qty.Clear();
-            _rate.Clear();
+            
+           // _code.Clear();
+           // _name.Clear();
+           //current = 0;
+           // SetPartybalance();
+           // _cr.Clear();
+           // _dr.Clear();
+           // _narration.Clear();
+           // _items.SelectedIndex = -1;
+            //_qty.Clear();
+            //_rate.Clear();
             RefreshItems();
             RefreshParties();
         }

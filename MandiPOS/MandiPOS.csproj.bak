@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props" Condition="Exists('..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,35 +72,44 @@
     <Reference Include="dbup-sqlserver, Version=6.0.0.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
       <HintPath>..\packages\dbup-sqlserver.6.0.0\lib\netstandard2.0\dbup-sqlserver.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.BonusSkins.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Charts.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.Desktop.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.DataAccess.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Drawing.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v24.2.Drawing, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.PivotGrid.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v24.2.Export, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v24.2.UI, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpo.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraBars.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v24.2.UI, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v24.2.Wizard, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGauges.v24.2.Core, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v24.2.Extensions, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraTreeList.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DeltaCompressionDotNet.MsDelta, Version=1.1.0.0, Culture=neutral, PublicKeyToken=46b2138a390abf55, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.MsDelta.dll</HintPath>
+    </Reference>
+    <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Charts.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v24.2.Drawing, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v24.2.Export, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v24.2.UI, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v24.2.UI, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v24.2.Wizard, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v24.2.Extensions, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="Fasterflect.Reflect">
       <HintPath>..\..\MandiSoftware\packages\Fasterflect.Reflect.3.1.0\lib\net45\Fasterflect.Reflect.dll</HintPath>
     </Reference>
@@ -169,6 +179,30 @@
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=8.12.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.8.12.1\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.11.2.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.2\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.11.2.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.2\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.11.2.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.2\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.11.2.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.2\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\squirrel.windows.2.0.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.17.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.17.1\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="Squirrel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\squirrel.windows.2.0.1\lib\Net45\Squirrel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -320,6 +354,7 @@
     <Compile Include="CLasses\ItemTypes.cs" />
     <Compile Include="CLasses\JVCart.cs" />
     <Compile Include="CLasses\MasterAccounts.cs" />
+    <Compile Include="CLasses\MasterSheet.cs" />
     <Compile Include="CLasses\SaleItemViewModel.cs" />
     <Compile Include="CLasses\SmoothScrollingLabel.cs">
       <SubType>Component</SubType>
@@ -328,6 +363,8 @@
     <Compile Include="CLasses\tblConfigs.cs" />
     <Compile Include="CLasses\tblItems.cs" />
     <Compile Include="CLasses\tblSale.cs" />
+    <Compile Include="CLasses\tblUsers.cs" />
+    <Compile Include="CLasses\UpdateHelper.cs" />
     <Compile Include="CLasses\Vouchers.cs" />
     <Compile Include="CLasses\vwmarka.cs" />
     <Compile Include="CLasses\vw_CommissionReport.cs" />
@@ -398,6 +435,12 @@
     <Compile Include="GUI\frmKhasraSummary.Designer.cs">
       <DependentUpon>frmKhasraSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmMarkaDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -434,11 +477,29 @@
     <Compile Include="GUI\frmSubPartiesSale.Designer.cs">
       <DependentUpon>frmSubPartiesSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmUserEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmUserEditor.Designer.cs">
+      <DependentUpon>frmUserEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmVoucherNew.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmVoucherNew.Designer.cs">
       <DependentUpon>frmVoucherNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frWPChanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frWPChanger.Designer.cs">
+      <DependentUpon>frWPChanger.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\rptChithaFull.cs">
       <SubType>Component</SubType>
@@ -545,6 +606,12 @@
     <Compile Include="Reports\rptCustomerSale.Designer.cs">
       <DependentUpon>rptCustomerSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\rptHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptHeader.Designer.cs">
+      <DependentUpon>rptHeader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rptIncomeChart.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -563,11 +630,23 @@
     <Compile Include="Reports\rptMarkaSummary.Designer.cs">
       <DependentUpon>rptMarkaSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\rptMasterSheet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptMasterSheet.Designer.cs">
+      <DependentUpon>rptMasterSheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rptMonthlyIncome.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptMonthlyIncome.Designer.cs">
       <DependentUpon>rptMonthlyIncome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptPartyLedger.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptPartyLedger.Designer.cs">
+      <DependentUpon>rptPartyLedger.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\rptRokar.cs">
       <SubType>Component</SubType>
@@ -649,6 +728,9 @@
     <EmbeddedResource Include="GUI\frmKhasraSummary.resx">
       <DependentUpon>frmKhasraSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmMarkaDetails.resx">
       <DependentUpon>frmMarkaDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -668,8 +750,17 @@
     <EmbeddedResource Include="GUI\frmSubPartiesSale.resx">
       <DependentUpon>frmSubPartiesSale.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmUserEditor.resx">
+      <DependentUpon>frmUserEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmVoucherNew.resx">
       <DependentUpon>frmVoucherNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frWPChanger.resx">
+      <DependentUpon>frWPChanger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\rptChithaFull.resx">
       <DependentUpon>rptChithaFull.cs</DependentUpon>
@@ -733,6 +824,9 @@
     <EmbeddedResource Include="Reports\rptCustomerSale.resx">
       <DependentUpon>rptCustomerSale.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptHeader.resx">
+      <DependentUpon>rptHeader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptIncomeChart.resx">
       <DependentUpon>rptIncomeChart.cs</DependentUpon>
     </EmbeddedResource>
@@ -742,8 +836,14 @@
     <EmbeddedResource Include="Reports\rptMarkaSummary.resx">
       <DependentUpon>rptMarkaSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptMasterSheet.resx">
+      <DependentUpon>rptMasterSheet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptMonthlyIncome.resx">
       <DependentUpon>rptMonthlyIncome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptPartyLedger.resx">
+      <DependentUpon>rptPartyLedger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptRokar.resx">
       <DependentUpon>rptRokar.cs</DependentUpon>
@@ -780,6 +880,7 @@
     <None Include="Properties\DataSources\MandiPOS.CLasses.MasterAccounts.datasource" />
     <None Include="Properties\DataSources\MandiPOS.CLasses.tblCity.datasource" />
     <None Include="Properties\DataSources\MandiPOS.CLasses.tblItems.datasource" />
+    <None Include="Properties\DataSources\MandiPOS.CLasses.tblUsers.datasource" />
     <None Include="Properties\DataSources\MandiPOS.CLasses.VoucherCart.datasource" />
     <None Include="Properties\DataSources\MandiPOS.CLasses.vwmarka.datasource" />
     <None Include="Properties\DataSources\MandiPOS.CLasses.vwSale1.datasource" />
@@ -868,6 +969,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fruits-and-vegetables.ico" />
+    <Content Include="Scripts\0004-Alter sp_Ledger.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20-07-2025_007.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20-07-2025_008.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20-07-2025_009.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\28-07-2025 - 1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\28-07-2025 - 2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\28-07-2025 - 3.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\28-07-2025 - 4.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\28-07-2025.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\refresh-149-16.png" />
     <Content Include="Scripts\0003- SubParties Sale.sql">
       <SubType>Form</SubType>
@@ -904,6 +1032,15 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
     <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
+    <Error Condition="!Exists('..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props'))" />
   </Target>
   <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>REM delete all .xml files under the output directory
+for /R "$(TargetDir)" %25%25f in (*.xml) do del /Q "%25%25f"
+
+
+REM delete all .pdb files under the output directory
+for /R "$(TargetDir)" %25%25f in (*.pdb) do del /Q "%25%25f"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

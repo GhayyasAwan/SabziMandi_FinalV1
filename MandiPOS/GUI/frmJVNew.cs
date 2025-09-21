@@ -1,5 +1,9 @@
-﻿using Janus.Windows.GridEX;
+﻿using Dapper;
+
+using Janus.Windows.GridEX;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Data;
 using System.Drawing;
@@ -203,6 +207,44 @@ namespace MandiPOS.GUI
                     Narration = _narration.Text.Trim(),
                     AccountCode = _code.Text.Trim()
                 };
+                using (var db = new db())
+                {
+                    using (var trx = db.BeginTransaction())
+                    {
+                        try
+                        {
+                            Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
+                            if (main.VoucherID == 0)
+                            {
+                                vmain = new Vouchers()
+                                {
+                                    VoucherType = VoucherType.ToString(),
+                                    CreatedBy = General.CurrentUserID.ToString(),
+                                    CreatedDate = DateTime.Now,
+                                    VoucherDate = dtp.Value.Date,
+                                    VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
+                                };
+                                db.Insert<Vouchers>(vmain, transaction: trx);
+                            }
+                            JVEntries d = new JVEntries()
+                            {
+                                 AccountID=c.AccountID, CreditAmount=c.CreditAmount, 
+                                  DebitAmount=c.DebitAmount, Narration=c.Narration, VoucherID=vmain.VoucherID, EnteredBy = General.CurrentUserID,
+                            };
+                            db.Insert<JVEntries>(d, transaction: trx);
+                            trx.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trx.Rollback();
+                            ex.ExcError(null);
+                            return;
+                        }
+                    }
+                }
+
+
+
                 bs.Add(c);
                 bs.ResetBindings(false);
                 _narration.Clear();

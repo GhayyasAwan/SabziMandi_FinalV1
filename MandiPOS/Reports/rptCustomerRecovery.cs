@@ -11,6 +11,7 @@ namespace MandiPOS.Reports
         public rptCustomerRecovery(DateTime date)
         {
             InitializeComponent();
+            
             this.HideWarnings();
             string sql = $@"DECLARE @SelectedDate DATE = '{date:yyyy-MM-dd}';
 
@@ -31,21 +32,25 @@ WHERE acc.MasterID = 7 and acc.AccountCode <> 70190
 GROUP BY t.AccountID, acc.AccountCode, acc.AccountTitle
 HAVING 
     --ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN DebitAmount + CreditAmount END), 0) <> 0
-    ISNULL(SUM(DebitAmount-CreditAmount),0) <> 0
+    ISNULL(SUM(DebitAmount-CreditAmount),0) <> 0  OR MAX(VoucherDate) = @SelectedDate
 ORDER BY 
     HasTodayDebit DESC,  -- Accounts with TodayDebit > 0 first
     LastDate DESC,      -- Then sort by date descending within each group
     AccountCode         -- Secondary sort for consistent ordering";
             System.Collections.Generic.List<AccountBalanceSummary> data = new db().Query<AccountBalanceSummary>(sql).ToList();
+            var toRemove = data
+     .Where(x => x.CurrentBalance < 0 && x.LastDate.Date < DateTime.Today)
+     .ToList();
+
             var accountBalanceList = data
-                .Where(x => !(x.CurrentBalance <= 0 && x.LastDate.Date != date))
+                .Where(x => !(x.CurrentBalance <= 0 && x.LastDate.Date < date.Date))
                 .ToList();
             //System.Collections.Generic.List<AccountBalanceSummary> data2 = new System.Collections.Generic.List<AccountBalanceSummary>();
             //foreach (var item in data)
             //{ 
                 
             //}
-            this.DataSource = accountBalanceList.ToDataTable();
+            this.DataSource = accountBalanceList;
             this.lblDate.Text = $@"{date:dd-MMM-yyyy}";
             this.lbl2.Text = $@"Print on: {DateTime.Now.Date:dd-MMM-yyyy hh:mm tt}";
         }
@@ -103,18 +108,6 @@ ORDER BY
             SetValueFormat(sender);
         }
 
-        private void xrTable1_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //XRTableRow row = (XRTableRow)sender;
-            //XRTableCell targetCell = row.Cells["xrTableCell12"]; // Replace with your actual cell name or index
-
-            //// Parse the cell value to decimal and check condition
-            //decimal cellValue = 0;
-            //Decimal.TryParse(Convert.ToString(targetCell.Text), out cellValue);
-
-            //// Hide row if cell value is zero
-            //row.Visible = cellValue != 0;
-
-        }
+        
     }
 }

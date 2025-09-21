@@ -1,13 +1,18 @@
 ﻿using Dapper;
+
 using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
 using MandiPOS.Reports;
 using MandiPOS.Reports.ReportClasses;
+
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -146,6 +151,8 @@ namespace MandiPOS.GUI
                     {
                         case "rb_Report15":
                             rb.Enabled = true;break;
+                        case "rb_Report06":
+                            rb.Enabled = true; break;
                         default: rb.Enabled = General.IsAdmin; break;
                     }
                 }
@@ -230,7 +237,8 @@ namespace MandiPOS.GUI
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Show(); lblDate2.Show();
-                    _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
+                    _pname.Show(); lblParty.Show(); 
+                    txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
@@ -291,11 +299,14 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report07": //بیوپاری بکری
-                    ReportID = 7; bsParties.DataSource = dtParties;
+                    ReportID = 7;
+                    dtParties = DetailAccountService.VendorAccounts().ToDataTable();
+                    bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    _pname.Show(); 
+                    lblParty.Show();
                     _pname.Clear();
                     cmbCity.Hide(); lblCity.Hide();
                     lblgroup.Hide(); cmbGroups.Hide();
@@ -598,16 +609,48 @@ namespace MandiPOS.GUI
             {
                 dgvHelp.Visible = true;
 
-                string[] parts = _pname.Text.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = _pname.Text.Trim()
+    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Cast the data source to a DataView for filtering and sorting
-                DataView view = ((DataTable)bsParties.DataSource).DefaultView;
+                DataTable table = (DataTable)bsParties.DataSource;
 
-                // Build filter condition
+                //// Make sure we have a helper column for sorting
+                //if (!table.Columns.Contains("SearchPriority"))
+                //    table.Columns.Add("SearchPriority", typeof(int));
+
+                //// Reset priorities before setting new ones
+                //foreach (DataRow row in table.Rows)
+                //{
+                //    row["SearchPriority"] = 1; // default (contains only)
+                //}
+
+                //if (parts.Length > 0)
+                //{
+                //    string part = parts[0];
+
+                //    foreach (DataRow row in table.Rows)
+                //    {
+                //        string title = row["AccountTitle"].ToString();
+                //        string code = row["AccountCode"].ToString();
+
+                //        if (title.StartsWith(part, StringComparison.OrdinalIgnoreCase) ||
+                //            code.StartsWith(part, StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            row["SearchPriority"] = 0; // starts with = higher priority
+                //        }
+                //    }
+                //}
+
+                // Build filter condition (same as before)
                 var filters = parts.Select(part =>
-                    $"(AccountTitle LIKE '%{part.Replace("'", "''")}%' OR Convert(AccountCode, 'System.String') LIKE '%{part.Replace("'", "''")}%')"
+                    $"(AccountTitle LIKE '%{part.Replace("'", "''")}%' " +
+                    $"OR Convert(AccountCode, 'System.String') LIKE '%{part.Replace("'", "''")}%')"
                 );
                 bsParties.Filter = string.Join(" AND ", filters);
+
+                // Apply sorting
+                DataView view = table.DefaultView;
+               // view.Sort = "SearchPriority ASC";
                 bsParties.ResetBindings(false);
             }
 
@@ -666,8 +709,12 @@ namespace MandiPOS.GUI
             using (new waitForm())
             {
                 var rpt = new rptCustomerRecovery(dtp.Value.Date);
+                
                 rpt.CreateDocument();
-                ShowReport(rpt);
+                var frm = new XtraForm1(rpt);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.Show();
+                frm.BringToFront();
             }
         }
 
@@ -720,20 +767,17 @@ namespace MandiPOS.GUI
         private void ShowReport(XtraReport rpt)
         {
             if (rpt == null) return;
-
-            var tool = new ReportPrintTool(rpt);
-            tool.ShowPreview();
-            var frm = tool.PreviewForm;
-            if (frm == null) return;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.BringToFront();
+            var frm= new XtraForm1(rpt);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();frm.BringToFront();
+            return;
         }
 
         private void ShowVendorSale()
         {
             using (new waitForm())
             {
-                var frm = new rptVendorSale(dtp.Value.Date);
+                var frm = new rptVendorSale(dtp.Value.Date,_pid.Text.Trim().toInt());
                 ShowReport(frm);
             }
         }
@@ -871,7 +915,7 @@ Order By mas.id";
                                 });
 
                             // 3️⃣ Combine Both Sets
-                            var combined4 = creditGrouped4
+                            System.Collections.Generic.List<clsLedger> combined4 = creditGrouped4
                                 .Concat(debitOnly4)
                                 .OrderBy(x => x.VoucherDate)
                                 .ThenBy(x => x.BillNo)
@@ -937,7 +981,7 @@ Order By mas.id";
                 }
 
 
-                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date,reportType);
+                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date,reportType,acc.MasterID);
                 frm.Show();
             }
         }

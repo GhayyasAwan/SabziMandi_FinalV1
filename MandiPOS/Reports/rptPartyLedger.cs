@@ -47,7 +47,8 @@ namespace MandiPOS.Reports
                 xrLabel1.Text = "فرد حساب";
             }
             this.DataSource = data;
-
+            string summary = new db().QuerySingle<string>($"Select dbo.fn_GetPartyItemSummary('{date1}','{date2}',{PartyID}) as summary");
+            lblSummary.Text = summary;
         }
 
         private void xrTableCell8_BeforePrint(object sender, CancelEventArgs e)

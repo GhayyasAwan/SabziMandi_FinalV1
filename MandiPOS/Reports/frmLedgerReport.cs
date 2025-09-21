@@ -3,9 +3,11 @@ using DevExpress.XtraRichEdit.Model;
 
 using Janus.Windows.GridEX;
 using MandiPOS.CLasses;
+using MandiPOS.GUI;
 using MandiPOS.Reports.ReportClasses;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,11 +21,15 @@ namespace MandiPOS.Reports
         int partyID = 0;
         List<clsLedger> data;
         int reportTyype;
+        int MasterID = 0;
 
 
-        public frmLedgerReport(List<clsLedger> _data, int PartyID, DateTime date, DateTime date1, int reportType)
+        public frmLedgerReport(List<clsLedger> _data, int PartyID, DateTime date, DateTime date1, int reportType, int masterID)
         {
             InitializeComponent();
+            MasterID = masterID;
+            uiComboBox1.SelectedIndex = 0;
+            uiComboBox1.SelectedIndexChanged += UiComboBox1_SelectedIndexChanged;
             data = _data;
             reportTyype = reportType;
             d1=date;d2=date1;
@@ -49,6 +55,37 @@ namespace MandiPOS.Reports
             dgvLedger.ColumnButtonClick += DgvLedger_ColumnButtonClick;
             dgvLedger.FormattingRow += DgvLedger_FormattingRow;
 
+        }
+
+        private void UiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (uiComboBox1.SelectedIndex == 0) //Complete
+            {
+                clsLedgerBindingSource.DataSource = data;
+                dgvLedger.RootTable.Columns["Balance"].Visible = true;
+                dgvLedger.RootTable.Columns["Credit"].Visible = true;
+                dgvLedger.RootTable.Columns["Debit"].Visible = true;
+                dgvLedger.RootTable.Columns["Status"].Visible = true;
+            }
+            else if (uiComboBox1.SelectedIndex == 1) //
+            {
+                var filteredData = data.Where(x => x.Debit != 0).ToList();
+                dgvLedger.RootTable.Columns["Balance"].Visible = false;
+                dgvLedger.RootTable.Columns["Credit"].Visible = false;
+                dgvLedger.RootTable.Columns["Debit"].Visible = true ;
+                dgvLedger.RootTable.Columns["Status"].Visible = false;
+                clsLedgerBindingSource.DataSource = filteredData;
+            }
+            else if (uiComboBox1.SelectedIndex == 2)
+            {
+                var filteredData = data.Where(x => x.Credit != 0).ToList();
+                dgvLedger.RootTable.Columns["Balance"].Visible = false;
+                dgvLedger.RootTable.Columns["Credit"].Visible = true;
+                dgvLedger.RootTable.Columns["Debit"].Visible = false;
+                dgvLedger.RootTable.Columns["Status"].Visible = false;
+                clsLedgerBindingSource.DataSource = filteredData;
+            }
+            clsLedgerBindingSource.ResetBindings(false);
         }
 
         private void DgvLedger_FormattingRow(object sender, Janus.Windows.GridEX.RowLoadEventArgs e)
@@ -97,7 +134,14 @@ namespace MandiPOS.Reports
                     using (var rpt = new saleBill(billNo, 1))
                     {
                         rpt.CreateDocument();
-                        rpt.ShowPreviewDialog();
+                        using (var frm = new XtraForm1(rpt))
+                        {
+                            frm.StartPosition = FormStartPosition.CenterScreen;
+                            frm.WindowState = FormWindowState.Normal;
+                            Size s = frm.Size;
+                            frm.Size = new Size(794, s.Height);
+                            frm.ShowDialog(this);
+                        }
                     }
                 }
             }
@@ -117,12 +161,50 @@ namespace MandiPOS.Reports
         private void uiButton1_Click(object sender, EventArgs e)
         {
             if (!data.Any()) { return; }
-             var report = new rptPartyLedger(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID,data,reportTyype);
-            ReportPrintTool tool=new ReportPrintTool(report);
-           var frm=tool.PreviewForm;
-            tool.ShowPreview();
-            frm.WindowState = FormWindowState.Maximized;
-            frm.BringToFront();
+            if (reportTyype!=0)
+            {
+                var showdetails = this.Ask("کیا آپ تفصیل بھی پرنٹ  کرناچاہتے ہیں؟");
+                if (!showdetails)
+                {
+                    foreach (clsLedger item in data)
+                    {
+                        if (MasterID == 4 && item.Credit != 0)
+                        {
+                            item.Narration = string.Empty;
+                        }
+                        if (MasterID != 4 && item.Debit != 0)
+                        {
+                            item.Narration = string.Empty;
+                        }
+                    }
+                } 
+            }
+            if (uiComboBox1.SelectedIndex == 0)
+            {
+                var report = new rptPartyLedger(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, data, reportTyype);
+                var frm = new XtraForm1(report);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+            }
+            else if (uiComboBox1.SelectedIndex == 1)
+            {
+                var filteredData = data.Where(x => x.Debit != 0).ToList();
+                var report = new rptPartyLedgerBanam(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
+                var frm = new XtraForm1(report);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+            }
+            else if (uiComboBox1.SelectedIndex == 2)
+            {
+                var filteredData = data.Where(x => x.Credit != 0).ToList();
+                var report = new rptPartyLedgerJama(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
+                var frm = new XtraForm1(report);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+            }
 
         }
     }

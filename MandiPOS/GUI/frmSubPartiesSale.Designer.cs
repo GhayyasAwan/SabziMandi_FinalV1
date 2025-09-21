@@ -36,9 +36,9 @@
             this.lbld2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dgv = new Janus.Windows.GridEX.GridEX();
+            this.vwSubpartiesSaleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.uiButton2 = new Janus.Windows.EditControls.UIButton();
             this.uiButton1 = new Janus.Windows.EditControls.UIButton();
-            this.vwSubpartiesSaleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vwSubpartiesSaleBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -108,12 +108,13 @@
             this.dgv.DesignTimeLayout = dgv_DesignTimeLayout;
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv.DynamicFiltering = true;
-            this.dgv.FilterMode = Janus.Windows.GridEX.FilterMode.Manual;
+            this.dgv.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic;
             this.dgv.FilterRowFormatStyle.BackColor = System.Drawing.Color.PeachPuff;
+            this.dgv.FilterRowUpdateMode = Janus.Windows.GridEX.FilterRowUpdateMode.WhenValueChanges;
             this.dgv.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F);
             this.dgv.GroupByBoxVisible = false;
             this.dgv.Location = new System.Drawing.Point(0, 62);
-            this.dgv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv.Margin = new System.Windows.Forms.Padding(4);
             this.dgv.Name = "dgv";
             this.dgv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgv.Size = new System.Drawing.Size(1021, 444);
@@ -124,6 +125,10 @@
             this.dgv.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
             this.dgv.FormattingRow += new Janus.Windows.GridEX.RowLoadEventHandler(this.dgv_FormattingRow);
             // 
+            // vwSubpartiesSaleBindingSource
+            // 
+            this.vwSubpartiesSaleBindingSource.DataSource = typeof(MandiPOS.CLasses.vw_SubpartiesSale);
+            // 
             // uiButton2
             // 
             this.uiButton2.ButtonStyle = Janus.Windows.EditControls.ButtonStyle.Button;
@@ -132,7 +137,7 @@
             this.uiButton2.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton2.ImageSize = new System.Drawing.Size(32, 32);
             this.uiButton2.Location = new System.Drawing.Point(157, 5);
-            this.uiButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uiButton2.Margin = new System.Windows.Forms.Padding(4);
             this.uiButton2.Name = "uiButton2";
             this.uiButton2.Size = new System.Drawing.Size(141, 49);
             this.uiButton2.TabIndex = 2;
@@ -149,16 +154,13 @@
             this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
             this.uiButton1.Location = new System.Drawing.Point(8, 5);
-            this.uiButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uiButton1.Margin = new System.Windows.Forms.Padding(4);
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Size = new System.Drawing.Size(141, 49);
             this.uiButton1.TabIndex = 1;
             this.uiButton1.Text = " پرنٹ رپورٹ";
             this.uiButton1.VisualStyle = Janus.Windows.UI.VisualStyle.Office2007;
-            // 
-            // vwSubpartiesSaleBindingSource
-            // 
-            this.vwSubpartiesSaleBindingSource.DataSource = typeof(MandiPOS.CLasses.vw_SubpartiesSale);
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // frmSubPartiesSale
             // 
@@ -172,7 +174,7 @@
             this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.lblParty);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSubPartiesSale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sub Parties Details";

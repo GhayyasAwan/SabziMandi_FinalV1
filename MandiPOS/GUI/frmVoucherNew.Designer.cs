@@ -67,7 +67,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(757, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 27);
+            this.label1.Size = new System.Drawing.Size(43, 34);
             this.label1.TabIndex = 0;
             this.label1.Text = "تاریخ";
             // 
@@ -83,7 +83,7 @@
             this.dtp.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp.Location = new System.Drawing.Point(591, 6);
             this.dtp.Name = "dtp";
-            this.dtp.Size = new System.Drawing.Size(160, 30);
+            this.dtp.Size = new System.Drawing.Size(160, 36);
             this.dtp.TabIndex = 1;
             this.dtp.VisualStyle = Janus.Windows.CalendarCombo.VisualStyle.Office2003;
             this.dtp.VisualStyleManager = this.visualStyleManager1;
@@ -101,7 +101,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(767, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 27);
+            this.label2.Size = new System.Drawing.Size(30, 34);
             this.label2.TabIndex = 2;
             this.label2.Text = "کوڈ";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -113,7 +113,7 @@
             this.txtCode.Name = "txtCode";
             this.txtCode.NullBehavior = Janus.Windows.GridEX.NumericEditNullBehavior.AllowNull;
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(80, 35);
+            this.txtCode.Size = new System.Drawing.Size(80, 41);
             this.txtCode.TabIndex = 3;
             this.txtCode.TabStop = false;
             this.txtCode.Text = "";
@@ -127,7 +127,7 @@
             this.txtName.Location = new System.Drawing.Point(514, 93);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtName.Size = new System.Drawing.Size(191, 35);
+            this.txtName.Size = new System.Drawing.Size(191, 41);
             this.txtName.TabIndex = 4;
             this.txtName.VisualStyleManager = this.visualStyleManager1;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
@@ -139,7 +139,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(662, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 27);
+            this.label3.Size = new System.Drawing.Size(53, 34);
             this.label3.TabIndex = 5;
             this.label3.Text = "نام پارٹی";
             // 
@@ -151,7 +151,7 @@
             this.txtCashBank.Location = new System.Drawing.Point(362, 92);
             this.txtCashBank.Name = "txtCashBank";
             this.txtCashBank.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtCashBank.Size = new System.Drawing.Size(146, 35);
+            this.txtCashBank.Size = new System.Drawing.Size(146, 41);
             this.txtCashBank.TabIndex = 6;
             this.txtCashBank.ValueMember = "ID";
             this.txtCashBank.VisualStyleManager = this.visualStyleManager1;
@@ -167,7 +167,7 @@
             this.txtNarration.Location = new System.Drawing.Point(140, 93);
             this.txtNarration.Name = "txtNarration";
             this.txtNarration.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtNarration.Size = new System.Drawing.Size(216, 35);
+            this.txtNarration.Size = new System.Drawing.Size(216, 41);
             this.txtNarration.TabIndex = 7;
             this.txtNarration.VisualStyleManager = this.visualStyleManager1;
             // 
@@ -175,7 +175,7 @@
             // 
             this.txtAmount.Location = new System.Drawing.Point(12, 93);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(122, 35);
+            this.txtAmount.Size = new System.Drawing.Size(122, 41);
             this.txtAmount.TabIndex = 8;
             this.txtAmount.Text = "0.00";
             this.txtAmount.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -192,7 +192,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(451, 49);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 27);
+            this.label4.Size = new System.Drawing.Size(72, 34);
             this.label4.TabIndex = 9;
             this.label4.Text = "کیش / بینک";
             // 
@@ -202,7 +202,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(318, 49);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 27);
+            this.label5.Size = new System.Drawing.Size(48, 34);
             this.label5.TabIndex = 10;
             this.label5.Text = "تفصیل";
             // 
@@ -212,7 +212,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(108, 50);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 27);
+            this.label6.Size = new System.Drawing.Size(32, 34);
             this.label6.TabIndex = 11;
             this.label6.Text = "رقم";
             // 
@@ -222,7 +222,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Location = new System.Drawing.Point(357, 6);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(44, 27);
+            this.lblTitle.Size = new System.Drawing.Size(55, 34);
             this.lblTitle.TabIndex = 12;
             this.lblTitle.Text = "بنام ووچر";
             // 
@@ -240,7 +240,7 @@
             this.gridEX1.Location = new System.Drawing.Point(12, 145);
             this.gridEX1.Name = "gridEX1";
             this.gridEX1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.gridEX1.Size = new System.Drawing.Size(779, 371);
+            this.gridEX1.Size = new System.Drawing.Size(779, 418);
             this.gridEX1.TabIndex = 13;
             this.gridEX1.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.gridEX1.TotalRowFormatStyle.BackColor = System.Drawing.SystemColors.Info;
@@ -263,6 +263,7 @@
             this.uiButton1.Size = new System.Drawing.Size(124, 41);
             this.uiButton1.TabIndex = 14;
             this.uiButton1.Text = "محفوظ کریں";
+            this.uiButton1.Visible = false;
             this.uiButton1.VisualStyleManager = this.visualStyleManager1;
             this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
@@ -273,10 +274,10 @@
             dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
             this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
             this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(362, 134);
+            this.dgvHelp.Location = new System.Drawing.Point(352, 134);
             this.dgvHelp.Name = "dgvHelp";
             this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvHelp.Size = new System.Drawing.Size(343, 237);
+            this.dgvHelp.Size = new System.Drawing.Size(353, 340);
             this.dgvHelp.TabIndex = 15;
             this.dgvHelp.Visible = false;
             this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
@@ -290,16 +291,16 @@
             // 
             this.partyBal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.partyBal.AutoSize = true;
-            this.partyBal.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partyBal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partyBal.Location = new System.Drawing.Point(514, 59);
             this.partyBal.Name = "partyBal";
-            this.partyBal.Size = new System.Drawing.Size(19, 18);
+            this.partyBal.Size = new System.Drawing.Size(24, 25);
             this.partyBal.TabIndex = 16;
             this.partyBal.Text = "0";
             // 
             // frmVoucherNew
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 27F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 34F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(803, 575);

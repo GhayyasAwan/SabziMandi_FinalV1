@@ -3,6 +3,6 @@
     public class ChartData
     {
         public string MonthTag { get; set; }
-        public string TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }

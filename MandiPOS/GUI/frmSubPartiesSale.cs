@@ -8,6 +8,7 @@ using MandiPOS.CLasses;
 using MandiPOS.Reports;
 
 using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -18,6 +19,7 @@ namespace MandiPOS.GUI
         int partyID = 0;
         DateTime date1 = DateTime.Now;
         DateTime date2 = DateTime.Now;
+        DataTable data = new DataTable();
         public frmSubPartiesSale(int PartyID, DateTime d1, DateTime d2)
         {
             InitializeComponent();
@@ -29,16 +31,40 @@ namespace MandiPOS.GUI
             lbld2.Text = $"{d2.Date:dd-MMM-yyyy}";
             DetailAccounts acc = DetailAccountService.GetDetailAccountByID(PartyID);
             lblParty.Text = acc.AccountTitle;
-
-            var data = new db().Query<vw_SubpartiesSale>($@"SELECT
+            data = new db().Query<vw_SubpartiesSale>($@"
+;WITH MarkaSummary AS
+(
+    SELECT
+        Marka,
+        SUM(CASE WHEN Remaining > 0 THEN Remaining ELSE 0 END) AS Credit,
+        SUM(CASE WHEN Remaining <= 0 THEN ABS(Remaining) ELSE 0 END) AS Debit,
+        SUM(CASE WHEN Remaining <= 0 THEN ABS(Remaining) ELSE 0 END) 
+          - SUM(CASE WHEN Remaining > 0 THEN ABS(Remaining) ELSE 0 END) AS EndBalance
+    FROM vw_SubpartiesSale
+    WHERE PartyID = {PartyID}
+    GROUP BY Marka
+),
+Ordered AS
+(
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY Marka) AS RowNo,
+        Marka,
+        Credit,
+        Debit,
+        EndBalance AS hiddenCol
+    FROM MarkaSummary
+)
+SELECT
+    RowNo,
     Marka,
-    SUM(CASE WHEN Remaining > 0 THEN Remaining ELSE 0 END) AS Credit,
-    SUM(CASE WHEN Remaining <= 0 THEN ABS(Remaining) ELSE 0 END) AS Debit,
-    SUM(CASE WHEN Remaining <= 0 THEN ABS(Remaining) ELSE 0 END) 
-      - SUM(CASE WHEN Remaining > 0 THEN ABS(Remaining) ELSE 0 END) AS EndBalance
-FROM vw_SubpartiesSale
-WHERE PartyID = {PartyID}
-GROUP BY Marka;").ToDataTable();
+    Credit,
+    Debit,
+    hiddenCol,
+    SUM(hiddenCol) OVER (ORDER BY RowNo ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS EndBalance
+FROM Ordered
+ORDER BY RowNo;
+").ToDataTable();
+
             vwSubpartiesSaleBindingSource.DataSource = data;
         }
 
@@ -114,6 +140,19 @@ GROUP BY Marka;").ToDataTable();
                 //{
                 //    e.Row.Cells["State"].Text = "بنام";
                 //}
+            }
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            var report = new MarkaReportDetail(data, partyID);
+            report.CreateDocument();
+            if (report != null)
+            {
+                var fr = new XtraForm1(report);
+                fr.Show();
+                fr.WindowState = FormWindowState.Maximized;
+                fr.BringToFront();
             }
         }
     }

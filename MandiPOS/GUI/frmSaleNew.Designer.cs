@@ -35,6 +35,7 @@
             Janus.Windows.GridEX.GridEXLayout dgv2_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem3 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout dgv_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout _CustomerHelper_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout _partySearchHelper_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
@@ -491,12 +492,15 @@
             // 
             // _item
             // 
+            this._item.BorderStyle = Janus.Windows.UI.BorderStyle.Flat;
+            this._item.ColorScheme = "Scheme0";
             this._item.DataSource = this.bsItems;
             this._item.DisplayMember = "ItemTitle";
+            this._item.HoverMode = Janus.Windows.EditControls.HoverMode.Highlight;
             this._item.Location = new System.Drawing.Point(665, 125);
+            this._item.MaxDropDownItems = 20;
             this._item.Name = "_item";
             this._item.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this._item.SelectInDataSource = true;
             this._item.Size = new System.Drawing.Size(84, 41);
             this._item.TabIndex = 34;
             this._item.ValueMember = "ID";
@@ -549,11 +553,16 @@
             uiComboBoxItem1.Value = 0;
             uiComboBoxItem2.FormatStyle.Alpha = 0;
             uiComboBoxItem2.IsSeparator = false;
-            uiComboBoxItem2.Text = "وزن";
+            uiComboBoxItem2.Text = "کلو";
             uiComboBoxItem2.Value = 1;
+            uiComboBoxItem3.FormatStyle.Alpha = 0;
+            uiComboBoxItem3.IsSeparator = false;
+            uiComboBoxItem3.Text = "من";
+            uiComboBoxItem3.Value = 2;
             this._unit.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
             uiComboBoxItem1,
-            uiComboBoxItem2});
+            uiComboBoxItem2,
+            uiComboBoxItem3});
             this._unit.Location = new System.Drawing.Point(359, 126);
             this._unit.Name = "_unit";
             this._unit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -568,10 +577,13 @@
             this._amount1.Name = "_amount1";
             this._amount1.Size = new System.Drawing.Size(55, 27);
             this._amount1.TabIndex = 39;
-            this._amount1.Text = "0";
+            this._amount1.Text = "0.00";
             this._amount1.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._amount1.Value = 0;
-            this._amount1.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._amount1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._amount1.VisualStyleManager = this.visualStyleManager1;
             this._amount1.Click += new System.EventHandler(this._amount1_Click);
             // 
@@ -582,10 +594,13 @@
             this._rate1.Name = "_rate1";
             this._rate1.Size = new System.Drawing.Size(55, 27);
             this._rate1.TabIndex = 40;
-            this._rate1.Text = "0";
+            this._rate1.Text = "0.00";
             this._rate1.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._rate1.Value = 0;
-            this._rate1.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._rate1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._rate1.VisualStyleManager = this.visualStyleManager1;
             this._rate1.Click += new System.EventHandler(this._rate1_Click);
             // 
@@ -596,10 +611,13 @@
             this._rate2.Name = "_rate2";
             this._rate2.Size = new System.Drawing.Size(55, 27);
             this._rate2.TabIndex = 41;
-            this._rate2.Text = "0";
+            this._rate2.Text = "0.00";
             this._rate2.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._rate2.Value = 0;
-            this._rate2.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._rate2.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._rate2.VisualStyleManager = this.visualStyleManager1;
             this._rate2.Click += new System.EventHandler(this._rate2_Click);
             // 
@@ -610,10 +628,13 @@
             this._amount2.Name = "_amount2";
             this._amount2.Size = new System.Drawing.Size(60, 27);
             this._amount2.TabIndex = 42;
-            this._amount2.Text = "0";
+            this._amount2.Text = "0.00";
             this._amount2.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._amount2.Value = 0;
-            this._amount2.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._amount2.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._amount2.VisualStyleManager = this.visualStyleManager1;
             this._amount2.Click += new System.EventHandler(this._amount2_Click);
             // 
@@ -735,10 +756,13 @@
             this._commission.Name = "_commission";
             this._commission.Size = new System.Drawing.Size(93, 27);
             this._commission.TabIndex = 54;
-            this._commission.Text = "0";
+            this._commission.Text = "0.00";
             this._commission.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._commission.Value = 0;
-            this._commission.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._commission.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._commission.VisualStyleManager = this.visualStyleManager1;
             // 
             // commissionPerc
@@ -749,7 +773,7 @@
             this.commissionPerc.Size = new System.Drawing.Size(41, 27);
             this.commissionPerc.TabIndex = 55;
             this.commissionPerc.Text = "0.00";
-            this.commissionPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.commissionPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
             this.commissionPerc.Value = new decimal(new int[] {
             0,
             0,
@@ -765,7 +789,7 @@
             this.mazdooriPerc.Size = new System.Drawing.Size(41, 27);
             this.mazdooriPerc.TabIndex = 58;
             this.mazdooriPerc.Text = "0.00";
-            this.mazdooriPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.mazdooriPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
             this.mazdooriPerc.Value = new decimal(new int[] {
             0,
             0,
@@ -780,16 +804,19 @@
             this._mazdoori.Name = "_mazdoori";
             this._mazdoori.Size = new System.Drawing.Size(93, 27);
             this._mazdoori.TabIndex = 57;
-            this._mazdoori.Text = "0";
+            this._mazdoori.Text = "0.00";
             this._mazdoori.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._mazdoori.Value = 0;
-            this._mazdoori.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._mazdoori.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._mazdoori.VisualStyleManager = this.visualStyleManager1;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(594, 484);
+            this.label18.Location = new System.Drawing.Point(600, 484);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 34);
             this.label18.TabIndex = 56;
@@ -802,13 +829,13 @@
             this.mushianaPerc.Name = "mushianaPerc";
             this.mushianaPerc.Size = new System.Drawing.Size(41, 27);
             this.mushianaPerc.TabIndex = 61;
-            this.mushianaPerc.Text = "0.00";
-            this.mushianaPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.mushianaPerc.Text = "0.20";
+            this.mushianaPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
             this.mushianaPerc.Value = new decimal(new int[] {
+            20,
             0,
             0,
-            0,
-            0});
+            131072});
             this.mushianaPerc.VisualStyleManager = this.visualStyleManager1;
             // 
             // _munshiana
@@ -818,10 +845,13 @@
             this._munshiana.Name = "_munshiana";
             this._munshiana.Size = new System.Drawing.Size(93, 27);
             this._munshiana.TabIndex = 60;
-            this._munshiana.Text = "0";
+            this._munshiana.Text = "0.00";
             this._munshiana.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._munshiana.Value = 0;
-            this._munshiana.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._munshiana.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._munshiana.VisualStyleManager = this.visualStyleManager1;
             // 
             // label19
@@ -840,16 +870,19 @@
             this._kraya.Name = "_kraya";
             this._kraya.Size = new System.Drawing.Size(78, 27);
             this._kraya.TabIndex = 63;
-            this._kraya.Text = "0";
+            this._kraya.Text = "0.00";
             this._kraya.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._kraya.Value = 0;
-            this._kraya.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._kraya.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._kraya.VisualStyleManager = this.visualStyleManager1;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(412, 484);
+            this.label20.Location = new System.Drawing.Point(397, 484);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(41, 34);
             this.label20.TabIndex = 62;
@@ -863,10 +896,13 @@
             this._paid.Name = "_paid";
             this._paid.Size = new System.Drawing.Size(68, 27);
             this._paid.TabIndex = 65;
-            this._paid.Text = "0";
+            this._paid.Text = "0.00";
             this._paid.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._paid.Value = 0;
-            this._paid.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._paid.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._paid.VisualStyleManager = this.visualStyleManager1;
             // 
             // label21
@@ -885,10 +921,13 @@
             this._store.Name = "_store";
             this._store.Size = new System.Drawing.Size(70, 27);
             this._store.TabIndex = 67;
-            this._store.Text = "0";
+            this._store.Text = "0.00";
             this._store.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._store.Value = 0;
-            this._store.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._store.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._store.VisualStyleManager = this.visualStyleManager1;
             // 
             // label22
@@ -1016,10 +1055,13 @@
             this._wt.Name = "_wt";
             this._wt.Size = new System.Drawing.Size(41, 27);
             this._wt.TabIndex = 76;
-            this._wt.Text = "0";
+            this._wt.Text = "0.00";
             this._wt.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
-            this._wt.Value = 0;
-            this._wt.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this._wt.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this._wt.VisualStyleManager = this.visualStyleManager1;
             this._wt.Click += new System.EventHandler(this._wt_Click);
             // 
@@ -1073,7 +1115,7 @@
             _partyHelper_DesignTimeLayout.LayoutString = resources.GetString("_partyHelper_DesignTimeLayout.LayoutString");
             this._partyHelper.DesignTimeLayout = _partyHelper_DesignTimeLayout;
             this._partyHelper.GroupByBoxVisible = false;
-            this._partyHelper.Location = new System.Drawing.Point(316, 88);
+            this._partyHelper.Location = new System.Drawing.Point(316, 172);
             this._partyHelper.Name = "_partyHelper";
             this._partyHelper.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this._partyHelper.Size = new System.Drawing.Size(377, 237);
@@ -1094,6 +1136,7 @@
             // 
             this.txtMarkaMain.Location = new System.Drawing.Point(282, 52);
             this.txtMarkaMain.Name = "txtMarkaMain";
+            this.txtMarkaMain.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtMarkaMain.Size = new System.Drawing.Size(147, 41);
             this.txtMarkaMain.TabIndex = 82;
             this.txtMarkaMain.VisualStyleManager = this.visualStyleManager1;
@@ -1109,7 +1152,7 @@
             dgvMarka_DesignTimeLayout.LayoutString = resources.GetString("dgvMarka_DesignTimeLayout.LayoutString");
             this.dgvMarka.DesignTimeLayout = dgvMarka_DesignTimeLayout;
             this.dgvMarka.GroupByBoxVisible = false;
-            this.dgvMarka.Location = new System.Drawing.Point(104, 89);
+            this.dgvMarka.Location = new System.Drawing.Point(106, 195);
             this.dgvMarka.Name = "dgvMarka";
             this.dgvMarka.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvMarka.Size = new System.Drawing.Size(323, 237);
@@ -1242,6 +1285,7 @@
             this.Controls.Add(this.dtp);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.label29);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmSaleNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

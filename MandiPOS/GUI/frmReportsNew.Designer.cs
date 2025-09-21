@@ -96,7 +96,7 @@
             this.pnlMain.BackColor = System.Drawing.Color.DodgerBlue;
             this.pnlMain.Controls.Add(this.uiGroupBox1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlMain.Location = new System.Drawing.Point(269, 0);
+            this.pnlMain.Location = new System.Drawing.Point(354, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -608,7 +608,7 @@
             // 
             this.lblDtp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDtp.AutoSize = true;
-            this.lblDtp.Location = new System.Drawing.Point(172, 59);
+            this.lblDtp.Location = new System.Drawing.Point(257, 59);
             this.lblDtp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDtp.Name = "lblDtp";
             this.lblDtp.Size = new System.Drawing.Size(84, 39);
@@ -621,8 +621,9 @@
             this.dtp.CustomFormat = "dd-MMM-yyyy";
             this.dtp.DateFormat = Janus.Windows.CalendarCombo.DateFormat.Custom;
             this.dtp.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp.Location = new System.Drawing.Point(42, 101);
+            this.dtp.Location = new System.Drawing.Point(127, 101);
             this.dtp.Margin = new System.Windows.Forms.Padding(2);
+            this.dtp.MinDate = new System.DateTime(2025, 1, 1, 0, 0, 0, 0);
             this.dtp.Name = "dtp";
             this.dtp.Size = new System.Drawing.Size(215, 40);
             this.dtp.TabIndex = 2;
@@ -633,7 +634,7 @@
             this.dtp2.CustomFormat = "dd-MMM-yyyy";
             this.dtp2.DateFormat = Janus.Windows.CalendarCombo.DateFormat.Custom;
             this.dtp2.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp2.Location = new System.Drawing.Point(-179, 101);
+            this.dtp2.Location = new System.Drawing.Point(-94, 101);
             this.dtp2.Margin = new System.Windows.Forms.Padding(2);
             this.dtp2.Name = "dtp2";
             this.dtp2.Size = new System.Drawing.Size(215, 40);
@@ -643,7 +644,7 @@
             // 
             this.lblDate2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate2.AutoSize = true;
-            this.lblDate2.Location = new System.Drawing.Point(-48, 59);
+            this.lblDate2.Location = new System.Drawing.Point(37, 59);
             this.lblDate2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate2.Name = "lblDate2";
             this.lblDate2.Size = new System.Drawing.Size(71, 39);
@@ -653,6 +654,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel1.Controls.Add(this.btnViewReport);
             this.panel1.Controls.Add(this.lblBill);
             this.panel1.Controls.Add(this.txtBillNo);
             this.panel1.Controls.Add(this.lblCity);
@@ -660,7 +662,6 @@
             this.panel1.Controls.Add(this.lblgroup);
             this.panel1.Controls.Add(this.cmbGroups);
             this.panel1.Controls.Add(this.dgvHelp);
-            this.panel1.Controls.Add(this.btnViewReport);
             this.panel1.Controls.Add(this._pname);
             this.panel1.Controls.Add(this.lblParty);
             this.panel1.Controls.Add(this._pid);
@@ -673,14 +674,14 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(269, 715);
+            this.panel1.Size = new System.Drawing.Size(354, 715);
             this.panel1.TabIndex = 5;
             // 
             // lblBill
             // 
             this.lblBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBill.AutoSize = true;
-            this.lblBill.Location = new System.Drawing.Point(196, 144);
+            this.lblBill.Location = new System.Drawing.Point(281, 144);
             this.lblBill.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBill.Name = "lblBill";
             this.lblBill.Size = new System.Drawing.Size(55, 39);
@@ -691,7 +692,7 @@
             // txtBillNo
             // 
             this.txtBillNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBillNo.Location = new System.Drawing.Point(102, 186);
+            this.txtBillNo.Location = new System.Drawing.Point(187, 186);
             this.txtBillNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtBillNo.Name = "txtBillNo";
             this.txtBillNo.Size = new System.Drawing.Size(154, 46);
@@ -702,7 +703,7 @@
             // 
             this.lblCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCity.AutoSize = true;
-            this.lblCity.Location = new System.Drawing.Point(-278, 59);
+            this.lblCity.Location = new System.Drawing.Point(-193, 59);
             this.lblCity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(36, 39);
@@ -716,7 +717,7 @@
             this.cmbCity.DesignTimeLayout = cmbCity_DesignTimeLayout;
             this.cmbCity.DropDownDisplayMember = "CityName";
             this.cmbCity.DropDownValueMember = "ID";
-            this.cmbCity.Location = new System.Drawing.Point(-504, 101);
+            this.cmbCity.Location = new System.Drawing.Point(-419, 101);
             this.cmbCity.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -730,7 +731,7 @@
             // 
             this.lblgroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblgroup.AutoSize = true;
-            this.lblgroup.Location = new System.Drawing.Point(-19, 59);
+            this.lblgroup.Location = new System.Drawing.Point(66, 59);
             this.lblgroup.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblgroup.Name = "lblgroup";
             this.lblgroup.Size = new System.Drawing.Size(55, 39);
@@ -745,7 +746,7 @@
             this.cmbGroups.DropDownDataSource = this.bs;
             this.cmbGroups.DropDownDisplayMember = "AccountTitle";
             this.cmbGroups.DropDownValueMember = "ID";
-            this.cmbGroups.Location = new System.Drawing.Point(-231, 101);
+            this.cmbGroups.Location = new System.Drawing.Point(-146, 101);
             this.cmbGroups.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGroups.Name = "cmbGroups";
             this.cmbGroups.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -762,7 +763,7 @@
             dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
             this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
             this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(-462, 238);
+            this.dgvHelp.Location = new System.Drawing.Point(-377, 238);
             this.dgvHelp.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHelp.Name = "dgvHelp";
             this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -773,13 +774,15 @@
             // 
             // btnViewReport
             // 
+            this.btnViewReport.AutoSize = true;
             this.btnViewReport.Image = global::MandiPOS.Properties.Resources.printernew;
-            this.btnViewReport.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.btnViewReport.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.Center;
             this.btnViewReport.ImageSize = new System.Drawing.Size(48, 48);
+            this.btnViewReport.ImageVerticalAlignment = Janus.Windows.EditControls.ImageVerticalAlignment.BottomOfText;
             this.btnViewReport.Location = new System.Drawing.Point(12, 88);
             this.btnViewReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewReport.Name = "btnViewReport";
-            this.btnViewReport.Size = new System.Drawing.Size(181, 72);
+            this.btnViewReport.Size = new System.Drawing.Size(106, 110);
             this.btnViewReport.TabIndex = 11;
             this.btnViewReport.Text = "رپورٹ دیکھیں";
             this.btnViewReport.Click += new System.EventHandler(this.uiButton1_Click);
@@ -789,7 +792,7 @@
             this._pname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._pname.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this._pname.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this._pname.Location = new System.Drawing.Point(-179, 186);
+            this._pname.Location = new System.Drawing.Point(-94, 186);
             this._pname.Margin = new System.Windows.Forms.Padding(2);
             this._pname.Name = "_pname";
             this._pname.Size = new System.Drawing.Size(436, 46);
@@ -801,7 +804,7 @@
             // 
             this.lblParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblParty.AutoSize = true;
-            this.lblParty.Location = new System.Drawing.Point(186, 144);
+            this.lblParty.Location = new System.Drawing.Point(271, 144);
             this.lblParty.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblParty.Name = "lblParty";
             this.lblParty.Size = new System.Drawing.Size(61, 39);
@@ -829,7 +832,7 @@
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.lblTitle.Size = new System.Drawing.Size(269, 49);
+            this.lblTitle.Size = new System.Drawing.Size(354, 49);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "label3";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -854,7 +857,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1184, 715);
+            this.ClientSize = new System.Drawing.Size(1269, 715);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

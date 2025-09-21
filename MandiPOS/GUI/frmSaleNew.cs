@@ -1,4 +1,6 @@
 ﻿using Dapper;
+
+using DevExpress.Utils.Filtering.Internal;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 using Janus.Windows.GridEX;
@@ -12,6 +14,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -97,6 +100,9 @@ namespace MandiPOS.GUI
         public frmSaleNew()
         {
             InitializeComponent();
+            commissionPerc.KeyDown += CommissionPerc_KeyDown;
+            mazdooriPerc.KeyDown += MazdooriPerc_KeyDown;
+            mushianaPerc.KeyDown += MushianaPerc_KeyDown;
             arrivalDate.Enabled=dtp.Enabled=dtp1.Enabled = General.IsAdmin;
             vendorBal.ValueChanged += VendorBal_ValueChanged;
             txtMarkaMain.RegisterFocus(true);
@@ -173,6 +179,7 @@ namespace MandiPOS.GUI
             obj = new clsResize(this);
             this.Text = "بل فروخت";
             this.Load += FrmSaleNew_Load;
+            this.Shown += FrmSaleNew_Shown;
             this.Resize += FrmSaleNew_Resize;
             this.ResizeEnd += FrmSaleNew_ResizeEnd;
             _marka.KeyDown += _marka_KeyDown;
@@ -183,6 +190,32 @@ namespace MandiPOS.GUI
             _ArrivalQty.Enter += _ArrivalQty_Enter;
             _vendor.Leave += _vendor_Leave;
             _ArrivalQty.Leave += _ArrivalQty_Leave;
+        }
+
+        private void CommissionPerc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
+        }
+
+        private void MazdooriPerc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+                _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
+        }
+
+        private void MushianaPerc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _munshiana.Value = _grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal()/100);
+            }
+        }
+
+        private void FrmSaleNew_Shown(object sender, EventArgs e)
+        {
+            Thread.Sleep(300);
+            this.Opacity = 100;
         }
 
         private void FrmSaleNew_ResizeEnd(object sender, EventArgs e)
@@ -464,7 +497,7 @@ namespace MandiPOS.GUI
         {
             _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
             _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
-
+            _munshiana.Value= _grossSale.Value.toDecimal()*(mushianaPerc.Value.toDecimal()/100);
         }
 
         private void Dgv1_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
@@ -472,6 +505,8 @@ namespace MandiPOS.GUI
             if (dgv1.IsRow())
             {
                 LoadRecordByID((dgv1.CurrentRow.DataRow as vwSale1).ID);
+                CheckValues();
+                dgv.AutoSizeColumns();
                 if (_item.Enabled)
                 {
                     _item.Select();
@@ -480,7 +515,17 @@ namespace MandiPOS.GUI
                 {
                     _commission.Select();
                 }
+                
+            }
+        }
 
+        private void CheckValues()
+        {
+            if (_grossSale.Value.toDecimal() != 0)
+            {
+                mushianaPerc.Value = (_munshiana.Value.toDecimal() / _grossSale.Value.toDecimal()) * 100;
+                commissionPerc.Value = (_commission.Value.toDecimal() / _grossSale.Value.toDecimal()) * 100;
+                mazdooriPerc.Value = (_mazdoori.Value.toDecimal() / _grossSale.Value.toDecimal()) * 100;
             }
         }
 
@@ -986,6 +1031,15 @@ namespace MandiPOS.GUI
                     this.Error("براہ کرم قیمت درج کریں۔");
                     return;
                 }
+                decimal sold = summary.Sum(x => x.ItemQty);
+                decimal arrived= _ArrivalQty.Text.toDecimal();
+                decimal currentQty = _qty.Text.toDecimal();
+                if (sold + currentQty > arrived)
+                {
+                    this.Error($"آپ اس گاہک کو {arrived - sold} مقدار سے زیادہ نہیں دے سکتے۔");
+                    _qty.Select();
+                    return;
+                }
                 AddToCart();
 
             }
@@ -1024,6 +1078,8 @@ namespace MandiPOS.GUI
 
             GetTotals();
             GetMazddori();
+            dgv.ColumnAutoSizeMode = ColumnAutoSizeMode.AllCellsAndHeader;
+            dgv.AutoSizeColumns();
             if (_item.Enabled)
             {
                 _item.Select();
@@ -1163,7 +1219,7 @@ namespace MandiPOS.GUI
 
         private void _unit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _wt.Enabled = _unit.SelectedIndex == 1;
+            _wt.Enabled = _unit.SelectedIndex != 0;
             if (!_wt.Enabled)
             {
                 _wt.Value = 0;
@@ -1192,7 +1248,7 @@ namespace MandiPOS.GUI
                 _amount1.Value = (_rate1.Value.toDecimal() * _qty.Value.toDecimal());
                 _amount2.Value = (_rate2.Value.toDecimal() * _qty.Value.toDecimal());
             }
-            else if (_unit.SelectedIndex == 0) //Weight Based Amount
+            else if (_unit.SelectedIndex != 0) //Weight Based Amount
             {
                 _amount1.Value = (_rate1.Value.toDecimal() * _wt.Value.toDecimal());
                 _amount2.Value = (_rate2.Value.toDecimal() * _wt.Value.toDecimal());
@@ -1218,6 +1274,7 @@ namespace MandiPOS.GUI
             ArrivalNo.Text = SQL.GetNextArrivalNo();
             _vendor.Clear();
             _unit.SelectedIndex = 0;
+            mushianaPerc.Value = 0.20;
             CalculateGrandTotals();
             ClearEntryPanel(true);
             _vendor.Select();
@@ -1280,13 +1337,13 @@ namespace MandiPOS.GUI
                 }
             }
         }
-        private Timer resizeTimer;
+        private System.Windows.Forms.Timer resizeTimer;
         private void FrmSaleNew_Resize(object sender, System.EventArgs e)
         {
             obj._resize();
             if (resizeTimer == null)
             {
-                resizeTimer = new Timer();
+                resizeTimer = new System.Windows.Forms.Timer();
                 resizeTimer.Interval = 300; // milliseconds
                 resizeTimer.Tick += ResizeTimer_Tick;
             }
@@ -1323,6 +1380,7 @@ namespace MandiPOS.GUI
         Point loc__partySearchHelper;
         private void FrmSaleNew_Load(object sender, System.EventArgs e)
         {
+            this.Opacity = 0;
             obj._get_initial_size();
             this.WindowState = FormWindowState.Maximized;
             loc_dgvMarka = dgvMarka.Location;
@@ -1504,6 +1562,8 @@ namespace MandiPOS.GUI
             LoadCustomers();
             LoadVendors();
         }
+
+       
     }
 }
 public class waitForm : IDisposable

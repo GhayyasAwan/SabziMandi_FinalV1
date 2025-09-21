@@ -285,10 +285,14 @@ namespace MandiPOS.CLasses
                     try
                     {
                         int voucherID = 0;
-                        if (sale.ID != 0)
+                        if (sale.ID == 0)
                         {
                             string sql = "select isnull(max([ArrivalNo]),0)+1 from [tblSale]";
-                            sale.ArrivalNo =bd.ExecuteScalar<string>(sql,transaction:trx).toInt();
+                            sale.ArrivalNo = bd.ExecuteScalar<string>(sql, transaction: trx).toInt();
+                        }
+                        if (sale.ID != 0)
+                        {
+                            
                             voucherID = sale.VoucherID;
                         }
                         PostAccountEntries(sale, saleDetails, bd, trx, ref voucherID);

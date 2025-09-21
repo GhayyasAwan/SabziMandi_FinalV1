@@ -22,7 +22,9 @@ namespace MandiPOS.Reports
             var acc=DetailAccountService.GetDetailAccountByID(PartyID);
             _party.Text=acc.AccountTitle;
             _d1.Text = $"{d1:dd-MMM-yyyy}"; _d2.Text = $"{d2:dd-MMM-yyyy}";
+            string summary = new db().QuerySingle<string>($"Select dbo.fn_GetPartyItemSummary('{d1:yyyy-MM-dd}','{d2:yyyy-MM-dd}',{PartyID}) as summary");
             this.objectDataSource1.DataSource = data;
+            lblSummary.Text = summary;
         }
     }
 }

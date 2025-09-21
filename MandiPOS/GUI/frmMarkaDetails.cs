@@ -8,6 +8,7 @@ using MandiPOS.CLasses;
 using MandiPOS.Reports;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -36,10 +37,61 @@ namespace MandiPOS.GUI
         public override void Refresh()
         {
             string sql = $@"
-                            Declare @PartyID int ='{partyID}'; Declare @Marka Nvarchar(250)=N'{marka}';
-                            Declare @date1 date='{d01.Value.Date:yyyy-MM-dd}'; declare @date2 date='{d02.Value.Date:yyyy-MM-dd}';
-Select * from vw_vendorSale Where ArrivalNo in  ( Select ArrivalNo From vw_SubpartiesSale Where PartyID=@PartyID and Marka=@Marka And (ArrivalDate Between @date1 and @date2))";
-            System.Collections.Generic.List<vw_vendorSale> data = new db().Query<vw_vendorSale>(sql).ToList();
+DECLARE @PartyID INT = {partyID};
+DECLARE @Marka NVARCHAR(250) = N'{marka}';
+DECLARE @date1 DATE = '{d01.Value.Date:yyyy-MM-dd}';
+DECLARE @date2 DATE = '{d02.Value.Date:yyyy-MM-dd}';
+
+;WITH Base AS
+(
+    SELECT 
+        ArrivalDate,
+        ArrivalNo,
+        AccountTitle,
+        ItemDetails,
+        TotalQty,
+        TotalLaga,
+        CommissionAmount,
+        MazdooriAmount,
+        MunshianaAmount,
+        KarayaAmount,
+        SaleAmount2,
+        PaidAmount,
+        (SaleAmount2 - (CommissionAmount + MazdooriAmount + MunshianaAmount + KarayaAmount) - PaidAmount) AS NetAmount
+    FROM vw_vendorSale
+    WHERE ArrivalNo IN (
+        SELECT ArrivalNo
+        FROM vw_SubpartiesSale 
+        WHERE PartyID=@PartyID AND Marka=@Marka 
+          AND ArrivalDate BETWEEN @date1 AND @date2
+    )
+)
+SELECT
+    ArrivalDate,
+    ArrivalNo,
+    AccountTitle,
+    ItemDetails,
+    TotalQty,
+    TotalLaga,
+    CommissionAmount,
+    MazdooriAmount,
+    MunshianaAmount,
+    KarayaAmount,
+    SaleAmount2,
+    PaidAmount,
+    NetAmount,
+    CASE WHEN NetAmount <= 0 THEN ABS(NetAmount) ELSE 0 END AS Debit,
+    CASE WHEN NetAmount > 0 THEN ABS(NetAmount) ELSE 0 END AS Credit,
+    ABS(
+        CASE WHEN NetAmount <= 0 THEN ABS(NetAmount) ELSE 0 END
+        - CASE WHEN NetAmount > 0 THEN ABS(NetAmount) ELSE 0 END
+    ) AS EndBalance,
+    SUM(NetAmount) OVER (ORDER BY ArrivalDate, ArrivalNo ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS RunningTotal
+FROM Base
+ORDER BY ArrivalDate, ArrivalNo;
+";
+            List<vw_vendorSale> data = new db().Query<vw_vendorSale>(sql).ToList();
+
             vwvendorSaleBindingSource.DataSource = data;
             vwvendorSaleBindingSource.ResetBindings(false);
 
@@ -85,10 +137,10 @@ FROM (
             var rows = gridEX1.GetCheckedRows();
             if (rows.Length > 0)
             {
-                var FinalReport = new XtraReport();
+                XtraReport FinalReport =null;
                 foreach (var row in rows)
                 {
-                    var rpt = new saleBill(gridEX1.GetValue("ArrivalNo").ToString(), 1);
+                    var rpt = new saleBill(row.Cells["ArrivalNo"].Value.ToString(), 1);
                     rpt.CreateDocument();
                     if (FinalReport == null)
                     {
@@ -101,7 +153,10 @@ FROM (
                 }
                 if (FinalReport != null)
                 {
-                    FinalReport.ShowPreview();
+                    var fr = new XtraForm1(FinalReport);
+                    fr.Show();
+                    fr.WindowState = FormWindowState.Maximized;
+                    fr.BringToFront();
                 }
             }
             else

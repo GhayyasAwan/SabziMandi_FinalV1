@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraPrinting;
+﻿using Dapper;
+
+using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
@@ -26,6 +28,7 @@ namespace MandiPOS
         {
             this.Opacity = 0;
             InitializeComponent();
+            this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
            this.DoubleBuffered = true;
             using (var frm = new frmLogin())
@@ -75,15 +78,38 @@ namespace MandiPOS
             SetButtonsvisibility();
         }
 
-        private  async void FrmMain_Shown(object sender, EventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _pendingRelease = await GitHubUpdater.CheckForNewReleaseAsync(
-            "GhayyasAwan", "MandiPOS");
-            if (_pendingRelease != null)
+            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟","Confirm",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+            if (result == DialogResult.Cancel)
             {
-                // Make the “Download Updates…” link visible
-                toolStripStatusLabelUpdate.Visible = true;
+                e.Cancel = true;
+                return;
             }
+            if (result==DialogResult.Yes)
+            {
+                using (var db = new db())
+                {
+                    db.Execute("exec BackupDatabase");
+                }
+            }
+        }
+
+        private void FrmMain_Shown1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
+            //_pendingRelease = await GitHubUpdater.CheckForNewReleaseAsync(
+            //"GhayyasAwan", "MandiPOS");
+            //if (_pendingRelease != null)
+            //{
+            //    // Make the “Download Updates…” link visible
+            //    toolStripStatusLabelUpdate.Visible = true;
+            //}
+            this.Opacity = 100;
         }
 
         private void SetButtonsvisibility()
@@ -91,51 +117,36 @@ namespace MandiPOS
             btnParty.Enabled = General.IsAdmin;
             btnItem.Enabled = General.IsAdmin;
             btnCity.Enabled = General.IsAdmin;
-
             btnBanamVoucher.Enabled = true;
             btnJamaVoucher.Enabled = true;
             btnBeejBardana.Enabled = true;
-
             btnSale.Enabled = true;
             btnJV.Enabled = true;
-
             btnLedger.Enabled = General.IsAdmin;
             btnRokar.Enabled = General.IsAdmin;
             btnKhasra.Enabled = General.IsAdmin;
-
             btnBeejak.Enabled = true;
             bnRecovery.Enabled = General.IsAdmin;
-            btnCustomerBill.Enabled = General.IsAdmin;
-
+            btnCustomerBill.Enabled = true;
             btnbackup.Enabled = Environment.MachineName.ToLower() == General.dbSystemName.ToLower(); ;
             btnExit.Enabled = true;
-
             //Buttons Enabling
-
             btnParty.Visible = General.IsAdmin;
             btnItem.Visible = General.IsAdmin;
             btnCity.Visible = General.IsAdmin;
-
             btnBanamVoucher.Visible = true;
             btnJamaVoucher.Visible = true;
             btnBeejBardana.Visible = true;
-
             btnSale.Visible = true;
             btnJV.Visible = true;
-
             btnLedger.Visible = General.IsAdmin;
             btnRokar.Visible = General.IsAdmin;
             btnKhasra.Visible = General.IsAdmin;
-
             btnBeejak.Visible = true;
             bnRecovery.Visible = General.IsAdmin;
-            btnCustomerBill.Visible = General.IsAdmin;
-
+            btnCustomerBill.Visible = true;
             btnbackup.Visible = Environment.MachineName.ToLower() == General.dbSystemName.ToLower() && General.IsAdmin;
             btnExit.Visible = true;
-
-
-
         }
 
         private void SetBGImage()
@@ -160,7 +171,7 @@ namespace MandiPOS
         private void Wrkr_DoWork(object sender, DoWorkEventArgs e)
         {
             SQL.SetDefaultAccount();
-            SaleService.RepostSales();
+            // SaleService.RepostSales();
             using(var rpt=new rptRokar(DateTime.Now.Date.AddDays(365)))
             {
                 rpt.CreateDocument();
@@ -184,11 +195,11 @@ namespace MandiPOS
         private async void FrmMain_Load(object sender, EventArgs e)
         {
 
-            for (int i = 0; i <= 10; i++)
-            {
-                this.Opacity = i / 10.0;
-                await Task.Delay(30);
-            }
+            //for (int i = 0; i <= 10; i++)
+            //{
+            //    this.Opacity = i / 10.0;
+            //    await Task.Delay(30);
+            //}
 
             wrkr.RunWorkerAsync();
             

@@ -19,7 +19,7 @@ namespace MandiPOS.CLasses
         public decimal TotalExpenses { get { return Commission + Mazdoori + Munshiana; } }
         public decimal Karaya { get; set; }
         public decimal NetPaid { get; set; }
-        public decimal NetAmount { get { return TotalExpenses - Karaya - NetPaid; } }
+        public decimal NetAmount { get { return PartyAmount-TotalExpenses - Karaya - NetPaid; } }
         public int PartyID { get; set; }
         public string Marka { get; set; }
     }

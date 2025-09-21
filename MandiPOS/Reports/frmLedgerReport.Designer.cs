@@ -29,9 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem3 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout dgvLedger_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLedgerReport));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.uiComboBox1 = new Janus.Windows.EditControls.UIComboBox();
+            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.lblDateRange2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblDateRange = new System.Windows.Forms.Label();
@@ -52,7 +57,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLedger = new Janus.Windows.GridEX.GridEX();
             this.clsLedgerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clsLedgerBindingSource)).BeginInit();
@@ -60,6 +64,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.uiComboBox1);
             this.panel1.Controls.Add(this.uiButton1);
             this.panel1.Controls.Add(this.lblDateRange2);
             this.panel1.Controls.Add(this.label6);
@@ -83,15 +88,53 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1299, 129);
+            this.panel1.Size = new System.Drawing.Size(1532, 129);
             this.panel1.TabIndex = 0;
+            // 
+            // uiComboBox1
+            // 
+            this.uiComboBox1.ComboStyle = Janus.Windows.EditControls.ComboStyle.DropDownList;
+            uiComboBoxItem1.FormatStyle.Alpha = 0;
+            uiComboBoxItem1.IsSeparator = false;
+            uiComboBoxItem1.Text = "مکمل";
+            uiComboBoxItem1.Value = 1;
+            uiComboBoxItem2.FormatStyle.Alpha = 0;
+            uiComboBoxItem2.IsSeparator = false;
+            uiComboBoxItem2.Text = "بنام رقم";
+            uiComboBoxItem2.Value = 2;
+            uiComboBoxItem3.FormatStyle.Alpha = 0;
+            uiComboBoxItem3.IsSeparator = false;
+            uiComboBoxItem3.Text = "جمع رقم";
+            uiComboBoxItem3.Value = 3;
+            this.uiComboBox1.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
+            uiComboBoxItem1,
+            uiComboBoxItem2,
+            uiComboBoxItem3});
+            this.uiComboBox1.Location = new System.Drawing.Point(119, 72);
+            this.uiComboBox1.Name = "uiComboBox1";
+            this.uiComboBox1.Size = new System.Drawing.Size(128, 46);
+            this.uiComboBox1.TabIndex = 20;
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.ButtonStyle = Janus.Windows.EditControls.ButtonStyle.Button;
+            this.uiButton1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiButton1.Image = global::MandiPOS.Properties.Resources.printernew;
+            this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
+            this.uiButton1.Location = new System.Drawing.Point(12, 78);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Size = new System.Drawing.Size(101, 38);
+            this.uiButton1.TabIndex = 19;
+            this.uiButton1.Text = "پرنٹ";
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // lblDateRange2
             // 
             this.lblDateRange2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDateRange2.Font = new System.Drawing.Font("Arial Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateRange2.ForeColor = System.Drawing.Color.Maroon;
-            this.lblDateRange2.Location = new System.Drawing.Point(54, 76);
+            this.lblDateRange2.Location = new System.Drawing.Point(287, 76);
             this.lblDateRange2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDateRange2.Name = "lblDateRange2";
             this.lblDateRange2.Size = new System.Drawing.Size(276, 52);
@@ -105,7 +148,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(335, 76);
+            this.label6.Location = new System.Drawing.Point(568, 76);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 52);
@@ -119,7 +162,7 @@
             this.lblDateRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDateRange.Font = new System.Drawing.Font("Arial Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateRange.ForeColor = System.Drawing.Color.Maroon;
-            this.lblDateRange.Location = new System.Drawing.Point(401, 76);
+            this.lblDateRange.Location = new System.Drawing.Point(634, 76);
             this.lblDateRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDateRange.Name = "lblDateRange";
             this.lblDateRange.Size = new System.Drawing.Size(276, 52);
@@ -132,7 +175,7 @@
             // 
             this.lblRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRemarks.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRemarks.Location = new System.Drawing.Point(151, 68);
+            this.lblRemarks.Location = new System.Drawing.Point(384, 68);
             this.lblRemarks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRemarks.Name = "lblRemarks";
             this.lblRemarks.Size = new System.Drawing.Size(772, 48);
@@ -144,7 +187,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1085, 71);
+            this.label4.Location = new System.Drawing.Point(1318, 71);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 39);
@@ -155,7 +198,7 @@
             // 
             this.lblCommission.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCommission.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCommission.Location = new System.Drawing.Point(926, 62);
+            this.lblCommission.Location = new System.Drawing.Point(1159, 62);
             this.lblCommission.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCommission.Name = "lblCommission";
             this.lblCommission.Size = new System.Drawing.Size(154, 52);
@@ -167,7 +210,7 @@
             // 
             this.lblCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCode.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCode.Location = new System.Drawing.Point(1149, 10);
+            this.lblCode.Location = new System.Drawing.Point(1382, 10);
             this.lblCode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(96, 52);
@@ -179,7 +222,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1250, 15);
+            this.label3.Location = new System.Drawing.Point(1483, 15);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 39);
@@ -190,7 +233,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1218, 71);
+            this.label11.Location = new System.Drawing.Point(1451, 71);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 39);
@@ -201,7 +244,7 @@
             // 
             this.lblCreditLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCreditLimit.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditLimit.Location = new System.Drawing.Point(1059, 62);
+            this.lblCreditLimit.Location = new System.Drawing.Point(1292, 62);
             this.lblCreditLimit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCreditLimit.Name = "lblCreditLimit";
             this.lblCreditLimit.Size = new System.Drawing.Size(154, 52);
@@ -213,7 +256,7 @@
             // 
             this.lblcontact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblcontact.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblcontact.Location = new System.Drawing.Point(161, 15);
+            this.lblcontact.Location = new System.Drawing.Point(394, 15);
             this.lblcontact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblcontact.Name = "lblcontact";
             this.lblcontact.Size = new System.Drawing.Size(154, 52);
@@ -225,7 +268,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(928, 71);
+            this.label8.Location = new System.Drawing.Point(1161, 71);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 39);
@@ -236,7 +279,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(318, 15);
+            this.label7.Location = new System.Drawing.Point(551, 15);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 39);
@@ -247,7 +290,7 @@
             // 
             this.lblRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRef.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRef.Location = new System.Drawing.Point(390, 6);
+            this.lblRef.Location = new System.Drawing.Point(623, 6);
             this.lblRef.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRef.Name = "lblRef";
             this.lblRef.Size = new System.Drawing.Size(288, 52);
@@ -259,7 +302,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(702, 15);
+            this.label5.Location = new System.Drawing.Point(935, 15);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 39);
@@ -270,7 +313,7 @@
             // 
             this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(780, 6);
+            this.lblTitle.Location = new System.Drawing.Point(1013, 6);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(288, 52);
@@ -282,7 +325,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1074, 15);
+            this.label2.Location = new System.Drawing.Point(1307, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 39);
@@ -298,7 +341,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1299, 128);
+            this.label1.Size = new System.Drawing.Size(1532, 128);
             this.label1.TabIndex = 0;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -317,7 +360,7 @@
             this.dgvLedger.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvLedger.Size = new System.Drawing.Size(1299, 587);
+            this.dgvLedger.Size = new System.Drawing.Size(1532, 587);
             this.dgvLedger.TabIndex = 3;
             this.dgvLedger.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.dgvLedger.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
@@ -327,25 +370,11 @@
             // 
             this.clsLedgerBindingSource.DataSource = typeof(MandiPOS.Reports.ReportClasses.clsLedger);
             // 
-            // uiButton1
-            // 
-            this.uiButton1.ButtonStyle = Janus.Windows.EditControls.ButtonStyle.Button;
-            this.uiButton1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uiButton1.Image = global::MandiPOS.Properties.Resources.printernew;
-            this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
-            this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
-            this.uiButton1.Location = new System.Drawing.Point(12, 78);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(101, 38);
-            this.uiButton1.TabIndex = 19;
-            this.uiButton1.Text = "پرنٹ";
-            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
-            // 
             // frmLedgerReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1299, 716);
+            this.ClientSize = new System.Drawing.Size(1532, 716);
             this.Controls.Add(this.dgvLedger);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -384,5 +413,6 @@
         private System.Windows.Forms.Label lblDateRange2;
         private System.Windows.Forms.Label label6;
         private Janus.Windows.EditControls.UIButton uiButton1;
+        private Janus.Windows.EditControls.UIComboBox uiComboBox1;
     }
 }

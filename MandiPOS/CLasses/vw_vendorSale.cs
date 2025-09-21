@@ -12,6 +12,7 @@ namespace MandiPOS.CLasses
         public DateTime ArrivalDate { get; set; }
 
         public int ArrivalNo { get; set; }
+        public int PartyID { get; set; }
 
         public string AccountTitle { get; set; }
 
@@ -49,7 +50,7 @@ namespace MandiPOS.CLasses
         public decimal Debit { get { return NetAmount<=0 ? Math.Abs(NetAmount) : 0; } }
         public decimal Credit { get { return NetAmount > 0 ? Math.Abs(NetAmount) : 0; } }
         public decimal EndBalance { get { return Math.Abs(Debit - Credit); } }
-        public string State { get { return Debit-Credit<=0?"جمع":"بنام"; } }
-
+        public string State { get { return RunningTotal>=0?"جمع":"بنام"; } }
+        public decimal RunningTotal { get; set; }
     }
 }

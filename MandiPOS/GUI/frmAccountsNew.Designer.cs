@@ -392,6 +392,7 @@
             this.dgv.DesignTimeLayout = dgv_DesignTimeLayout;
             this.dgv.DynamicFiltering = true;
             this.dgv.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic;
+            this.dgv.FilterRowButtonStyle = Janus.Windows.GridEX.FilterRowButtonStyle.ConditionOperatorDropDown;
             this.dgv.FilterRowUpdateMode = Janus.Windows.GridEX.FilterRowUpdateMode.WhenValueChanges;
             this.dgv.GroupByBoxVisible = false;
             this.dgv.Location = new System.Drawing.Point(12, 201);

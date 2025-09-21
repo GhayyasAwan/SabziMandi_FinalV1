@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -18,10 +19,21 @@ namespace MandiPOS.GUI
         public frmLogin()
         {
             InitializeComponent();
+            this.Shown += FrmLogin_Shown;
             LoadExeIcon();
             editBox1.RegisterFocus(false);
             editBox2.RegisterFocus(false);
         }
+
+        private void FrmLogin_Shown(object sender, EventArgs e)
+        {
+            if (Debugger.IsAttached)
+            { 
+            editBox1.Text = "amir"; // Default username for testing
+                editBox2.Text = "1234"; // Default password for testing
+            }
+        }
+
         private void LoadExeIcon()
         {
             string exePath = Assembly.GetExecutingAssembly().Location;
@@ -53,6 +65,7 @@ namespace MandiPOS.GUI
                 {
                    General.IsAdmin=user.IsAdmin;
                     General.UserName = user.UserName;
+                    General.CurrentUserID = user.UserID;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
