@@ -30,7 +30,7 @@ namespace MandiPOS.CLasses
 
         public List<VoucherCart> Entries { get; set; } = new List<VoucherCart>();
         public List<BardanaCart> BardanaEntries { get; set; } = new List<BardanaCart>();
-        public List<JVCart> JVEntries { get; set; } = new List<JVCart>();
+        public IEnumerable<JVCart> JVEntries { get; set; } = new List<JVCart>();
 
     }
     public class JVEntries
@@ -67,6 +67,7 @@ namespace MandiPOS.CLasses
         [DisplayName("رقم بنام")]
         public decimal CreditAmount { get; set; }
         public int EnteredBy { get; set; }
+        public int id { get; set; }
         public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }
     public class VoucherDetails
@@ -90,6 +91,7 @@ namespace MandiPOS.CLasses
     public class VoucherCart
     {
         public int EntryID { get; set; } = 0;
+        public int index { get; set; }
         public int PartyID { get; set; }
         [DisplayName("کوڈ")]
         public string PartyCode { get; set; }
@@ -198,7 +200,7 @@ bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.Ente
 from VoucherBardanaDetails bd
 left join tblItems p on bd.itemID=p.ID
 left join DetailAccounts acc on bd.accountiD=acc.ID
-Where VoucherID=@VoucherID";
+Where VoucherID=@VoucherID Order by bd.id desc";
                         voucher.BardanaEntries = db.Query<BardanaCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
                     }
                     else
@@ -207,8 +209,8 @@ Where VoucherID=@VoucherID";
                     }
                     if (voucher.VoucherType == 2.ToString()) //Journal Voucher
                     {
-                        sql = "Select jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID";
-                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
+                        sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
+                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x=>x.id);
                     }
 
                     else

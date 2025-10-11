@@ -487,7 +487,7 @@ namespace MandiPOS.GUI
                 return;
             }
             main = VoucherService.GetVoucher(vType, dtp.Value.Date);
-            bsCart.DataSource = main.BardanaEntries;
+            bsCart.DataSource = main.BardanaEntries.OrderByDescending(x=>x.ID);
             bsCart.ResetBindings(false);
             _name.Select();
         }

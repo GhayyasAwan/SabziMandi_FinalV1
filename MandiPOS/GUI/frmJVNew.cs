@@ -242,10 +242,8 @@ namespace MandiPOS.GUI
                         }
                     }
                 }
-
-
-
-                bs.Add(c);
+                main = VoucherService.GetVoucher(VoucherType, dtp.Value);
+                bs.DataSource = main.JVEntries;
                 bs.ResetBindings(false);
                 _narration.Clear();
                 _name.Clear();

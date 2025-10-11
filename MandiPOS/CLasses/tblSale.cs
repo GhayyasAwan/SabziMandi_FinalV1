@@ -383,7 +383,6 @@ namespace MandiPOS.CLasses
             //Post to Vendor
             if (sale.SaleAmount2 != 0)
             {
-
                 decimal remainingAmoun = sale.SaleAmount2 - sale.KarayaAmount
                     - sale.MazdooriAmount - sale.MunshianaAmount - sale.CommissionAmount - sale.StoreRent - sale.PaidAmount;
                 decimal debit = 0;
@@ -442,6 +441,7 @@ namespace MandiPOS.CLasses
                     DebitAmount = 0,
                     Narration = $"بقایا سیل آمد نمبر {sale.ArrivalNo}"
                 };
+                details.Add(jv);
             }
             //commission
             if (sale.CommissionAmount != 0)

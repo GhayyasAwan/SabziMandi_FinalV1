@@ -29,8 +29,8 @@ namespace MandiPOS.GUI
         {
             if (Debugger.IsAttached)
             { 
-            editBox1.Text = "amir"; // Default username for testing
-                editBox2.Text = "1234"; // Default password for testing
+            editBox1.Text = "admin"; // Default username for testing
+                editBox2.Text = "admin"; // Default password for testing
             }
         }
 

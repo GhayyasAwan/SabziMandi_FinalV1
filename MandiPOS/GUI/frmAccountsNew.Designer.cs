@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Janus.Windows.Common.JanusColorScheme janusColorScheme1 = new Janus.Windows.Common.JanusColorScheme();
+            Janus.Windows.Common.JanusColorScheme janusColorScheme2 = new Janus.Windows.Common.JanusColorScheme();
             Janus.Windows.GridEX.GridEXLayout dgv_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccountsNew));
             this.label1 = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@
             this.bsCity = new System.Windows.Forms.BindingSource(this.components);
             this.txtDebit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.txtCredit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
-            this.uiGroupBox1 = new Janus.Windows.EditControls.UIGroupBox();
+            this.grpRef = new Janus.Windows.EditControls.UIGroupBox();
             this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.txtRefName = new Janus.Windows.GridEX.EditControls.EditBox();
             this.cmbRefParty = new Janus.Windows.EditControls.UIComboBox();
@@ -65,8 +65,8 @@
             this.bsAccount1 = new System.Windows.Forms.BindingSource(this.components);
             this.bsAccounts2 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).BeginInit();
-            this.uiGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpRef)).BeginInit();
+            this.grpRef.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bss)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAccount1)).BeginInit();
@@ -79,7 +79,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1293, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 41);
+            this.label1.Size = new System.Drawing.Size(28, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "کوڈ";
             // 
@@ -88,17 +88,17 @@
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCode.Location = new System.Drawing.Point(1234, 55);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(87, 47);
+            this.txtCode.Size = new System.Drawing.Size(87, 39);
             this.txtCode.TabIndex = 1;
             this.txtCode.VisualStyleManager = this.visualStyleManager1;
             // 
             // visualStyleManager1
             // 
-            janusColorScheme1.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
-            janusColorScheme1.Name = "Scheme0";
-            janusColorScheme1.OfficeCustomColor = System.Drawing.Color.Empty;
-            janusColorScheme1.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
-            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme1);
+            janusColorScheme2.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
+            janusColorScheme2.Name = "Scheme0";
+            janusColorScheme2.OfficeCustomColor = System.Drawing.Color.Empty;
+            janusColorScheme2.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
+            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme2);
             // 
             // txtName
             // 
@@ -107,7 +107,7 @@
             this.txtName.Location = new System.Drawing.Point(904, 55);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtName.Size = new System.Drawing.Size(324, 47);
+            this.txtName.Size = new System.Drawing.Size(324, 39);
             this.txtName.TabIndex = 2;
             this.txtName.VisualStyleManager = this.visualStyleManager1;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
@@ -116,7 +116,7 @@
             // 
             this.txtContact.Location = new System.Drawing.Point(739, 54);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(159, 47);
+            this.txtContact.Size = new System.Drawing.Size(159, 39);
             this.txtContact.TabIndex = 3;
             this.txtContact.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
             this.txtContact.VisualStyleManager = this.visualStyleManager1;
@@ -128,7 +128,7 @@
             this.cmbCity.Location = new System.Drawing.Point(549, 54);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmbCity.Size = new System.Drawing.Size(184, 47);
+            this.cmbCity.Size = new System.Drawing.Size(184, 39);
             this.cmbCity.TabIndex = 4;
             this.cmbCity.ValueMember = "ID";
             this.cmbCity.VisualStyleManager = this.visualStyleManager1;
@@ -141,7 +141,7 @@
             // 
             this.txtDebit.Location = new System.Drawing.Point(395, 55);
             this.txtDebit.Name = "txtDebit";
-            this.txtDebit.Size = new System.Drawing.Size(148, 47);
+            this.txtDebit.Size = new System.Drawing.Size(148, 39);
             this.txtDebit.TabIndex = 5;
             this.txtDebit.Text = "0.00";
             this.txtDebit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -156,7 +156,7 @@
             // 
             this.txtCredit.Location = new System.Drawing.Point(241, 55);
             this.txtCredit.Name = "txtCredit";
-            this.txtCredit.Size = new System.Drawing.Size(148, 47);
+            this.txtCredit.Size = new System.Drawing.Size(148, 39);
             this.txtCredit.TabIndex = 6;
             this.txtCredit.Text = "0.00";
             this.txtCredit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -167,21 +167,23 @@
             0});
             this.txtCredit.VisualStyleManager = this.visualStyleManager1;
             // 
-            // uiGroupBox1
+            // grpRef
             // 
-            this.uiGroupBox1.Controls.Add(this.uiButton1);
-            this.uiGroupBox1.Controls.Add(this.txtRefName);
-            this.uiGroupBox1.Controls.Add(this.cmbRefParty);
-            this.uiGroupBox1.Controls.Add(this.rbOther);
-            this.uiGroupBox1.Controls.Add(this.rbCustomer);
-            this.uiGroupBox1.Controls.Add(this.rbVendor);
-            this.uiGroupBox1.Location = new System.Drawing.Point(12, 12);
-            this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uiGroupBox1.Size = new System.Drawing.Size(223, 183);
-            this.uiGroupBox1.TabIndex = 7;
-            this.uiGroupBox1.Text = "معرفت";
-            this.uiGroupBox1.VisualStyleManager = this.visualStyleManager1;
+            this.grpRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpRef.Controls.Add(this.uiButton1);
+            this.grpRef.Controls.Add(this.txtRefName);
+            this.grpRef.Controls.Add(this.cmbRefParty);
+            this.grpRef.Controls.Add(this.rbOther);
+            this.grpRef.Controls.Add(this.rbCustomer);
+            this.grpRef.Controls.Add(this.rbVendor);
+            this.grpRef.Location = new System.Drawing.Point(12, 12);
+            this.grpRef.Name = "grpRef";
+            this.grpRef.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grpRef.Size = new System.Drawing.Size(223, 183);
+            this.grpRef.TabIndex = 7;
+            this.grpRef.Text = "معرفت";
+            this.grpRef.VisualStyleManager = this.visualStyleManager1;
             // 
             // uiButton1
             // 
@@ -200,7 +202,7 @@
             this.txtRefName.Location = new System.Drawing.Point(10, 136);
             this.txtRefName.Name = "txtRefName";
             this.txtRefName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtRefName.Size = new System.Drawing.Size(207, 47);
+            this.txtRefName.Size = new System.Drawing.Size(207, 39);
             this.txtRefName.TabIndex = 21;
             this.txtRefName.VisualStyleManager = this.visualStyleManager1;
             this.txtRefName.TextChanged += new System.EventHandler(this.txtRefName_TextChanged);
@@ -211,7 +213,7 @@
             this.cmbRefParty.DisplayMember = "AccountTitle";
             this.cmbRefParty.Location = new System.Drawing.Point(10, 136);
             this.cmbRefParty.Name = "cmbRefParty";
-            this.cmbRefParty.Size = new System.Drawing.Size(207, 47);
+            this.cmbRefParty.Size = new System.Drawing.Size(207, 39);
             this.cmbRefParty.TabIndex = 3;
             this.cmbRefParty.ValueMember = "ID";
             this.cmbRefParty.VisualStyleManager = this.visualStyleManager1;
@@ -225,7 +227,7 @@
             this.rbOther.AutoSize = true;
             this.rbOther.Location = new System.Drawing.Point(6, 46);
             this.rbOther.Name = "rbOther";
-            this.rbOther.Size = new System.Drawing.Size(48, 44);
+            this.rbOther.Size = new System.Drawing.Size(41, 36);
             this.rbOther.TabIndex = 2;
             this.rbOther.Text = "دیگر";
             this.rbOther.VisualStyleManager = this.visualStyleManager1;
@@ -236,7 +238,7 @@
             this.rbCustomer.AutoSize = true;
             this.rbCustomer.Location = new System.Drawing.Point(67, 46);
             this.rbCustomer.Name = "rbCustomer";
-            this.rbCustomer.Size = new System.Drawing.Size(55, 44);
+            this.rbCustomer.Size = new System.Drawing.Size(46, 36);
             this.rbCustomer.TabIndex = 1;
             this.rbCustomer.Text = "گاہک";
             this.rbCustomer.VisualStyleManager = this.visualStyleManager1;
@@ -248,7 +250,7 @@
             this.rbVendor.Checked = true;
             this.rbVendor.Location = new System.Drawing.Point(140, 46);
             this.rbVendor.Name = "rbVendor";
-            this.rbVendor.Size = new System.Drawing.Size(67, 44);
+            this.rbVendor.Size = new System.Drawing.Size(54, 36);
             this.rbVendor.TabIndex = 0;
             this.rbVendor.TabStop = true;
             this.rbVendor.Text = "بیوپاری";
@@ -261,7 +263,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1192, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 41);
+            this.label2.Size = new System.Drawing.Size(28, 32);
             this.label2.TabIndex = 8;
             this.label2.Text = "نام";
             // 
@@ -270,7 +272,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(832, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 41);
+            this.label3.Size = new System.Drawing.Size(54, 32);
             this.label3.TabIndex = 9;
             this.label3.Text = "رابطہ نمبر";
             // 
@@ -279,7 +281,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(695, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 41);
+            this.label4.Size = new System.Drawing.Size(30, 32);
             this.label4.TabIndex = 10;
             this.label4.Text = "شہر";
             // 
@@ -288,7 +290,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(472, 11);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 41);
+            this.label5.Size = new System.Drawing.Size(56, 32);
             this.label5.TabIndex = 11;
             this.label5.Text = "سابقہ بنام";
             // 
@@ -297,7 +299,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(320, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 41);
+            this.label6.Size = new System.Drawing.Size(54, 32);
             this.label6.TabIndex = 12;
             this.label6.Text = "سابقہ جمع";
             // 
@@ -307,7 +309,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(1264, 104);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 41);
+            this.label7.Size = new System.Drawing.Size(45, 32);
             this.label7.TabIndex = 14;
             this.label7.Text = "تفصیل";
             // 
@@ -318,7 +320,7 @@
             this.txtRemarks.Location = new System.Drawing.Point(549, 148);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtRemarks.Size = new System.Drawing.Size(773, 47);
+            this.txtRemarks.Size = new System.Drawing.Size(773, 39);
             this.txtRemarks.TabIndex = 13;
             this.txtRemarks.VisualStyleManager = this.visualStyleManager1;
             // 
@@ -327,7 +329,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(337, 104);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 41);
+            this.label8.Size = new System.Drawing.Size(41, 32);
             this.label8.TabIndex = 18;
             this.label8.Text = "کمیشن";
             // 
@@ -336,7 +338,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(472, 104);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 41);
+            this.label9.Size = new System.Drawing.Size(54, 32);
             this.label9.TabIndex = 17;
             this.label9.Text = "بیلنس حد";
             // 
@@ -344,7 +346,7 @@
             // 
             this.txtCommisionRatio.Location = new System.Drawing.Point(241, 148);
             this.txtCommisionRatio.Name = "txtCommisionRatio";
-            this.txtCommisionRatio.Size = new System.Drawing.Size(148, 47);
+            this.txtCommisionRatio.Size = new System.Drawing.Size(148, 39);
             this.txtCommisionRatio.TabIndex = 16;
             this.txtCommisionRatio.Text = "0.00";
             this.txtCommisionRatio.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -359,7 +361,7 @@
             // 
             this.txtCreditLimit.Location = new System.Drawing.Point(395, 148);
             this.txtCreditLimit.Name = "txtCreditLimit";
-            this.txtCreditLimit.Size = new System.Drawing.Size(148, 47);
+            this.txtCreditLimit.Size = new System.Drawing.Size(148, 39);
             this.txtCreditLimit.TabIndex = 15;
             this.txtCreditLimit.Text = "0.00";
             this.txtCreditLimit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -428,7 +430,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.uiGroupBox1);
+            this.Controls.Add(this.grpRef);
             this.Controls.Add(this.txtCredit);
             this.Controls.Add(this.txtDebit);
             this.Controls.Add(this.cmbCity);
@@ -441,9 +443,9 @@
             this.Name = "frmAccountsNew";
             this.Text = "frmAccountsNew";
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).EndInit();
-            this.uiGroupBox1.ResumeLayout(false);
-            this.uiGroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpRef)).EndInit();
+            this.grpRef.ResumeLayout(false);
+            this.grpRef.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bss)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAccount1)).EndInit();
@@ -462,7 +464,7 @@
         private Janus.Windows.EditControls.UIComboBox cmbCity;
         private Janus.Windows.GridEX.EditControls.NumericEditBox txtDebit;
         private Janus.Windows.GridEX.EditControls.NumericEditBox txtCredit;
-        private Janus.Windows.EditControls.UIGroupBox uiGroupBox1;
+        private Janus.Windows.EditControls.UIGroupBox grpRef;
         private Janus.Windows.EditControls.UIRadioButton rbOther;
         private Janus.Windows.EditControls.UIRadioButton rbCustomer;
         private Janus.Windows.EditControls.UIRadioButton rbVendor;

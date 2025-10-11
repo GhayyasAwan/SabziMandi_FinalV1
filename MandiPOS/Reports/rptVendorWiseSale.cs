@@ -20,15 +20,52 @@ namespace MandiPOS.Reports
             {
                 lblTitle.Text = $"بکری نقد";
                 bndCustomer.Visible = false;
-                var records = data.Select("CustomerAccountFull Like '%نقد سیل%'").CopyToDataTable();
-                this.DataSource = records;
+                if (data.Rows.Count > 0)
+                {
+                    var filteredRows = data.Select("CustomerAccountFull Like '%نقد سیل%'");
+
+                    if (filteredRows != null && filteredRows.Length > 0)
+                    {
+                        var records = filteredRows.CopyToDataTable();
+                        this.DataSource = records;
+                    }
+                    else
+                    {
+                        // No matching rows found
+                        this.DataSource = null; // or assign an empty DataTable
+                    }
+                }
+
+                else
+                {
+                    this.DataSource = null;
+                }
+
+                    
             }
             else if (type == 2)
             {
                 lblTitle.Text = $"بکری ادھار";
+                if (data.Rows.Count > 0)
+                {
+                    var filteredRows = data.Select("CustomerAccountFull Not Like '%نقد سیل%'");
 
-                var records = data.Select("CustomerAccountFull Not Like '%نقد سیل%'").CopyToDataTable();
-                this.DataSource = records;
+                    if (filteredRows != null && filteredRows.Length > 0)
+                    {
+                        var records = filteredRows.CopyToDataTable();
+                        this.DataSource = records;
+                    }
+                    else
+                    {
+                        // No matching rows found
+                        this.DataSource = null; // or assign an empty DataTable
+                    }
+                }
+                else
+                {
+                    this.DataSource = null;
+                }
+                    
             }
             else { this.DataSource = data; }
 

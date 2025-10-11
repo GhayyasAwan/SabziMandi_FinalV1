@@ -130,8 +130,12 @@ namespace MandiPOS.GUI
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    txtCredit.Parent.SelectNextControl(txtCredit, true, true, true, true);
+                    if(MasterID==4)
+                        txtCredit.Parent.SelectNextControl(txtCredit, true, true, true, true);
+                    else
+                        SaveRecord();
                 }
+                
             });
             txtDebit.KeyDown += ((s, e) =>
             {
@@ -353,12 +357,12 @@ namespace MandiPOS.GUI
             {
                 Button btn = new Button()
                 {
-                    Size = new Size(150, 50),
+                    Size = new Size(flowLayoutPanel1.Width-10, 50),
                     Text = $"{acc.ID} - {acc.AccountTitle}",
                     Tag = acc.ID,
                     Font = new Font("Jameel Noori nastaleeq", 14),
                     //VisualStyleManager = this.visualStyleManager1,
-                    RightToLeft = RightToLeft.Yes,
+                    RightToLeft = RightToLeft.Yes, TextAlign = ContentAlignment.MiddleLeft,
                     Anchor = AnchorStyles.Top | AnchorStyles.Right
                 };
                 btn.Click += Btn_Click;
@@ -370,6 +374,7 @@ namespace MandiPOS.GUI
                 flowLayoutPanel1.Controls.Add(btn);
             }
         }
+        int CityID = 0;
         public override void Refresh()
         {
             if (MasterID != 0)
@@ -377,11 +382,21 @@ namespace MandiPOS.GUI
                 if (!isloading)
                 {
                     bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).ToDataTable();
+                    CityID = SQL.GetCity($"where CityName like N'%ملتان%'").ID;
                 }
                 bsAccount1.RemoveFilter();
-                account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt() };
+                account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt(),CityID=CityID };
                 BindObject();
-
+                dgv.AutoSizeColumns();
+                 grpRef.Enabled=txtRemarks.Enabled=txtCreditLimit.Enabled=txtCommisionRatio.Enabled= MasterID == 4;
+                if (MasterID == 1 || MasterID == 2 || MasterID == 3 || MasterID == 6 || MasterID == 8 || MasterID == 10)
+                {
+                    txtContact.Enabled = false; cmbCity.Enabled = false;
+                }
+                else
+                {
+                    txtContact.Enabled = true; cmbCity.Enabled = true;
+                }
             }
         }
 

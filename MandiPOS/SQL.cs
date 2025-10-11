@@ -2,6 +2,8 @@
 
 using DevExpress.XtraEditors;
 
+using Janus.Data;
+
 using MandiPOS.CLasses;
 
 using System;
@@ -80,6 +82,7 @@ namespace MandiPOS
             }
         }
 
+
         internal static List<tblCity> GetCities()
         {
             try
@@ -97,6 +100,25 @@ namespace MandiPOS
                 return default;
             }
         }
+        internal static tblCity GetCity(string whercondition="")
+        {
+            try
+            {
+                using (var xdb = new db())
+                {
+                    var data = xdb.Query<tblCity>($"Select * from tblCity {whercondition}").FirstOrDefault();
+                    return data;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ex.ExcError("while Getting Cities");
+                return default;
+            }
+        }
+
+
 
 
 
@@ -255,6 +277,21 @@ namespace MandiPOS
         internal static void PrintBillByNo(string billNo)
         {
             throw new NotImplementedException();
+        }
+
+        internal static void GetStats(DateTime date, ref decimal banam, ref decimal jama, ref decimal income)
+        {
+            using (var db = new db())
+            {
+                (DateTime VoucherDate, decimal TotalBanam, decimal TotalJama) data = db.Query<(DateTime VoucherDate, decimal TotalBanam, decimal TotalJama)>(
+    $"SELECT * FROM dbo.ufn_GetVoucherSummaryByDate('{date:yyyy-MM-dd}')").FirstOrDefault();
+                if (data != default)
+                {
+                    banam = data.TotalBanam;
+                    jama = data.TotalJama;
+                }
+               income= db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
+            }
         }
     }
 

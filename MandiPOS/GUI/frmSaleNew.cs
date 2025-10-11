@@ -75,7 +75,7 @@ namespace MandiPOS.GUI
             decimal sale1 = 0;
             foreach (vwSale3 sale in bsCart)
             {
-                sale1 += sale.CustomerAmount;
+                sale1 += sale.PartyAmount;
             }
             _grossSale.Text = sale1.ProperDecimals();
             _Expnses.Value = (commission + mazdoori + munshiana + kraya + store).ProperDecimals();
@@ -1138,14 +1138,16 @@ namespace MandiPOS.GUI
             _mazdoori.Value = itemMazdoori.toInt();
         }
         List<vwSale2> summary = new List<vwSale2>();
+        decimal _sale1 = 0;
+        decimal _sale2 = 0;
         private void GetTotals()
         {
 
             summary.Clear();
             bsSummry.Clear();
             decimal __totalLaga = 0;
-            decimal _sale1 = 0;
-            decimal _sale2 = 0;
+            _sale1 = 0;
+            _sale2 = 0;
             decimal tobesold = _sale.TotalQty;
             decimal sold = 0;
             decimal rem = 0;
@@ -1173,7 +1175,8 @@ namespace MandiPOS.GUI
                 ItemQty = g.Sum(x => x.ItemQty)
             }).ToList();
             bsSummry.ResetBindings(false);
-            _grossSale.Value = _sale1.ProperDecimals();
+            _CustomerSale.Value = _sale1.ProperDecimals();
+            _grossSale.Value = _sale2.ProperDecimals();
 
             SetEntryPanel(tobesold - sold == 0);
         }
@@ -1188,7 +1191,7 @@ namespace MandiPOS.GUI
         {
             _partyID.Text = _sale.PartyID.ToString();
             voucherID = _sale.VoucherID;
-            _grossSale.Value = _sale.SaleAmount1.ProperDecimals();
+            _grossSale.Value = _sale.SaleAmount2.ProperDecimals();
             _ArrivalQty.Text = _sale.TotalQty.ProperDecimals();
             txtTitle.Text = _sale.PartyTitle;
             _commission.Text = _sale.CommissionAmount.ProperDecimals();
@@ -1563,7 +1566,7 @@ namespace MandiPOS.GUI
             LoadVendors();
         }
 
-       
+        
     }
 }
 public class waitForm : IDisposable

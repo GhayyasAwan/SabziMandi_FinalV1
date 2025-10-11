@@ -125,6 +125,7 @@ namespace MandiPOS.GUI
         }
         int currentAccount;
         DataTable dtParties = new DataTable();
+        int index = 0;
         public override void Refresh()
         {
             try
@@ -148,11 +149,12 @@ namespace MandiPOS.GUI
                 }
                 isLoading = true;
                 main = VoucherService.GetVoucher(VoucherType, dtp.Value.Date);
-                bsCart.DataSource = main.Entries;
+                bsCart.DataSource = main.Entries.OrderByDescending(x=>x.EntryID);
                 bsCashBank.DataSource = DetailAccountService.BankCashAccounts();
                 dtParties = DetailAccountService.PartyAccounts().ToDataTable();
                 bsParties.DataSource = dtParties;
                 txtCashBank.SelectedIndex = 0;
+                index = 0;
                 isLoading = false;
                 txtName.Select();
             }
@@ -197,9 +199,10 @@ namespace MandiPOS.GUI
                 txtAmount.Select();
                 return;
             }
+            index++;
             VoucherCart c = new VoucherCart()
             {
-                Amount = txtAmount.Text.toDecimal(),
+                Amount = txtAmount.Text.toDecimal(), index = index,
                 CashAccount = txtCashBank.Text,
                 CashAccountID = txtCashBank.SelectedValue.toInt(),
                 EntryID = 0,

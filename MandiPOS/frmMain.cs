@@ -47,7 +47,7 @@ namespace MandiPOS
                 BackColor = Color.Transparent,
                 AutoSize = false,
                 Dock = DockStyle.Fill,
-                Text = "ملک حاجی صدیق کرناول اینڈ برادرز",
+                Text = "چوہدری محمد شریف، چوہدری محمد سلیم اینڈ کو، دکان نمبر 63",
                 TextAlign = ContentAlignment.MiddleCenter
             };
             panel2.Height = lbl.Height;
@@ -61,7 +61,7 @@ namespace MandiPOS
             timer.Interval = 1000;
             timer.Enabled = true;
             timer.Tick += Timer_Tick;
-            lblFiscalYear.Text = $"مالی سال {this.GetPakistaniFiscalYear()}";
+            lblFiscalYear.Text = $"مالی سال {DateTime.Now.Year}";
             this.Opacity = 0;
             SetBGImage();
 
@@ -479,7 +479,7 @@ namespace MandiPOS
             }
 
         }
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             var frm = new frmVoucherNew(1) { Name = Name + "_1" };

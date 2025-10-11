@@ -40,7 +40,13 @@ namespace MandiPOS.Reports
             xrSubreport1.BeforePrint += CollectJamaEntries;
             xrSubreport2.BeforePrint += CollectBanamEntries;
             this.AfterPrint += RptRokar_AfterPrint;
-
+            decimal Jama = 0;
+            decimal Banam = 0;
+            decimal income = 0;
+            SQL.GetStats(date,ref Banam,ref Jama,ref income);
+            _wasooli.Text = Jama.ToString("#,0.##");
+            _banam.Text = Banam.ToString("#,0.##");
+            _expnse.Text= income.ToString("#,0.##");
         }
 
         private void GetSummaryBalances()

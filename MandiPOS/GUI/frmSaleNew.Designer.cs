@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Janus.Windows.Common.JanusColorScheme janusColorScheme1 = new Janus.Windows.Common.JanusColorScheme();
+            Janus.Windows.Common.JanusColorScheme janusColorScheme2 = new Janus.Windows.Common.JanusColorScheme();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSaleNew));
             Janus.Windows.GridEX.GridEXLayout dgv1_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout dgv2_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
-            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
-            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
-            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem3 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem4 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem5 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem6 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout dgv_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout _CustomerHelper_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout _partySearchHelper_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
@@ -131,6 +131,8 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.uiButton1 = new Janus.Windows.EditControls.UIButton();
+            this._CustomerSale = new Janus.Windows.GridEX.EditControls.NumericEditBox();
+            this.label30 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vwSale1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
@@ -167,11 +169,11 @@
             // 
             // visualStyleManager1
             // 
-            janusColorScheme1.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
-            janusColorScheme1.Name = "Scheme0";
-            janusColorScheme1.OfficeCustomColor = System.Drawing.Color.Empty;
-            janusColorScheme1.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
-            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme1);
+            janusColorScheme2.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
+            janusColorScheme2.Name = "Scheme0";
+            janusColorScheme2.OfficeCustomColor = System.Drawing.Color.Empty;
+            janusColorScheme2.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
+            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme2);
             // 
             // dtp1
             // 
@@ -547,22 +549,22 @@
             // 
             // _unit
             // 
-            uiComboBoxItem1.FormatStyle.Alpha = 0;
-            uiComboBoxItem1.IsSeparator = false;
-            uiComboBoxItem1.Text = "نگ";
-            uiComboBoxItem1.Value = 0;
-            uiComboBoxItem2.FormatStyle.Alpha = 0;
-            uiComboBoxItem2.IsSeparator = false;
-            uiComboBoxItem2.Text = "کلو";
-            uiComboBoxItem2.Value = 1;
-            uiComboBoxItem3.FormatStyle.Alpha = 0;
-            uiComboBoxItem3.IsSeparator = false;
-            uiComboBoxItem3.Text = "من";
-            uiComboBoxItem3.Value = 2;
+            uiComboBoxItem4.FormatStyle.Alpha = 0;
+            uiComboBoxItem4.IsSeparator = false;
+            uiComboBoxItem4.Text = "نگ";
+            uiComboBoxItem4.Value = 0;
+            uiComboBoxItem5.FormatStyle.Alpha = 0;
+            uiComboBoxItem5.IsSeparator = false;
+            uiComboBoxItem5.Text = "کلو";
+            uiComboBoxItem5.Value = 1;
+            uiComboBoxItem6.FormatStyle.Alpha = 0;
+            uiComboBoxItem6.IsSeparator = false;
+            uiComboBoxItem6.Text = "من";
+            uiComboBoxItem6.Value = 2;
             this._unit.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
-            uiComboBoxItem1,
-            uiComboBoxItem2,
-            uiComboBoxItem3});
+            uiComboBoxItem4,
+            uiComboBoxItem5,
+            uiComboBoxItem6});
             this._unit.Location = new System.Drawing.Point(359, 126);
             this._unit.Name = "_unit";
             this._unit.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -685,38 +687,38 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(257, 95);
+            this.label13.Location = new System.Drawing.Point(258, 95);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 34);
+            this.label13.Size = new System.Drawing.Size(49, 34);
             this.label13.TabIndex = 48;
-            this.label13.Text = "ریٹ گاہک";
+            this.label13.Text = "ریٹ 1";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(189, 95);
+            this.label14.Location = new System.Drawing.Point(197, 95);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 34);
+            this.label14.Size = new System.Drawing.Size(48, 34);
             this.label14.TabIndex = 49;
-            this.label14.Text = "ریٹ بیوپاری";
+            this.label14.Text = "ریٹ 2";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(132, 95);
+            this.label15.Location = new System.Drawing.Point(139, 95);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(57, 34);
+            this.label15.Size = new System.Drawing.Size(41, 34);
             this.label15.TabIndex = 50;
-            this.label15.Text = "رقم گاہک";
+            this.label15.Text = "رقم 1";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(73, 95);
+            this.label16.Location = new System.Drawing.Point(76, 95);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(65, 34);
+            this.label16.Size = new System.Drawing.Size(40, 34);
             this.label16.TabIndex = 51;
-            this.label16.Text = "رقم بیوپاری";
+            this.label16.Text = "رقم 2";
             // 
             // dgv
             // 
@@ -743,7 +745,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(714, 484);
+            this.label17.Location = new System.Drawing.Point(714, 505);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(43, 34);
             this.label17.TabIndex = 53;
@@ -752,7 +754,7 @@
             // _commission
             // 
             this._commission.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._commission.Location = new System.Drawing.Point(652, 533);
+            this._commission.Location = new System.Drawing.Point(652, 547);
             this._commission.Name = "_commission";
             this._commission.Size = new System.Drawing.Size(93, 27);
             this._commission.TabIndex = 54;
@@ -768,9 +770,9 @@
             // commissionPerc
             // 
             this.commissionPerc.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.commissionPerc.Location = new System.Drawing.Point(652, 488);
+            this.commissionPerc.Location = new System.Drawing.Point(652, 509);
             this.commissionPerc.Name = "commissionPerc";
-            this.commissionPerc.Size = new System.Drawing.Size(41, 27);
+            this.commissionPerc.Size = new System.Drawing.Size(56, 27);
             this.commissionPerc.TabIndex = 55;
             this.commissionPerc.Text = "0.00";
             this.commissionPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
@@ -784,9 +786,9 @@
             // mazdooriPerc
             // 
             this.mazdooriPerc.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mazdooriPerc.Location = new System.Drawing.Point(553, 488);
+            this.mazdooriPerc.Location = new System.Drawing.Point(553, 509);
             this.mazdooriPerc.Name = "mazdooriPerc";
-            this.mazdooriPerc.Size = new System.Drawing.Size(41, 27);
+            this.mazdooriPerc.Size = new System.Drawing.Size(51, 27);
             this.mazdooriPerc.TabIndex = 58;
             this.mazdooriPerc.Text = "0.00";
             this.mazdooriPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
@@ -800,7 +802,7 @@
             // _mazdoori
             // 
             this._mazdoori.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._mazdoori.Location = new System.Drawing.Point(553, 533);
+            this._mazdoori.Location = new System.Drawing.Point(553, 547);
             this._mazdoori.Name = "_mazdoori";
             this._mazdoori.Size = new System.Drawing.Size(93, 27);
             this._mazdoori.TabIndex = 57;
@@ -816,7 +818,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(600, 484);
+            this.label18.Location = new System.Drawing.Point(600, 505);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 34);
             this.label18.TabIndex = 56;
@@ -825,9 +827,9 @@
             // mushianaPerc
             // 
             this.mushianaPerc.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mushianaPerc.Location = new System.Drawing.Point(451, 488);
+            this.mushianaPerc.Location = new System.Drawing.Point(451, 509);
             this.mushianaPerc.Name = "mushianaPerc";
-            this.mushianaPerc.Size = new System.Drawing.Size(41, 27);
+            this.mushianaPerc.Size = new System.Drawing.Size(55, 27);
             this.mushianaPerc.TabIndex = 61;
             this.mushianaPerc.Text = "0.20";
             this.mushianaPerc.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
@@ -841,7 +843,7 @@
             // _munshiana
             // 
             this._munshiana.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._munshiana.Location = new System.Drawing.Point(451, 533);
+            this._munshiana.Location = new System.Drawing.Point(451, 547);
             this._munshiana.Name = "_munshiana";
             this._munshiana.Size = new System.Drawing.Size(93, 27);
             this._munshiana.TabIndex = 60;
@@ -857,7 +859,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(510, 484);
+            this.label19.Location = new System.Drawing.Point(502, 505);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(42, 34);
             this.label19.TabIndex = 59;
@@ -866,7 +868,7 @@
             // _kraya
             // 
             this._kraya.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._kraya.Location = new System.Drawing.Point(363, 533);
+            this._kraya.Location = new System.Drawing.Point(363, 547);
             this._kraya.Name = "_kraya";
             this._kraya.Size = new System.Drawing.Size(78, 27);
             this._kraya.TabIndex = 63;
@@ -882,7 +884,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(397, 484);
+            this.label20.Location = new System.Drawing.Point(400, 505);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(41, 34);
             this.label20.TabIndex = 62;
@@ -892,7 +894,7 @@
             // _paid
             // 
             this._paid.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._paid.Location = new System.Drawing.Point(289, 533);
+            this._paid.Location = new System.Drawing.Point(289, 547);
             this._paid.Name = "_paid";
             this._paid.Size = new System.Drawing.Size(68, 27);
             this._paid.TabIndex = 65;
@@ -908,7 +910,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(323, 484);
+            this.label21.Location = new System.Drawing.Point(314, 505);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(43, 34);
             this.label21.TabIndex = 64;
@@ -917,7 +919,7 @@
             // _store
             // 
             this._store.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._store.Location = new System.Drawing.Point(213, 533);
+            this._store.Location = new System.Drawing.Point(213, 547);
             this._store.Name = "_store";
             this._store.Size = new System.Drawing.Size(70, 27);
             this._store.TabIndex = 67;
@@ -933,7 +935,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(232, 485);
+            this.label22.Location = new System.Drawing.Point(219, 506);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(64, 34);
             this.label22.TabIndex = 66;
@@ -944,9 +946,9 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(132, 465);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(60, 34);
+            this.label23.Size = new System.Drawing.Size(49, 34);
             this.label23.TabIndex = 68;
-            this.label23.Text = "خام بکری";
+            this.label23.Text = "بکری 2";
             // 
             // label24
             // 
@@ -959,11 +961,13 @@
             // 
             // _grossSale
             // 
+            this._grossSale.Enabled = false;
             this._grossSale.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._grossSale.Location = new System.Drawing.Point(12, 469);
             this._grossSale.Name = "_grossSale";
             this._grossSale.Size = new System.Drawing.Size(114, 31);
             this._grossSale.TabIndex = 70;
+            this._grossSale.TabStop = false;
             this._grossSale.Text = "0.00";
             this._grossSale.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
             this._grossSale.Value = new decimal(new int[] {
@@ -1197,15 +1201,55 @@
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Size = new System.Drawing.Size(48, 35);
             this.uiButton1.TabIndex = 87;
+            this.uiButton1.ToolTipText = "کھاتے ریفریش کریں";
             this.uiButton1.VisualStyle = Janus.Windows.UI.VisualStyle.Office2010;
             this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            // 
+            // _CustomerSale
+            // 
+            this._CustomerSale.Enabled = false;
+            this._CustomerSale.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._CustomerSale.Location = new System.Drawing.Point(208, 468);
+            this._CustomerSale.Name = "_CustomerSale";
+            this._CustomerSale.Size = new System.Drawing.Size(114, 31);
+            this._CustomerSale.TabIndex = 89;
+            this._CustomerSale.TabStop = false;
+            this._CustomerSale.Text = "0.00";
+            this._CustomerSale.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this._CustomerSale.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this._CustomerSale.VisualStyleManager = this.visualStyleManager1;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(328, 464);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(50, 34);
+            this.label30.TabIndex = 88;
+            this.label30.Text = "بکری 1";
             // 
             // frmSaleNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1080, 640);
-            this.Controls.Add(this._CustomerHelper);
             this.Controls.Add(this._partySearchHelper);
+            this.Controls.Add(this._customer);
+            this.Controls.Add(this._item);
+            this.Controls.Add(this._unit);
+            this.Controls.Add(this._qty);
+            this.Controls.Add(this._laga);
+            this.Controls.Add(this._wt);
+            this.Controls.Add(this._amount2);
+            this.Controls.Add(this._rate2);
+            this.Controls.Add(this._rate1);
+            this.Controls.Add(this._amount1);
+            this.Controls.Add(this._CustomerSale);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this._CustomerHelper);
             this.Controls.Add(this.dgvMarka);
             this.Controls.Add(this._partyHelper);
             this.Controls.Add(this.uiButton1);
@@ -1213,7 +1257,6 @@
             this.Controls.Add(this.txtMarkaMain);
             this.Controls.Add(this._partyID);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this._wt);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label25);
             this.Controls.Add(this._netSale);
@@ -1233,7 +1276,6 @@
             this.Controls.Add(this.label19);
             this.Controls.Add(this.mazdooriPerc);
             this.Controls.Add(this._mazdoori);
-            this.Controls.Add(this.label18);
             this.Controls.Add(this.commissionPerc);
             this.Controls.Add(this._commission);
             this.Controls.Add(this.label17);
@@ -1247,15 +1289,6 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this._marka);
-            this.Controls.Add(this._amount2);
-            this.Controls.Add(this._rate2);
-            this.Controls.Add(this._rate1);
-            this.Controls.Add(this._amount1);
-            this.Controls.Add(this._unit);
-            this.Controls.Add(this._qty);
-            this.Controls.Add(this._laga);
-            this.Controls.Add(this._customer);
-            this.Controls.Add(this._item);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ArrivalNo);
             this.Controls.Add(this.label7);
@@ -1285,6 +1318,7 @@
             this.Controls.Add(this.dtp);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.label29);
+            this.Controls.Add(this.label18);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmSaleNew";
@@ -1402,5 +1436,7 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private Janus.Windows.EditControls.UIButton uiButton1;
+        private Janus.Windows.GridEX.EditControls.NumericEditBox _CustomerSale;
+        private System.Windows.Forms.Label label30;
     }
 }
