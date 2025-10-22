@@ -11,11 +11,10 @@ namespace MandiPOS.Reports
         /// The main entry point for the application.
         /// type 0=All,1=Cash Sale, 2=Credit Sale
         /// </summary>
-        public rptVendorWiseSale(DateTime date, int type = 0)
+        public rptVendorWiseSale(DateTime date, int type = 0, DataTable data = null)
         {
             InitializeComponent();
-            string sql = $@"Select * from vendorWiseSale Where ArrivalDate='{date:yyyy-MM-dd}'";
-            var data = new db().Query<vendorWiseSale>(sql).ToDataTable();
+            
             if (type == 1)
             {
                 lblTitle.Text = $"بکری نقد";

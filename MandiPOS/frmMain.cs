@@ -31,6 +31,7 @@ namespace MandiPOS
             this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
            this.DoubleBuffered = true;
+            General.MultanCityID = General.GetMultanCityID();
             using (var frm = new frmLogin())
             { 
                 if(frm.ShowDialog() != DialogResult.OK)
@@ -77,6 +78,8 @@ namespace MandiPOS
             this.Resize += FrmMain_Resize;
             SetButtonsvisibility();
         }
+
+       
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -171,7 +174,7 @@ namespace MandiPOS
         private void Wrkr_DoWork(object sender, DoWorkEventArgs e)
         {
             SQL.SetDefaultAccount();
-            // SaleService.RepostSales();
+            //SaleService.RepostSales();
             using(var rpt=new rptRokar(DateTime.Now.Date.AddDays(365)))
             {
                 rpt.CreateDocument();
@@ -443,7 +446,7 @@ namespace MandiPOS
 
         private void OpenAccountForm()
         {
-            var frm = new frmAccountsNew();
+            var frm = new frmAccountsNew2();
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             { f.BringToFront(); }

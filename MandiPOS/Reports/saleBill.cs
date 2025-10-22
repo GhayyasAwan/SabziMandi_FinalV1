@@ -31,6 +31,7 @@ namespace MandiPOS.Reports
             else
             {
                 lblMarka.Text = string.Empty;
+                SubBand1.Visible = false;
             }
             DetailAccounts acc = DetailAccountService.GetDetailAccountByID(sale.PartyID);
             if (acc.AccountTitle.Contains("نقد") && !string.IsNullOrEmpty(sale.PartyTitle))
@@ -63,6 +64,7 @@ namespace MandiPOS.Reports
                     vwSale3 existingItem = newCart.FirstOrDefault(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate);
                     existingItem.PartyAmount += d.PartyAmount;
                     existingItem.ItemQty += d.ItemQty;
+                    existingItem.ItemWeight += d.ItemWeight;
                 }
                 else
                 {

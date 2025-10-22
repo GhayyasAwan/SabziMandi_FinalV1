@@ -6,6 +6,7 @@ using MandiPOS.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -89,7 +90,36 @@ namespace MandiPOS.GUI
                 {
                     continue;
                 }
-                var rpt = new CustomerBill(s.toInt(), _date.Date);
+                string sql = $@"SELECT 
+	p.ItemTitle as 'Item',
+    CustomerRate  as Rate,
+    SUM(ItemQty) AS Qty,
+    SUM(ItemWeight) AS 'Weight',
+    SUM(CustomerAmount) AS Amount,
+    SUM(LagaAmount) AS Laga
+FROM (
+    SELECT 
+        sd.PartyID,
+        sd.ItemID,
+        sd.ItemQty,
+        sd.ItemWeight,
+        sd.CustomerRate,
+        sd.CustomerAmount,
+        sd.LagaAmount 
+    FROM tblsale s 
+    LEFT JOIN tblSaleDetail sd ON s.ID = sd.SaleID
+    WHERE s.ArrivalDate = '{_date.Date:yyyy-MM-dd}' AND sd.PartyID = '{s.toInt()}'
+) AS SubQuery
+left join tblItems p on SubQuery.ItemID=p.ID
+GROUP BY 
+   p.ItemTitle,
+    CustomerRate
+ORDER BY 
+    p.ItemTitle";
+                List<clsCustomerBill> data = new db().Query<clsCustomerBill>(sql).ToList();
+
+
+                var rpt = new CustomerBill(s.toInt(), _date.Date, data);
                 rpt.CreateDocument();
                 if (mainReport == null)
                 {

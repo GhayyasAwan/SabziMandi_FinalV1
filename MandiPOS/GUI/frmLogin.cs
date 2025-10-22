@@ -28,9 +28,14 @@ namespace MandiPOS.GUI
         private void FrmLogin_Shown(object sender, EventArgs e)
         {
             if (Debugger.IsAttached)
-            { 
-            editBox1.Text = "amir"; // Default username for testing
-                editBox2.Text = "1234"; // Default password for testing
+            {
+                var user = new db().GetList<CLasses.tblUsers>().FirstOrDefault();
+                if (user != null)
+                {
+                    editBox1.Text = user.UserName; // Default username for testing
+                    editBox2.Text = user.UserPassword; // Default password for testing
+                }
+                
             }
         }
 

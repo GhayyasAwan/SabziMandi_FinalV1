@@ -8,10 +8,12 @@ using Squirrel;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,6 +21,14 @@ namespace MandiPOS
 {
     internal static class Program
     {
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        private const int SW_RESTORE = 9;
+
         private static InputLanguage urdu = InputLanguage.FromCulture(new CultureInfo("ur-PK"));
         private static InputLanguage english = InputLanguage.FromCulture(new CultureInfo("en-US"));
         public static Image AppBackground;
@@ -29,34 +39,60 @@ namespace MandiPOS
         [STAThread]
         static async Task Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            SetBGImage();
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CS"].ConnectionString);
-            builder.Encrypt = true;
-            builder.ConnectTimeout = 0;
-            builder.MaxPoolSize = 2000;
-            builder.TrustServerCertificate = true;
-            MainConnectionstring = builder.ConnectionString;
-            if (builder.DataSource.Split('\\')[0] == ".")
+            bool createdNew;
+            using (var mutex = new System.Threading.Mutex(true, "MyUniqueAppMutexName", out createdNew))
             {
-                General.dbSystemName = Environment.MachineName;
+                if (createdNew)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    SetBGImage();
+                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CS"].ConnectionString);
+                    builder.Encrypt = true;
+                    builder.ConnectTimeout = 0;
+                    builder.MaxPoolSize = 2000;
+                    builder.TrustServerCertificate = true;
+                    MainConnectionstring = builder.ConnectionString;
+                    if (builder.DataSource.Split('\\')[0] == ".")
+                    {
+                        General.dbSystemName = Environment.MachineName;
+                    }
+                    else
+                    {
+                        General.dbSystemName = builder.DataSource.Split('\\')[0];
+                    }
+                    CheckForDatabaseUpgrade();
+
+                    Application.ApplicationExit += OnExit;
+                    var main = new frmMain();
+
+                    Application.Run(main);
+                }
+                else
+                { 
+                BringToFront(); 
+                }
             }
-            else
+            
+                
+
+        }
+        private static void BringToFront()
+        {
+            Process current = Process.GetCurrentProcess();
+            foreach (var process in Process.GetProcessesByName(current.ProcessName))
             {
-                General.dbSystemName = builder.DataSource.Split('\\')[0];
+                if (process.Id != current.Id)
+                {
+                    IntPtr handle = process.MainWindowHandle;
+                    if (handle != IntPtr.Zero)
+                    {
+                        ShowWindowAsync(handle, SW_RESTORE);
+                        SetForegroundWindow(handle);
+                    }
+                    break;
+                }
             }
-                CheckForDatabaseUpgrade();
-
-            Application.ApplicationExit += OnExit;
-            //Application.AddMessageFilter(new FocusMessageFilter());
-            var main = new frmMain();
-            //var updateTask = Task.Run(() => CheckAndDownloadUpdateAsync(main));
-
-            Application.Run(main);
-           // try { await updateTask; }
-           // catch(Exception ex) { ex.ExcError(null); }
-
         }
         public static void ResetBG()
         {

@@ -23,7 +23,7 @@ namespace MandiPOS.CLasses
         [DisplayName("رابطہ نمبر")]
         public string Contact { get; set; }
         [DisplayName("شہر")]
-        public int CityID { get; set; }
+        public int CityID { get; set; } = General.MultanCityID;
         [DisplayName("سابقہ جمع")]
         public decimal OpCredit { get; set; }
         [DisplayName("سابقہ بنام")]
@@ -155,6 +155,10 @@ Where acc.MasterID =7";
         public static IEnumerable<DetailAccountView> GetAccountsViewList()
         {
             return new db().Query<DetailAccountView>($"Exec GetDetailAccount").ToList();
+        }
+        public static IEnumerable<DetailAccountView> GetRefferalsList()
+        {
+            return new db().Query<DetailAccountView>($"Exec GetReferral").ToList();
         }
         public static IEnumerable<DetailAccountView> GetSubPartiesAccountList()
         {

@@ -30,7 +30,7 @@ namespace MandiPOS.GUI
                 MasterIDChanged?.Invoke(this, e);
             }
         }
-        bool isloading = true;
+        bool isloading = false;
         public frmAccountsNew()
         {
             InitializeComponent();
@@ -347,7 +347,7 @@ namespace MandiPOS.GUI
         }
         private void PopulateMasterAccounts()
         {
-            var master = MasterAccountsService.GetMasterAccounts();
+            var master = MasterAccountsService.GetMasterAccounts(" where ID=4");
             bool isFirst = true;
             foreach (var acc in master)
             {
@@ -362,11 +362,11 @@ namespace MandiPOS.GUI
                     Anchor = AnchorStyles.Top | AnchorStyles.Right
                 };
                 btn.Click += Btn_Click;
-                //if (isFirst)
-                //{
-                //    btn.PerformClick();
-                //    isFirst = false;
-                //}
+                if (isFirst)
+                {
+                    btn.PerformClick();
+                    isFirst = false;
+                }
                 flowLayoutPanel1.Controls.Add(btn);
             }
         }

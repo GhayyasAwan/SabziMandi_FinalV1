@@ -54,6 +54,11 @@ namespace MandiPOS.Reports
             clsLedgerBindingSource.DataSource = data;
             dgvLedger.ColumnButtonClick += DgvLedger_ColumnButtonClick;
             dgvLedger.FormattingRow += DgvLedger_FormattingRow;
+            if (acc.MasterID != 4)
+            {
+                dgvLedger.RootTable.Columns["BillNo"].Selectable = false;
+                dgvLedger.RootTable.Columns["BillNo"].SelectableCells = SelectableCells.None;
+            }
 
         }
 
@@ -122,6 +127,11 @@ namespace MandiPOS.Reports
         {
             if (dgvLedger.IsRow() && !string.IsNullOrEmpty(dgvLedger.CurrentRow.Cells["BillNo"].Value.ToString()))
             {
+                if (MasterID!= 4)
+                {
+                    Console.Beep(2000, 50);
+                    return;
+                }
                 var entry = dgvLedger.CurrentRow.DataRow as clsLedger;
 
                 if (entry.TrxType == 0)

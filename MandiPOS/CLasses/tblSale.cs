@@ -156,7 +156,18 @@ namespace MandiPOS.CLasses
         [Browsable(false)]
         public int ItemUnit { get; set; }
         [DisplayName("یونٹ")]
-        public string UnitTitle { get { switch (ItemUnit) { case 1: return "وزن"; default: return "تعداد"; } } }
+        public string UnitTitle 
+        { 
+            get 
+            { 
+                switch (ItemUnit) 
+                {
+                    case 1: return "کلو";
+                    case 2: return "من";
+                    default: return "تعداد"; 
+                } 
+            } 
+        }
         [DisplayName("وزن")]
         public decimal ItemWeight { get; set; }
         [DisplayName("گاہک ریٹ")]
@@ -350,7 +361,7 @@ namespace MandiPOS.CLasses
             foreach (var record in result)
             {
                 var item = connecion.Get<tblItems>(record.ItemID, transaction: trx);
-                string itemText = $"{item.ItemTitle} {(record.TotalWeight != 0 ? record.TotalWeight.ToString("N0") : record.TotalQuantity.ToString("N0"))} نگ";
+                string itemText = $"{item.ItemTitle} {(record.TotalQuantity != 0 ? record.TotalQuantity.ToString("N0") : record.TotalWeight.ToString("N0"))} نگ";
                 items.Add(itemText);
             }
 
@@ -479,7 +490,7 @@ namespace MandiPOS.CLasses
                     AccountID = General.MunshianaAccount,
                     CreditAmount = sale.MunshianaAmount,
                     DebitAmount = 0,
-                    Narration = $"منشایانہ رقم آمد نمبر {sale.ArrivalNo}"
+                    Narration = $"منشیانہ رقم آمد نمبر {sale.ArrivalNo}"
                 };
                 details.Add(jv);
             }
@@ -523,7 +534,7 @@ namespace MandiPOS.CLasses
                         AccountID = (int)record.PartyID,
                         CreditAmount = 0,
                         DebitAmount = record.CustomerAmount + record.LagaAmount,
-                        Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
+                        Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0} => {(record.ItemWeight==0?string.Empty:($"{record.ItemWeight:N0} {(record.ItemUnit==1?"کلو":"من")}"))}"
                     }; details.Add(jv);
                 }
                 decimal laga_amount = saleDetails.Sum(x => x.LagaAmount).toDecimal();

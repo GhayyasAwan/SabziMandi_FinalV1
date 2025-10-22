@@ -10,36 +10,10 @@ namespace MandiPOS.Reports
 {
     public partial class CustomerBill : DevExpress.XtraReports.UI.XtraReport
     {
-        public CustomerBill(int CustomerID, DateTime date)
+        public CustomerBill(int CustomerID, DateTime date, List<clsCustomerBill> data)
         {
             InitializeComponent();
-            string sql = $@"SELECT 
-	p.ItemTitle as 'Item',
-    CustomerRate  as Rate,
-    SUM(ItemQty) AS Qty,
-    SUM(ItemWeight) AS 'Weight',
-    SUM(CustomerAmount) AS Amount,
-    SUM(LagaAmount) AS Laga
-FROM (
-    SELECT 
-        sd.PartyID,
-        sd.ItemID,
-        sd.ItemQty,
-        sd.ItemWeight,
-        sd.CustomerRate,
-        sd.CustomerAmount,
-        sd.LagaAmount 
-    FROM tblsale s 
-    LEFT JOIN tblSaleDetail sd ON s.ID = sd.SaleID
-    WHERE s.ArrivalDate = '{date:yyyy-MM-dd}' AND sd.PartyID = '{CustomerID}'
-) AS SubQuery
-left join tblItems p on SubQuery.ItemID=p.ID
-GROUP BY 
-   p.ItemTitle,
-    CustomerRate
-ORDER BY 
-    p.ItemTitle";
-            List<clsCustomerBill> data = new db().Query<clsCustomerBill>(sql).ToList();
+            
             var acc = DetailAccountService.GetDetailAccountByID(CustomerID);
             var city = SQL.GetCities().Where(x => x.ID == acc.CityID).FirstOrDefault();
             var prevBalance = new db().ExecuteScalar<decimal>("sp_Ledger", new { AccountID = CustomerID, GetBalanceBeforeDate = date.Date },

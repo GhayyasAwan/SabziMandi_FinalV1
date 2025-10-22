@@ -83,7 +83,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1307, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1307, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -92,13 +92,13 @@
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.applicationToolStripMenuItem.Text = "Application";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -110,32 +110,32 @@
             this.toolStripMenuItem1,
             this.defaultAccountsToolStripMenuItem});
             this.chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            this.chartOfAccountsToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
+            this.chartOfAccountsToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.chartOfAccountsToolStripMenuItem.Text = "Chart of Accounts";
             // 
             // masterAccountsToolStripMenuItem
             // 
             this.masterAccountsToolStripMenuItem.Name = "masterAccountsToolStripMenuItem";
-            this.masterAccountsToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.masterAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.masterAccountsToolStripMenuItem.Text = "Master Accounts";
             this.masterAccountsToolStripMenuItem.Click += new System.EventHandler(this.masterAccountsToolStripMenuItem_Click);
             // 
             // detailAccountsToolStripMenuItem
             // 
             this.detailAccountsToolStripMenuItem.Name = "detailAccountsToolStripMenuItem";
-            this.detailAccountsToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.detailAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.detailAccountsToolStripMenuItem.Text = "Detail Accounts";
             this.detailAccountsToolStripMenuItem.Click += new System.EventHandler(this.detailAccountsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(202, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
             // 
             // defaultAccountsToolStripMenuItem
             // 
             this.defaultAccountsToolStripMenuItem.Name = "defaultAccountsToolStripMenuItem";
-            this.defaultAccountsToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.defaultAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.defaultAccountsToolStripMenuItem.Text = "Default Accounts";
             this.defaultAccountsToolStripMenuItem.Click += new System.EventHandler(this.defaultAccountsToolStripMenuItem_Click);
             // 
@@ -145,20 +145,20 @@
             this.backupToolStripMenuItem,
             this.changeWallpaperToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
-            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilitiesToolStripMenuItem.Text = "Utilities";
             // 
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.backupToolStripMenuItem.Text = "Backup";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // changeWallpaperToolStripMenuItem
             // 
             this.changeWallpaperToolStripMenuItem.Name = "changeWallpaperToolStripMenuItem";
-            this.changeWallpaperToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.changeWallpaperToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.changeWallpaperToolStripMenuItem.Text = "Change Wallpaper";
             this.changeWallpaperToolStripMenuItem.Visible = false;
             this.changeWallpaperToolStripMenuItem.Click += new System.EventHandler(this.changeWallpaperToolStripMenuItem_Click);
@@ -168,13 +168,13 @@
             this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usersToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.securityToolStripMenuItem.Text = "Security";
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(127, 26);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
@@ -194,7 +194,7 @@
             // 
             this.toolStripStatusLabelUpdate.IsLink = true;
             this.toolStripStatusLabelUpdate.Name = "toolStripStatusLabelUpdate";
-            this.toolStripStatusLabelUpdate.Size = new System.Drawing.Size(131, 20);
+            this.toolStripStatusLabelUpdate.Size = new System.Drawing.Size(102, 19);
             this.toolStripStatusLabelUpdate.Text = "Download Update";
             this.toolStripStatusLabelUpdate.Visible = false;
             this.toolStripStatusLabelUpdate.Click += new System.EventHandler(this.DownlaodUpdates);
@@ -224,18 +224,18 @@
             this.panel1.Controls.Add(this.btnCity);
             this.panel1.Controls.Add(this.btnItem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(840, 68);
+            this.panel1.Location = new System.Drawing.Point(831, 87);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(467, 589);
+            this.panel1.Size = new System.Drawing.Size(476, 570);
             this.panel1.TabIndex = 4;
             // 
             // btnExit
             // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.PaleGreen;
             this.btnExit.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Image = global::MandiPOS.Properties.Resources.power_on;
-            this.btnExit.Location = new System.Drawing.Point(47, 447);
+            this.btnExit.Location = new System.Drawing.Point(50, 428);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(132, 70);
             this.btnExit.TabIndex = 18;
@@ -246,11 +246,11 @@
             // 
             // btnbackup
             // 
-            this.btnbackup.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnbackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnbackup.BackColor = System.Drawing.Color.PaleGreen;
             this.btnbackup.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnbackup.Image = global::MandiPOS.Properties.Resources.backup;
-            this.btnbackup.Location = new System.Drawing.Point(323, 447);
+            this.btnbackup.Location = new System.Drawing.Point(326, 428);
             this.btnbackup.Name = "btnbackup";
             this.btnbackup.Size = new System.Drawing.Size(132, 70);
             this.btnbackup.TabIndex = 17;
@@ -261,11 +261,11 @@
             // 
             // bnRecovery
             // 
-            this.bnRecovery.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bnRecovery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bnRecovery.BackColor = System.Drawing.Color.PaleGreen;
             this.bnRecovery.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnRecovery.Image = ((System.Drawing.Image)(resources.GetObject("bnRecovery.Image")));
-            this.bnRecovery.Location = new System.Drawing.Point(47, 371);
+            this.bnRecovery.Location = new System.Drawing.Point(50, 352);
             this.bnRecovery.Name = "bnRecovery";
             this.bnRecovery.Size = new System.Drawing.Size(132, 70);
             this.bnRecovery.TabIndex = 16;
@@ -276,11 +276,11 @@
             // 
             // btnCustomerBill
             // 
-            this.btnCustomerBill.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCustomerBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCustomerBill.BackColor = System.Drawing.Color.PaleGreen;
             this.btnCustomerBill.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomerBill.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomerBill.Image")));
-            this.btnCustomerBill.Location = new System.Drawing.Point(185, 371);
+            this.btnCustomerBill.Location = new System.Drawing.Point(188, 352);
             this.btnCustomerBill.Name = "btnCustomerBill";
             this.btnCustomerBill.Size = new System.Drawing.Size(132, 70);
             this.btnCustomerBill.TabIndex = 15;
@@ -291,11 +291,11 @@
             // 
             // btnBeejak
             // 
-            this.btnBeejak.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBeejak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBeejak.BackColor = System.Drawing.Color.PaleGreen;
             this.btnBeejak.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBeejak.Image = ((System.Drawing.Image)(resources.GetObject("btnBeejak.Image")));
-            this.btnBeejak.Location = new System.Drawing.Point(323, 371);
+            this.btnBeejak.Location = new System.Drawing.Point(326, 352);
             this.btnBeejak.Name = "btnBeejak";
             this.btnBeejak.Size = new System.Drawing.Size(132, 70);
             this.btnBeejak.TabIndex = 14;
@@ -306,11 +306,11 @@
             // 
             // btnLedger
             // 
-            this.btnLedger.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLedger.BackColor = System.Drawing.Color.PaleGreen;
             this.btnLedger.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnLedger.Image")));
-            this.btnLedger.Location = new System.Drawing.Point(323, 295);
+            this.btnLedger.Location = new System.Drawing.Point(326, 276);
             this.btnLedger.Name = "btnLedger";
             this.btnLedger.Size = new System.Drawing.Size(132, 70);
             this.btnLedger.TabIndex = 13;
@@ -321,11 +321,11 @@
             // 
             // btnRokar
             // 
-            this.btnRokar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRokar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRokar.BackColor = System.Drawing.Color.PaleGreen;
             this.btnRokar.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRokar.Image = ((System.Drawing.Image)(resources.GetObject("btnRokar.Image")));
-            this.btnRokar.Location = new System.Drawing.Point(185, 295);
+            this.btnRokar.Location = new System.Drawing.Point(188, 276);
             this.btnRokar.Name = "btnRokar";
             this.btnRokar.Size = new System.Drawing.Size(132, 70);
             this.btnRokar.TabIndex = 12;
@@ -336,11 +336,11 @@
             // 
             // btnKhasra
             // 
-            this.btnKhasra.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnKhasra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnKhasra.BackColor = System.Drawing.Color.PaleGreen;
             this.btnKhasra.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKhasra.Image = ((System.Drawing.Image)(resources.GetObject("btnKhasra.Image")));
-            this.btnKhasra.Location = new System.Drawing.Point(47, 295);
+            this.btnKhasra.Location = new System.Drawing.Point(50, 276);
             this.btnKhasra.Name = "btnKhasra";
             this.btnKhasra.Size = new System.Drawing.Size(132, 70);
             this.btnKhasra.TabIndex = 11;
@@ -351,11 +351,11 @@
             // 
             // btnJV
             // 
-            this.btnJV.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnJV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnJV.BackColor = System.Drawing.Color.PaleGreen;
             this.btnJV.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJV.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnJV.Location = new System.Drawing.Point(44, 195);
+            this.btnJV.Location = new System.Drawing.Point(46, 172);
             this.btnJV.Name = "btnJV";
             this.btnJV.Size = new System.Drawing.Size(132, 70);
             this.btnJV.TabIndex = 10;
@@ -366,11 +366,11 @@
             // 
             // btnSale
             // 
-            this.btnSale.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSale.BackColor = System.Drawing.Color.PaleGreen;
             this.btnSale.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSale.Image = global::MandiPOS.Properties.Resources.purchase;
-            this.btnSale.Location = new System.Drawing.Point(320, 195);
+            this.btnSale.Location = new System.Drawing.Point(326, 172);
             this.btnSale.Name = "btnSale";
             this.btnSale.Size = new System.Drawing.Size(132, 70);
             this.btnSale.TabIndex = 9;
@@ -381,11 +381,11 @@
             // 
             // btnBeejBardana
             // 
-            this.btnBeejBardana.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBeejBardana.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBeejBardana.BackColor = System.Drawing.Color.PaleGreen;
             this.btnBeejBardana.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBeejBardana.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnBeejBardana.Location = new System.Drawing.Point(44, 119);
+            this.btnBeejBardana.Location = new System.Drawing.Point(46, 96);
             this.btnBeejBardana.Name = "btnBeejBardana";
             this.btnBeejBardana.Size = new System.Drawing.Size(132, 70);
             this.btnBeejBardana.TabIndex = 8;
@@ -396,11 +396,11 @@
             // 
             // btnJamaVoucher
             // 
-            this.btnJamaVoucher.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnJamaVoucher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnJamaVoucher.BackColor = System.Drawing.Color.PaleGreen;
             this.btnJamaVoucher.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJamaVoucher.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnJamaVoucher.Location = new System.Drawing.Point(182, 119);
+            this.btnJamaVoucher.Location = new System.Drawing.Point(188, 96);
             this.btnJamaVoucher.Name = "btnJamaVoucher";
             this.btnJamaVoucher.Size = new System.Drawing.Size(132, 70);
             this.btnJamaVoucher.TabIndex = 7;
@@ -411,11 +411,11 @@
             // 
             // btnBanamVoucher
             // 
-            this.btnBanamVoucher.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBanamVoucher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBanamVoucher.BackColor = System.Drawing.Color.PaleGreen;
             this.btnBanamVoucher.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBanamVoucher.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnBanamVoucher.Location = new System.Drawing.Point(320, 119);
+            this.btnBanamVoucher.Location = new System.Drawing.Point(326, 96);
             this.btnBanamVoucher.Name = "btnBanamVoucher";
             this.btnBanamVoucher.Size = new System.Drawing.Size(132, 70);
             this.btnBanamVoucher.TabIndex = 6;
@@ -426,11 +426,11 @@
             // 
             // btnParty
             // 
-            this.btnParty.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnParty.BackColor = System.Drawing.Color.PaleGreen;
             this.btnParty.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnParty.Image = global::MandiPOS.Properties.Resources.Persons;
-            this.btnParty.Location = new System.Drawing.Point(320, 43);
+            this.btnParty.Location = new System.Drawing.Point(322, 20);
             this.btnParty.Name = "btnParty";
             this.btnParty.Size = new System.Drawing.Size(132, 70);
             this.btnParty.TabIndex = 5;
@@ -441,11 +441,11 @@
             // 
             // btnCity
             // 
-            this.btnCity.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCity.BackColor = System.Drawing.Color.PaleGreen;
             this.btnCity.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCity.Image = global::MandiPOS.Properties.Resources.location;
-            this.btnCity.Location = new System.Drawing.Point(182, 43);
+            this.btnCity.Location = new System.Drawing.Point(184, 20);
             this.btnCity.Name = "btnCity";
             this.btnCity.Size = new System.Drawing.Size(132, 70);
             this.btnCity.TabIndex = 4;
@@ -456,11 +456,11 @@
             // 
             // btnItem
             // 
-            this.btnItem.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnItem.BackColor = System.Drawing.Color.PaleGreen;
             this.btnItem.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnItem.Image = global::MandiPOS.Properties.Resources.Items;
-            this.btnItem.Location = new System.Drawing.Point(44, 43);
+            this.btnItem.Location = new System.Drawing.Point(46, 20);
             this.btnItem.Name = "btnItem";
             this.btnItem.Size = new System.Drawing.Size(132, 70);
             this.btnItem.TabIndex = 3;
@@ -474,7 +474,7 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::MandiPOS.Properties.Resources.BIsmillah;
-            this.pictureBox1.Location = new System.Drawing.Point(59, 88);
+            this.pictureBox1.Location = new System.Drawing.Point(60, 88);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(537, 143);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -486,7 +486,7 @@
             this.lblFiscalYear.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFiscalYear.BackColor = System.Drawing.Color.AliceBlue;
             this.lblFiscalYear.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFiscalYear.Location = new System.Drawing.Point(59, 234);
+            this.lblFiscalYear.Location = new System.Drawing.Point(60, 235);
             this.lblFiscalYear.Name = "lblFiscalYear";
             this.lblFiscalYear.Size = new System.Drawing.Size(537, 84);
             this.lblFiscalYear.TabIndex = 6;
@@ -510,9 +510,9 @@
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 28);
+            this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1307, 40);
+            this.panel2.Size = new System.Drawing.Size(1307, 63);
             this.panel2.TabIndex = 8;
             // 
             // frmMain

@@ -15,6 +15,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -393,6 +393,12 @@
     <Compile Include="GUI\frmAccountsHelp.Designer.cs">
       <DependentUpon>frmAccountsHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmAccountsNew2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmAccountsNew2.Designer.cs">
+      <DependentUpon>frmAccountsNew2.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -500,6 +506,12 @@
     </Compile>
     <Compile Include="GUI\frWPChanger.Designer.cs">
       <DependentUpon>frWPChanger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\rptRefRalReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\rptRefRalReport.Designer.cs">
+      <DependentUpon>rptRefRalReport.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\rptChithaFull.cs">
       <SubType>Component</SubType>
@@ -739,6 +751,9 @@
     <EmbeddedResource Include="GUI\frmAccountsHelp.resx">
       <DependentUpon>frmAccountsHelp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmAccountsNew2.resx">
+      <DependentUpon>frmAccountsNew2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmBackup.resx">
       <DependentUpon>frmBackup.cs</DependentUpon>
     </EmbeddedResource>
@@ -794,6 +809,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frWPChanger.resx">
       <DependentUpon>frWPChanger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\rptRefRalReport.resx">
+      <DependentUpon>rptRefRalReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\rptChithaFull.resx">
       <DependentUpon>rptChithaFull.cs</DependentUpon>

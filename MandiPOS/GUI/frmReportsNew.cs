@@ -7,6 +7,7 @@ using MandiPOS.Reports;
 using MandiPOS.Reports.ReportClasses;
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -85,7 +86,7 @@ namespace MandiPOS.GUI
         bool triggerSetReport = true;
         private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
         {
-
+            
         }
 
         void SetRadioButtonAppearance()
@@ -152,6 +153,8 @@ namespace MandiPOS.GUI
                         case "rb_Report15":
                             rb.Enabled = true;break;
                         case "rb_Report06":
+                            rb.Enabled = true; break;
+                        case "rb_Report07":
                             rb.Enabled = true; break;
                         default: rb.Enabled = General.IsAdmin; break;
                     }
@@ -230,7 +233,7 @@ namespace MandiPOS.GUI
             {
                 case "rb_Report01": //لین دین
                     ReportID = 1;
-                    bsParties.DataSource = dtParties;
+                    bsParties.DataSource = null;
                     dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp.Show();
@@ -244,6 +247,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report02": //Cash Rokar
                     ReportID = 2;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
@@ -254,6 +258,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report03": //Chitha Complete
                     ReportID = 3;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide(); _pname.Clear();
@@ -264,6 +269,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report04": //Chitha Group Wise
                     ReportID = 4;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
@@ -275,7 +281,10 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report05": //Chitha City Wise
-                    ReportID = 5; bsParties.DataSource = dtParties;
+                    ReportID = 5;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
                     _pname.Clear();
@@ -286,7 +295,8 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report06": //گاہک بل
-                    ReportID = 6; bsParties.DataSource = dtParties;
+                    ReportID = 6;
+                    bsParties.DataSource = null;
                     dtCustomers = DetailAccountService.CustomerAccounts().ToDataTable();
                     bsParties.DataSource = dtCustomers;
                     dtp2.Hide(); lblDate2.Hide();
@@ -300,6 +310,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report07": //بیوپاری بکری
                     ReportID = 7;
+                    bsParties.DataSource = null;
                     dtParties = DetailAccountService.VendorAccounts().ToDataTable();
                     bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
@@ -315,7 +326,10 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report08": //گاہک بکری
-                    ReportID = 8; bsParties.DataSource = dtParties;
+                    ReportID = 8;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
@@ -328,7 +342,10 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report09": //خسرہ گاہک
-                    ReportID = 9; bsParties.DataSource = dtParties;
+                    ReportID = 9;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable(); 
+                    bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
@@ -341,7 +358,10 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report10": //خسرہ گاہک مختصر
-                    ReportID = 10; bsParties.DataSource = dtParties;
+                    ReportID = 10;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
@@ -354,7 +374,10 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report11": //ماہانہ آمدن فرم
-                    ReportID = 11; bsParties.DataSource = dtParties;
+                    ReportID = 11;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Show(); lblDate2.Show();
@@ -367,8 +390,12 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report12": //ٹاپ کمیشن رپورٹ
-                    ReportID = 12; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    ReportID = 12;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Show(); lblDate2.Show();
                     _pname.Hide(); lblParty.Hide();
@@ -380,41 +407,73 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
                 case "rb_Report13": //ریکوری
-                    ReportID = 13; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    ReportID = 13;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide(); 
+                    lblDate2.Hide();
+                    _pname.Hide(); 
+                    lblParty.Hide();
                     _pname.Clear();
-                    cmbCity.Hide(); lblCity.Hide();
-                    lblgroup.Hide(); cmbGroups.Hide();
-                    cmbGroups.CheckedItems = null; txtBillNo.Visible = lblBill.Visible = false;
+                    cmbCity.Hide(); 
+                    lblCity.Hide();
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide();
+                    cmbGroups.CheckedItems = null; 
+                    txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
                 case "rb_Report14": //بیوپاری بکری گاہک وار
-                    ReportID = 14; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    ReportID = 14;
+                    bsParties.DataSource = null;
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide(); 
+                    lblDate2.Hide();
+                    _pname.Hide(); 
+                    lblParty.Hide();
                     _pname.Clear();
-                    cmbCity.Hide(); lblCity.Hide();
-                    lblgroup.Hide(); cmbGroups.Hide();
+                    cmbCity.Hide(); 
+                    lblCity.Hide();
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide();
                     cmbGroups.CheckedItems = null;
                     txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
                 case "rb_Report15": //بیوپاری بکری گاہک وار
-                    ReportID = 15; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    ReportID = 15;
+                    bsParties.DataSource = null;
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide(); 
+                    lblDate2.Hide();
+                    _pname.Hide(); 
+                    lblParty.Hide();
                     _pname.Clear();
-                    cmbCity.Hide(); lblCity.Hide();
-                    lblgroup.Hide(); cmbGroups.Hide();
+                    cmbCity.Hide(); 
+                    lblCity.Hide();
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide();
                     cmbGroups.CheckedItems = null;
                     txtBillNo.Visible = lblBill.Visible = true;
                     dtp.Visible = lblDtp.Visible = false;
@@ -422,39 +481,69 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report16":
                     ReportID = 16;
+                    bsParties.DataSource = null;
                     dtSubParties = DetailAccountService.GetSubPartiesAccountList().ToDataTable();
                     bsParties.DataSource = dtSubParties;
                     dtp.Show();
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Show(); lblDate2.Show();
-                    _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Show(); 
+                    lblDate2.Show();
+                    _pname.Show(); 
+                    lblParty.Show(); 
+                    txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
                 case "rb_Report17": //ادھار سیل
-                    ReportID = 17; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    ReportID = 17;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide(); 
+                    lblDate2.Hide();
+                    _pname.Hide(); 
+                    lblParty.Hide();
                     _pname.Clear();
-                    cmbCity.Hide(); lblCity.Hide();
-                    lblgroup.Hide(); cmbGroups.Hide();
+                    cmbCity.Hide(); 
+                    lblCity.Hide();
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide();
                     cmbGroups.CheckedItems = null;
                     txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
                 case "rb_Report18": //نقد سیل
-                    ReportID = 18; bsParties.DataSource = dtParties;
-                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
-                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
-                    dtp2.Hide(); lblDate2.Hide();
-                    _pname.Hide(); lblParty.Hide();
+                    ReportID = 18;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide(); 
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); 
+                    lblCity.Hide(); 
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide(); 
+                    lblDate2.Hide();
+                    _pname.Hide(); 
+                    lblParty.Hide();
                     _pname.Clear();
-                    cmbCity.Hide(); lblCity.Hide();
-                    lblgroup.Hide(); cmbGroups.Hide();
+                    cmbCity.Hide(); 
+                    lblCity.Hide();
+                    lblgroup.Hide(); 
+                    cmbGroups.Hide();
                     cmbGroups.CheckedItems = null;
                     txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
@@ -462,7 +551,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report19": //ماسٹر شیٹ
                     ReportID = 19;
-                    bsParties.DataSource = dtParties;
+                    bsParties.DataSource = null;
                     dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp.Show();
@@ -475,8 +564,21 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report20": //فرد حساب
                     ReportID = 20;
-                    bsParties.DataSource = dtParties;
+                    bsParties.DataSource = null;
                     dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
+                case "rbRefReport": //معرفت رپورٹ
+                    ReportID = 21;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetRefferalsList().ToDataTable();
                     bsParties.DataSource = dtParties;
                     dtp.Show();
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
@@ -581,6 +683,58 @@ namespace MandiPOS.GUI
             if (ReportID == 20) //فردحساب
             {
                 ShowLedger(1); return;
+            }
+            if(ReportID==21) //معرفت رپورٹ
+            {
+                ShowRefReport(); return;
+            }
+        }
+
+        private void ShowRefReport()
+        {
+            using (new waitForm())
+            {
+                int refrerID = _pid.Text.Trim().toInt();
+                string partyName = _pname.Text.Trim();
+
+
+                string sql = $@"WITH EndBalances AS
+    (
+        SELECT AccountID, SUM(DebitAmount - CreditAmount) AS 'EndBalance'
+        FROM vwTrx 
+        WHERE VoucherDate <= '{dtp.Value.Date:yyyy-MM-dd}'
+            AND AccountID IN (SELECT ID FROM DetailAccounts WHERE RefrenceID='{refrerID}')
+        GROUP BY AccountID
+    )
+    SELECT acc.AccountCode as ID,
+        acc.AccountTitle,
+mas.AccountTitle as 'MasterAccount',
+        acc.RefName,
+        acc.Contact,
+        city.CityName,
+        eb.EndBalance 
+    FROM EndBalances eb 
+    LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
+    left Join MasterAccounts mas ON acc.MasterID = mas.ID
+    LEFT JOIN tblCity city ON acc.CityID = city.ID
+    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10
+Order By mas.id";
+                DataTable dt = new DataTable();
+                using (var db = new db())
+                {
+                    var reader = db.ExecuteReader(sql);
+                    dt.Load(reader);
+                }
+                if (dt.Rows.Count > 0)
+                {
+                    var report = new rptRefRalReport(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    report.CreateDocument();
+                    ShowReport(report);
+                }
+                else
+                {
+                    this.Info("کوئی ریکارڈ موجود نہیں ہے۔");
+                }
             }
         }
 
@@ -697,7 +851,14 @@ namespace MandiPOS.GUI
         {
             using (new waitForm())
             {
-                var rpt = new rptVendorWiseSale(dtp.Value.Date, type);
+                string sql = $@"Select * from vendorWiseSale Where ArrivalDate='{dtp.Value.Date:yyyy-MM-dd}'";
+                var data = new db().Query<vendorWiseSale>(sql).ToDataTable();
+                if(data.Rows.Count==0)
+                {
+                    this.Info("اس تاریخ کا کوئی ریکارڈ موجود نہیں ہے۔");
+                    return;
+                }
+                var rpt = new rptVendorWiseSale(dtp.Value.Date, type,data);
                 rpt.CreateDocument();
                 ShowReport(rpt);
             }
@@ -766,7 +927,7 @@ namespace MandiPOS.GUI
 
         private void ShowReport(XtraReport rpt)
         {
-            if (rpt == null) return;
+            if (rpt == null ||rpt.IsDisposed) return;
             var frm= new XtraForm1(rpt);
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.Show();frm.BringToFront();
@@ -786,7 +947,39 @@ namespace MandiPOS.GUI
         {
             using (new waitForm())
             {
-                var rpt = new CustomerBill(_pid.Text.toInt(), dtp.Value.Date);
+                string sql = $@"SELECT 
+	p.ItemTitle as 'Item',
+    CustomerRate  as Rate,
+    SUM(ItemQty) AS Qty,
+    SUM(ItemWeight) AS 'Weight',
+    SUM(CustomerAmount) AS Amount,
+    SUM(LagaAmount) AS Laga
+FROM (
+    SELECT 
+        sd.PartyID,
+        sd.ItemID,
+        sd.ItemQty,
+        sd.ItemWeight,
+        sd.CustomerRate,
+        sd.CustomerAmount,
+        sd.LagaAmount 
+    FROM tblsale s 
+    LEFT JOIN tblSaleDetail sd ON s.ID = sd.SaleID
+    WHERE s.ArrivalDate = '{dtp.Value.Date:yyyy-MM-dd}' AND sd.PartyID = '{_pid.Text.toInt()}'
+) AS SubQuery
+left join tblItems p on SubQuery.ItemID=p.ID
+GROUP BY 
+   p.ItemTitle,
+    CustomerRate
+ORDER BY 
+    p.ItemTitle";
+                List<clsCustomerBill> data = new db().Query<clsCustomerBill>(sql).ToList();
+                if(data.Count==0)
+                {
+                    this.Info("اس تاریخ کا کوئی ریکارڈ موجود نہیں ہے۔");
+                    return;
+                }
+                var rpt = new CustomerBill(_pid.Text.toInt(), dtp.Value.Date,data);
                 rpt.CreateDocument();
                 ShowReport(rpt);
             }
@@ -835,7 +1028,9 @@ mas.AccountTitle as 'MasterAccount',
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
-    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
+    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 
+{(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} 
+{(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
 Order By mas.id";
                 DataTable dt = new DataTable();
                 using (var db = new db())
