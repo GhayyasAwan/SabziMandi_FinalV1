@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MandiPOS
@@ -195,6 +196,22 @@ namespace MandiPOS
         public static int CurrentUserID { get; internal set; } = 1; // Default to 1 for testing, should be set to actual user ID on login
         public static bool IsAdmin { get; internal set; }
         public static string UserName { get; internal set; }
+        public static int MultanCityID { get; internal set; }
+        internal static int GetMultanCityID()
+        {
+            var cities = SQL.GetCities();
+            if (cities.Any(x => x.CityName == "ملتان"))
+            {
+                return cities.Where(x => x.CityName == "ملتان").FirstOrDefault().ID;
+            }
+            if (cities.Any(x => x.CityName == "مُلتان"))
+            {
+                return cities.Where(x => x.CityName == "مُلتان").FirstOrDefault().ID;
+            }
+            return 0;
+        }
+
+
         #region MessageBox
         public static bool Ask(this Form f, string message)
         {

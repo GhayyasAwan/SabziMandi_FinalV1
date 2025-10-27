@@ -380,6 +380,7 @@ namespace MandiPOS.CLasses
             connecion.Execute($"Delete from JVEntries Where VoucherID='{main.VoucherID}'", transaction: trx);
             connecion.Execute($"Delete from VoucherBardanaDetails Where VoucherID='{main.VoucherID}'", transaction: trx);
             List<JVEntries> details = new List<JVEntries>();
+            JVEntries jv;
             //Post to Vendor
             if (sale.SaleAmount2 != 0)
             {
@@ -401,7 +402,7 @@ namespace MandiPOS.CLasses
 
                 if (debit != 0 || credit != 0)
                 {
-                    JVEntries jv = new JVEntries()
+                    jv = new JVEntries()
                     {
                         VoucherID = main.VoucherID,
                         AccountID = sale.PartyID,
@@ -419,7 +420,7 @@ namespace MandiPOS.CLasses
             //Paid Amount
             if (sale.PaidAmount != 0)
             {
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.NetPaidAccount,
@@ -433,7 +434,7 @@ namespace MandiPOS.CLasses
             if (sale.SaleAmount1 != sale.SaleAmount2)
             {
                 var diff = sale.SaleAmount1 - sale.SaleAmount2;
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.PendingSaleAccount,
@@ -447,7 +448,7 @@ namespace MandiPOS.CLasses
             if (sale.CommissionAmount != 0)
             {
 
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.CommissionAccount,
@@ -460,7 +461,7 @@ namespace MandiPOS.CLasses
             //mazdoori
             if (sale.MazdooriAmount != 0)
             {
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.MazdooriAccount,
@@ -473,7 +474,7 @@ namespace MandiPOS.CLasses
             //munshiana
             if (sale.MunshianaAmount != 0)
             {
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.MunshianaAccount,
@@ -486,7 +487,7 @@ namespace MandiPOS.CLasses
             //karaya
             if (sale.KarayaAmount != 0)
             {
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.KarayaAccount,
@@ -499,7 +500,7 @@ namespace MandiPOS.CLasses
             //store
             if (sale.StoreRent != 0)
             {
-                JVEntries jv = new JVEntries()
+                jv = new JVEntries()
                 {
                     VoucherID = main.VoucherID,
                     AccountID = General.StoreAccount,
@@ -510,26 +511,64 @@ namespace MandiPOS.CLasses
                 details.Add(jv);
             }
 
-
+            
             if (saleDetails.Count > 0)
             {
                 foreach (tblSaleDetail record in saleDetails)
                 {
+                    decimal Amount = record.CustomerAmount + record.LagaAmount;
                     tblItems items1 = connecion.Get<tblItems>(record.ItemID, transaction: trx);
-
-                    JVEntries jv = new JVEntries()
+                    DetailAccounts dAcc = connecion.Get<DetailAccounts>(record.PartyID, transaction: trx);
+                    if (dAcc.AccountTitle.Contains("نقد"))
                     {
-                        VoucherID = main.VoucherID,
-                        AccountID = (int)record.PartyID,
-                        CreditAmount = 0,
-                        DebitAmount = record.CustomerAmount + record.LagaAmount,
-                        Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
-                    }; details.Add(jv);
+                        //Normally Debit to Customer Account
+                        jv = new JVEntries()
+                        {
+                            VoucherID = main.VoucherID,
+                            AccountID = record.PartyID,
+                            CreditAmount = 0,
+                            DebitAmount = Amount,
+                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
+                        }; details.Add(jv);
+                        //then Credit From Customer Account
+                        
+                        jv = new JVEntries()
+                        {
+                            VoucherID = main.VoucherID,
+                            AccountID = record.PartyID,
+                            CreditAmount = Amount,
+                            DebitAmount = 0,
+                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
+                        }; details.Add(jv);
+                        //and Then Debit to CashAccount
+                        var dAcc2 = connecion.Query<DetailAccounts>($"Select Top 1 ID from DetailAccounts Where MasterID=10", transaction: trx).FirstOrDefault();
+                        jv = new JVEntries()
+                        {
+                            VoucherID = main.VoucherID,
+                            AccountID = dAcc2.ID,
+                            CreditAmount = 0,
+                            DebitAmount = Amount,
+                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
+                        }; details.Add(jv);
+                    }
+                    else
+                    {
+                        jv = new JVEntries()
+                        {
+                            VoucherID = main.VoucherID,
+                            AccountID = record.PartyID,
+                            CreditAmount = 0,
+                            DebitAmount = Amount,
+                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
+                        }; details.Add(jv);
+                    }
+
+                        
                 }
                 decimal laga_amount = saleDetails.Sum(x => x.LagaAmount).toDecimal();
                 if (laga_amount != 0)
                 {
-                    JVEntries jv = new JVEntries()
+                    jv = new JVEntries()
                     {
                         VoucherID = main.VoucherID,
                         AccountID = General.LagaAccount,
@@ -542,9 +581,9 @@ namespace MandiPOS.CLasses
 
             if (details.Any())
             {
-                foreach (JVEntries jv in details)
+                foreach (JVEntries jv1 in details)
                 {
-                    connecion.Insert<JVEntries>(jv, transaction: trx);
+                    connecion.Insert<JVEntries>(jv1, transaction: trx);
                 }
             }
 

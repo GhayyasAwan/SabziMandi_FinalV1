@@ -393,6 +393,12 @@
     <Compile Include="GUI\frmAccountsHelp.Designer.cs">
       <DependentUpon>frmAccountsHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmAccountsNew2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmAccountsNew2.Designer.cs">
+      <DependentUpon>frmAccountsNew2.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -739,6 +745,9 @@
     <EmbeddedResource Include="GUI\frmAccountsHelp.resx">
       <DependentUpon>frmAccountsHelp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmAccountsNew2.resx">
+      <DependentUpon>frmAccountsNew2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmBackup.resx">
       <DependentUpon>frmBackup.cs</DependentUpon>
     </EmbeddedResource>
@@ -1040,6 +1049,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\23-09-2025_003.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\24-10-2025_001.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\28-07-2025 - 1.sql">

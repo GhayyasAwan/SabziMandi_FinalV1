@@ -28,6 +28,7 @@ namespace MandiPOS
         {
             this.Opacity = 0;
             InitializeComponent();
+            General.MultanCityID = General.GetMultanCityID();
             this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
            this.DoubleBuffered = true;
@@ -88,6 +89,8 @@ namespace MandiPOS
             }
             if (result==DialogResult.Yes)
             {
+                string dir = new db().ExecuteScalar<string>($"Select ConfigValue From tblConfigs Where ConfigName like 'BackupDirectory';");
+                Directory.CreateDirectory(dir);
                 using (var db = new db())
                 {
                     db.Execute("exec BackupDatabase");
@@ -171,7 +174,7 @@ namespace MandiPOS
         private void Wrkr_DoWork(object sender, DoWorkEventArgs e)
         {
             SQL.SetDefaultAccount();
-            // SaleService.RepostSales();
+            SaleService.RepostSales();
             using(var rpt=new rptRokar(DateTime.Now.Date.AddDays(365)))
             {
                 rpt.CreateDocument();
@@ -443,7 +446,7 @@ namespace MandiPOS
 
         private void OpenAccountForm()
         {
-            var frm = new frmAccountsNew();
+            var frm = new frmAccountsNew2();
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             { f.BringToFront(); }
@@ -453,7 +456,6 @@ namespace MandiPOS
                 frm.Show();
             }
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             var frm = new frmVoucherNew(0) { Name = Name + "_0" };

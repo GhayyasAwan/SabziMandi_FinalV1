@@ -34,6 +34,7 @@ namespace MandiPOS.GUI
         public frmAccountsNew()
         {
             InitializeComponent();
+            bsAccount1.DataSourceChanged += BsAccount1_DataSourceChanged;
             txtCode.RegisterFocus(true);
             txtName.RegisterFocus(true);
             txtContact.RegisterFocus(true);
@@ -165,6 +166,11 @@ namespace MandiPOS.GUI
                     SaveRecord();
                 }
             });
+        }
+
+        private void BsAccount1_DataSourceChanged(object sender, EventArgs e)
+        {
+           dgv.AutoSizeColumns();
         }
 
         private void CmbRefParty_Enter(object sender, EventArgs e)
@@ -335,6 +341,8 @@ namespace MandiPOS.GUI
             objResizer = new clsResize(this);
             objResizer._get_initial_size();
             txtName.Select();
+            MasterID = 4;
+            MasterIDChanged?.Invoke(this, e);
         }
 
         private void FrmAccountsNew_Resize(object sender, System.EventArgs e)
@@ -351,7 +359,7 @@ namespace MandiPOS.GUI
         }
         private void PopulateMasterAccounts()
         {
-            var master = MasterAccountsService.GetMasterAccounts();
+            var master = MasterAccountsService.GetMasterAccounts("where ID=4");
             bool isFirst = true;
             foreach (var acc in master)
             {
@@ -372,6 +380,7 @@ namespace MandiPOS.GUI
                 //    isFirst = false;
                 //}
                 flowLayoutPanel1.Controls.Add(btn);
+                btn.PerformClick();
             }
         }
         int CityID = 0;
@@ -381,12 +390,13 @@ namespace MandiPOS.GUI
             {
                 if (!isloading)
                 {
-                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).ToDataTable();
-                    CityID = SQL.GetCity($"where CityName like N'%ملتان%'").ID;
+                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x=>x.AccountCode).ToDataTable();
+                    CityID = General.MultanCityID;
                 }
                 bsAccount1.RemoveFilter();
                 account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt(),CityID=CityID };
                 BindObject();
+                CheckRefType();
                 dgv.AutoSizeColumns();
                  grpRef.Enabled=txtRemarks.Enabled=txtCreditLimit.Enabled=txtCommisionRatio.Enabled= MasterID == 4;
                 if (MasterID == 1 || MasterID == 2 || MasterID == 3 || MasterID == 6 || MasterID == 8 || MasterID == 10)
@@ -411,7 +421,7 @@ namespace MandiPOS.GUI
             cmbCity.SelectedValue = account.CityID;
             txtRemarks.Text = account.Remarks;
             txtCommisionRatio.Text = (account.Commission).ToString("0.##");
-            if (!account.RefrenceType.HasValue) { account.RefrenceType = 0; }
+            if (!account.RefrenceType.HasValue) { account.RefrenceType = 4; }
             switch ((int)account.RefrenceType)
             {
                 case 4: rbVendor.Checked = true; break;

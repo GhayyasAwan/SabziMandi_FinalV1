@@ -208,7 +208,7 @@ namespace MandiPOS.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _munshiana.Value = _grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal()/100);
+                _munshiana.Value = Math.Round(_grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal() / 100), 0, MidpointRounding.AwayFromZero);
             }
         }
 
@@ -497,7 +497,7 @@ namespace MandiPOS.GUI
         {
             _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
             _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
-            _munshiana.Value= _grossSale.Value.toDecimal()*(mushianaPerc.Value.toDecimal()/100);
+            _munshiana.Value= Math.Round(_grossSale.Value.toDecimal()*(mushianaPerc.Value.toDecimal()/100),0,MidpointRounding.AwayFromZero);
         }
 
         private void Dgv1_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
@@ -1198,7 +1198,7 @@ namespace MandiPOS.GUI
             //commissionPerc.Text = _sale.CommisionPerc.ProperDecimals();
             _kraya.Text = _sale.KarayaAmount.ToString("0.##");
             _mazdoori.Text = _sale.MazdooriAmount.ToString("0.##");
-            _munshiana.Text = _sale.MunshianaAmount.ToString("0.##");
+            _munshiana.Value = Math.Round(_sale.MunshianaAmount,0,MidpointRounding.AwayFromZero);
             _store.Text = _sale.StoreRent.ToString("0.##");
             _paid.Text = _sale.PaidAmount.ToString("0.##");
             arrivalDate.Value = _sale.ArrivalDate;
@@ -1277,7 +1277,7 @@ namespace MandiPOS.GUI
             ArrivalNo.Text = SQL.GetNextArrivalNo();
             _vendor.Clear();
             _unit.SelectedIndex = 0;
-            mushianaPerc.Value = 0.20;
+            mushianaPerc.Value = 0.10;
             CalculateGrandTotals();
             ClearEntryPanel(true);
             _vendor.Select();

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Janus.Windows.Common.JanusColorScheme janusColorScheme2 = new Janus.Windows.Common.JanusColorScheme();
+            Janus.Windows.Common.JanusColorScheme janusColorScheme1 = new Janus.Windows.Common.JanusColorScheme();
             Janus.Windows.GridEX.GridEXLayout dgv_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccountsNew));
             this.label1 = new System.Windows.Forms.Label();
@@ -94,11 +94,11 @@
             // 
             // visualStyleManager1
             // 
-            janusColorScheme2.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
-            janusColorScheme2.Name = "Scheme0";
-            janusColorScheme2.OfficeCustomColor = System.Drawing.Color.Empty;
-            janusColorScheme2.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
-            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme2);
+            janusColorScheme1.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
+            janusColorScheme1.Name = "Scheme0";
+            janusColorScheme1.OfficeCustomColor = System.Drawing.Color.Empty;
+            janusColorScheme1.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
+            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme1);
             // 
             // txtName
             // 
@@ -171,9 +171,9 @@
             // 
             this.grpRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpRef.Controls.Add(this.cmbRefParty);
             this.grpRef.Controls.Add(this.uiButton1);
             this.grpRef.Controls.Add(this.txtRefName);
-            this.grpRef.Controls.Add(this.cmbRefParty);
             this.grpRef.Controls.Add(this.rbOther);
             this.grpRef.Controls.Add(this.rbCustomer);
             this.grpRef.Controls.Add(this.rbVendor);
@@ -381,6 +381,7 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(171, 519);
             this.flowLayoutPanel1.TabIndex = 19;
+            this.flowLayoutPanel1.Visible = false;
             // 
             // dgv
             // 
@@ -400,7 +401,7 @@
             this.dgv.Location = new System.Drawing.Point(12, 201);
             this.dgv.Name = "dgv";
             this.dgv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgv.Size = new System.Drawing.Size(1132, 519);
+            this.dgv.Size = new System.Drawing.Size(1309, 519);
             this.dgv.TabIndex = 20;
             this.dgv.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007;
             this.dgv.VisualStyleManager = this.visualStyleManager1;

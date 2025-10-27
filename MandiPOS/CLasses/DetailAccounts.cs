@@ -23,7 +23,7 @@ namespace MandiPOS.CLasses
         [DisplayName("رابطہ نمبر")]
         public string Contact { get; set; }
         [DisplayName("شہر")]
-        public int CityID { get; set; }
+        public int CityID { get; set; } = General.MultanCityID;
         [DisplayName("سابقہ جمع")]
         public decimal OpCredit { get; set; }
         [DisplayName("سابقہ بنام")]
