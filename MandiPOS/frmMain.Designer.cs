@@ -66,6 +66,8 @@
             this.lblFiscalYear = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -79,7 +81,8 @@
             this.applicationToolStripMenuItem,
             this.chartOfAccountsToolStripMenuItem,
             this.utilitiesToolStripMenuItem,
-            this.securityToolStripMenuItem});
+            this.securityToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -515,6 +518,21 @@
             this.panel2.Size = new System.Drawing.Size(1307, 63);
             this.panel2.TabIndex = 8;
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuCheckForUpdate});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // mnuCheckForUpdate
+            // 
+            this.mnuCheckForUpdate.Name = "mnuCheckForUpdate";
+            this.mnuCheckForUpdate.Size = new System.Drawing.Size(180, 22);
+            this.mnuCheckForUpdate.Text = "Check For Update";
+            this.mnuCheckForUpdate.Click += new System.EventHandler(this.CheckForUpdate);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -588,5 +606,7 @@
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdate;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarDownload;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuCheckForUpdate;
     }
 }

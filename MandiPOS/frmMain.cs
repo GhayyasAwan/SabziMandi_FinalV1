@@ -713,6 +713,16 @@ namespace MandiPOS
             }
 
         }
+
+        private void CheckForUpdate(object sender, EventArgs e)
+        {
+            using(var frm=new MandiPOS.UpdateForm(Program.MainConnectionstring))
+            {
+                frm.Icon = this.Icon;
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.ShowDialog(this);
+            }
+        }
     }
     public class crsr : IDisposable
     {

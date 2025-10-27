@@ -341,6 +341,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckForUpdates.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CLasses\AccountBalanceSummary.cs" />
     <Compile Include="CLasses\backupHelper.cs" />
     <Compile Include="CLasses\clsCahrt.cs" />
