@@ -518,10 +518,7 @@ namespace MandiPOS.CLasses
                 {
                     decimal Amount = record.CustomerAmount + record.LagaAmount;
                     tblItems items1 = connecion.Get<tblItems>(record.ItemID, transaction: trx);
-                    DetailAccounts dAcc = connecion.Get<DetailAccounts>(record.PartyID, transaction: trx);
-                    if (dAcc.AccountTitle.Contains("نقد"))
-                    {
-                        //Normally Debit to Customer Account
+                        DetailAccounts dAcc = connecion.Get<DetailAccounts>(record.PartyID, transaction: trx);
                         jv = new JVEntries()
                         {
                             VoucherID = main.VoucherID,
@@ -530,40 +527,6 @@ namespace MandiPOS.CLasses
                             DebitAmount = Amount,
                             Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
                         }; details.Add(jv);
-                        //then Credit From Customer Account
-                        
-                        jv = new JVEntries()
-                        {
-                            VoucherID = main.VoucherID,
-                            AccountID = record.PartyID,
-                            CreditAmount = Amount,
-                            DebitAmount = 0,
-                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
-                        }; details.Add(jv);
-                        //and Then Debit to CashAccount
-                        var dAcc2 = connecion.Query<DetailAccounts>($"Select Top 1 ID from DetailAccounts Where MasterID=10", transaction: trx).FirstOrDefault();
-                        jv = new JVEntries()
-                        {
-                            VoucherID = main.VoucherID,
-                            AccountID = dAcc2.ID,
-                            CreditAmount = 0,
-                            DebitAmount = Amount,
-                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
-                        }; details.Add(jv);
-                    }
-                    else
-                    {
-                        jv = new JVEntries()
-                        {
-                            VoucherID = main.VoucherID,
-                            AccountID = record.PartyID,
-                            CreditAmount = 0,
-                            DebitAmount = Amount,
-                            Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0}"
-                        }; details.Add(jv);
-                    }
-
-                        
                 }
                 decimal laga_amount = saleDetails.Sum(x => x.LagaAmount).toDecimal();
                 if (laga_amount != 0)
