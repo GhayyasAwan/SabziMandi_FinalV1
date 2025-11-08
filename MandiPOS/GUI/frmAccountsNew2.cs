@@ -99,9 +99,10 @@ namespace MandiPOS.GUI
                 bsCity.ResetBindings(false);
                 if (!isloading)
                 {
-                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).ToDataTable();
+                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x=>x.AccountCode).ToDataTable();
                 }
                 bsAccount1.RemoveFilter();
+                gridEX1.AutoSizeColumns();
                 account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt() };
                 BindObject();
 
@@ -150,6 +151,11 @@ namespace MandiPOS.GUI
                     RightToLeft = RightToLeft.Yes,
                     Anchor = AnchorStyles.Top | AnchorStyles.Right
                 };
+                if (acc.ID == 4)
+                {
+                    btn.BackColor = Color.ForestGreen;
+                    btn.ForeColor=Color.White;
+                }
                 btn.Click += Btn_Click;
                 //if (isFirst)
                 //{

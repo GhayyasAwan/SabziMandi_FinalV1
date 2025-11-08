@@ -331,6 +331,7 @@ namespace MandiPOS.GUI
             objResizer = new clsResize(this);
             objResizer._get_initial_size();
             txtName.Select();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void FrmAccountsNew_Resize(object sender, System.EventArgs e)
@@ -376,9 +377,10 @@ namespace MandiPOS.GUI
             {
                 if (!isloading)
                 {
-                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).ToDataTable();
+                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x=>x.AccountCode).ToDataTable();
                 }
                 bsAccount1.RemoveFilter();
+                dgv.AutoSizeColumns();
                 account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt() };
                 BindObject();
 
@@ -491,6 +493,11 @@ namespace MandiPOS.GUI
                 frm.ShowDialog();
                 Refresh();
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

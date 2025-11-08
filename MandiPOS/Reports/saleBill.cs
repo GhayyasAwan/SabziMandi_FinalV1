@@ -58,7 +58,10 @@ namespace MandiPOS.Reports
                 {
                     d.ItemTitle = $"{d.ItemTitle}  {d.Marka}";
                 }
-
+                if (d.ItemUnit == 0)
+                {
+                    d.ItemUnit = -1;
+                }
                 if (newCart.Any(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate))
                 {
                     vwSale3 existingItem = newCart.FirstOrDefault(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate);
@@ -71,9 +74,13 @@ namespace MandiPOS.Reports
                     newCart.Add(d);
                 }
             }
-
-
-
+            string totalText = "";
+            if (newCart.Sum(x => x.ItemWeight) > 0)
+            {
+                var totals = newCart.Where(x=>x.ItemWeight>0).GroupBy(x => x.UnitTitle).Select(g => new { UnitTitle = g.Key, TotalQty = g.Sum(x => x.ItemQty), TotalWeight = g.Sum(x => x.ItemWeight) }).ToList();
+                totalText = string.Join(", ", totals.Select(x => $"کل وزن : {x.TotalWeight:0.##} {x.UnitTitle}"));
+            }
+            lblTotlaSUmmary.Text = totalText;
 
             this.DataSource = newCart.OrderByDescending(x => x.ParyRate);
             decimal total = 0, commission = 0, mazdoori = 0, munshiana = 0, karaya = 0, store = 0;

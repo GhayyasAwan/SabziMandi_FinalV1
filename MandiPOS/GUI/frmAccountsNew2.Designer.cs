@@ -40,20 +40,21 @@
             this.txtCredit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.txtDebit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.cmbCity = new Janus.Windows.EditControls.UIComboBox();
+            this.bsCity = new System.Windows.Forms.BindingSource(this.components);
             this.txtContact = new Janus.Windows.GridEX.EditControls.EditBox();
             this.txtName = new Janus.Windows.GridEX.EditControls.EditBox();
             this.txtCode = new Janus.Windows.GridEX.EditControls.EditBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gridEX1 = new Janus.Windows.GridEX.GridEX();
             this.bsAccount1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bsCity = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAccount1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -149,6 +150,10 @@
             this.cmbCity.TabIndex = 17;
             this.cmbCity.ValueMember = "ID";
             // 
+            // bsCity
+            // 
+            this.bsCity.DataSource = typeof(MandiPOS.CLasses.tblCity);
+            // 
             // txtContact
             // 
             this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -217,10 +222,6 @@
             // 
             this.bsAccount1.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
             // 
-            // bsCity
-            // 
-            this.bsCity.DataSource = typeof(MandiPOS.CLasses.tblCity);
-            // 
             // frmAccountsNew2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -242,9 +243,9 @@
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAccountsNew2";
             this.Text = "frmAccountsNew2";
+            ((System.ComponentModel.ISupportInitialize)(this.bsCity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEX1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAccount1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

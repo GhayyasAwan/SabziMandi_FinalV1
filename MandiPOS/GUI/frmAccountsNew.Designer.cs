@@ -64,6 +64,8 @@
             this.dgv = new Janus.Windows.GridEX.GridEX();
             this.bsAccount1 = new System.Windows.Forms.BindingSource(this.components);
             this.bsAccounts2 = new System.Windows.Forms.BindingSource(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.munshiana = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -79,7 +81,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1293, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 41);
+            this.label1.Size = new System.Drawing.Size(28, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "کوڈ";
             // 
@@ -88,7 +90,7 @@
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCode.Location = new System.Drawing.Point(1234, 55);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(87, 47);
+            this.txtCode.Size = new System.Drawing.Size(87, 39);
             this.txtCode.TabIndex = 1;
             this.txtCode.VisualStyleManager = this.visualStyleManager1;
             // 
@@ -107,7 +109,7 @@
             this.txtName.Location = new System.Drawing.Point(904, 55);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtName.Size = new System.Drawing.Size(324, 47);
+            this.txtName.Size = new System.Drawing.Size(324, 39);
             this.txtName.TabIndex = 2;
             this.txtName.VisualStyleManager = this.visualStyleManager1;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
@@ -116,7 +118,7 @@
             // 
             this.txtContact.Location = new System.Drawing.Point(739, 54);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(159, 47);
+            this.txtContact.Size = new System.Drawing.Size(159, 39);
             this.txtContact.TabIndex = 3;
             this.txtContact.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
             this.txtContact.VisualStyleManager = this.visualStyleManager1;
@@ -128,7 +130,7 @@
             this.cmbCity.Location = new System.Drawing.Point(549, 54);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmbCity.Size = new System.Drawing.Size(184, 47);
+            this.cmbCity.Size = new System.Drawing.Size(184, 39);
             this.cmbCity.TabIndex = 4;
             this.cmbCity.ValueMember = "ID";
             this.cmbCity.VisualStyleManager = this.visualStyleManager1;
@@ -141,7 +143,7 @@
             // 
             this.txtDebit.Location = new System.Drawing.Point(395, 55);
             this.txtDebit.Name = "txtDebit";
-            this.txtDebit.Size = new System.Drawing.Size(148, 47);
+            this.txtDebit.Size = new System.Drawing.Size(148, 39);
             this.txtDebit.TabIndex = 5;
             this.txtDebit.Text = "0.00";
             this.txtDebit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -156,7 +158,7 @@
             // 
             this.txtCredit.Location = new System.Drawing.Point(241, 55);
             this.txtCredit.Name = "txtCredit";
-            this.txtCredit.Size = new System.Drawing.Size(148, 47);
+            this.txtCredit.Size = new System.Drawing.Size(148, 39);
             this.txtCredit.TabIndex = 6;
             this.txtCredit.Text = "0.00";
             this.txtCredit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -195,12 +197,10 @@
             // 
             // txtRefName
             // 
-            this.txtRefName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRefName.Location = new System.Drawing.Point(10, 136);
             this.txtRefName.Name = "txtRefName";
             this.txtRefName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtRefName.Size = new System.Drawing.Size(207, 47);
+            this.txtRefName.Size = new System.Drawing.Size(207, 39);
             this.txtRefName.TabIndex = 21;
             this.txtRefName.VisualStyleManager = this.visualStyleManager1;
             this.txtRefName.TextChanged += new System.EventHandler(this.txtRefName_TextChanged);
@@ -211,7 +211,7 @@
             this.cmbRefParty.DisplayMember = "AccountTitle";
             this.cmbRefParty.Location = new System.Drawing.Point(10, 136);
             this.cmbRefParty.Name = "cmbRefParty";
-            this.cmbRefParty.Size = new System.Drawing.Size(207, 47);
+            this.cmbRefParty.Size = new System.Drawing.Size(207, 39);
             this.cmbRefParty.TabIndex = 3;
             this.cmbRefParty.ValueMember = "ID";
             this.cmbRefParty.VisualStyleManager = this.visualStyleManager1;
@@ -225,7 +225,7 @@
             this.rbOther.AutoSize = true;
             this.rbOther.Location = new System.Drawing.Point(6, 46);
             this.rbOther.Name = "rbOther";
-            this.rbOther.Size = new System.Drawing.Size(48, 44);
+            this.rbOther.Size = new System.Drawing.Size(41, 36);
             this.rbOther.TabIndex = 2;
             this.rbOther.Text = "دیگر";
             this.rbOther.VisualStyleManager = this.visualStyleManager1;
@@ -236,7 +236,7 @@
             this.rbCustomer.AutoSize = true;
             this.rbCustomer.Location = new System.Drawing.Point(67, 46);
             this.rbCustomer.Name = "rbCustomer";
-            this.rbCustomer.Size = new System.Drawing.Size(55, 44);
+            this.rbCustomer.Size = new System.Drawing.Size(46, 36);
             this.rbCustomer.TabIndex = 1;
             this.rbCustomer.Text = "گاہک";
             this.rbCustomer.VisualStyleManager = this.visualStyleManager1;
@@ -248,7 +248,7 @@
             this.rbVendor.Checked = true;
             this.rbVendor.Location = new System.Drawing.Point(140, 46);
             this.rbVendor.Name = "rbVendor";
-            this.rbVendor.Size = new System.Drawing.Size(67, 44);
+            this.rbVendor.Size = new System.Drawing.Size(54, 36);
             this.rbVendor.TabIndex = 0;
             this.rbVendor.TabStop = true;
             this.rbVendor.Text = "بیوپاری";
@@ -261,43 +261,44 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1192, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 41);
+            this.label2.Size = new System.Drawing.Size(28, 32);
             this.label2.TabIndex = 8;
             this.label2.Text = "نام";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(832, 11);
+            this.label3.Location = new System.Drawing.Point(844, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 41);
+            this.label3.Size = new System.Drawing.Size(54, 32);
             this.label3.TabIndex = 9;
             this.label3.Text = "رابطہ نمبر";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(695, 12);
+            this.label4.Location = new System.Drawing.Point(703, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 41);
+            this.label4.Size = new System.Drawing.Size(30, 32);
             this.label4.TabIndex = 10;
             this.label4.Text = "شہر";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(472, 11);
+            this.label5.Location = new System.Drawing.Point(487, 11);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 41);
+            this.label5.Size = new System.Drawing.Size(56, 32);
             this.label5.TabIndex = 11;
             this.label5.Text = "سابقہ بنام";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(320, 11);
+            this.label6.Location = new System.Drawing.Point(335, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 41);
+            this.label6.Size = new System.Drawing.Size(54, 32);
             this.label6.TabIndex = 12;
             this.label6.Text = "سابقہ جمع";
             // 
@@ -307,7 +308,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(1264, 104);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 41);
+            this.label7.Size = new System.Drawing.Size(45, 32);
             this.label7.TabIndex = 14;
             this.label7.Text = "تفصیل";
             // 
@@ -315,28 +316,28 @@
             // 
             this.txtRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRemarks.Location = new System.Drawing.Point(549, 148);
+            this.txtRemarks.Location = new System.Drawing.Point(718, 148);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtRemarks.Size = new System.Drawing.Size(773, 47);
+            this.txtRemarks.Size = new System.Drawing.Size(604, 39);
             this.txtRemarks.TabIndex = 13;
             this.txtRemarks.VisualStyleManager = this.visualStyleManager1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(337, 104);
+            this.label8.Location = new System.Drawing.Point(348, 104);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 41);
+            this.label8.Size = new System.Drawing.Size(41, 32);
             this.label8.TabIndex = 18;
             this.label8.Text = "کمیشن";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(472, 104);
+            this.label9.Location = new System.Drawing.Point(504, 104);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 41);
+            this.label9.Size = new System.Drawing.Size(54, 32);
             this.label9.TabIndex = 17;
             this.label9.Text = "بیلنس حد";
             // 
@@ -344,7 +345,7 @@
             // 
             this.txtCommisionRatio.Location = new System.Drawing.Point(241, 148);
             this.txtCommisionRatio.Name = "txtCommisionRatio";
-            this.txtCommisionRatio.Size = new System.Drawing.Size(148, 47);
+            this.txtCommisionRatio.Size = new System.Drawing.Size(148, 39);
             this.txtCommisionRatio.TabIndex = 16;
             this.txtCommisionRatio.Text = "0.00";
             this.txtCommisionRatio.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -359,7 +360,7 @@
             // 
             this.txtCreditLimit.Location = new System.Drawing.Point(395, 148);
             this.txtCreditLimit.Name = "txtCreditLimit";
-            this.txtCreditLimit.Size = new System.Drawing.Size(148, 47);
+            this.txtCreditLimit.Size = new System.Drawing.Size(163, 39);
             this.txtCreditLimit.TabIndex = 15;
             this.txtCreditLimit.Text = "0.00";
             this.txtCreditLimit.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -375,10 +376,12 @@
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1150, 201);
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1299, 201);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(171, 519);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(22, 519);
             this.flowLayoutPanel1.TabIndex = 19;
+            this.flowLayoutPanel1.Visible = false;
             // 
             // dgv
             // 
@@ -398,7 +401,7 @@
             this.dgv.Location = new System.Drawing.Point(12, 201);
             this.dgv.Name = "dgv";
             this.dgv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgv.Size = new System.Drawing.Size(1132, 519);
+            this.dgv.Size = new System.Drawing.Size(1309, 519);
             this.dgv.TabIndex = 20;
             this.dgv.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007;
             this.dgv.VisualStyleManager = this.visualStyleManager1;
@@ -411,10 +414,36 @@
             // 
             this.bsAccounts2.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(673, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 32);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "منشیانہ";
+            // 
+            // munshiana
+            // 
+            this.munshiana.Location = new System.Drawing.Point(564, 148);
+            this.munshiana.Name = "munshiana";
+            this.munshiana.Size = new System.Drawing.Size(148, 39);
+            this.munshiana.TabIndex = 21;
+            this.munshiana.Text = "0.00";
+            this.munshiana.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.munshiana.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.munshiana.VisualStyleManager = this.visualStyleManager1;
+            // 
             // frmAccountsNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1333, 732);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.munshiana);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label8);
@@ -487,5 +516,7 @@
         private System.Windows.Forms.BindingSource bss;
         private Janus.Windows.GridEX.EditControls.EditBox txtRefName;
         private Janus.Windows.EditControls.UIButton uiButton1;
+        private System.Windows.Forms.Label label10;
+        private Janus.Windows.GridEX.EditControls.NumericEditBox munshiana;
     }
 }

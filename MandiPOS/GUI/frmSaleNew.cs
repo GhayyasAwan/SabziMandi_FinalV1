@@ -100,6 +100,7 @@ namespace MandiPOS.GUI
         public frmSaleNew()
         {
             InitializeComponent();
+            _qty.TextChanged += (s, e) => CalculateAmounts();
             commissionPerc.KeyDown += CommissionPerc_KeyDown;
             mazdooriPerc.KeyDown += MazdooriPerc_KeyDown;
             mushianaPerc.KeyDown += MushianaPerc_KeyDown;
@@ -615,6 +616,7 @@ namespace MandiPOS.GUI
                 bsCart.DataSource = cart;
                 CurrentID = _sale.ID;
                 bsCart.ResetBindings(false);
+                dgv.AutoSizeColumns();
                 GetTotals();
                 objectToControls();
                 _vendor.Select();
@@ -1082,7 +1084,7 @@ namespace MandiPOS.GUI
             dgv.AutoSizeColumns();
             if (_item.Enabled)
             {
-                _item.Select();
+                _customer.Select();
             }
             else
             {
@@ -1093,14 +1095,14 @@ namespace MandiPOS.GUI
         {
             // cmbItems.EditValue = null;
             // cmbCustomers.EditValue = null;
-            _laga.Clear();
+            //_laga.Clear();
             _qty.Clear();
             _rate1.Clear();
             _rate2.Clear();
             _amount1.Clear();
             _amount2.Clear();
             _rate2.Clear();
-            _unit.SelectedIndex = 0;
+            //_unit.SelectedIndex = 0;
             if (complete)
             {
                 _item.SelectedIndex = -1;
@@ -1328,7 +1330,25 @@ namespace MandiPOS.GUI
                     }
                 }
             }
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.PageUp)
+            {
+                ArrivalNo.Value = ArrivalNo.Value.toInt() + 1;
+                LoadRecordByArrivalNo(ArrivalNo.Value.toInt());
+                _partyHelper.Hide();
+            }
+            if (e.KeyCode == Keys.PageDown)
+            {
+                ArrivalNo.Value = ArrivalNo.Value.toInt() - 1;
+                LoadRecordByArrivalNo(ArrivalNo.Value.toInt());
+                _partyHelper.Hide();
+
+            }
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                ArrivalNo.Select();
+                ArrivalNo.SelectAll ();
+            }
+                if (e.KeyCode == Keys.F1)
             {
                 if (SaveRecord(true))
                 {
@@ -1423,7 +1443,8 @@ namespace MandiPOS.GUI
             vwSale1BindingSource.DataSource = SaleService.GetviewSale1(dtp.Value.Date, dtp1.Value.Date, partysearch.Text.Trim()).OrderByDescending(x => x.ArrivalNo).ToList();
             GetStatus();
             ArrivalNo.Maximum = SaleService.GetMaxSaleNo();
-            //dgv1.AutoSizeColumns();
+            dgv1.ColumnAutoSizeMode= ColumnAutoSizeMode.AllCellsAndHeader;
+            dgv1.AutoSizeColumns();
 
         }
 
@@ -1563,7 +1584,10 @@ namespace MandiPOS.GUI
             LoadVendors();
         }
 
-       
+        private void _qty_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 public class waitForm : IDisposable

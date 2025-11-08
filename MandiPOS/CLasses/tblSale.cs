@@ -164,7 +164,9 @@ namespace MandiPOS.CLasses
                 {
                     case 1: return "کلو";
                     case 2: return "من";
-                    default: return "تعداد"; 
+                    case 0: return "تعداد";
+                    case -1: return "";
+                    default: return ""; 
                 } 
             } 
         }

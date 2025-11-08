@@ -111,7 +111,7 @@
             uiComboBoxItem2,
             uiComboBoxItem3});
             this.uiComboBox1.Location = new System.Drawing.Point(95, 58);
-            this.uiComboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uiComboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.uiComboBox1.Name = "uiComboBox1";
             this.uiComboBox1.Size = new System.Drawing.Size(102, 39);
             this.uiComboBox1.TabIndex = 20;
@@ -124,7 +124,7 @@
             this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
             this.uiButton1.Location = new System.Drawing.Point(10, 62);
-            this.uiButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uiButton1.Margin = new System.Windows.Forms.Padding(2);
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Size = new System.Drawing.Size(81, 30);
             this.uiButton1.TabIndex = 19;
