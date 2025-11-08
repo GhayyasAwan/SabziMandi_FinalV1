@@ -600,8 +600,16 @@ namespace MandiPOS.GUI
             }
         }
 
-        private void LoadRecordByArrivalNo(int iD)
+        private void LoadRecordByArrivalNo(int iD=0)
         {
+            if(iD==0)
+            {
+                iD = ArrivalNo.Value.toInt();
+            }
+            if (iD == 0)
+            {
+                return;
+            }
             {
                 CurrentID = iD;
                 object cart = new object();
@@ -1331,7 +1339,24 @@ namespace MandiPOS.GUI
                     }
                 }
             }
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.PageDown)
+            { 
+                ArrivalNo.Value=ArrivalNo.Value.toInt()-1;
+                LoadRecordByArrivalNo();
+                _partyHelper.Hide();
+            }
+            if (e.KeyCode == Keys.PageUp)
+            {
+                ArrivalNo.Value = ArrivalNo.Value.toInt()+ 1;
+                LoadRecordByArrivalNo();
+                _partyHelper.Hide();
+            }
+            if (e.Control && e.KeyCode == Keys.G)
+            { 
+                ArrivalNo.Select();
+                ArrivalNo.SelectAll();
+            }
+                if (e.KeyCode == Keys.F1)
             {
                 if (SaveRecord(true))
                 {
