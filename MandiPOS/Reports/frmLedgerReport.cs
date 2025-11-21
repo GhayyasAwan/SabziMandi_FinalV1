@@ -47,7 +47,7 @@ namespace MandiPOS.Reports
             lblRemarks.Text = acc.Remarks?.ToString();
             lblCommission.Text = acc.Commission.ToString("0.##");
             label1.Text = $"{group}";
-            lblTitle.Text = city + " " + acc.AccountTitle;
+            lblTitle.Text =acc.AccountTitle+" "+city;
             lblCreditLimit.Text = acc.CreditLimit.ToString("0.##");
             lblcontact.Text = acc.Contact;
             lblRef.Text = acc.RefName;

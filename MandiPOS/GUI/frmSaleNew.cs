@@ -625,7 +625,9 @@ namespace MandiPOS.GUI
                 bsCart.ResetBindings(false);
                 GetTotals();
                 objectToControls();
+                dgv.AutoSizeColumns();
                 _vendor.Select();
+
             }
         }
         private void Dgv_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
@@ -716,10 +718,16 @@ namespace MandiPOS.GUI
                 this.Error(validationError);
                 return false;
             }
+            if(_netSale.Value.toDecimal()<0)
+            {
+                this.Error("صافی بکری منفی نہیں ہو سکتی۔");
+                return false;
+            }
             if (SaleService.SaveSale(_sale, _saleDetails))
             {
                 CurrentID = _sale.ID;
                 SearchRecords();
+                
                 return true;
             }
             return false;
@@ -941,7 +949,7 @@ namespace MandiPOS.GUI
                     this.Error("براہ کرم مقدار درج کریں۔");
                     return;
                 }
-                _unit.Select();
+                _rate1.Select();
             }
         }
 
@@ -1090,7 +1098,7 @@ namespace MandiPOS.GUI
             dgv.AutoSizeColumns();
             if (_item.Enabled)
             {
-                _item.Select();
+                _customer.Select();
             }
             else
             {
@@ -1101,7 +1109,7 @@ namespace MandiPOS.GUI
         {
             // cmbItems.EditValue = null;
             // cmbCustomers.EditValue = null;
-            _laga.Clear();
+            //_laga.Clear();
             _qty.Clear();
             _rate1.Clear();
             _rate2.Clear();
@@ -1185,7 +1193,7 @@ namespace MandiPOS.GUI
             bsSummry.ResetBindings(false);
             _CustomerSale.Value = _sale1.ProperDecimals();
             _grossSale.Value = _sale2.ProperDecimals();
-
+            _RemQty.Value=(tobesold - sold).ProperDecimals();
             SetEntryPanel(tobesold - sold == 0);
         }
         private void SetEntryPanel(bool v)
@@ -1347,6 +1355,10 @@ namespace MandiPOS.GUI
             }
             if (e.KeyCode == Keys.PageUp)
             {
+                if(ArrivalNo.Value==ArrivalNo.Maximum)
+                {
+                    return;
+                }
                 ArrivalNo.Value = ArrivalNo.Value.toInt()+ 1;
                 LoadRecordByArrivalNo();
                 _partyHelper.Hide();
@@ -1360,10 +1372,12 @@ namespace MandiPOS.GUI
             {
                 if (SaveRecord(true))
                 {
+                    Refresh();
                     this.Info("ریکارڈ کامیابی سے محفوظ ہو گیا۔");
-                    LoadRecordByID(CurrentID);
                 }
             }
+           
+
         }
         private System.Windows.Forms.Timer resizeTimer;
         private void FrmSaleNew_Resize(object sender, System.EventArgs e)

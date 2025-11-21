@@ -20,6 +20,23 @@ namespace MandiPOS
 
     public static class SQL
     {
+        public static int LastArrivalNo { 
+            get 
+            {
+                try
+                {
+                    string sql = "select isnull(max([ArrivalNo]),0) from [tblSale]";
+                    using (var xdb = new db())
+                    {
+                        return xdb.ExecuteScalar<int>(sql);
+                    }
+                }
+                catch
+                {
+                    return 0;
+                }
+            } }
+
         internal static bool DeleteCity(int iD)
         {
             try

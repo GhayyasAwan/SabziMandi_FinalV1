@@ -135,6 +135,8 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this._RemQty = new Janus.Windows.GridEX.EditControls.NumericEditBox();
+            this.label33 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vwSale1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
@@ -1249,10 +1251,39 @@
             this.label32.TabIndex = 91;
             this.label32.Text = "تاریخ";
             // 
+            // _RemQty
+            // 
+            this._RemQty.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._RemQty.Location = new System.Drawing.Point(637, 468);
+            this._RemQty.Name = "_RemQty";
+            this._RemQty.ReadOnly = true;
+            this._RemQty.Size = new System.Drawing.Size(56, 23);
+            this._RemQty.TabIndex = 93;
+            this._RemQty.TabStop = false;
+            this._RemQty.Text = "0.00";
+            this._RemQty.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
+            this._RemQty.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this._RemQty.VisualStyleManager = this.visualStyleManager1;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(699, 464);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(46, 27);
+            this.label33.TabIndex = 92;
+            this.label33.Text = "بقایا تعداد";
+            // 
             // frmSaleNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1080, 640);
+            this.Controls.Add(this._RemQty);
+            this.Controls.Add(this.label33);
             this.Controls.Add(this._partySearchHelper);
             this.Controls.Add(this.dgvMarka);
             this.Controls.Add(this._partyHelper);
@@ -1459,5 +1490,7 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
+        private Janus.Windows.GridEX.EditControls.NumericEditBox _RemQty;
+        private System.Windows.Forms.Label label33;
     }
 }
