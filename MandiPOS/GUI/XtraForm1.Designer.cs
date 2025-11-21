@@ -36,8 +36,8 @@
             this.bbiPrint = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiPrintDirect = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiHandTool = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiMagnifier = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiZoomOut = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
+            this.bbiMagnifier = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiZoom = new DevExpress.XtraPrinting.Preview.ZoomBarEditItem();
             this.printPreviewRepositoryItemComboBox1 = new DevExpress.XtraPrinting.Preview.PrintPreviewRepositoryItemComboBox();
             this.bbiZoomIn = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
@@ -45,12 +45,8 @@
             this.bbiShowPrevPage = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiShowNextPage = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiShowLastPage = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiFillBackground = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiWatermark = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiExportFile = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiSendFile = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
-            this.bbiClosePreview = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.bbiClosePreview = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.previewBar2 = new DevExpress.XtraPrinting.Preview.PreviewBar();
             this.printPreviewStaticItemPageOfPages = new DevExpress.XtraPrinting.Preview.PrintPreviewStaticItem();
             this.progressBarEditItem = new DevExpress.XtraPrinting.Preview.ProgressBarEditItem();
@@ -75,6 +71,10 @@
             this.bbiEditPageHF = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiScale = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.bbiMultiplePages = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
+            this.bbiFillBackground = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
+            this.bbiWatermark = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
+            this.bbiExportFile = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
+            this.bbiSendFile = new DevExpress.XtraPrinting.Preview.PrintPreviewBarItem();
             this.miFile = new DevExpress.XtraPrinting.Preview.PrintPreviewSubItem();
             this.miView = new DevExpress.XtraPrinting.Preview.PrintPreviewSubItem();
             this.miPageLayout = new DevExpress.XtraPrinting.Preview.PrintPreviewSubItem();
@@ -101,6 +101,9 @@
             this.printPreviewBarCheckItem17 = new DevExpress.XtraPrinting.Preview.PrintPreviewBarCheckItem();
             this.printPreviewBarCheckItem18 = new DevExpress.XtraPrinting.Preview.PrintPreviewBarCheckItem();
             this.printPreviewBarCheckItem19 = new DevExpress.XtraPrinting.Preview.PrintPreviewBarCheckItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.documentViewerBarManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printPreviewRepositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
@@ -111,10 +114,9 @@
             // 
             this.documentViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.documentViewer1.IsMetric = false;
-            this.documentViewer1.Location = new System.Drawing.Point(0, 47);
-            this.documentViewer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.documentViewer1.Location = new System.Drawing.Point(0, 39);
             this.documentViewer1.Name = "documentViewer1";
-            this.documentViewer1.Size = new System.Drawing.Size(1285, 593);
+            this.documentViewer1.Size = new System.Drawing.Size(964, 480);
             this.documentViewer1.TabIndex = 0;
             // 
             // documentViewerBarManager1
@@ -189,8 +191,10 @@
             this.printPreviewBarCheckItem17,
             this.printPreviewBarCheckItem18,
             this.printPreviewBarCheckItem19,
-            this.barButtonItem1});
-            this.documentViewerBarManager1.MaxItemId = 60;
+            this.barButtonItem1,
+            this.barButtonItem3,
+            this.barButtonItem4});
+            this.documentViewerBarManager1.MaxItemId = 62;
             this.documentViewerBarManager1.PreviewBar = this.previewBar1;
             this.documentViewerBarManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemProgressBar1,
@@ -218,7 +222,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.bbiShowNextPage),
             new DevExpress.XtraBars.LinkPersistInfo(this.bbiShowLastPage),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.bbiClosePreview, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem4, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.bbiClosePreview, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.previewBar1.Text = "Toolbar";
             // 
             // bbiPrint
@@ -249,6 +254,15 @@
             this.bbiHandTool.Id = 18;
             this.bbiHandTool.Name = "bbiHandTool";
             // 
+            // bbiZoomOut
+            // 
+            this.bbiZoomOut.Caption = "Zoom Out";
+            this.bbiZoomOut.Command = DevExpress.XtraPrinting.PrintingSystemCommand.ZoomOut;
+            this.bbiZoomOut.Enabled = false;
+            this.bbiZoomOut.Hint = "Zoom Out";
+            this.bbiZoomOut.Id = 20;
+            this.bbiZoomOut.Name = "bbiZoomOut";
+            // 
             // bbiMagnifier
             // 
             this.bbiMagnifier.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
@@ -258,15 +272,6 @@
             this.bbiMagnifier.Hint = "Magnifier";
             this.bbiMagnifier.Id = 19;
             this.bbiMagnifier.Name = "bbiMagnifier";
-            // 
-            // bbiZoomOut
-            // 
-            this.bbiZoomOut.Caption = "Zoom Out";
-            this.bbiZoomOut.Command = DevExpress.XtraPrinting.PrintingSystemCommand.ZoomOut;
-            this.bbiZoomOut.Enabled = false;
-            this.bbiZoomOut.Hint = "Zoom Out";
-            this.bbiZoomOut.Id = 20;
-            this.bbiZoomOut.Name = "bbiZoomOut";
             // 
             // bbiZoom
             // 
@@ -332,44 +337,13 @@
             this.bbiShowLastPage.Id = 26;
             this.bbiShowLastPage.Name = "bbiShowLastPage";
             // 
-            // bbiFillBackground
+            // barButtonItem1
             // 
-            this.bbiFillBackground.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.bbiFillBackground.Caption = "&Color...";
-            this.bbiFillBackground.Command = DevExpress.XtraPrinting.PrintingSystemCommand.FillBackground;
-            this.bbiFillBackground.Enabled = false;
-            this.bbiFillBackground.Hint = "Background";
-            this.bbiFillBackground.Id = 28;
-            this.bbiFillBackground.Name = "bbiFillBackground";
-            // 
-            // bbiWatermark
-            // 
-            this.bbiWatermark.Caption = "&Watermark...";
-            this.bbiWatermark.Command = DevExpress.XtraPrinting.PrintingSystemCommand.Watermark;
-            this.bbiWatermark.Enabled = false;
-            this.bbiWatermark.Hint = "Watermark";
-            this.bbiWatermark.Id = 29;
-            this.bbiWatermark.Name = "bbiWatermark";
-            // 
-            // bbiExportFile
-            // 
-            this.bbiExportFile.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.bbiExportFile.Caption = "Export Document...";
-            this.bbiExportFile.Command = DevExpress.XtraPrinting.PrintingSystemCommand.ExportFile;
-            this.bbiExportFile.Enabled = false;
-            this.bbiExportFile.Hint = "Export Document...";
-            this.bbiExportFile.Id = 30;
-            this.bbiExportFile.Name = "bbiExportFile";
-            // 
-            // bbiSendFile
-            // 
-            this.bbiSendFile.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.bbiSendFile.Caption = "Send via E-Mail...";
-            this.bbiSendFile.Command = DevExpress.XtraPrinting.PrintingSystemCommand.SendFile;
-            this.bbiSendFile.Enabled = false;
-            this.bbiSendFile.Hint = "Send via E-Mail...";
-            this.bbiSendFile.Id = 31;
-            this.bbiSendFile.Name = "bbiSendFile";
+            this.barButtonItem1.Caption = "Export";
+            this.barButtonItem1.Id = 59;
+            this.barButtonItem1.ImageOptions.SvgImage = global::MandiPOS.Properties.Resources.exporttopdf;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // bbiClosePreview
             // 
@@ -379,14 +353,6 @@
             this.bbiClosePreview.Hint = "Close Preview";
             this.bbiClosePreview.Id = 32;
             this.bbiClosePreview.Name = "bbiClosePreview";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "Export";
-            this.barButtonItem1.Id = 59;
-            this.barButtonItem1.ImageOptions.SvgImage = global::MandiPOS.Properties.Resources.exporttopdf;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // previewBar2
             // 
@@ -473,31 +439,35 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.documentViewerBarManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1285, 47);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlTop.Size = new System.Drawing.Size(964, 39);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 640);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 519);
             this.barDockControlBottom.Manager = this.documentViewerBarManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1285, 42);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlBottom.Size = new System.Drawing.Size(964, 35);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 47);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 39);
             this.barDockControlLeft.Manager = this.documentViewerBarManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 593);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 480);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1285, 47);
+            this.barDockControlRight.Location = new System.Drawing.Point(964, 39);
             this.barDockControlRight.Manager = this.documentViewerBarManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 593);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 480);
             // 
             // bbiDocumentMap
             // 
@@ -615,6 +585,45 @@
             this.bbiMultiplePages.Hint = "Multiple Pages";
             this.bbiMultiplePages.Id = 27;
             this.bbiMultiplePages.Name = "bbiMultiplePages";
+            // 
+            // bbiFillBackground
+            // 
+            this.bbiFillBackground.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.bbiFillBackground.Caption = "&Color...";
+            this.bbiFillBackground.Command = DevExpress.XtraPrinting.PrintingSystemCommand.FillBackground;
+            this.bbiFillBackground.Enabled = false;
+            this.bbiFillBackground.Hint = "Background";
+            this.bbiFillBackground.Id = 28;
+            this.bbiFillBackground.Name = "bbiFillBackground";
+            // 
+            // bbiWatermark
+            // 
+            this.bbiWatermark.Caption = "&Watermark...";
+            this.bbiWatermark.Command = DevExpress.XtraPrinting.PrintingSystemCommand.Watermark;
+            this.bbiWatermark.Enabled = false;
+            this.bbiWatermark.Hint = "Watermark";
+            this.bbiWatermark.Id = 29;
+            this.bbiWatermark.Name = "bbiWatermark";
+            // 
+            // bbiExportFile
+            // 
+            this.bbiExportFile.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.bbiExportFile.Caption = "Export Document...";
+            this.bbiExportFile.Command = DevExpress.XtraPrinting.PrintingSystemCommand.ExportFile;
+            this.bbiExportFile.Enabled = false;
+            this.bbiExportFile.Hint = "Export Document...";
+            this.bbiExportFile.Id = 30;
+            this.bbiExportFile.Name = "bbiExportFile";
+            // 
+            // bbiSendFile
+            // 
+            this.bbiSendFile.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.bbiSendFile.Caption = "Send via E-Mail...";
+            this.bbiSendFile.Command = DevExpress.XtraPrinting.PrintingSystemCommand.SendFile;
+            this.bbiSendFile.Enabled = false;
+            this.bbiSendFile.Hint = "Send via E-Mail...";
+            this.bbiSendFile.Id = 31;
+            this.bbiSendFile.Name = "bbiSendFile";
             // 
             // miFile
             // 
@@ -880,16 +889,41 @@
             this.printPreviewBarCheckItem19.Id = 58;
             this.printPreviewBarCheckItem19.Name = "printPreviewBarCheckItem19";
             // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Export";
+            this.barButtonItem2.Id = 59;
+            this.barButtonItem2.ImageOptions.SvgImage = global::MandiPOS.Properties.Resources.exporttopdf;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Images";
+            this.barButtonItem3.Id = 60;
+            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Images";
+            this.barButtonItem4.Id = 61;
+            this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
+            this.barButtonItem4.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
             // XtraForm1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1285, 682);
+            this.ClientSize = new System.Drawing.Size(964, 554);
             this.Controls.Add(this.documentViewer1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "XtraForm1";
             this.Text = "Report";
             ((System.ComponentModel.ISupportInitialize)(this.documentViewerBarManager1)).EndInit();
@@ -974,5 +1008,8 @@
         private DevExpress.XtraPrinting.Preview.PrintPreviewBarCheckItem printPreviewBarCheckItem18;
         private DevExpress.XtraPrinting.Preview.PrintPreviewBarCheckItem printPreviewBarCheckItem19;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
     }
 }

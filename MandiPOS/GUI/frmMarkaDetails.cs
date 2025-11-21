@@ -168,10 +168,13 @@ FROM (
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (report != null)
-            {
-                report.ShowPreview();
-            }
+                if (report != null)
+                {
+                    var fr = new XtraForm1(report);
+                    fr.Show();
+                    fr.WindowState = FormWindowState.Maximized;
+                    fr.BringToFront();
+                }
         }
 
         private void gridEX1_FormattingRow(object sender, Janus.Windows.GridEX.RowLoadEventArgs e)

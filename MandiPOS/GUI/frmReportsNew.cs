@@ -991,6 +991,10 @@ ORDER BY
             {
                 string cities = string.Empty;
                 string groups = string.Empty;
+                if (cmbGroups.CheckedValues == null)
+                {
+                    this.Info("گروپ منتخب کریں۔"); return;
+                }
                 // if (ChithaType == 1)
                 {
                     groups = string.Join(",",

@@ -1530,10 +1530,12 @@ namespace MandiPOS.GUI
                 }
                 if (Finalreport != null)
                 {
-                    Finalreport.ShowPreview();
+                    using (var frm = new XtraForm1(Finalreport))
+                    {
+                        frm.ShowDialog();
+                    }
                 }
             }
-
         }
 
         private static XtraReport PrintReport(XtraReport Finalreport, int id, int idType)
@@ -1548,7 +1550,6 @@ namespace MandiPOS.GUI
             {
                 Finalreport.Pages.AddRange(report.Pages);
             }
-
             return Finalreport;
         }
 

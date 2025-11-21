@@ -10,6 +10,7 @@ using MandiPOS.Reports;
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
@@ -713,15 +714,42 @@ namespace MandiPOS
             }
 
         }
+        public void LaunchActivator()
+        {
+            try
+            {
+                // Path of Updater/Activator in the same folder as Main Application
+                string updaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater", "Updater.exe");
 
+                if (!File.Exists(updaterPath))
+                {
+                    MessageBox.Show("Activator.exe not found in application folder.");
+                    return;
+                }
+
+                // Main application's process name (without .exe)
+                string mainProcessName = Process.GetCurrentProcess().ProcessName;
+
+                // Main application's current version
+                string mainVersion = Application.ProductVersion; // Or your custom version string
+
+                // GitHub Release URL (or any update URL)
+                string githubReleaseUrl = "https://api.github.com/repos/GhayyasAwan/MandiPOS_Amir/releases/latest";
+
+                // Pass arguments: "ProcessName Version GitHubURL"
+                string args = $"\"{mainProcessName}\" \"{mainVersion}\" \"{githubReleaseUrl}\"";
+
+                // Launch Updater/Activator
+                Process.Start(updaterPath, args);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error launching Activator: " + ex.Message);
+            }
+        }
         private void CheckForUpdate(object sender, EventArgs e)
         {
-            using(var frm=new MandiPOS.UpdateForm(Program.MainConnectionstring))
-            {
-                frm.Icon = this.Icon;
-                frm.StartPosition = FormStartPosition.CenterScreen;
-                frm.ShowDialog(this);
-            }
+            LaunchActivator();
         }
     }
     public class crsr : IDisposable

@@ -192,7 +192,7 @@
             // mnuCheckForUpdate
             // 
             this.mnuCheckForUpdate.Name = "mnuCheckForUpdate";
-            this.mnuCheckForUpdate.Size = new System.Drawing.Size(168, 22);
+            this.mnuCheckForUpdate.Size = new System.Drawing.Size(180, 22);
             this.mnuCheckForUpdate.Text = "Check For Update";
             this.mnuCheckForUpdate.Click += new System.EventHandler(this.CheckForUpdate);
             // 

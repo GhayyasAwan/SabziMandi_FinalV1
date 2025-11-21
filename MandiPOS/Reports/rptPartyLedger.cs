@@ -114,7 +114,7 @@ namespace MandiPOS.Reports
             
         }
 
-        private void xrTableRow2_BeforePrint(object sender, CancelEventArgs e)
+        private void xrTableRow2_BeforePrint2(object sender, CancelEventArgs e)
         {
             XRTableRow row = sender as XRTableRow;
             decimal credit = Convert.ToDecimal(GetCurrentColumnValue("Credit"));
@@ -131,6 +131,31 @@ namespace MandiPOS.Reports
             }
             else { row.ForeColor = Color.Black; }
         }
+        private void xrTableRow2_BeforePrint(object sender, CancelEventArgs e)
+        {
+            //XRTableRow row = sender as XRTableRow;
+
+            //foreach (XRTableCell cell in row.Cells)
+            //{
+            //    cell.ForeColor = Color.Black; // reset
+
+            //    if (cell.DataBindings.Count > 0)
+            //    {
+            //        string fieldName = ((XRBinding)cell.DataBindings[0]).DataMember;
+            //        decimal value;
+
+            //        if (decimal.TryParse(cell.Text, out value) && value != 0)
+            //        {
+            //            if (fieldName == "Debit")
+            //                cell.ForeColor = Color.Red;
+            //            else if (fieldName == "Credit")
+            //                cell.ForeColor = Color.Green;
+            //        }
+            //    }
+            //}
+        }
+
+
 
         private void xrTable2_BeforePrint(object sender, CancelEventArgs e)
         {

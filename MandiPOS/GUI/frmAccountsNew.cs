@@ -31,9 +31,11 @@ namespace MandiPOS.GUI
             }
         }
         bool isloading = false;
-        public frmAccountsNew()
+        int parentID = 4;
+        public frmAccountsNew(int _parentID=4)
         {
             InitializeComponent();
+            parentID = _parentID;
             txtCode.RegisterFocus(true);
             txtName.RegisterFocus(true);
             txtContact.RegisterFocus(true);
@@ -348,7 +350,7 @@ namespace MandiPOS.GUI
         }
         private void PopulateMasterAccounts()
         {
-            var master = MasterAccountsService.GetMasterAccounts(" where ID=4");
+            var master = MasterAccountsService.GetMasterAccounts($" where ID={parentID}");
             bool isFirst = true;
             foreach (var acc in master)
             {

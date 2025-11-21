@@ -18,6 +18,22 @@ namespace MandiPOS
 
     public static class SQL
     {
+        internal static void GetStats(DateTime date, ref decimal banam, ref decimal jama, ref decimal income)
+        {
+            using (var db = new db())
+            {
+                (DateTime VoucherDate, decimal TotalBanam, decimal TotalJama) data = db.Query<(DateTime VoucherDate, decimal TotalBanam, decimal TotalJama)>(
+    $"SELECT * FROM dbo.ufn_GetVoucherSummaryByDate('{date:yyyy-MM-dd}')").FirstOrDefault();
+                if (data != default)
+                {
+                    banam = data.TotalBanam;
+                    jama = data.TotalJama;
+                }
+                income = db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
+            }
+        }
+
+
         internal static bool DeleteCity(int iD)
         {
             try

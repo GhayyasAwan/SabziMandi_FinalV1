@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraPrinting;
+using DevExpress.XtraPrinting.Native.ExportOptionsControllers;
 using DevExpress.XtraReports.UI;
 
 using System;
@@ -7,6 +9,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -86,6 +90,47 @@ namespace MandiPOS.GUI
             });
             staThread.SetApartmentState(ApartmentState.STA);
             staThread.Start();
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            
+
+            // Inside your method
+            Thread staThread = new Thread(() =>
+            {
+                try
+                {
+                    // Choose a folder to save exported images
+                    using (var fbd = new FolderBrowserDialog())
+                    {
+                        fbd.Description = "Select folder to export report pages as images";
+                        if (fbd.ShowDialog() != DialogResult.OK)
+                            return;
+
+                        string exportFolder = fbd.SelectedPath;
+                        
+                        ImageExportOptions imageOptions = this.Report.ExportOptions.Image;
+                        imageOptions.Resolution = 300;
+                        imageOptions.Format = ImageFormat.Png; // Or your preferred format
+                        imageOptions.ExportMode = ImageExportMode.DifferentFiles; // Crucial for individual page export
+
+                        // Export the report. DevExpress will automatically create files for each page
+                        // when ExportMode is SingleFilePageByPage and you provide a file path.
+                        // The file name will be suffixed with "_<page_number>".
+                        string baseFileName = Path.Combine(exportFolder, "ReportPage.png");
+                        this.Report.ExportToImage(baseFileName, imageOptions);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error exporting report: " + ex.Message,
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            });
+            staThread.SetApartmentState(ApartmentState.STA);
+            staThread.Start();
+
         }
     }
 }

@@ -26,8 +26,21 @@ namespace MandiPOS.GUI
             PopulateMasterAccounts();
             this.Resize += FrmAccountsNew2_Resize;
             this.Load += FrmAccountsNew2_Load;
+            txtName.TextChanged += TxtName_TextChanged;
             objR = new clsResize(this);
             
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtName.Focused && txtName.TextLength > 0)
+            {
+                bsAccount1.Filter = $"AccountTitle LIKE '%{txtName.Text}%'";
+            }
+            else
+            { 
+                bsAccount1.RemoveFilter();
+            }
         }
 
         private void RegisterEnter()
@@ -143,15 +156,15 @@ namespace MandiPOS.GUI
             {
                 Button btn = new Button()
                 {
-                    Size = new Size(150, 50),
+                    AutoSize=true,AutoSizeMode=AutoSizeMode.GrowAndShrink,Name=$"btn{acc.ID}",
                     Text = $"{acc.ID} - {acc.AccountTitle}",
-                    Tag = acc.ID,
+                    Tag = acc.ID,FlatStyle=FlatStyle.Flat, FlatAppearance={BorderSize=0,MouseOverBackColor=SystemColors.Highlight,MouseDownBackColor=SystemColors.Highlight},
                     Font = new Font("Jameel Noori nastaleeq", 14),
                     //VisualStyleManager = this.visualStyleManager1,
                     RightToLeft = RightToLeft.Yes,
                     Anchor = AnchorStyles.Top | AnchorStyles.Right
                 };
-                if (acc.ID == 4)
+                if (acc.ID == 4|| acc.ID == 7)
                 {
                     btn.BackColor = Color.ForestGreen;
                     btn.ForeColor=Color.White;
@@ -171,8 +184,29 @@ namespace MandiPOS.GUI
             if (sender is Button btn)
             {
                 MasterID = btn.Tag.toInt();
+                foreach(Button b in flowLayoutPanel1.Controls)
+                {
+                    if(b.Name==btn.Name)
+                    {
+                        b.BackColor = SystemColors.Highlight;
+                        b.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        if (b.Tag.toInt() == 4|| b.Tag.toInt() == 7)
+                        {
+                            b.BackColor = Color.ForestGreen;
+                            b.ForeColor = Color.White;
+                        }
+                        else
+                        {
+                            b.BackColor = SystemColors.Control;
+                            b.ForeColor = Color.Black;
+                        }
+                    }
+                }
             }
-            if (MasterID != 4)
+            if (MasterID != 4 && MasterID!=7)
             {
                 Refresh();
             }
@@ -181,7 +215,7 @@ namespace MandiPOS.GUI
                 bsAccount1.DataSource = null;
                 bsAccount1.ResetBindings(false);
                 bsAccount1.RemoveFilter();
-                using (var frm = new frmAccountsNew())
+                using (var frm = new frmAccountsNew(MasterID))
                 {
                     frm.StartPosition = FormStartPosition.CenterScreen;
                     frm.ShowDialog();
