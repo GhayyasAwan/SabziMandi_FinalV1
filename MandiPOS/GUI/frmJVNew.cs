@@ -20,6 +20,7 @@ namespace MandiPOS.GUI
         public frmJVNew()
         {
             InitializeComponent();
+            partyBal.Visible = General.IsAdmin;
             SetPartybalance();
             _narration.RegisterFocus(true);
             _name.RegisterFocus(true);

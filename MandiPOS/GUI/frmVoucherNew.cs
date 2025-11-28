@@ -21,6 +21,7 @@ namespace MandiPOS.GUI
         public frmVoucherNew(int _voucherType)
         {
             InitializeComponent();
+            partyBal.Visible = General.IsAdmin;
             txtCode.RegisterFocus(true);
             txtCashBank.RegisterFocus(true);
             txtAmount.RegisterFocus(false);

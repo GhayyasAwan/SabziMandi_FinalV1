@@ -238,7 +238,7 @@
             this.lblPrevBal,
             this.xrLabel2,
             this.xrLabel1});
-            this.PageHeader.HeightF = 79.83334F;
+            this.PageHeader.HeightF = 94.00002F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrLabel7
@@ -293,7 +293,7 @@
             this.xrLine1.BorderWidth = 1.5F;
             this.xrLine1.LineStyle = DevExpress.Drawing.DXDashStyle.DashDot;
             this.xrLine1.LineWidth = 1.5F;
-            this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 35.91666F);
+            this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 86.00002F);
             this.xrLine1.Name = "xrLine1";
             this.xrLine1.SizeF = new System.Drawing.SizeF(1129F, 8.000004F);
             this.xrLine1.StylePriority.UseBorderDashStyle = false;
@@ -397,13 +397,14 @@
             this.xrLabel3,
             this.lblEndBalanceState,
             this.xrTable1});
-            this.SubBand2.HeightF = 86.66667F;
+            this.SubBand2.HeightF = 96.66666F;
+            this.SubBand2.KeepTogether = true;
             this.SubBand2.Name = "SubBand2";
             // 
             // xrTable2
             // 
             this.xrTable2.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(795.8333F, 0F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(795.8333F, 10F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -582,7 +583,7 @@
             this.xrLabel4.CanGrow = false;
             this.xrLabel4.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrLabel4.ForeColor = System.Drawing.Color.White;
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 28.88891F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 38.88891F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(62.50009F, 28.88886F);
@@ -605,7 +606,7 @@
             this.xrLabel3.CanGrow = false;
             this.xrLabel3.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrLabel3.ForeColor = System.Drawing.Color.White;
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 0F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 10F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(62.50011F, 28.88891F);
@@ -626,7 +627,7 @@
             this.lblEndBalanceState.CanGrow = false;
             this.lblEndBalanceState.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.lblEndBalanceState.ForeColor = System.Drawing.Color.White;
-            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 57.77776F);
+            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 67.77776F);
             this.lblEndBalanceState.Name = "lblEndBalanceState";
             this.lblEndBalanceState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblEndBalanceState.SizeF = new System.Drawing.SizeF(62.5001F, 28.88891F);
@@ -643,7 +644,7 @@
             // xrTable1
             // 
             this.xrTable1.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(189.0001F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(189.0001F, 10F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {

@@ -57,6 +57,7 @@ namespace MandiPOS.GUI
                     verticalScroll.Value = Math.Min(verticalScroll.Maximum, 100); // scroll 100px down
                 }
             }));
+            Program.waitFormInstance?.Dispose();
         }
 
         private void DocumentViewer1_DocumentChanged(object sender, EventArgs e)

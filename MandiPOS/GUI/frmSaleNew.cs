@@ -100,6 +100,8 @@ namespace MandiPOS.GUI
         public frmSaleNew()
         {
             InitializeComponent();
+            label28.Visible = vendorBal.Visible = General.IsAdmin;
+            label29.Visible = customerBal.Visible = General.IsAdmin;
             _qty.TextChanged += (s, e) => CalculateAmounts();
             commissionPerc.KeyDown += CommissionPerc_KeyDown;
             mazdooriPerc.KeyDown += MazdooriPerc_KeyDown;
@@ -1507,8 +1509,10 @@ namespace MandiPOS.GUI
                 return;
             }
 
-            using (new waitForm())
+            
+
             {
+                Program.waitFormInstance = new waitForm();
                 XtraReport Finalreport = null;
                 if (rows.Length == 0 && CurrentID != 0)
                 {

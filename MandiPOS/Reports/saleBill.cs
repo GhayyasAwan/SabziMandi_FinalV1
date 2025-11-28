@@ -24,6 +24,13 @@ namespace MandiPOS.Reports
             {
                 sale = SaleService.GetSaleByArrivalNo(id.toInt(), ref cart, ref summary);
             }
+            if (sale.ID == 0)
+            {
+                "Invlaid Record ID.".Error();
+                this.ClosePreview();
+                this.Dispose();
+                return;
+            }
             if (!string.IsNullOrEmpty(sale.Marka))
             {
                 lblMarka.Text = $@"مارکہ {sale.Marka} ";
@@ -36,11 +43,11 @@ namespace MandiPOS.Reports
             DetailAccounts acc = DetailAccountService.GetDetailAccountByID(sale.PartyID);
             if (acc.AccountTitle.Contains("نقد") && !string.IsNullOrEmpty(sale.PartyTitle))
             {
-                lblPartyTitle.Text = $"{sale.PartyTitle}";
+                lblPartyTitle.Text = $"{sale.PartyTitle} صاحب";
             }
             else
             {
-                lblPartyTitle.Text = $"{acc.AccountTitle}";
+                lblPartyTitle.Text = $"{acc.AccountTitle} صاحب";
             }
 
             lblBillNO.Text = $"{sale.ArrivalNo}";
@@ -128,8 +135,7 @@ namespace MandiPOS.Reports
             {
                 lblstate2.Text = "جمع";
             }
-
-
+            this.CreateDocument();
             //lblPrintTime.Text = $"Print Time: {DateTime.Now:dd-MMM-yyyy hh:mm tt}";
         }
 

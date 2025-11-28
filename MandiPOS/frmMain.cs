@@ -751,6 +751,15 @@ namespace MandiPOS
         {
             LaunchActivator();
         }
+
+        private void rePostSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new waitForm())
+            {
+                SaleService.RepostSales(frm);
+                this.Info("Action Completed Successfully.");
+            }
+        }
     }
     public class crsr : IDisposable
     {

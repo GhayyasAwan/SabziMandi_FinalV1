@@ -68,6 +68,7 @@
             this.lblFiscalYear = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rePostSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -184,7 +185,8 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCheckForUpdate});
+            this.mnuCheckForUpdate,
+            this.rePostSalesToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -533,6 +535,13 @@
             this.panel2.Size = new System.Drawing.Size(1307, 63);
             this.panel2.TabIndex = 8;
             // 
+            // rePostSalesToolStripMenuItem
+            // 
+            this.rePostSalesToolStripMenuItem.Name = "rePostSalesToolStripMenuItem";
+            this.rePostSalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rePostSalesToolStripMenuItem.Text = "Re-Post Sales";
+            this.rePostSalesToolStripMenuItem.Click += new System.EventHandler(this.rePostSalesToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -608,5 +617,6 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarDownload;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuCheckForUpdate;
+        private System.Windows.Forms.ToolStripMenuItem rePostSalesToolStripMenuItem;
     }
 }

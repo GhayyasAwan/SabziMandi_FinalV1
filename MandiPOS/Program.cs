@@ -36,6 +36,7 @@ namespace MandiPOS
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        public static waitForm waitFormInstance;
         [STAThread]
         static async Task Main()
         {

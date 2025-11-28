@@ -25,6 +25,7 @@ namespace MandiPOS.GUI
         public frmBVNew()
         {
             InitializeComponent();
+            partyBal.Visible = General.IsAdmin;
             _code.RegisterFocus(true);
             _name.RegisterFocus(true);
             _cr.RegisterFocus(false);

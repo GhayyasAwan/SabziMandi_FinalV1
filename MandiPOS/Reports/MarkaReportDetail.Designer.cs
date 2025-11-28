@@ -94,7 +94,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2.083333F, 2.083333F, 0F, 0F, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(830F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(800F, 25F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -162,7 +162,7 @@
             this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2.083333F, 10F, 0F, 0F, 100F);
             this.xrTableCell3.StylePriority.UsePadding = false;
             this.xrTableCell3.Text = "xrTableCell3";
-            this.xrTableCell3.Weight = 1.7294117647058824D;
+            this.xrTableCell3.Weight = 1.6811908513919187D;
             // 
             // ReportHeader
             // 
@@ -170,7 +170,7 @@
             this.xrLabel1,
             this.xrTable3,
             this.xrSubreport1});
-            this.ReportHeader.HeightF = 87.49999F;
+            this.ReportHeader.HeightF = 87.5F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrLabel1
@@ -180,7 +180,7 @@
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(829.9998F, 24.99999F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(810.0001F, 24.99999F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
             this.xrLabel1.Text = "تفصیل مارکہ";
@@ -194,12 +194,12 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable3.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
             this.xrTable3.ForeColor = System.Drawing.Color.White;
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 49.99999F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 50F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2.083333F, 2.083333F, 0F, 0F, 100F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(830F, 37.5F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(800F, 37.5F);
             this.xrTable3.StylePriority.UseBackColor = false;
             this.xrTable3.StylePriority.UseBorders = false;
             this.xrTable3.StylePriority.UseFont = false;
@@ -243,13 +243,13 @@
             this.xrTableCell11.Multiline = true;
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Text = "مارکہ";
-            this.xrTableCell11.Weight = 1.7294117647058824D;
+            this.xrTableCell11.Weight = 1.6811908477583744D;
             // 
             // xrSubreport1
             // 
             this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(829.9999F, 24.99999F);
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(800F, 24.99999F);
             // 
             // ReportFooter
             // 
@@ -268,7 +268,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2.083333F, 2.083333F, 0F, 0F, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(829.9998F, 25F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(800F, 25F);
             this.xrTable2.StylePriority.UseBorders = false;
             this.xrTable2.StylePriority.UseTextAlignment = false;
             this.xrTable2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -345,7 +345,7 @@
             this.xrTableCell8.Name = "xrTableCell8";
             this.xrTableCell8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2.083333F, 10F, 0F, 0F, 100F);
             this.xrTableCell8.StylePriority.UsePadding = false;
-            this.xrTableCell8.Weight = 1.7294109030330884D;
+            this.xrTableCell8.Weight = 1.6811898531990246D;
             // 
             // bindingSource1
             // 
@@ -363,7 +363,7 @@
             this.bindingSource1});
             this.DataSource = this.bindingSource1;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(10F, 10F, 15.83333F, 10F);
+            this.Margins = new DevExpress.Drawing.DXMargins(20F, 20F, 15.83333F, 10F);
             this.SnappingMode = ((DevExpress.XtraReports.UI.SnappingMode)((DevExpress.XtraReports.UI.SnappingMode.SnapLines | DevExpress.XtraReports.UI.SnappingMode.SnapToGrid)));
             this.Version = "25.1";
             xrWatermark1.Id = "Watermark1";

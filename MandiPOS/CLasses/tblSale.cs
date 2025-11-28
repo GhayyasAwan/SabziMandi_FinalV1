@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace MandiPOS.CLasses
 {
@@ -67,38 +68,82 @@ namespace MandiPOS.CLasses
     public class tblSaleDetail
     {
         [Key]
-
         public int ID { get; set; }
 
         public int? SaleID { get; set; }
-
         public int? ItemID { get; set; }
-
         public int PartyID { get; set; }
-
-        public decimal ItemQty { get; set; }
-
-        public decimal LagaRate { get; set; }
-
-        public decimal LagaAmount { get; set; }
-
         public int ItemUnit { get; set; }
+        private decimal _itemQty;
+        public decimal ItemQty
+        {
+            get => _itemQty;
+            set => _itemQty = Math.Round(value, 0);
+        }
 
-        public decimal ItemWeight { get; set; }
+        private decimal _lagaRate;
+        public decimal LagaRate
+        {
+            get => _lagaRate;
+            set => _lagaRate = Math.Round(value, 0);
+        }
 
-        public decimal CustomerRate { get; set; }
+        private decimal _lagaAmount;
+        public decimal LagaAmount
+        {
+            get => _lagaAmount;
+            set => _lagaAmount = Math.Round(value, 0);
+        }
 
-        public decimal CustomerAmount { get; set; }
+        private decimal _itemWeight;
+        public decimal ItemWeight
+        {
+            get => _itemWeight;
+            set => _itemWeight = Math.Round(value, 0);
+        }
 
-        public decimal ParyRate { get; set; }
+        private decimal _customerRate;
+        public decimal CustomerRate
+        {
+            get => _customerRate;
+            set => _customerRate = Math.Round(value, 0);
+        }
 
-        public decimal PartyAmount { get; set; }
+        private decimal _customerAmount;
+        public decimal CustomerAmount
+        {
+            get => _customerAmount;
+            set => _customerAmount = Math.Round(value, 0);
+        }
+
+        private decimal _partyRate;
+        public decimal ParyRate
+        {
+            get => _partyRate;
+            set => _partyRate = Math.Round(value, 0);
+        }
+
+        private decimal _partyAmount;
+        public decimal PartyAmount
+        {
+            get => _partyAmount;
+            set => _partyAmount = Math.Round(value, 0);
+        }
 
         public string Marka { get; set; }
-        public decimal MazdooriRate { get; set; }
-        public decimal MazdooriAmount { get { return ItemQty * MazdooriRate; } }
 
+        private decimal _mazdooriRate;
+        public decimal MazdooriRate
+        {
+            get => _mazdooriRate;
+            set => _mazdooriRate = Math.Round(value, 0);
+        }
+        public decimal MazdooriAmount
+        {
+            get => Math.Round(ItemQty * MazdooriRate, 0);
+        }
     }
+
     public class vwSale1
     {
         [Key]
@@ -255,7 +300,7 @@ namespace MandiPOS.CLasses
             return new db().Query<vwSale1>($"Select * from vwSale1 {whereClause}").ToList();
         }
 
-        public static bool RepostSales()
+        public static bool RepostSales(waitForm frm)
         {
             try
             {
@@ -268,13 +313,20 @@ namespace MandiPOS.CLasses
                         {
                             return true;
                         }
+                        int count = sales.Count;
+                        int progress = 1;
+                        int running = 1;
                         foreach (var sale in sales)
                         {
+                            progress=(running / count) * 100;
+                            frm.UpdateStatus($"{running} of {count}", $"Processing Sale No: {sale.ArrivalNo}");
                             var saleDetails = db.Query<tblSaleDetail>($"Select * from tblSaleDetail Where SaleID={sale.ID}", transaction: trx).ToList();
                             int voucherID = 0;
                             PostAccountEntries(sale, saleDetails, db, trx, ref voucherID);
                             sale.VoucherID = voucherID;
                             db.Update<tblSale>(sale, transaction: trx);
+                            running++;
+                            Application.DoEvents();
                         }
                         trx.Commit();
                         return true;

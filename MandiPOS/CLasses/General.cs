@@ -214,6 +214,10 @@ namespace MandiPOS
         {
             return ShowMessage(message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
         }
+        public static bool Error(this string message)
+        {
+            return ShowMessage(message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+        }
         public static bool ExcError(this Form f, Exception ex)
         {
             return ShowMessage(ex.Message + $"{ex.Message}\r\nDetails:{ex.InnerException}", "Exception", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
