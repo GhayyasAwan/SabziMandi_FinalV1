@@ -484,8 +484,13 @@ namespace MandiPOS.GUI
                     dtp2.Show(); lblDate2.Show();
                     _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
-                    dtp.Select();
+                    dtp.Select(); 
                     break;
+                case "rb_Report21":
+                    ReportID= 21;
+                    break;
+
+
             }
         }
 
@@ -582,8 +587,58 @@ namespace MandiPOS.GUI
             {
                 ShowLedger(1); return;
             }
+            if (ReportID == 21) //معرفت رپورٹ
+            {
+                ShowRefReport(); return;
+            }
         }
+        private void ShowRefReport()
+        {
+            using (new waitForm())
+            {
+                int refrerID = _pid.Text.Trim().toInt();
+                string partyName = _pname.Text.Trim();
 
+
+                string sql = $@"WITH EndBalances AS
+    (
+        SELECT AccountID, SUM(DebitAmount - CreditAmount) AS 'EndBalance'
+        FROM vwTrx 
+        WHERE VoucherDate <= '{dtp.Value.Date:yyyy-MM-dd}'
+            AND AccountID IN (SELECT ID FROM DetailAccounts WHERE RefrenceID='{refrerID}')
+        GROUP BY AccountID
+    )
+    SELECT acc.AccountCode as ID,
+        acc.AccountTitle,
+mas.AccountTitle as 'MasterAccount',
+        acc.RefName,
+        acc.Contact,
+        city.CityName,
+        eb.EndBalance 
+    FROM EndBalances eb 
+    LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
+    left Join MasterAccounts mas ON acc.MasterID = mas.ID
+    LEFT JOIN tblCity city ON acc.CityID = city.ID
+    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10
+Order By mas.id";
+                DataTable dt = new DataTable();
+                using (var db = new db())
+                {
+                    var reader = db.ExecuteReader(sql);
+                    dt.Load(reader);
+                }
+                if (dt.Rows.Count > 0)
+                {
+                    var report = new rptRefRalReport(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    report.CreateDocument();
+                    ShowReport(report);
+                }
+                else
+                {
+                    this.Info("کوئی ریکارڈ موجود نہیں ہے۔");
+                }
+            }
+        }
         private void ShowMaterSheet(int reportType)
         {
             if (_pid.Text.toInt() > 0)

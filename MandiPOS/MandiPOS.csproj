@@ -513,6 +513,12 @@
     <Compile Include="GUI\rptChithaFull.Designer.cs">
       <DependentUpon>rptChithaFull.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\rptRefRalReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\rptRefRalReport.Designer.cs">
+      <DependentUpon>rptRefRalReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\XtraForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -809,6 +815,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\rptChithaFull.resx">
       <DependentUpon>rptChithaFull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\rptRefRalReport.resx">
+      <DependentUpon>rptRefRalReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\XtraForm1.resx">
       <DependentUpon>XtraForm1.cs</DependentUpon>

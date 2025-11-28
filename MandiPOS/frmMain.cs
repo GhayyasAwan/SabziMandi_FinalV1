@@ -10,6 +10,7 @@ using MandiPOS.Reports;
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
@@ -736,6 +737,44 @@ namespace MandiPOS
         private void button1_Click_1(object sender, EventArgs e)
         {
             OpenBardanaVoucher(5);
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LaunchActivator();
+        }
+        public void LaunchActivator()
+        {
+            try
+            {
+                // Path of Updater/Activator in the same folder as Main Application
+                string updaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater", "Updater.exe");
+
+                if (!File.Exists(updaterPath))
+                {
+                    MessageBox.Show("Activator.exe not found in application folder.");
+                    return;
+                }
+
+                // Main application's process name (without .exe)
+                string mainProcessName = Process.GetCurrentProcess().ProcessName;
+
+                // Main application's current version
+                string mainVersion = Application.ProductVersion; // Or your custom version string
+
+                // GitHub Release URL (or any update URL)
+                string githubReleaseUrl = "https://api.github.com/repos/GhayyasAwan/MandiPOS_Muqaddam/releases/latest";
+
+                // Pass arguments: "ProcessName Version GitHubURL"
+                string args = $"\"{mainProcessName}\" \"{mainVersion}\" \"{githubReleaseUrl}\"";
+
+                // Launch Updater/Activator
+                Process.Start(updaterPath, args);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error launching Activator: " + ex.Message);
+            }
         }
     }
     public class crsr : IDisposable
