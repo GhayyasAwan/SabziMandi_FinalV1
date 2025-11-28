@@ -663,7 +663,7 @@ namespace MandiPOS.GUI
 
         private void _item_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.EnterKey())
+            if (e.EnterKey() && _item.SelectedIndex>-1)
             {
                 _item.Validate();
                 var item = bsItems[_item.SelectedIndex] as tblItems;

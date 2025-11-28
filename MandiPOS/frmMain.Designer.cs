@@ -37,6 +37,8 @@
             this.detailAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.defaultAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.شہراندراجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.اشیاءاندراجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeWallpaperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,12 +62,11 @@
             this.btnJamaVoucher = new System.Windows.Forms.Button();
             this.btnBanamVoucher = new System.Windows.Forms.Button();
             this.btnParty = new System.Windows.Forms.Button();
-            this.btnCity = new System.Windows.Forms.Button();
-            this.btnItem = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblFiscalYear = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -108,7 +109,9 @@
             this.masterAccountsToolStripMenuItem,
             this.detailAccountsToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.defaultAccountsToolStripMenuItem});
+            this.defaultAccountsToolStripMenuItem,
+            this.شہراندراجToolStripMenuItem,
+            this.اشیاءاندراجToolStripMenuItem});
             this.chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
             this.chartOfAccountsToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.chartOfAccountsToolStripMenuItem.Text = "Chart of Accounts";
@@ -116,28 +119,44 @@
             // masterAccountsToolStripMenuItem
             // 
             this.masterAccountsToolStripMenuItem.Name = "masterAccountsToolStripMenuItem";
-            this.masterAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.masterAccountsToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
             this.masterAccountsToolStripMenuItem.Text = "Master Accounts";
             this.masterAccountsToolStripMenuItem.Click += new System.EventHandler(this.masterAccountsToolStripMenuItem_Click);
             // 
             // detailAccountsToolStripMenuItem
             // 
             this.detailAccountsToolStripMenuItem.Name = "detailAccountsToolStripMenuItem";
-            this.detailAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.detailAccountsToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
             this.detailAccountsToolStripMenuItem.Text = "Detail Accounts";
             this.detailAccountsToolStripMenuItem.Click += new System.EventHandler(this.detailAccountsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // defaultAccountsToolStripMenuItem
             // 
             this.defaultAccountsToolStripMenuItem.Name = "defaultAccountsToolStripMenuItem";
-            this.defaultAccountsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.defaultAccountsToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
             this.defaultAccountsToolStripMenuItem.Text = "Default Accounts";
             this.defaultAccountsToolStripMenuItem.Click += new System.EventHandler(this.defaultAccountsToolStripMenuItem_Click);
+            // 
+            // شہراندراجToolStripMenuItem
+            // 
+            this.شہراندراجToolStripMenuItem.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.شہراندراجToolStripMenuItem.Name = "شہراندراجToolStripMenuItem";
+            this.شہراندراجToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.شہراندراجToolStripMenuItem.Text = "شہر اندراج";
+            this.شہراندراجToolStripMenuItem.Click += new System.EventHandler(this.شہراندراجToolStripMenuItem_Click);
+            // 
+            // اشیاءاندراجToolStripMenuItem
+            // 
+            this.اشیاءاندراجToolStripMenuItem.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.اشیاءاندراجToolStripMenuItem.Name = "اشیاءاندراجToolStripMenuItem";
+            this.اشیاءاندراجToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.اشیاءاندراجToolStripMenuItem.Text = "اشیاء اندراج";
+            this.اشیاءاندراجToolStripMenuItem.Click += new System.EventHandler(this.اشیاءاندراجToolStripMenuItem_Click);
             // 
             // utilitiesToolStripMenuItem
             // 
@@ -207,6 +226,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.btnbackup);
             this.panel1.Controls.Add(this.bnRecovery);
@@ -221,8 +241,6 @@
             this.panel1.Controls.Add(this.btnJamaVoucher);
             this.panel1.Controls.Add(this.btnBanamVoucher);
             this.panel1.Controls.Add(this.btnParty);
-            this.panel1.Controls.Add(this.btnCity);
-            this.panel1.Controls.Add(this.btnItem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(840, 64);
             this.panel1.Name = "panel1";
@@ -385,11 +403,11 @@
             this.btnBeejBardana.BackColor = System.Drawing.Color.PaleGreen;
             this.btnBeejBardana.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBeejBardana.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnBeejBardana.Location = new System.Drawing.Point(44, 121);
+            this.btnBeejBardana.Location = new System.Drawing.Point(320, 121);
             this.btnBeejBardana.Name = "btnBeejBardana";
             this.btnBeejBardana.Size = new System.Drawing.Size(132, 70);
             this.btnBeejBardana.TabIndex = 8;
-            this.btnBeejBardana.Text = "بیج باردانہ ووچر";
+            this.btnBeejBardana.Text = "بیج ووچر";
             this.btnBeejBardana.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnBeejBardana.UseVisualStyleBackColor = false;
             this.btnBeejBardana.Click += new System.EventHandler(this.button6_Click);
@@ -400,7 +418,7 @@
             this.btnJamaVoucher.BackColor = System.Drawing.Color.PaleGreen;
             this.btnJamaVoucher.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJamaVoucher.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnJamaVoucher.Location = new System.Drawing.Point(182, 121);
+            this.btnJamaVoucher.Location = new System.Drawing.Point(47, 45);
             this.btnJamaVoucher.Name = "btnJamaVoucher";
             this.btnJamaVoucher.Size = new System.Drawing.Size(132, 70);
             this.btnJamaVoucher.TabIndex = 7;
@@ -415,7 +433,7 @@
             this.btnBanamVoucher.BackColor = System.Drawing.Color.PaleGreen;
             this.btnBanamVoucher.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBanamVoucher.Image = global::MandiPOS.Properties.Resources.voucher;
-            this.btnBanamVoucher.Location = new System.Drawing.Point(320, 121);
+            this.btnBanamVoucher.Location = new System.Drawing.Point(185, 45);
             this.btnBanamVoucher.Name = "btnBanamVoucher";
             this.btnBanamVoucher.Size = new System.Drawing.Size(132, 70);
             this.btnBanamVoucher.TabIndex = 6;
@@ -438,36 +456,6 @@
             this.btnParty.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnParty.UseVisualStyleBackColor = false;
             this.btnParty.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // btnCity
-            // 
-            this.btnCity.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCity.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnCity.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCity.Image = global::MandiPOS.Properties.Resources.location;
-            this.btnCity.Location = new System.Drawing.Point(182, 45);
-            this.btnCity.Name = "btnCity";
-            this.btnCity.Size = new System.Drawing.Size(132, 70);
-            this.btnCity.TabIndex = 4;
-            this.btnCity.Text = "شہر اندراج";
-            this.btnCity.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCity.UseVisualStyleBackColor = false;
-            this.btnCity.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnItem
-            // 
-            this.btnItem.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnItem.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnItem.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnItem.Image = global::MandiPOS.Properties.Resources.Items;
-            this.btnItem.Location = new System.Drawing.Point(44, 45);
-            this.btnItem.Name = "btnItem";
-            this.btnItem.Size = new System.Drawing.Size(132, 70);
-            this.btnItem.TabIndex = 3;
-            this.btnItem.Text = "اشیاء اندراج";
-            this.btnItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnItem.UseVisualStyleBackColor = false;
-            this.btnItem.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -515,6 +503,21 @@
             this.panel2.Size = new System.Drawing.Size(1307, 40);
             this.panel2.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.PaleGreen;
+            this.button1.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::MandiPOS.Properties.Resources.voucher;
+            this.button1.Location = new System.Drawing.Point(185, 121);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(132, 70);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "باردانہ ووچر";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -559,8 +562,6 @@
         private System.Windows.Forms.ToolStripMenuItem masterAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detailAccountsToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnItem;
-        private System.Windows.Forms.Button btnCity;
         private System.Windows.Forms.Button btnParty;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnbackup;
@@ -588,5 +589,8 @@
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdate;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarDownload;
+        private System.Windows.Forms.ToolStripMenuItem شہراندراجToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem اشیاءاندراجToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }

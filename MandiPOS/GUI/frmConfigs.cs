@@ -25,7 +25,7 @@ namespace MandiPOS.GUI
             store.KeyDown += checkKey;
             pending.KeyDown += checkKey;
             laga.KeyDown += checkKey;
-
+            netsale.KeyDown += checkKey;
 
         }
 
@@ -83,6 +83,8 @@ namespace MandiPOS.GUI
                     pending.Text = title; pendingID.Text = id.ToString(); break;
                 case "laga":
                     laga.Text = title; lagaID.Text = id.ToString(); break;
+                case "netsale":
+                    netsale.Text = title; netsaleid.Text = id.ToString(); break;
             }
         }
 
@@ -124,7 +126,7 @@ namespace MandiPOS.GUI
             store.RegisterFocus(true);
             pending.RegisterFocus(true);
             laga.RegisterFocus(true);
-
+            netsale.RegisterFocus(true);
 
 
             var records = new db().GetList<tblConfigs>();
@@ -158,6 +160,8 @@ namespace MandiPOS.GUI
                             pending.Text = title; pendingID.Text = id.ToString(); break;
                         case "laga":
                             laga.Text = title; lagaID.Text = id.ToString(); break;
+                        case "netsale":
+                            netsale.Text = title; netsaleid.Text = id.ToString(); break;
                     }
                 }
             }
@@ -201,6 +205,7 @@ namespace MandiPOS.GUI
             configs.Add(new tblConfigs() { ConfigName = "store", ConfigValue = storeID.Text });
             configs.Add(new tblConfigs() { ConfigName = "pending", ConfigValue = pendingID.Text });
             configs.Add(new tblConfigs() { ConfigName = "laga", ConfigValue = lagaID.Text });
+            configs.Add(new tblConfigs() { ConfigName = "netsale", ConfigValue = netsaleid.Text });
             foreach (tblConfigs c in configs)
             {
                 sql += $"Delete from tblConfigs Where ConfigName like '{c.ConfigName}';\r\n\t";

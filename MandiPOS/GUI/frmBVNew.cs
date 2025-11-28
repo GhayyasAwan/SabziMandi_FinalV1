@@ -19,12 +19,22 @@ namespace MandiPOS.GUI
     {
         clsResize obj;
         Vouchers main = new Vouchers();
-        int vType = 3;
+        int vType;
         bool isChanged = false;
 
-        public frmBVNew()
+        public frmBVNew(int v=3)
         {
             InitializeComponent();
+            numericUpDown1.KeyDown+= (s, e) =>
+            {
+                if (e.EnterKey())
+                {
+                    RefreshById(numericUpDown1.Value.toInt());
+                }
+            };
+            numericUpDown1.Maximum = decimal.MaxValue;
+            vType = v;
+
             _code.RegisterFocus(true);
             _name.RegisterFocus(true);
             _cr.RegisterFocus(false);
@@ -75,6 +85,18 @@ namespace MandiPOS.GUI
                     _qty.SelectAll();
                 }
             };
+            switch (vType)
+            { 
+                case 3:
+                    rbSeed.Checked = true;
+                    this.Text=lblType.Text = "بیج ووچر";
+                    break;
+                case 5:
+                    rbOther.Checked = true;
+                    this.Text=lblType.Text = "باردانہ ووچر";
+                    break;
+            }
+
         }
         void SetPartybalance()
         {
@@ -337,7 +359,7 @@ namespace MandiPOS.GUI
                 ItemQty = _qty.Value.toDecimal(),
                 ItemRate = _rate.Value.toDecimal(),
                 PartyName = _name.Text.Trim(),
-                Narration = _narration.Text.Trim(),
+                Narration = $"{_items.Text} => {_qty.Value.toDecimal().ProperDecimals()}x{_rate.Value.toDecimal().ProperDecimals()}",
                 ID = 0,
                 VoucherID = main.VoucherID
             };
@@ -349,7 +371,7 @@ namespace MandiPOS.GUI
                     try
                     {
                         Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{vType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
-                        if (main.VoucherID == 0)
+                        if (vmain.VoucherID == 0)
                         {
                             vmain = new Vouchers()
                             {
@@ -487,7 +509,28 @@ namespace MandiPOS.GUI
                 return;
             }
             main = VoucherService.GetVoucher(vType, dtp.Value.Date);
+            numericUpDown1.Value = main.VoucherNo.toDecimal();
             bsCart.DataSource = main.BardanaEntries.OrderByDescending(x=>x.ID);
+            bsCart.ResetBindings(false);
+            _name.Select();
+        }
+        void RefreshById(int id)
+        {
+            var voucher = VoucherService.GetVoucherByNo(vType,id);
+            if(voucher.VoucherDate.Date < DateTime.Now.Date && !General.IsAdmin)
+            {
+                this.Info("آپکو پرانا ووچر دیکھنے کی اجازت نہیں ہے۔");
+                dtp.Value = DateTime.Now.Date;
+                return;
+            }
+            if (voucher.VoucherDate.Date < DateTime.Today.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
+            {
+                return;
+            }
+            main = voucher;
+            dtp.Value = main.VoucherDate.Date;
+            numericUpDown1.Value = main.VoucherNo.toDecimal ();
+            bsCart.DataSource = main.BardanaEntries.OrderByDescending(x => x.ID);
             bsCart.ResetBindings(false);
             _name.Select();
         }

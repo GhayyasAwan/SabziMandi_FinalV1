@@ -118,8 +118,8 @@ namespace MandiPOS
         private void SetButtonsvisibility()
         {
             btnParty.Enabled = General.IsAdmin;
-            btnItem.Enabled = General.IsAdmin;
-            btnCity.Enabled = General.IsAdmin;
+            //btnItem.Enabled = General.IsAdmin;
+            //btnCity.Enabled = General.IsAdmin;
             btnBanamVoucher.Enabled = true;
             btnJamaVoucher.Enabled = true;
             btnBeejBardana.Enabled = true;
@@ -135,8 +135,8 @@ namespace MandiPOS
             btnExit.Enabled = true;
             //Buttons Enabling
             btnParty.Visible = General.IsAdmin;
-            btnItem.Visible = General.IsAdmin;
-            btnCity.Visible = General.IsAdmin;
+            //btnItem.Visible = General.IsAdmin;
+            //btnCity.Visible = General.IsAdmin;
             btnBanamVoucher.Visible = true;
             btnJamaVoucher.Visible = true;
             btnBeejBardana.Visible = true;
@@ -421,6 +421,11 @@ namespace MandiPOS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            OpenItemsForm();
+        }
+
+        private void OpenItemsForm()
+        {
             var frm = new frmItemsNew();
             var f = Application.OpenForms[frm.Name];
             if (f != null)
@@ -508,7 +513,13 @@ namespace MandiPOS
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var frm = new frmBVNew() { StartPosition = FormStartPosition.CenterScreen };
+            OpenBardanaVoucher();
+
+        }
+
+        private void OpenBardanaVoucher(int type=3)
+        {
+            var frm = new frmBVNew(type) { StartPosition = FormStartPosition.CenterScreen };
             var f = Application.OpenForms[frm.Name];
             if (f != null) { f.BringToFront(); }
             else
@@ -516,7 +527,6 @@ namespace MandiPOS
                 frm.Icon = this.Icon;
                 frm.Show();
             }
-
         }
 
         private void defaultAccountsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -711,6 +721,21 @@ namespace MandiPOS
                 toolStripProgressBarDownload.Visible = false;
             }
 
+        }
+
+        private void شہراندراجToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCityForm();
+        }
+
+        private void اشیاءاندراجToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenItemsForm();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            OpenBardanaVoucher(5);
         }
     }
     public class crsr : IDisposable

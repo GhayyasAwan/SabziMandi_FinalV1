@@ -175,8 +175,66 @@ namespace MandiPOS.CLasses
 
             using (var db = new db())
             {
-                var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherDate = @VoucherDate";
+                var query = $"Select * from Vouchers  WHERE VoucherType = '{vtype}' AND VoucherDate = '{targetDate:yyyy-MM-dd}';";
                 var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = targetDate };
+
+                if (voucher.VoucherID != 0) // or != null depending on type
+                {
+                    string sql = $@"Select vd.EntryID,
+vd.PartyID,
+p.AccountCode as 'PartyCode',
+p.AccountTitle as 'PartyName',
+CashAccountID,
+cp.AccountTitle as 'CashAccount',
+vd.Narration,
+vd.Amount, vd.EnteredBy
+from voucherDetails vd
+left join DetailAccounts cp on vd.cashAccountID=cp.ID
+left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
+                    voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
+                    if (voucher.VoucherType == 3.ToString()||voucher.VoucherType == 5.ToString())
+                    {
+                        sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
+acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
+bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
+from VoucherBardanaDetails bd
+left join tblItems p on bd.itemID=p.ID
+left join DetailAccounts acc on bd.accountiD=acc.ID
+Where VoucherID=@VoucherID Order by bd.id desc";
+                        voucher.BardanaEntries = db.Query<BardanaCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
+                    }
+                    else
+                    {
+                        voucher.BardanaEntries = new List<BardanaCart>();
+                    }
+                    if (voucher.VoucherType == 2.ToString()) //Journal Voucher
+                    {
+                        sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
+                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x => x.id);
+                    }
+
+                    else
+                    {
+                        voucher.JVEntries = new List<JVCart>(); ;
+                    }
+                }
+                else
+                {
+                    voucher.Entries = new List<VoucherCart>();
+                    voucher.BardanaEntries = new List<BardanaCart>();
+                }
+
+                return voucher;
+            }
+        }
+        public static Vouchers GetVoucherById(int vtype = 0, int id=0)
+        {
+            
+
+            using (var db = new db())
+            {
+                var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherID = @VoucherID";
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherID = id }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = DateTime.Now.Date };
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -210,7 +268,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     if (voucher.VoucherType == 2.ToString()) //Journal Voucher
                     {
                         sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
-                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x=>x.id);
+                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x => x.id);
                     }
 
                     else
@@ -223,7 +281,66 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     voucher.Entries = new List<VoucherCart>();
                     voucher.BardanaEntries = new List<BardanaCart>();
                 }
+                return voucher;
+            }
+        }
+        public static Vouchers GetVoucherByNo(int vtype = 0, int id = 0)
+        {
 
+
+            using (var db = new db())
+            {
+                var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherNo = @VoucherNo";
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherNo = id }).ToList().FirstOrDefault(); 
+                    if(voucher == null)
+                    {
+                       return GetVoucher(vtype, null);
+                }
+                if (voucher.VoucherID != 0) // or != null depending on type
+                {
+                    string sql = $@"Select vd.EntryID,
+vd.PartyID,
+p.AccountCode as 'PartyCode',
+p.AccountTitle as 'PartyName',
+CashAccountID,
+cp.AccountTitle as 'CashAccount',
+vd.Narration,
+vd.Amount, vd.EnteredBy
+from voucherDetails vd
+left join DetailAccounts cp on vd.cashAccountID=cp.ID
+left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
+                    voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
+                    if (voucher.VoucherType == 3.ToString()|| voucher.VoucherType == 5.ToString())
+                    {
+                        sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
+acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
+bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
+from VoucherBardanaDetails bd
+left join tblItems p on bd.itemID=p.ID
+left join DetailAccounts acc on bd.accountiD=acc.ID
+Where VoucherID=@VoucherID Order by bd.id desc";
+                        voucher.BardanaEntries = db.Query<BardanaCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
+                    }
+                    else
+                    {
+                        voucher.BardanaEntries = new List<BardanaCart>();
+                    }
+                    if (voucher.VoucherType == 2.ToString()) //Journal Voucher
+                    {
+                        sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
+                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x => x.id);
+                    }
+
+                    else
+                    {
+                        voucher.JVEntries = new List<JVCart>(); ;
+                    }
+                }
+                else
+                {
+                    voucher.Entries = new List<VoucherCart>();
+                    voucher.BardanaEntries = new List<BardanaCart>();
+                }
                 return voucher;
             }
         }

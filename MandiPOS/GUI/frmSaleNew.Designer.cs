@@ -1260,13 +1260,10 @@
             this._RemQty.Size = new System.Drawing.Size(56, 23);
             this._RemQty.TabIndex = 93;
             this._RemQty.TabStop = false;
-            this._RemQty.Text = "0.00";
-            this._RemQty.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near;
-            this._RemQty.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
+            this._RemQty.Text = "0";
+            this._RemQty.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this._RemQty.Value = 0;
+            this._RemQty.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
             this._RemQty.VisualStyleManager = this.visualStyleManager1;
             // 
             // label33

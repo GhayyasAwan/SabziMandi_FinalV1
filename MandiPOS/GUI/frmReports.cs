@@ -222,7 +222,20 @@ namespace MandiPOS.GUI
                 using (var rpt = new saleBill(billNo, 1))
                 {
                     rpt.CreateDocument();
-                    rpt.ShowPreviewDialog();
+                    using(XtraForm1 frm = new XtraForm1(rpt) { StartPosition = FormStartPosition.CenterScreen })
+                    {
+                        
+                        frm.WindowState = FormWindowState.Normal;
+                        frm.KeyPreview = true;
+                        frm.KeyDown += (s, ev) =>
+                        {
+                            if (ev.EscapeKey())
+                            {
+                                frm.Close();
+                            }
+                        };
+                        frm.ShowDialog(this);
+                    }
                 }
             }
         }

@@ -100,7 +100,11 @@ namespace MandiPOS.GUI
                     mainReport.Pages.AddRange(rpt.Pages);
                 }
             }
-            mainReport.ShowPreview();
+            using (XtraForm1 frm = new XtraForm1(mainReport))
+            {
+                frm.ShowDialog();
+                mainReport?.Dispose();
+            }
         }
     }
 }

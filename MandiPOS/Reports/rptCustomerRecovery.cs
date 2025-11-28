@@ -28,7 +28,11 @@ SELECT
     CASE WHEN ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN DebitAmount END), 0) > 0 THEN 1 ELSE 0 END AS HasTodayDebit
 FROM vwTrx t
 LEFT JOIN DetailAccounts acc ON t.AccountID = acc.ID
-WHERE acc.MasterID = 7 and acc.AccountCode <> 70190
+WHERE acc.MasterID = 7 and acc.ID <> (SELECT ISNULL(
+        (SELECT ConfigValue 
+         FROM tblConfigs 
+         WHERE ConfigName = 'netsale'), 0
+       ) AS NetSale)
 GROUP BY t.AccountID, acc.AccountCode, acc.AccountTitle
 HAVING 
     --ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN DebitAmount + CreditAmount END), 0) <> 0
