@@ -26,5 +26,10 @@ namespace MandiPOS.Reports
             this.objectDataSource1.DataSource = data;
             lblSummary.Text = summary;
         }
+
+        private void rptMasterSheet_BeforePrint(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

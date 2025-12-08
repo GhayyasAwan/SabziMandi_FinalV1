@@ -50,9 +50,8 @@
             this.lblParty.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblParty.ForeColor = System.Drawing.Color.White;
             this.lblParty.Location = new System.Drawing.Point(0, 0);
-            this.lblParty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblParty.Name = "lblParty";
-            this.lblParty.Size = new System.Drawing.Size(1021, 62);
+            this.lblParty.Size = new System.Drawing.Size(766, 50);
             this.lblParty.TabIndex = 0;
             this.lblParty.Text = "Label01";
             this.lblParty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,10 +62,9 @@
             this.lbld1.BackColor = System.Drawing.Color.DodgerBlue;
             this.lbld1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbld1.ForeColor = System.Drawing.Color.White;
-            this.lbld1.Location = new System.Drawing.Point(872, 23);
-            this.lbld1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbld1.Location = new System.Drawing.Point(654, 19);
             this.lbld1.Name = "lbld1";
-            this.lbld1.Size = new System.Drawing.Size(133, 28);
+            this.lbld1.Size = new System.Drawing.Size(100, 23);
             this.lbld1.TabIndex = 3;
             this.lbld1.Text = "03-Jun-2025";
             this.lbld1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,10 +75,9 @@
             this.lbld2.BackColor = System.Drawing.Color.DodgerBlue;
             this.lbld2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbld2.ForeColor = System.Drawing.Color.White;
-            this.lbld2.Location = new System.Drawing.Point(703, 23);
-            this.lbld2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbld2.Location = new System.Drawing.Point(527, 19);
             this.lbld2.Name = "lbld2";
-            this.lbld2.Size = new System.Drawing.Size(133, 28);
+            this.lbld2.Size = new System.Drawing.Size(100, 23);
             this.lbld2.TabIndex = 4;
             this.lbld2.Text = "03-Jun-2025";
             this.lbld2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -92,10 +89,9 @@
             this.label4.BackColor = System.Drawing.Color.DodgerBlue;
             this.label4.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(844, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(633, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 51);
+            this.label4.Size = new System.Drawing.Size(28, 41);
             this.label4.TabIndex = 5;
             this.label4.Text = "تا";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,11 +109,10 @@
             this.dgv.FilterRowUpdateMode = Janus.Windows.GridEX.FilterRowUpdateMode.WhenValueChanges;
             this.dgv.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 12F);
             this.dgv.GroupByBoxVisible = false;
-            this.dgv.Location = new System.Drawing.Point(0, 62);
-            this.dgv.Margin = new System.Windows.Forms.Padding(4);
+            this.dgv.Location = new System.Drawing.Point(0, 50);
             this.dgv.Name = "dgv";
             this.dgv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgv.Size = new System.Drawing.Size(1021, 444);
+            this.dgv.Size = new System.Drawing.Size(766, 361);
             this.dgv.TabIndex = 6;
             this.dgv.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.dgv.TotalRowFormatStyle.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -136,10 +131,9 @@
             this.uiButton2.Image = global::MandiPOS.Properties.Resources.printernew;
             this.uiButton2.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton2.ImageSize = new System.Drawing.Size(32, 32);
-            this.uiButton2.Location = new System.Drawing.Point(157, 5);
-            this.uiButton2.Margin = new System.Windows.Forms.Padding(4);
+            this.uiButton2.Location = new System.Drawing.Point(118, 4);
             this.uiButton2.Name = "uiButton2";
-            this.uiButton2.Size = new System.Drawing.Size(141, 49);
+            this.uiButton2.Size = new System.Drawing.Size(106, 40);
             this.uiButton2.TabIndex = 2;
             this.uiButton2.Text = "پرنٹ بل";
             this.uiButton2.Visible = false;
@@ -153,10 +147,9 @@
             this.uiButton1.Image = global::MandiPOS.Properties.Resources.printernew;
             this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
-            this.uiButton1.Location = new System.Drawing.Point(8, 5);
-            this.uiButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.uiButton1.Location = new System.Drawing.Point(6, 4);
             this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(141, 49);
+            this.uiButton1.Size = new System.Drawing.Size(106, 40);
             this.uiButton1.TabIndex = 1;
             this.uiButton1.Text = " پرنٹ رپورٹ";
             this.uiButton1.VisualStyle = Janus.Windows.UI.VisualStyle.Office2007;
@@ -164,9 +157,9 @@
             // 
             // frmSubPartiesSale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1021, 506);
+            this.ClientSize = new System.Drawing.Size(766, 411);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbld2);
@@ -174,7 +167,6 @@
             this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.lblParty);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSubPartiesSale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sub Parties Details";

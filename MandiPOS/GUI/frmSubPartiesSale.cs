@@ -41,7 +41,7 @@ namespace MandiPOS.GUI
         SUM(CASE WHEN Remaining <= 0 THEN ABS(Remaining) ELSE 0 END) 
           - SUM(CASE WHEN Remaining > 0 THEN ABS(Remaining) ELSE 0 END) AS EndBalance
     FROM vw_SubpartiesSale
-    WHERE PartyID = {PartyID}
+    WHERE PartyID = {PartyID} and (ArrivalDate between '{d1:yyyy-MM-dd}' and '{d2:yyyy-MM-dd}')
     GROUP BY Marka
 ),
 Ordered AS
@@ -52,15 +52,14 @@ Ordered AS
         Credit,
         Debit,
         EndBalance AS hiddenCol
-    FROM MarkaSummary
+    FROM MarkaSummary 
 )
 SELECT
     RowNo,
     Marka,
     Credit,
     Debit,
-    hiddenCol,
-    SUM(hiddenCol) OVER (ORDER BY RowNo ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS EndBalance
+    hiddenCol as EndBalance
 FROM Ordered
 ORDER BY RowNo;
 ").ToDataTable();
