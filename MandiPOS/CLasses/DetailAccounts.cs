@@ -75,7 +75,10 @@ namespace MandiPOS.CLasses
     }
     public static class DetailAccountService
     {
-
+        public static IEnumerable<DetailAccountView> GetRefferalsList()
+        {
+            return new db().Query<DetailAccountView>($"Exec GetReferral").ToList();
+        }
         public static List<DetailAccountView> BankCashAccounts()
         {
             string sql = $@"Select acc.ID,

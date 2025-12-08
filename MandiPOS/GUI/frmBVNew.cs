@@ -490,6 +490,16 @@ namespace MandiPOS.GUI
             {
                 e.Cancel = true;
             }
+            if (e.CloseReason != CloseReason.UserClosing)
+                return;
+            decimal dr = main.BardanaEntries.Sum(x => x.DebitAmount);
+            decimal cr = main.BardanaEntries.Sum(x => x.CreditAmount);
+            if (dr != cr)
+            {
+                this.Error("جمع اور بنام کی رقم برابر نہیں۔ دوبارہ کوشش کریں۔");
+                e.Cancel = true;
+                return;
+            }
         }
 
         private void FrmBVNew_Resize(object sender, EventArgs e)

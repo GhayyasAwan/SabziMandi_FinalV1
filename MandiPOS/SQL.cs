@@ -81,6 +81,14 @@ namespace MandiPOS
                 control.ItemIndex = 0;
             }
         }
+        public static int NetSaleAccount
+        {
+            get
+            {
+                string sql = "SELECT dbo.fn_GetNetSaleAccount()";
+               return new db().ExecuteScalar<int>(sql);
+            }
+        }
 
         internal static List<tblItems> GetAllItems(string searchTerm = "")
         {

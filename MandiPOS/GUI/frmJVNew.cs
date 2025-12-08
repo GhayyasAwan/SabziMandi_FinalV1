@@ -20,6 +20,7 @@ namespace MandiPOS.GUI
         public frmJVNew()
         {
             InitializeComponent();
+            this.FormClosing += FrmJVNew_FormClosing;
             SetPartybalance();
             _narration.RegisterFocus(true);
             _name.RegisterFocus(true);
@@ -44,6 +45,21 @@ namespace MandiPOS.GUI
             dgvHelp.KeyDown += DgvHelp_KeyDown;
 
         }
+
+        private void FrmJVNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason != CloseReason.UserClosing)
+                return;
+            decimal dr = main.JVEntries.Sum(x=>x.DebitAmount);
+            decimal cr = main.JVEntries.Sum(x => x.CreditAmount);
+            if (dr != cr)
+            {
+                this.Error("جمع اور بنام کی رقم برابر نہیں۔ دوبارہ کوشش کریں۔");
+                e.Cancel = true;
+                return;
+            }
+        }
+
         void SetPartybalance()
         {
             if (curent != 0)
@@ -214,7 +230,7 @@ namespace MandiPOS.GUI
                         try
                         {
                             Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
-                            if (main.VoucherID == 0)
+                            if (vmain.VoucherID == 0)
                             {
                                 vmain = new Vouchers()
                                 {

@@ -519,7 +519,11 @@ namespace MandiPOS.CLasses
                     decimal Amount = record.CustomerAmount + record.LagaAmount;
                     tblItems items1 = connecion.Get<tblItems>(record.ItemID, transaction: trx);
                         DetailAccounts dAcc = connecion.Get<DetailAccounts>(record.PartyID, transaction: trx);
-                        jv = new JVEntries()
+                        if(dAcc.ID==SQL.NetSaleAccount)
+                        {
+                            continue;
+                    }
+                    jv = new JVEntries()
                         {
                             VoucherID = main.VoucherID,
                             AccountID = record.PartyID,

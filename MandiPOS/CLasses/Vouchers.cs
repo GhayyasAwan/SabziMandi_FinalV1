@@ -169,6 +169,10 @@ namespace MandiPOS.CLasses
     }
     public static class VoucherService
     {
+        public static string NextVocuherNo(int vtype=1)
+        {
+                return new db().ExecuteScalar<string>($"Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers Where VoucherType='{vtype}'");
+        }
         public static Vouchers GetVoucher(int vtype = 0, DateTime? date = null)
         {
             DateTime targetDate = date?.Date ?? DateTime.Now.Date;
@@ -176,7 +180,7 @@ namespace MandiPOS.CLasses
             using (var db = new db())
             {
                 var query = $"Select * from Vouchers  WHERE VoucherType = '{vtype}' AND VoucherDate = '{targetDate:yyyy-MM-dd}';";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = targetDate };
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = targetDate, VoucherNo=NextVocuherNo(vtype)};
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -234,7 +238,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
             using (var db = new db())
             {
                 var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherID = @VoucherID";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherID = id }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = DateTime.Now.Date };
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherID = id }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = DateTime.Now.Date, VoucherNo=NextVocuherNo(vtype) };
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -295,7 +299,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     if(voucher == null)
                     {
                        return GetVoucher(vtype, null);
-                }
+                    }
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
                     string sql = $@"Select vd.EntryID,
@@ -357,7 +361,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                         {
                             if (main.VoucherID == 0)
                             {
-                                main.VoucherNo = db.ExecuteScalar<string>("Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers", transaction: trx);
+                                main.VoucherNo = db.ExecuteScalar<string>($"Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers Where VoucherType='{main.VoucherType}'", transaction: trx);
                                 db.Insert<Vouchers>(main, transaction: trx);
                             }
                             else

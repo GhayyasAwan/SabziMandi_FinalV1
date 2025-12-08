@@ -488,6 +488,16 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report21":
                     ReportID= 21;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetRefferalsList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
                     break;
 
 
