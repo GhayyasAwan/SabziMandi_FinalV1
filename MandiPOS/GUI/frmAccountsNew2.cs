@@ -48,6 +48,7 @@ namespace MandiPOS.GUI
             txtContact.EnterToNext();
             cmbCity.EnterToNext();
             txtDebit.EnterToNext();
+            txtOldAcc.EnterToNext();
             txtCredit.KeyDown+=((sender, e) =>
             {
                 if (e.EnterKey())
@@ -65,7 +66,7 @@ namespace MandiPOS.GUI
             account.CityID = cmbCity.SelectedValue.toInt();
             account.OpCredit = txtCredit.Text.toDecimal();
             account.OpDebit = txtDebit.Text.toDecimal();
-            
+            account.OldAccountCode = txtOldAcc.Text.Trim().toInt();
             if (!EntryValid())
             {
                 return;
@@ -124,6 +125,7 @@ namespace MandiPOS.GUI
             txtCode.Text = account.AccountCode.ToString();
             txtName.Text = account.AccountTitle;
             txtContact.Text = account.Contact;
+            txtOldAcc.Text = account.OldAccountCode.ToString();
             txtCredit.Text = (account.OpCredit).ToString("0.##");
             txtDebit.Text = (account.OpDebit).ToString("0.##");
             cmbCity.SelectedValue = account.CityID;

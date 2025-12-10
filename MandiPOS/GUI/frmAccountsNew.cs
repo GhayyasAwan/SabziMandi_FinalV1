@@ -46,9 +46,8 @@ namespace MandiPOS.GUI
             txtRemarks.RegisterFocus(true);
             cmbCity.RegisterFocus(true);
             cmbRefParty.RegisterFocus(true);
-
-
-
+            txtOldAccNo.RegisterFocus(false);
+            txtOldAccNo.Enter+= SwitchToEnglish;
             cmbRefParty.Enter += CmbRefParty_Enter;
             txtRefName.Enter += TxtRefName_Enter;
             dgv.KeyDown += Dgv_KeyDown;
@@ -70,7 +69,6 @@ namespace MandiPOS.GUI
             cmbCity.Enter += SwitchToUrdu;
             txtRemarks.Enter += SwitchToUrdu;
             txtContact.Enter += SwitchToEnglish;
-
             cmbRefParty.KeyDown += ((s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
@@ -156,7 +154,14 @@ namespace MandiPOS.GUI
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    txtRemarks.Parent.SelectNextControl(txtRemarks, true, true, true, true);
+                    txtOldAccNo.Select();   
+                }
+            });
+            txtOldAccNo.KeyDown += ((s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    txtCreditLimit.Select();
                 }
             });
             txtCommisionRatio.KeyDown += ((s, e) =>
@@ -302,6 +307,7 @@ namespace MandiPOS.GUI
             account.Remarks = txtRemarks.Text.Trim();
             account.CreditLimit = txtCreditLimit.Text.toDecimal();
             account.Commission = txtCommisionRatio.Text.toDecimal();
+            account.OldAccountCode=txtOldAccNo.Text.Trim().toInt();
             if (rbCustomer.Checked)
             {
                 account.RefrenceType = 7;
@@ -420,6 +426,7 @@ namespace MandiPOS.GUI
             txtCreditLimit.Text = (account.CreditLimit).ToString("0.##");
             cmbCity.SelectedValue = account.CityID;
             txtRemarks.Text = account.Remarks;
+            txtOldAccNo.Text = account.OldAccountCode.ToString();
             txtCommisionRatio.Text = (account.Commission).ToString("0.##");
             if (!account.RefrenceType.HasValue) { account.RefrenceType = 4; }
             switch ((int)account.RefrenceType)

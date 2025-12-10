@@ -890,18 +890,18 @@ Order By mas.id";
         GROUP BY AccountID
     )
     SELECT acc.AccountCode as ID,
-        acc.AccountTitle,
+        Case When ISNULL(Acc.OldAccountCode,0)=0 Then acc.AccountTitle Else acc.AccountTitle+'-'+Cast(acc.OldAccountCode as nvarchar(50))  End as AccountTitle,
 mas.AccountTitle as 'MasterAccount',
         acc.RefName,
         acc.Contact,
         city.CityName,
-        eb.EndBalance 
+        eb.EndBalance , Acc.OldAccountCode
     FROM EndBalances eb 
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
     WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
-Order By mas.id";
+Order By mas.id, Cast(Acc.AccountCode as int) asc";
                 DataTable dt = new DataTable();
                 using (var db = new db())
                 {

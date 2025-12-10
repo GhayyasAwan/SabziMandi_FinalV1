@@ -36,6 +36,7 @@ namespace MandiPOS.CLasses
         public decimal Commission { get; set; }
 
         public int? RefrenceType { get; set; }
+        public int OldAccountCode { get; set; } = 0;
 
         public int? RefrenceID { get; set; }
         [DisplayName("معرفت")]
@@ -65,7 +66,9 @@ namespace MandiPOS.CLasses
         public decimal OpDebit { get; set; }
         [DisplayName("تفصیل")]
         public string Remarks { get; set; }
-        [DisplayName("بیلنش حد")]
+        [DisplayName("پرانا کھاتہ نمبر")]
+        public string OldAccountCode { get; set; }
+        [DisplayName("بیلنس حد")]
         public decimal CreditLimit { get; set; }
         [DisplayName("کمیشن")]
         public decimal Commission { get; set; }

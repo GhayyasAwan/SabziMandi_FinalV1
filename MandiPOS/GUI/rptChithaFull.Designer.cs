@@ -88,8 +88,8 @@
             this.lblDate.LocationFloat = new DevExpress.Utils.PointFloat(0F, 43F);
             this.lblDate.Multiline = true;
             this.lblDate.Name = "lblDate";
-            this.lblDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblDate.SizeF = new System.Drawing.SizeF(830F, 32.16667F);
+            this.lblDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
+            this.lblDate.SizeF = new System.Drawing.SizeF(810.0001F, 32.16667F);
             this.lblDate.StylePriority.UseBorderDashStyle = false;
             this.lblDate.StylePriority.UseBorders = false;
             this.lblDate.StylePriority.UseBorderWidth = false;
@@ -105,8 +105,8 @@
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(830F, 43F);
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(810.0001F, 43F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
             this.xrLabel1.Text = "چٹھہ جات";
@@ -130,9 +130,10 @@
             // 
             // xrSubreport1
             // 
+            this.xrSubreport1.CanShrink = true;
             this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(830F, 23F);
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(810F, 23F);
             // 
             // SubBand2
             // 
@@ -140,12 +141,14 @@
             this.xrSubreport2});
             this.SubBand2.HeightF = 23F;
             this.SubBand2.Name = "SubBand2";
+            this.SubBand2.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
             // xrSubreport2
             // 
+            this.xrSubreport2.CanShrink = true;
             this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrSubreport2.Name = "xrSubreport2";
-            this.xrSubreport2.SizeF = new System.Drawing.SizeF(830F, 23F);
+            this.xrSubreport2.SizeF = new System.Drawing.SizeF(810.0001F, 23F);
             // 
             // SubBand3
             // 
@@ -158,7 +161,7 @@
             // 
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(10F, 10F);
             this.xrTable1.Name = "xrTable1";
-            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow3,
@@ -178,7 +181,7 @@
             this.lblJama.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 12F);
             this.lblJama.Multiline = true;
             this.lblJama.Name = "lblJama";
-            this.lblJama.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblJama.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblJama.StylePriority.UseFont = false;
             this.lblJama.StylePriority.UsePadding = false;
             this.lblJama.Text = "lblJama";
@@ -209,7 +212,7 @@
             this.lblBanam.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 12F);
             this.lblBanam.Multiline = true;
             this.lblBanam.Name = "lblBanam";
-            this.lblBanam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblBanam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblBanam.StylePriority.UseFont = false;
             this.lblBanam.StylePriority.UsePadding = false;
             this.lblBanam.Text = "lblBanam";
@@ -240,7 +243,7 @@
             this.lblDiff.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 12F);
             this.lblDiff.Multiline = true;
             this.lblDiff.Name = "lblDiff";
-            this.lblDiff.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblDiff.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblDiff.StylePriority.UseFont = false;
             this.lblDiff.StylePriority.UsePadding = false;
             this.lblDiff.Text = "lblDiff";
@@ -267,8 +270,8 @@
             this.ReportHeader,
             this.ReportFooter});
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(10F, 10F, 10F, 10F);
-            this.Version = "24.2";
+            this.Margins = new DevExpress.Drawing.DXMargins(20F, 20F, 10F, 10F);
+            this.Version = "25.1";
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
             xrWatermark1});

@@ -17,7 +17,7 @@ namespace MandiPOS.Reports
             if (value < 0)
             {
                 xrTableCell1.Text = Math.Abs(value).ToString("N0");
-                xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+                xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             }
             else
             {

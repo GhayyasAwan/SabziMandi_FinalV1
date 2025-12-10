@@ -738,6 +738,12 @@
     <Compile Include="Reports\uc_Report01.Designer.cs">
       <DependentUpon>uc_Report01.cs</DependentUpon>
     </Compile>
+    <Content Include="Scripts\Add Column OldAccountCode.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Get DetailaAccount LAter Proc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Update Vendor Wise Sale.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

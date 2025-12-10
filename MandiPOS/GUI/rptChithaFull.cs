@@ -94,5 +94,6 @@ namespace MandiPOS.CLasses
         public string Contact { get; set; }
         public string CityName { get; set; }
         public decimal EndBalance { get; set; }
+        public int OldAccountCode { get; set; }
     }
 }
