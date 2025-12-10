@@ -191,7 +191,7 @@
             this.radioButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.radioButton3.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.Location = new System.Drawing.Point(571, 394);
+            this.radioButton3.Location = new System.Drawing.Point(574, 346);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(153, 46);
@@ -261,11 +261,12 @@
             this.rb_Report17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rb_Report17.AutoSize = true;
             this.rb_Report17.BackColor = System.Drawing.Color.Transparent;
+            this.rb_Report17.Enabled = false;
             this.rb_Report17.FlatAppearance.BorderSize = 0;
             this.rb_Report17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report17.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report17.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report17.Location = new System.Drawing.Point(426, 202);
+            this.rb_Report17.Location = new System.Drawing.Point(585, 502);
             this.rb_Report17.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report17.Name = "rb_Report17";
             this.rb_Report17.Size = new System.Drawing.Size(118, 46);
@@ -274,6 +275,7 @@
             this.rb_Report17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rb_Report17.UseCompatibleTextRendering = true;
             this.rb_Report17.UseVisualStyleBackColor = true;
+            this.rb_Report17.Visible = false;
             this.rb_Report17.Click += new System.EventHandler(this.SetReport);
             // 
             // rb_Report18
@@ -489,19 +491,18 @@
             // rb_Report14
             // 
             this.rb_Report14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rb_Report14.AutoSize = true;
             this.rb_Report14.BackColor = System.Drawing.Color.Transparent;
             this.rb_Report14.FlatAppearance.BorderSize = 0;
             this.rb_Report14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report14.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.rb_Report14.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report14.Location = new System.Drawing.Point(549, 346);
+            this.rb_Report14.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb_Report14.Location = new System.Drawing.Point(378, 202);
             this.rb_Report14.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report14.Name = "rb_Report14";
-            this.rb_Report14.Size = new System.Drawing.Size(176, 46);
+            this.rb_Report14.Size = new System.Drawing.Size(166, 46);
             this.rb_Report14.TabIndex = 13;
-            this.rb_Report14.Text = "بیوپاری بکری گاہک وار";
-            this.rb_Report14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_Report14.Text = "ادھار تفصیل / بیوپاری بکری";
+            this.rb_Report14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb_Report14.UseCompatibleTextRendering = true;
             this.rb_Report14.UseVisualStyleBackColor = true;
             this.rb_Report14.Click += new System.EventHandler(this.SetReport);

@@ -318,6 +318,33 @@ namespace MandiPOS
                income= db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
             }
         }
+
+        internal static bool IsDateAssigned(DateTime date, int vType)
+        {
+            try
+            {
+                string Sql = "Select count(*) from Vouchers where VoucherDate=@date and VoucherType=@vType";
+                return new db().ExecuteScalar<int>(Sql, new { date = date.Date, vType }) > 0;
+            }
+            catch (Exception ex)
+            {
+                ex.ExcError();
+                return true;
+            }
+        }
+
+        internal static void ChangeVoucherDate(int vID, DateTime date)
+        {
+            try
+            {
+                string sql = "Update Vouchers set VoucherDate=@date where VoucherID=@vID";
+                new db().Execute(sql, new { date = date.Date, vID });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 
 

@@ -25,6 +25,8 @@ namespace MandiPOS.GUI
         public frmBVNew(int v=3)
         {
             InitializeComponent();
+            rbDebit.CheckedChanged += CheckEntryMode;
+            tbCredit.CheckedChanged += CheckEntryMode;
             numericUpDown1.KeyDown+= (s, e) =>
             {
                 if (e.EnterKey())
@@ -62,6 +64,7 @@ namespace MandiPOS.GUI
             _name.KeyDown += _name_KeyDown;
             _qty.Enter += (s, e) => { Program.UrduInput(false); };
             _rate.Enter += (s, e) => { Program.UrduInput(false); };
+            _wt.Enter += (s, e) => { Program.UrduInput(false); };
             _items.Enter += (s, e) => { Program.UrduInput(true); };
             _name.Enter += (s, e) => { Program.UrduInput(true); };
             _narration.Enter += (s, e) => { Program.UrduInput(true); };
@@ -73,7 +76,16 @@ namespace MandiPOS.GUI
             obj = new clsResize(this);
             this.Load += FrmBVNew_Load;
             this.Resize += FrmBVNew_Resize;
+            this.KeyPreview = true;
+            this.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode==Keys.F5)
+                {
+                    Refresh();
+                }
+            };
             _rate.TextChanged += CalculateAmount;
+            _wt.TextChanged += CalculateAmount;
             _qty.TextChanged += CalculateAmount;
             _rate.KeyDown += RateKeyDown;
             dtp.KeyDown += Dtp_KeyDown;
@@ -98,6 +110,32 @@ namespace MandiPOS.GUI
             }
 
         }
+
+        private void CheckEntryMode(object sender, EventArgs e)
+        {
+            if(rbDebit.Checked)
+            {
+                rbDebit.BackColor = Color.DodgerBlue;
+                tbCredit.BackColor = SystemColors.Control;
+                grpMode.BackColor = Color.LightCoral;
+                _dr.Enabled = true;
+                _cr.Enabled = false;
+                _cr.Clear();
+            }
+            else
+            {
+               
+                tbCredit.BackColor = Color.DodgerBlue;
+                
+                rbDebit.BackColor = SystemColors.Control;
+                grpMode.BackColor = Color.LightGreen;
+                _dr.Enabled = false;
+                _cr.Enabled = true;
+                _dr.Clear();
+            }
+            CalculateAmount(null,null);
+        }
+
         void SetPartybalance()
         {
             if (current != 0)
@@ -357,9 +395,10 @@ namespace MandiPOS.GUI
                 ItemID = _items.SelectedValue.toInt(),
                 ItemName = _items.Text.Trim(),
                 ItemQty = _qty.Value.toDecimal(),
+                ItemWeight = _wt.Value.toDecimal(),
                 ItemRate = _rate.Value.toDecimal(),
                 PartyName = _name.Text.Trim(),
-                Narration = $"{_items.Text} => {_qty.Value.toDecimal().ProperDecimals()}x{_rate.Value.toDecimal().ProperDecimals()}",
+                Narration =_narration.Text.Trim(),
                 ID = 0,
                 VoucherID = main.VoucherID
             };
@@ -393,6 +432,7 @@ namespace MandiPOS.GUI
                             ItemDescription = c.ItemDescription,
                             ItemID = c.ItemID,
                             ItemQty = c.ItemQty,
+                            ItemWeight = c.ItemWeight,
                             VoucherID = vmain.VoucherID, EnteredBy=General.CurrentUserID
                         };
                         db.Insert<VoucherBardanaDetails>(d, transaction: trx);
@@ -404,7 +444,6 @@ namespace MandiPOS.GUI
                         ex.ExcError(null);
                         return;
                     }
-                    
                 }
             }
             Refresh();
@@ -413,33 +452,27 @@ namespace MandiPOS.GUI
         private void CalculateAmount(object sender, EventArgs e)
         {
             bool isDebit = rbDebit.Checked;
-            if (isDebit)
+            decimal qty, rate, wt, Amount;
+            decimal.TryParse(_qty.Text, out qty);
+            decimal.TryParse(_rate.Text, out rate);
+            decimal.TryParse(_wt.Text, out wt);
+            _dr.Clear();
+            _cr.Clear();
+            if (wt == 0)
             {
-                _dr.Clear();
-                _cr.Clear();
-                decimal qty, rate;
-                if (decimal.TryParse(_qty.Text, out qty) && decimal.TryParse(_rate.Text, out rate))
-                {
-                    _cr.Text = (qty * rate).ProperDecimals();
-                }
-                else
-                {
-                    _cr.Clear();
-                }
+                Amount = (qty * rate);
             }
             else
             {
-                _dr.Clear();
-                _cr.Clear();
-                decimal qty, rate;
-                if (decimal.TryParse(_qty.Text, out qty) && decimal.TryParse(_rate.Text, out rate))
-                {
-                    _dr.Text = (qty * rate).ProperDecimals();
-                }
-                else
-                {
-                    _dr.Clear();
-                }
+                Amount = (wt * rate);
+            }
+            if (isDebit)
+            {
+                _cr.Text = (Amount).ProperDecimals();
+            }
+            else
+            {
+                _dr.Text = (Amount).ProperDecimals();
             }
         }
         private void GetItems(object sender, EventArgs e)
@@ -550,7 +583,7 @@ namespace MandiPOS.GUI
             this.WindowState = FormWindowState.Maximized;
             SetPartybalance();
             dtp.Value = DateTime.Today.Date;
-            Refresh();
+            CheckEntryMode(null,null);
         }
 
         private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -560,51 +593,25 @@ namespace MandiPOS.GUI
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            if (main.VoucherDate.Date != dtp.Value.Date)
-            {
-                this.Error("A critical error has occurred. Please contact support."); return;
-            }
-            if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
-            {
-                this.Info("آپکو پرانا ووچر محفوظ کرنے کی اجازت نہیں ہے۔");
-                return;
-            }
-            if (dtp.Value.Date < DateTime.Today.Date && !this.Ask("کیا آپ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟"))
-            {
-                return;
-            }
-
-
-            if (bsCart.Count == 0)
-            {
-                this.Error("براہ کرم کم از کم ایک اندراج شامل کریں");
-                return;
-            }
-            var carts = bsCart.Cast<BardanaCart>();
-
-            decimal totalDebit = carts.Sum(c => c.DebitAmount);
-            decimal totalCredit = carts.Sum(c => c.CreditAmount);
-
-            if (totalDebit != totalCredit)
-            {
-                this.Error("رقم بنام اور رقم جمع میں فرق ہے۔ براہ کرم درست کریں");
-                return;
-            }
-            dgv.Validate();
-            try
-            {
-                VoucherService.SaveVoucher(main);
-                //finally
-                isChanged = false;
-                this.Info("ریکارڈ محفوظ ہو گیا ہے۔");
-                Refresh();
-            }
-            catch (Exception ex)
-            {
-                ex.ExcError("While Saving Voucher...");
-            }
+            this.Close();
         }
 
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            Refresh();
+        }
 
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            if (main.VoucherID == 0)
+                return;
+            using(var frm=new frmDateChanger(vType, main.VoucherID, main.VoucherDate))
+            {
+                if(frm.ShowDialog()==DialogResult.OK)
+                {
+                    Refresh();
+                }
+            }
+        }
     }
 }

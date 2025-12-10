@@ -37,7 +37,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbOther = new Janus.Windows.EditControls.UIRadioButton();
             this.rbSeed = new Janus.Windows.EditControls.UIRadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpMode = new System.Windows.Forms.GroupBox();
             this.tbCredit = new Janus.Windows.EditControls.UIRadioButton();
             this.rbDebit = new Janus.Windows.EditControls.UIRadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -65,8 +65,12 @@
             this.partyBal = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this._wt = new Janus.Windows.GridEX.EditControls.NumericEditBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.uiButton2 = new Janus.Windows.EditControls.UIButton();
+            this.uiButton3 = new Janus.Windows.EditControls.UIButton();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).BeginInit();
@@ -100,7 +104,7 @@
             this.groupBox1.Controls.Add(this.rbOther);
             this.groupBox1.Controls.Add(this.rbSeed);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(97, 3);
+            this.groupBox1.Location = new System.Drawing.Point(249, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(178, 72);
             this.groupBox1.TabIndex = 2;
@@ -133,16 +137,16 @@
             this.rbSeed.TextAlignment = Janus.Windows.EditControls.TextAlignment.Center;
             this.rbSeed.UseCompatibleTextRendering = true;
             // 
-            // groupBox2
+            // grpMode
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.DodgerBlue;
-            this.groupBox2.Controls.Add(this.tbCredit);
-            this.groupBox2.Controls.Add(this.rbDebit);
-            this.groupBox2.Location = new System.Drawing.Point(543, -11);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(178, 72);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
+            this.grpMode.BackColor = System.Drawing.Color.DodgerBlue;
+            this.grpMode.Controls.Add(this.tbCredit);
+            this.grpMode.Controls.Add(this.rbDebit);
+            this.grpMode.Location = new System.Drawing.Point(543, -11);
+            this.grpMode.Name = "grpMode";
+            this.grpMode.Size = new System.Drawing.Size(178, 72);
+            this.grpMode.TabIndex = 5;
+            this.grpMode.TabStop = false;
             // 
             // tbCredit
             // 
@@ -221,7 +225,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(259, 78);
+            this.label7.Location = new System.Drawing.Point(230, 79);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 27);
             this.label7.TabIndex = 11;
@@ -291,9 +295,9 @@
             // 
             // _qty
             // 
-            this._qty.Location = new System.Drawing.Point(297, 114);
+            this._qty.Location = new System.Drawing.Point(332, 114);
             this._qty.Name = "_qty";
-            this._qty.Size = new System.Drawing.Size(89, 35);
+            this._qty.Size = new System.Drawing.Size(54, 35);
             this._qty.TabIndex = 18;
             this._qty.Text = "0.00";
             this._qty.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -307,7 +311,7 @@
             // 
             this._rate.Location = new System.Drawing.Point(202, 114);
             this._rate.Name = "_rate";
-            this._rate.Size = new System.Drawing.Size(89, 35);
+            this._rate.Size = new System.Drawing.Size(60, 35);
             this._rate.TabIndex = 19;
             this._rate.Text = "0.00";
             this._rate.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
@@ -378,16 +382,13 @@
             // 
             // uiButton1
             // 
-            this.uiButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.uiButton1.Image = global::MandiPOS.Properties.Resources.save_close_48px;
             this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
             this.uiButton1.ImageSize = new System.Drawing.Size(32, 32);
-            this.uiButton1.Location = new System.Drawing.Point(802, 556);
+            this.uiButton1.Location = new System.Drawing.Point(6, 42);
             this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(124, 41);
+            this.uiButton1.Size = new System.Drawing.Size(37, 33);
             this.uiButton1.TabIndex = 23;
-            this.uiButton1.Text = "محفوظ کریں";
-            this.uiButton1.Visible = false;
             this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // bsParties
@@ -441,12 +442,62 @@
             this.numericUpDown1.TabIndex = 29;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // _wt
+            // 
+            this._wt.Location = new System.Drawing.Point(268, 114);
+            this._wt.Name = "_wt";
+            this._wt.Size = new System.Drawing.Size(58, 35);
+            this._wt.TabIndex = 30;
+            this._wt.Text = "0.00";
+            this._wt.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this._wt.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(294, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 27);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "وزن";
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Image = global::MandiPOS.Properties.Resources.download;
+            this.uiButton2.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.uiButton2.ImageSize = new System.Drawing.Size(32, 32);
+            this.uiButton2.Location = new System.Drawing.Point(49, 41);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.Size = new System.Drawing.Size(37, 33);
+            this.uiButton2.TabIndex = 32;
+            this.uiButton2.Click += new System.EventHandler(this.uiButton2_Click);
+            // 
+            // uiButton3
+            // 
+            this.uiButton3.BackColor = System.Drawing.Color.Transparent;
+            this.uiButton3.Image = global::MandiPOS.Properties.Resources.download__1_;
+            this.uiButton3.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.uiButton3.ImageSize = new System.Drawing.Size(32, 32);
+            this.uiButton3.Location = new System.Drawing.Point(94, 3);
+            this.uiButton3.Name = "uiButton3";
+            this.uiButton3.Size = new System.Drawing.Size(44, 34);
+            this.uiButton3.TabIndex = 33;
+            this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);
+            // 
             // frmBVNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(938, 609);
+            this.Controls.Add(this.uiButton3);
+            this.Controls.Add(this.uiButton2);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this._wt);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpMode);
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.partyBal);
             this.Controls.Add(this.dgvHelp);
@@ -475,7 +526,7 @@
             this.Name = "frmBVNew";
             this.Text = "frmBVNew";
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.grpMode.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).EndInit();
@@ -494,7 +545,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private Janus.Windows.EditControls.UIRadioButton rbSeed;
         private Janus.Windows.EditControls.UIRadioButton rbOther;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpMode;
         private Janus.Windows.EditControls.UIRadioButton tbCredit;
         private Janus.Windows.EditControls.UIRadioButton rbDebit;
         private System.Windows.Forms.Label label2;
@@ -522,5 +573,9 @@
         private System.Windows.Forms.Label partyBal;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private Janus.Windows.GridEX.EditControls.NumericEditBox _wt;
+        private System.Windows.Forms.Label label10;
+        private Janus.Windows.EditControls.UIButton uiButton2;
+        private Janus.Windows.EditControls.UIButton uiButton3;
     }
 }

@@ -122,6 +122,8 @@ namespace MandiPOS.CLasses
         public string PartyName { get; set; }
         [DisplayName("تفصیل")]
         public string Narration { get; set; }
+        [DisplayName("تفصیل دوم")]
+        public string Narration2 { get; set; }
         [Browsable(false)]
         public int ItemID { get; set; }
         [Browsable(false)]
@@ -132,6 +134,8 @@ namespace MandiPOS.CLasses
         public string ItemName { get; set; }
         [DisplayName("تعداد")]
         public decimal ItemQty { get; set; }
+        [DisplayName("وزن")]
+        public decimal ItemWeight { get; set; }
         [DisplayName("ریٹ")]
         public decimal ItemRate { get; set; }
         [DisplayName("رقم بنام")]
@@ -139,7 +143,7 @@ namespace MandiPOS.CLasses
         [DisplayName("رقم جمع")]
         public decimal CreditAmount { get; set; }
         [Browsable(false)]
-        public string ItemDescription { get { return $"{ItemName} {ItemQty}*{ItemRate}"; } }
+        public string ItemDescription { get { return $"{ItemName} تعداد:{ItemQty}{(ItemWeight==0?string.Empty:$" وزن:{ItemWeight:#,#.##}")}, ریٹ:{ItemRate}"; } }
         public int EnteredBy { get; set; }
         public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }
@@ -157,6 +161,7 @@ namespace MandiPOS.CLasses
         public int ItemID { get; set; }
 
         public decimal ItemQty { get; set; }
+        public decimal ItemWeight { get; set; }
         public decimal ItemRate { get; set; }
 
         public decimal DebitAmount { get; set; }
@@ -200,7 +205,7 @@ left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
-bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
+bd.ItemQty,bd.ItemRate,bd.ItemWeight,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
 from VoucherBardanaDetails bd
 left join tblItems p on bd.itemID=p.ID
 left join DetailAccounts acc on bd.accountiD=acc.ID

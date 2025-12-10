@@ -423,6 +423,12 @@
     <Compile Include="GUI\frmConfigs.Designer.cs">
       <DependentUpon>frmConfigs.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmDateChanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmDateChanger.Designer.cs">
+      <DependentUpon>frmDateChanger.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmImportAccounts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -732,6 +738,11 @@
     <Compile Include="Reports\uc_Report01.Designer.cs">
       <DependentUpon>uc_Report01.cs</DependentUpon>
     </Compile>
+    <Content Include="Scripts\Update Vendor Wise Sale.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\download %281%29.png" />
+    <None Include="Resources\download.png" />
     <Content Include="Scripts\20250907_backupDatabase.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -748,10 +759,21 @@
     <Content Include="Scripts\28112025_002.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Add ItemWeightColumn to bardanaEntries.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Alter vwTrx View.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\netsale account function.sql" />
+    <Content Include="Scripts\KhasraView_Update_09122025.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\netsale account function.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Update sp_Ledger_09-11-2025.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -776,6 +798,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmConfigs.resx">
       <DependentUpon>frmConfigs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmDateChanger.resx">
+      <DependentUpon>frmDateChanger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmImportAccounts.resx">
       <DependentUpon>frmImportAccounts.cs</DependentUpon>
