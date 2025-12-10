@@ -8,9 +8,14 @@ namespace MandiPOS.GUI
     public partial class rptChithaFull : DevExpress.XtraReports.UI.XtraReport
     {
         DataTable _dt;
-        public rptChithaFull(DataTable dt = null, string date = "")
+        bool IncludeZero = false;
+        bool SummaryOnly = false;
+        public rptChithaFull(DataTable dt = null, string date = "", bool @checked = false, bool Summary = false)
         {
             InitializeComponent();
+            this.ShowPrintMarginsWarning = false;
+            IncludeZero = @checked;
+            SummaryOnly = Summary;
             lblDate.Text = date;
             _dt = dt;
             GetJamaRecords();
@@ -42,10 +47,11 @@ namespace MandiPOS.GUI
 
         private void GetJamaRecords()
         {
-            var rows = _dt.Select("EndBalance < 0");
+            string condition= IncludeZero ? "EndBalance <= 0" : "EndBalance < 0";
+            var rows = _dt.Select(condition);
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("جمع");
+                var subReport = new rptChithaRecords("جمع",SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
                 subReport.CreateDocument();
                 xrSubreport1.ReportSource = subReport;
@@ -69,7 +75,7 @@ namespace MandiPOS.GUI
             var rows = _dt.Select("EndBalance > 0");
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("بنام");
+                var subReport = new rptChithaRecords("بنام",SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
                 subReport.CreateDocument();
                 xrSubreport2.ReportSource = subReport;

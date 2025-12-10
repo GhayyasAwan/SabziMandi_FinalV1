@@ -613,15 +613,15 @@ namespace MandiPOS.GUI
             }
             if (ReportID == 3) //چٹھہ مکمل
             {
-                ShowChitha(0); return;
+                ShowChitha(0, cbIncludeZero.Checked, cbSummary.Checked); return;
             }
             if (ReportID == 4) //چٹھہ گروپ وار
             {
-                ShowChitha(1); return;
+                ShowChitha(1, cbIncludeZero.Checked,cbSummary.Checked); return;
             }
             if (ReportID == 5) //چٹھہ شہر وار
             {
-                ShowChitha(2); return;
+                ShowChitha(2, cbIncludeZero.Checked, cbSummary.Checked); return;
             }
             if (ReportID == 6) //گاہک بل
             {
@@ -985,7 +985,7 @@ ORDER BY
             }
         }
 
-        private void ShowChitha(int ChithaType)
+        private void ShowChitha(int ChithaType, bool @checked, bool checked1)
         {
             using (new waitForm())
             {
@@ -1044,7 +1044,7 @@ Order By mas.id";
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"),@checked,checked1);
                     report.CreateDocument();
                     ShowReport(report);
                 }

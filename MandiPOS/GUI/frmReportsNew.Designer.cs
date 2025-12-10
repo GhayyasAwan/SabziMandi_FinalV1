@@ -76,10 +76,12 @@
             this.lblParty = new System.Windows.Forms.Label();
             this._pid = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.cbIncludeZero = new Janus.Windows.EditControls.UICheckBox();
             this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.bsParties = new System.Windows.Forms.BindingSource(this.components);
             this.chartDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bsSubParties = new System.Windows.Forms.BindingSource(this.components);
+            this.cbSummary = new Janus.Windows.EditControls.UICheckBox();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -96,11 +98,11 @@
             this.pnlMain.BackColor = System.Drawing.Color.DodgerBlue;
             this.pnlMain.Controls.Add(this.uiGroupBox1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlMain.Location = new System.Drawing.Point(544, 0);
+            this.pnlMain.Location = new System.Drawing.Point(810, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.pnlMain.Size = new System.Drawing.Size(750, 633);
+            this.pnlMain.Size = new System.Drawing.Size(750, 684);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
@@ -136,7 +138,7 @@
             this.uiGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiGroupBox1.Location = new System.Drawing.Point(0, 0);
             this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.Size = new System.Drawing.Size(750, 633);
+            this.uiGroupBox1.Size = new System.Drawing.Size(750, 684);
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.VisualStyle = Janus.Windows.UI.Dock.PanelVisualStyle.Office2003;
             // 
@@ -610,7 +612,7 @@
             // 
             this.lblDtp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDtp.AutoSize = true;
-            this.lblDtp.Location = new System.Drawing.Point(466, 47);
+            this.lblDtp.Location = new System.Drawing.Point(732, 47);
             this.lblDtp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDtp.Name = "lblDtp";
             this.lblDtp.Size = new System.Drawing.Size(69, 32);
@@ -623,7 +625,7 @@
             this.dtp.CustomFormat = "dd-MMM-yyyy";
             this.dtp.DateFormat = Janus.Windows.CalendarCombo.DateFormat.Custom;
             this.dtp.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp.Location = new System.Drawing.Point(362, 81);
+            this.dtp.Location = new System.Drawing.Point(628, 81);
             this.dtp.Margin = new System.Windows.Forms.Padding(2);
             this.dtp.MinDate = new System.DateTime(2025, 1, 1, 0, 0, 0, 0);
             this.dtp.Name = "dtp";
@@ -636,7 +638,7 @@
             this.dtp2.CustomFormat = "dd-MMM-yyyy";
             this.dtp2.DateFormat = Janus.Windows.CalendarCombo.DateFormat.Custom;
             this.dtp2.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp2.Location = new System.Drawing.Point(185, 81);
+            this.dtp2.Location = new System.Drawing.Point(451, 81);
             this.dtp2.Margin = new System.Windows.Forms.Padding(2);
             this.dtp2.Name = "dtp2";
             this.dtp2.Size = new System.Drawing.Size(172, 33);
@@ -646,7 +648,7 @@
             // 
             this.lblDate2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate2.AutoSize = true;
-            this.lblDate2.Location = new System.Drawing.Point(290, 47);
+            this.lblDate2.Location = new System.Drawing.Point(556, 47);
             this.lblDate2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate2.Name = "lblDate2";
             this.lblDate2.Size = new System.Drawing.Size(58, 32);
@@ -656,7 +658,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.PeachPuff;
-            this.panel1.Controls.Add(this.btnViewReport);
+            this.panel1.Controls.Add(this.cbSummary);
+            this.panel1.Controls.Add(this.cbIncludeZero);
             this.panel1.Controls.Add(this.lblBill);
             this.panel1.Controls.Add(this.txtBillNo);
             this.panel1.Controls.Add(this.lblCity);
@@ -672,11 +675,12 @@
             this.panel1.Controls.Add(this.dtp2);
             this.panel1.Controls.Add(this.lblDtp);
             this.panel1.Controls.Add(this.lblDate2);
+            this.panel1.Controls.Add(this.btnViewReport);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(544, 633);
+            this.panel1.Size = new System.Drawing.Size(810, 684);
             this.panel1.TabIndex = 5;
             // 
             // btnViewReport
@@ -686,7 +690,7 @@
             this.btnViewReport.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.Center;
             this.btnViewReport.ImageSize = new System.Drawing.Size(48, 48);
             this.btnViewReport.ImageVerticalAlignment = Janus.Windows.EditControls.ImageVerticalAlignment.BottomOfText;
-            this.btnViewReport.Location = new System.Drawing.Point(10, 70);
+            this.btnViewReport.Location = new System.Drawing.Point(11, 134);
             this.btnViewReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewReport.Name = "btnViewReport";
             this.btnViewReport.Size = new System.Drawing.Size(89, 110);
@@ -698,7 +702,7 @@
             // 
             this.lblBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBill.AutoSize = true;
-            this.lblBill.Location = new System.Drawing.Point(485, 115);
+            this.lblBill.Location = new System.Drawing.Point(751, 115);
             this.lblBill.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBill.Name = "lblBill";
             this.lblBill.Size = new System.Drawing.Size(46, 32);
@@ -709,7 +713,7 @@
             // txtBillNo
             // 
             this.txtBillNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBillNo.Location = new System.Drawing.Point(410, 149);
+            this.txtBillNo.Location = new System.Drawing.Point(676, 149);
             this.txtBillNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtBillNo.Name = "txtBillNo";
             this.txtBillNo.Size = new System.Drawing.Size(123, 39);
@@ -720,7 +724,7 @@
             // 
             this.lblCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCity.AutoSize = true;
-            this.lblCity.Location = new System.Drawing.Point(106, 47);
+            this.lblCity.Location = new System.Drawing.Point(372, 47);
             this.lblCity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(30, 32);
@@ -734,7 +738,7 @@
             this.cmbCity.DesignTimeLayout = cmbCity_DesignTimeLayout;
             this.cmbCity.DropDownDisplayMember = "CityName";
             this.cmbCity.DropDownValueMember = "ID";
-            this.cmbCity.Location = new System.Drawing.Point(-75, 81);
+            this.cmbCity.Location = new System.Drawing.Point(191, 81);
             this.cmbCity.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -748,7 +752,7 @@
             // 
             this.lblgroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblgroup.AutoSize = true;
-            this.lblgroup.Location = new System.Drawing.Point(313, 47);
+            this.lblgroup.Location = new System.Drawing.Point(579, 47);
             this.lblgroup.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblgroup.Name = "lblgroup";
             this.lblgroup.Size = new System.Drawing.Size(45, 32);
@@ -763,7 +767,7 @@
             this.cmbGroups.DropDownDataSource = this.bs;
             this.cmbGroups.DropDownDisplayMember = "AccountTitle";
             this.cmbGroups.DropDownValueMember = "ID";
-            this.cmbGroups.Location = new System.Drawing.Point(144, 81);
+            this.cmbGroups.Location = new System.Drawing.Point(410, 81);
             this.cmbGroups.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGroups.Name = "cmbGroups";
             this.cmbGroups.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -780,7 +784,7 @@
             dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
             this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
             this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(-41, 190);
+            this.dgvHelp.Location = new System.Drawing.Point(225, 190);
             this.dgvHelp.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHelp.Name = "dgvHelp";
             this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -794,7 +798,7 @@
             this._pname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._pname.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this._pname.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this._pname.Location = new System.Drawing.Point(185, 149);
+            this._pname.Location = new System.Drawing.Point(451, 149);
             this._pname.Margin = new System.Windows.Forms.Padding(2);
             this._pname.Name = "_pname";
             this._pname.Size = new System.Drawing.Size(349, 39);
@@ -806,7 +810,7 @@
             // 
             this.lblParty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblParty.AutoSize = true;
-            this.lblParty.Location = new System.Drawing.Point(477, 115);
+            this.lblParty.Location = new System.Drawing.Point(743, 115);
             this.lblParty.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblParty.Name = "lblParty";
             this.lblParty.Size = new System.Drawing.Size(50, 32);
@@ -834,10 +838,20 @@
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Padding = new System.Windows.Forms.Padding(0, 0, 16, 0);
-            this.lblTitle.Size = new System.Drawing.Size(544, 39);
+            this.lblTitle.Size = new System.Drawing.Size(810, 39);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "label3";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cbIncludeZero
+            // 
+            this.cbIncludeZero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIncludeZero.Location = new System.Drawing.Point(298, 125);
+            this.cbIncludeZero.Name = "cbIncludeZero";
+            this.cbIncludeZero.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbIncludeZero.Size = new System.Drawing.Size(104, 41);
+            this.cbIncludeZero.TabIndex = 24;
+            this.cbIncludeZero.Text = "بشمول زیرو";
             // 
             // bs
             // 
@@ -855,11 +869,21 @@
             // 
             this.bsSubParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
             // 
+            // cbSummary
+            // 
+            this.cbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSummary.Location = new System.Drawing.Point(225, 125);
+            this.cbSummary.Name = "cbSummary";
+            this.cbSummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbSummary.Size = new System.Drawing.Size(104, 41);
+            this.cbSummary.TabIndex = 25;
+            this.cbSummary.Text = "مختصر";
+            // 
             // frmReportsNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1294, 633);
+            this.ClientSize = new System.Drawing.Size(1560, 684);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -931,5 +955,7 @@
         private System.Windows.Forms.RadioButton rbRefReport;
         private System.Windows.Forms.RadioButton rb_Report19;
         private System.Windows.Forms.RadioButton radioButton3;
+        private Janus.Windows.EditControls.UICheckBox cbIncludeZero;
+        private Janus.Windows.EditControls.UICheckBox cbSummary;
     }
 }
