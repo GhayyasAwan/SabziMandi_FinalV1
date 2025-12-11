@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
-
+using DevExpress.XtraEditors.Repository;
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
 using System;
@@ -375,6 +375,11 @@ namespace MandiPOS
                 return cities.Where(x => x.CityName == "مُلتان").FirstOrDefault().ID;
             }
             return 0;
+        }
+
+        internal static bool CheckIsApplicationLocked()
+        {
+            return SQL.IsLocked;
         }
         #endregion
     }

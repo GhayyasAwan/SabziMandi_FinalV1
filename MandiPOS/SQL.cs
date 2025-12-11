@@ -18,6 +18,18 @@ namespace MandiPOS
 
     public static class SQL
     {
+        public static bool IsLocked 
+        {   get
+            { 
+                var result =new db().ExecuteScalar<string>("SELECT ISNULL([Value],0) From Settings Where SettingKey like 'IsLocked'");
+                if(result == "1"||result.ToLower()=="true")
+                {
+                    return true;
+                }
+                return false;
+            } 
+        }
+
         internal static void GetStats(DateTime date, ref decimal banam, ref decimal jama, ref decimal income)
         {
             using (var db = new db())

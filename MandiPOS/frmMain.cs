@@ -24,11 +24,15 @@ namespace MandiPOS
     {
 
         BackgroundWorker wrkr;
+        bool IsLocked = false;
         Timer timer;
         public frmMain()
         {
             this.Opacity = 0;
+           
             InitializeComponent();
+            IsLocked = General.CheckIsApplicationLocked();
+            
             this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
            this.DoubleBuffered = true;
@@ -78,9 +82,23 @@ namespace MandiPOS
             this.Load += FrmMain_Load;
             this.Resize += FrmMain_Resize;
             SetButtonsvisibility();
+            CheckForSoftwareLocked();
         }
 
-       
+        private void CheckForSoftwareLocked()
+        {
+            btnItem.Enabled=!IsLocked;
+            btnCity.Enabled = !IsLocked;
+            btnParty.Enabled = !IsLocked;
+            btnBeejBardana.Enabled = !IsLocked;
+            btnJamaVoucher.Enabled = !IsLocked;
+            btnBanamVoucher.Enabled = !IsLocked;
+            btnSale.Enabled = !IsLocked;
+            btnJV.Enabled = !IsLocked;
+            masterAccountsToolStripMenuItem.Enabled = !IsLocked;
+            detailAccountsToolStripMenuItem.Enabled = !IsLocked;
+            defaultAccountsToolStripMenuItem.Enabled = !IsLocked;
+        }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {

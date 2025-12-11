@@ -44,6 +44,7 @@
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCheckForUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.rePostSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelUpdate = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBarDownload = new System.Windows.Forms.ToolStripProgressBar();
@@ -68,7 +69,6 @@
             this.lblFiscalYear = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rePostSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -194,9 +194,16 @@
             // mnuCheckForUpdate
             // 
             this.mnuCheckForUpdate.Name = "mnuCheckForUpdate";
-            this.mnuCheckForUpdate.Size = new System.Drawing.Size(180, 22);
+            this.mnuCheckForUpdate.Size = new System.Drawing.Size(168, 22);
             this.mnuCheckForUpdate.Text = "Check For Update";
             this.mnuCheckForUpdate.Click += new System.EventHandler(this.CheckForUpdate);
+            // 
+            // rePostSalesToolStripMenuItem
+            // 
+            this.rePostSalesToolStripMenuItem.Name = "rePostSalesToolStripMenuItem";
+            this.rePostSalesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.rePostSalesToolStripMenuItem.Text = "Re-Post Sales";
+            this.rePostSalesToolStripMenuItem.Click += new System.EventHandler(this.rePostSalesToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -534,13 +541,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1307, 63);
             this.panel2.TabIndex = 8;
-            // 
-            // rePostSalesToolStripMenuItem
-            // 
-            this.rePostSalesToolStripMenuItem.Name = "rePostSalesToolStripMenuItem";
-            this.rePostSalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.rePostSalesToolStripMenuItem.Text = "Re-Post Sales";
-            this.rePostSalesToolStripMenuItem.Click += new System.EventHandler(this.rePostSalesToolStripMenuItem_Click);
             // 
             // frmMain
             // 

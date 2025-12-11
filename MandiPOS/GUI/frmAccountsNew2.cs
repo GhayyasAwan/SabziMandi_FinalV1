@@ -24,11 +24,22 @@ namespace MandiPOS.GUI
             RegisterEnter();
             RegisterFocus();
             PopulateMasterAccounts();
+            gridEX1.RowDoubleClick += GridEX1_RowDoubleClick;
             this.Resize += FrmAccountsNew2_Resize;
             this.Load += FrmAccountsNew2_Load;
             txtName.TextChanged += TxtName_TextChanged;
             objR = new clsResize(this);
             
+        }
+
+        private void GridEX1_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
+        {
+            if(gridEX1.CurrentRow!=null)
+            {
+                int id = gridEX1.CurrentRow.Cells["ID"].Value.toInt();
+                account = DetailAccountService.GetDetailAccountByID(id);
+                BindObject();
+            }
         }
 
         private void TxtName_TextChanged(object sender, EventArgs e)
