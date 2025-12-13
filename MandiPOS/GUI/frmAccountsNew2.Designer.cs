@@ -49,6 +49,7 @@
             this.bsAccount1 = new System.Windows.Forms.BindingSource(this.components);
             this.txtOldAcc = new Janus.Windows.GridEX.EditControls.EditBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.uiCheckBox1 = new Janus.Windows.EditControls.UICheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAccount1)).BeginInit();
@@ -244,10 +245,20 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "پرانا کھاتہ نمبر";
             // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.Location = new System.Drawing.Point(16, 49);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiCheckBox1.Size = new System.Drawing.Size(57, 32);
+            this.uiCheckBox1.TabIndex = 16;
+            this.uiCheckBox1.Text = "ایکٹو";
+            // 
             // frmAccountsNew2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(963, 579);
+            this.Controls.Add(this.uiCheckBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtOldAcc);
             this.Controls.Add(this.gridEX1);
@@ -295,5 +306,6 @@
         private System.Windows.Forms.BindingSource bsCity;
         private Janus.Windows.GridEX.EditControls.EditBox txtOldAcc;
         private System.Windows.Forms.Label label7;
+        private Janus.Windows.EditControls.UICheckBox uiCheckBox1;
     }
 }

@@ -64,11 +64,13 @@
             this.dgvHelp = new Janus.Windows.GridEX.GridEX();
             this.partyBal = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txtVno = new System.Windows.Forms.NumericUpDown();
             this._wt = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.label10 = new System.Windows.Forms.Label();
             this.uiButton2 = new Janus.Windows.EditControls.UIButton();
             this.uiButton3 = new Janus.Windows.EditControls.UIButton();
+            this.lblStock = new System.Windows.Forms.Label();
+            this.lblwtStock = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.grpMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).BeginInit();
@@ -76,7 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVno)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -97,6 +99,7 @@
             this.dtp.Name = "dtp";
             this.dtp.Size = new System.Drawing.Size(160, 30);
             this.dtp.TabIndex = 1;
+            this.dtp.Value = new System.DateTime(2025, 12, 11, 0, 0, 0, 0);
             // 
             // groupBox1
             // 
@@ -366,10 +369,10 @@
             dgv_DesignTimeLayout.LayoutString = resources.GetString("dgv_DesignTimeLayout.LayoutString");
             this.dgv.DesignTimeLayout = dgv_DesignTimeLayout;
             this.dgv.GroupByBoxVisible = false;
-            this.dgv.Location = new System.Drawing.Point(12, 163);
+            this.dgv.Location = new System.Drawing.Point(12, 167);
             this.dgv.Name = "dgv";
             this.dgv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgv.Size = new System.Drawing.Size(914, 434);
+            this.dgv.Size = new System.Drawing.Size(914, 430);
             this.dgv.TabIndex = 22;
             this.dgv.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.dgv.TotalRowFormatStyle.BackColor = System.Drawing.SystemColors.Info;
@@ -434,13 +437,13 @@
             this.lblType.Text = "تاریخ";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numericUpDown1
+            // txtVno
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(3, 1);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(85, 35);
-            this.numericUpDown1.TabIndex = 29;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtVno.Location = new System.Drawing.Point(3, 1);
+            this.txtVno.Name = "txtVno";
+            this.txtVno.Size = new System.Drawing.Size(85, 35);
+            this.txtVno.TabIndex = 29;
+            this.txtVno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // _wt
             // 
@@ -459,11 +462,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(294, 82);
+            this.label10.Location = new System.Drawing.Point(276, 84);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 27);
+            this.label10.Size = new System.Drawing.Size(50, 27);
             this.label10.TabIndex = 31;
-            this.label10.Text = "وزن";
+            this.label10.Text = "وزن (کلو)";
             // 
             // uiButton2
             // 
@@ -488,15 +491,37 @@
             this.uiButton3.TabIndex = 33;
             this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);
             // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.Font = new System.Drawing.Font("Verdana", 6F);
+            this.lblStock.Location = new System.Drawing.Point(395, 154);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(32, 10);
+            this.lblStock.TabIndex = 34;
+            this.lblStock.Text = "وزن (کلو)";
+            // 
+            // lblwtStock
+            // 
+            this.lblwtStock.AutoSize = true;
+            this.lblwtStock.Font = new System.Drawing.Font("Verdana", 6F);
+            this.lblwtStock.Location = new System.Drawing.Point(330, 154);
+            this.lblwtStock.Name = "lblwtStock";
+            this.lblwtStock.Size = new System.Drawing.Size(32, 10);
+            this.lblwtStock.TabIndex = 35;
+            this.lblwtStock.Text = "وزن (کلو)";
+            // 
             // frmBVNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(938, 609);
+            this.Controls.Add(this.lblwtStock);
+            this.Controls.Add(this.lblStock);
             this.Controls.Add(this.uiButton3);
             this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this._wt);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.txtVno);
             this.Controls.Add(this.grpMode);
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.partyBal);
@@ -532,7 +557,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVno)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -572,10 +597,12 @@
         private Janus.Windows.GridEX.GridEX dgvHelp;
         private System.Windows.Forms.Label partyBal;
         private System.Windows.Forms.Label lblType;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown txtVno;
         private Janus.Windows.GridEX.EditControls.NumericEditBox _wt;
         private System.Windows.Forms.Label label10;
         private Janus.Windows.EditControls.UIButton uiButton2;
         private Janus.Windows.EditControls.UIButton uiButton3;
+        private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.Label lblwtStock;
     }
 }

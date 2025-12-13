@@ -345,6 +345,11 @@ namespace MandiPOS
                 throw ex;
             }
         }
+
+        internal static object GetNextVoucherNo(int vType)
+        {
+            return new db().ExecuteScalar<object>($"Select ISNULL(MAx(VoucherNo),0)+1 from Vouchers Where VoucherType="+vType);
+        }
     }
 
 

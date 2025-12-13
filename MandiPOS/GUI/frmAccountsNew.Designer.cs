@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Janus.Windows.Common.JanusColorScheme janusColorScheme1 = new Janus.Windows.Common.JanusColorScheme();
+            Janus.Windows.Common.JanusColorScheme janusColorScheme2 = new Janus.Windows.Common.JanusColorScheme();
             Janus.Windows.GridEX.GridEXLayout dgv_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccountsNew));
             this.label1 = new System.Windows.Forms.Label();
@@ -66,6 +66,7 @@
             this.bsAccounts2 = new System.Windows.Forms.BindingSource(this.components);
             this.txtOldAccNo = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.uiCheckBox1 = new Janus.Windows.EditControls.UICheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpRef)).BeginInit();
             this.grpRef.SuspendLayout();
@@ -96,11 +97,11 @@
             // 
             // visualStyleManager1
             // 
-            janusColorScheme1.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
-            janusColorScheme1.Name = "Scheme0";
-            janusColorScheme1.OfficeCustomColor = System.Drawing.Color.Empty;
-            janusColorScheme1.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
-            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme1);
+            janusColorScheme2.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
+            janusColorScheme2.Name = "Scheme0";
+            janusColorScheme2.OfficeCustomColor = System.Drawing.Color.Empty;
+            janusColorScheme2.VisualStyle = Janus.Windows.Common.VisualStyle.Office2007;
+            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme2);
             // 
             // txtName
             // 
@@ -437,10 +438,21 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "پرانا کھاتہ نمبر";
             // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.Location = new System.Drawing.Point(241, 98);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.uiCheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiCheckBox1.Size = new System.Drawing.Size(54, 38);
+            this.uiCheckBox1.TabIndex = 23;
+            this.uiCheckBox1.Text = " ایکٹو";
+            // 
             // frmAccountsNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1333, 732);
+            this.Controls.Add(this.uiCheckBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtOldAccNo);
             this.Controls.Add(this.dgv);
@@ -517,5 +529,6 @@
         private Janus.Windows.EditControls.UIButton uiButton1;
         private Janus.Windows.GridEX.EditControls.NumericEditBox txtOldAccNo;
         private System.Windows.Forms.Label label10;
+        private Janus.Windows.EditControls.UICheckBox uiCheckBox1;
     }
 }

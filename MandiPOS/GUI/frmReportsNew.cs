@@ -255,6 +255,7 @@ namespace MandiPOS.GUI
                 case "rb_Report03": //Chitha Complete
                     ReportID = 3;
                     bsParties.DataSource = dtParties;
+                    cmbSort.SelectedValue = 0;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide(); _pname.Clear();
                     lblgroup.Show(); cmbGroups.Show(); cmbGroups.CheckedItems = null;
@@ -268,6 +269,7 @@ namespace MandiPOS.GUI
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
                     _pname.Clear();
+                    cmbSort.SelectedValue = 0;
                     cmbCity.Hide(); lblCity.Hide();
                     cmbCity.CheckedItems = null;
                     lblgroup.Show(); cmbGroups.Show(); txtBillNo.Visible = lblBill.Visible = false;
@@ -278,6 +280,7 @@ namespace MandiPOS.GUI
                     ReportID = 5; bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
+                    cmbSort.SelectedValue = 0;
                     _pname.Clear();
                     cmbCity.Show(); lblCity.Show();
                     lblgroup.Hide(); cmbGroups.Hide();
@@ -502,6 +505,7 @@ namespace MandiPOS.GUI
 
 
             }
+            cmbSort.Visible = lblSort.Visible = cmbCity.Visible;
         }
 
         private void UncheckAll(object sender)
@@ -890,18 +894,18 @@ Order By mas.id";
         GROUP BY AccountID
     )
     SELECT acc.AccountCode as ID,
-        Case When ISNULL(Acc.OldAccountCode,0)=0 Then acc.AccountTitle Else acc.AccountTitle+'-'+Cast(acc.OldAccountCode as nvarchar(50))  End as AccountTitle,
+        acc.AccountTitle,
 mas.AccountTitle as 'MasterAccount',
         acc.RefName,
         acc.Contact,
         city.CityName,
-        eb.EndBalance , Acc.OldAccountCode
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode
     FROM EndBalances eb 
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
     WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
-Order By mas.id, Cast(Acc.AccountCode as int) asc";
+";
                 DataTable dt = new DataTable();
                 using (var db = new db())
                 {
@@ -910,7 +914,7 @@ Order By mas.id, Cast(Acc.AccountCode as int) asc";
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt());
                     report.CreateDocument();
                     ShowReport(report);
                 }

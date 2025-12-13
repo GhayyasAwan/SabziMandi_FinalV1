@@ -4,11 +4,12 @@ namespace MandiPOS.Reports
 {
     public partial class rptChithaRecords : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptChithaRecords(string type = "")
+        public rptChithaRecords(string type = "", int sortOrder = 0)
         {
             InitializeComponent();
             lblrqm.Text = $"رقم {type}";
             lblTotal.Text = $"کُل {type}";
+            
         }
 
         private void xrTableCell1_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)

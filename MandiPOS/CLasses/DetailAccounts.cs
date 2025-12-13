@@ -41,6 +41,7 @@ namespace MandiPOS.CLasses
         public int? RefrenceID { get; set; }
         [DisplayName("معرفت")]
         public string RefName { get; set; }
+        public bool IsActive { get; set; } = true;
 
         internal static DetailAccounts GetAccountByID(int accountID)
         {
@@ -103,7 +104,7 @@ Where acc.MasterID in (Select AccountID From BankCashAccounts) ORDER BY
   ID";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static IEnumerable<DetailAccountView> PartyAccounts()
+        public static IEnumerable<DetailAccountView> PartyAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
@@ -115,10 +116,10 @@ acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
-left join tblCity c on acc.cityID=c.ID";
+left join tblCity c on acc.cityID=c.ID {(IncludeInActive?"":"Where ISNULL(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql);
         }
-        public static List<DetailAccountView> VendorAccounts()
+        public static List<DetailAccountView> VendorAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
@@ -131,10 +132,10 @@ acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
-Where acc.MasterID =4";
+Where acc.MasterID =4 {(IncludeInActive?"":" and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static List<DetailAccountView> CustomerAccounts()
+        public static List<DetailAccountView> CustomerAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
@@ -147,21 +148,30 @@ acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
-Where acc.MasterID =7";
+Where acc.MasterID =7 {(IncludeInActive ? "" : " and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static IEnumerable<DetailAccounts> GetAccountsList(int MasteriID = 0)
+        public static IEnumerable<DetailAccounts> GetAccountsList(int MasteriID = 0, bool IncludeInActive = false)
         {
-            return new db().GetList<DetailAccounts>(MasteriID > 0 ? $" Where MasterID = {MasteriID}" : "").ToList();
+            string sql = "where 1=1";
+            if (MasteriID > 0)
+            {
+                sql += $" and MasterID={MasteriID}";
+            }
+            if (!IncludeInActive)
+            {
+                sql += $" and IsnUll(IsActive,1)=1";
+            }
+            return new db().GetList<DetailAccounts>(sql).ToList();
         }
-        public static IEnumerable<DetailAccountView> GetAccountsViewList(int MasteriID = 0)
+        public static IEnumerable<DetailAccountView> GetAccountsViewList(int MasteriID = 0, bool IncludeInActive = false)
         {
-            return new db().Query<DetailAccountView>($"Exec GetDetailAccount '{MasteriID}'").ToList();
+            return new db().Query<DetailAccountView>($"Exec GetDetailAccount '{MasteriID}','{(!IncludeInActive?1:0)}'").ToList();
         }
-        public static IEnumerable<DetailAccountView> GetAccountsViewList()
-        {
-            return new db().Query<DetailAccountView>($"Exec GetDetailAccount").ToList();
-        }
+        //public static IEnumerable<DetailAccountView> GetAccountsViewList(bool IncludeInActive = false)
+        //{
+        //    return new db().Query<DetailAccountView>($"Exec GetDetailAccount '0','{(!IncludeInActive?1:0)}'").ToList();
+        //}
         public static IEnumerable<DetailAccountView> GetSubPartiesAccountList()
         {
             return new db().Query<DetailAccountView>($"Exec GetSubParties").ToList();

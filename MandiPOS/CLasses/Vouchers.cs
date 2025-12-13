@@ -143,7 +143,19 @@ namespace MandiPOS.CLasses
         [DisplayName("رقم جمع")]
         public decimal CreditAmount { get; set; }
         [Browsable(false)]
-        public string ItemDescription { get { return $"{ItemName} تعداد:{ItemQty}{(ItemWeight==0?string.Empty:$" وزن:{ItemWeight:#,#.##}")}, ریٹ:{ItemRate}"; } }
+        public string ItemDescription { 
+            get 
+            {
+                if (ItemWeight == 0)
+                {
+                    return $"{ItemName} => {ItemQty} x {ItemRate}";
+                }
+                else
+                {
+                    return $"{ItemName} تعداد:{ItemQty}{(ItemWeight == 0 ? string.Empty : $" وزن:{ItemWeight:#,#.##} کلو")}  , ریٹ:{ItemRate}";
+                }
+            } 
+        }
         public int EnteredBy { get; set; }
         public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
     }

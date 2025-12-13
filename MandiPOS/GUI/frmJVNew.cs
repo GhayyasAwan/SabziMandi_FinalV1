@@ -341,7 +341,7 @@ namespace MandiPOS.GUI
 
             main = VoucherService.GetVoucher(VoucherType, dtp.Value);
             bs.DataSource = main.JVEntries;
-            dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+            dtParties = DetailAccountService.GetAccountsViewList(0,false).ToDataTable();
             bsParties.DataSource = dtParties;
             bsParties.ResetBindings(false);
             bs.ResetBindings(false);

@@ -2,17 +2,20 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 
 namespace MandiPOS.GUI
 {
     public partial class rptChithaFull : DevExpress.XtraReports.UI.XtraReport
     {
         DataTable _dt;
-        public rptChithaFull(DataTable dt = null, string date = "")
+        int SortOrder = 0;
+        public rptChithaFull(DataTable dt = null, string date = "", int sortOrder = 0)
         {
             InitializeComponent();
             lblDate.Text = date;
             _dt = dt;
+            SortOrder = sortOrder;
             GetJamaRecords();
             GetBanamRecords();
 
@@ -43,10 +46,19 @@ namespace MandiPOS.GUI
         private void GetJamaRecords()
         {
             var rows = _dt.Select("EndBalance < 0");
+            if (SortOrder == 0)
+            {
+                rows.OrderBy(r => r["ID"]);
+            }
+            else
+            {
+                rows.OrderBy(r => r["OldAccountCode"]);
+            }
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("جمع");
+                var subReport = new rptChithaRecords("جمع", SortOrder);
                 subReport.DataSource = rows.CopyToDataTable();
+                
                 subReport.CreateDocument();
                 xrSubreport1.ReportSource = subReport;
 
@@ -67,6 +79,14 @@ namespace MandiPOS.GUI
         private void GetBanamRecords()
         {
             var rows = _dt.Select("EndBalance > 0");
+            if (SortOrder == 0)
+            {
+                rows.OrderBy(r => r["ID"]);
+            }
+            else
+            {
+                rows.OrderBy(r => r["OldAccountCode"]);
+            }
             if (rows.Length > 0)
             {
                 var subReport = new rptChithaRecords("بنام");

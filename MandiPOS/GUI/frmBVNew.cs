@@ -27,16 +27,16 @@ namespace MandiPOS.GUI
             InitializeComponent();
             rbDebit.CheckedChanged += CheckEntryMode;
             tbCredit.CheckedChanged += CheckEntryMode;
-            numericUpDown1.KeyDown+= (s, e) =>
+            txtVno.KeyDown+= (s, e) =>
             {
                 if (e.EnterKey())
                 {
-                    RefreshById(numericUpDown1.Value.toInt());
+                    RefreshById(txtVno.Value.toInt());
                 }
             };
-            numericUpDown1.Maximum = decimal.MaxValue;
+            txtVno.Maximum = decimal.MaxValue;
             vType = v;
-
+            _wt.Enabled=vType==3;
             _code.RegisterFocus(true);
             _name.RegisterFocus(true);
             _cr.RegisterFocus(false);
@@ -48,6 +48,14 @@ namespace MandiPOS.GUI
             dtp.RegisterFocus(false);
             _narration.KeyDown += _narration_KeyDown;
             _qty.KeyDown += ((s, e) =>
+            {
+                if (e.EnterKey())
+                {
+                    _rate.Select();
+                    _rate.SelectAll();
+                }
+            });
+            _wt.KeyDown += ((s, e) =>
             {
                 if (e.EnterKey())
                 {
@@ -91,8 +99,9 @@ namespace MandiPOS.GUI
             dtp.KeyDown += Dtp_KeyDown;
             _items.KeyDown += (s, e) =>
             {
-                if (e.EnterKey())
+                if (e.EnterKey() && _items.SelectedIndex!=-1)
                 {
+                    GetStock(_items.SelectedValue);
                     _qty.Select();
                     _qty.SelectAll();
                 }
@@ -111,13 +120,21 @@ namespace MandiPOS.GUI
 
         }
 
+        private void GetStock(object selectedValue)
+        {
+            int stock = ItemService.GetItemStock(selectedValue.toInt());
+            int wtstock = ItemService.GetItemWeightStock(selectedValue.toInt());
+            lblStock.Text = stock == 0 ? "" : stock.ToString();
+            lblwtStock.Text = wtstock == 0 ? "" : wtstock.ToString();
+        }
+
         private void CheckEntryMode(object sender, EventArgs e)
         {
             if(rbDebit.Checked)
             {
                 rbDebit.BackColor = Color.DodgerBlue;
                 tbCredit.BackColor = SystemColors.Control;
-                grpMode.BackColor = Color.LightCoral;
+                grpMode.BackColor = Color.LightGreen;
                 _dr.Enabled = true;
                 _cr.Enabled = false;
                 _cr.Clear();
@@ -128,7 +145,7 @@ namespace MandiPOS.GUI
                 tbCredit.BackColor = Color.DodgerBlue;
                 
                 rbDebit.BackColor = SystemColors.Control;
-                grpMode.BackColor = Color.LightGreen;
+                grpMode.BackColor = Color.LightCoral;
                 _dr.Enabled = false;
                 _cr.Enabled = true;
                 _dr.Clear();
@@ -494,6 +511,7 @@ namespace MandiPOS.GUI
            // _items.SelectedIndex = -1;
             //_qty.Clear();
             //_rate.Clear();
+            lblStock.Text =lblwtStock.Text= "";
             RefreshItems();
             RefreshParties();
         }
@@ -552,7 +570,7 @@ namespace MandiPOS.GUI
                 return;
             }
             main = VoucherService.GetVoucher(vType, dtp.Value.Date);
-            numericUpDown1.Value = main.VoucherNo.toDecimal();
+            txtVno.Value = main.VoucherNo.toDecimal();
             bsCart.DataSource = main.BardanaEntries.OrderByDescending(x=>x.ID);
             bsCart.ResetBindings(false);
             _name.Select();
@@ -572,17 +590,19 @@ namespace MandiPOS.GUI
             }
             main = voucher;
             dtp.Value = main.VoucherDate.Date;
-            numericUpDown1.Value = main.VoucherNo.toDecimal ();
+            txtVno.Value = main.VoucherNo.toDecimal ();
             bsCart.DataSource = main.BardanaEntries.OrderByDescending(x => x.ID);
             bsCart.ResetBindings(false);
             _name.Select();
         }
         private void FrmBVNew_Load(object sender, EventArgs e)
         {
+
             obj._get_initial_size();
             this.WindowState = FormWindowState.Maximized;
             SetPartybalance();
             dtp.Value = DateTime.Today.Date;
+            txtVno.Value=SQL.GetNextVoucherNo(vType).toDecimal();
             CheckEntryMode(null,null);
         }
 

@@ -24,6 +24,14 @@ namespace MandiPOS.GUI
             txtCode.RegisterFocus(true);
             txtCashBank.RegisterFocus(true);
             txtAmount.RegisterFocus(false);
+            txtVoucherNumber.RegisterFocus(false);
+            txtVoucherNumber.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    RefreshByNo();
+                }
+            };
             txtNarration.RegisterFocus(true);
             txtName.RegisterFocus(true);
             dtp.RegisterFocus(false);
@@ -149,6 +157,7 @@ namespace MandiPOS.GUI
                 }
                 isLoading = true;
                 main = VoucherService.GetVoucher(VoucherType, dtp.Value.Date);
+                txtVoucherNumber.Value =main.VoucherNo.toDecimal();
                 bsCart.DataSource = main.Entries.OrderByDescending(x=>x.EntryID);
                 bsCashBank.DataSource = DetailAccountService.BankCashAccounts();
                 dtParties = DetailAccountService.PartyAccounts().ToDataTable();
@@ -157,6 +166,27 @@ namespace MandiPOS.GUI
                 index = 0;
                 isLoading = false;
                 txtName.Select();
+            }
+            catch (Exception ex)
+            {
+                ex.ExcError("While Loading Voucher...");
+            }
+        }
+        public  void RefreshByNo()
+        {
+            try
+            {
+                var record= VoucherService.GetVoucherByNo(VoucherType, txtVoucherNumber.Value.toInt());
+                if (record == null || record.VoucherID == 0)
+                {
+                    this.Error("واؤچر نمبر درست نہیں ہے۔");
+                    return;
+                }
+                else
+                { 
+                    dtp.Value= record.VoucherDate;
+                    Refresh();
+                }
             }
             catch (Exception ex)
             {
@@ -399,6 +429,16 @@ namespace MandiPOS.GUI
         private void txtName_Leave(object sender, EventArgs e)
         {
 
+        }
+
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }

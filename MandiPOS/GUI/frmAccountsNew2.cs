@@ -63,6 +63,7 @@ namespace MandiPOS.GUI
             account.AccountCode = txtCode.Text.toInt();
             account.AccountTitle = txtName.Text;
             account.Contact = txtContact.Text;
+            account.IsActive = uiCheckBox1.Checked;
             account.CityID = cmbCity.SelectedValue.toInt();
             account.OpCredit = txtCredit.Text.toDecimal();
             account.OpDebit = txtDebit.Text.toDecimal();
@@ -112,7 +113,7 @@ namespace MandiPOS.GUI
                 bsCity.ResetBindings(false);
                 if (!isloading)
                 {
-                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x=>x.AccountCode).ToDataTable();
+                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID,true).OrderByDescending(x=>x.AccountCode).ToDataTable();
                 }
                 bsAccount1.RemoveFilter();
                 account = new DetailAccounts() { AccountCode = DetailAccountService.GenerateNextAccountCode(MasterID).toInt() };
@@ -124,6 +125,7 @@ namespace MandiPOS.GUI
         {
             txtCode.Text = account.AccountCode.ToString();
             txtName.Text = account.AccountTitle;
+            uiCheckBox1.Checked=account.IsActive;   
             txtContact.Text = account.Contact;
             txtOldAcc.Text = account.OldAccountCode.ToString();
             txtCredit.Text = (account.OpCredit).ToString("0.##");

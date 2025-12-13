@@ -117,7 +117,7 @@
             this.lblPrintDate.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblPrintDate.Multiline = true;
             this.lblPrintDate.Name = "lblPrintDate";
-            this.lblPrintDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 2, 0, 0, 100F);
+            this.lblPrintDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 2F, 0F, 0F, 100F);
             this.lblPrintDate.SizeF = new System.Drawing.SizeF(388.3333F, 23F);
             this.lblPrintDate.StylePriority.UseFont = false;
             this.lblPrintDate.StylePriority.UsePadding = false;
@@ -133,7 +133,7 @@
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(1078.167F, 0F);
             this.xrLabel6.Multiline = true;
             this.xrLabel6.Name = "xrLabel6";
-            this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel6.SizeF = new System.Drawing.SizeF(50.8335F, 35.91667F);
             this.xrLabel6.StylePriority.UseBackColor = false;
             this.xrLabel6.StylePriority.UseFont = false;
@@ -148,7 +148,7 @@
             this.lblRokarDate.LocationFloat = new DevExpress.Utils.PointFloat(964.8331F, 3.74999F);
             this.lblRokarDate.Multiline = true;
             this.lblRokarDate.Name = "lblRokarDate";
-            this.lblRokarDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblRokarDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblRokarDate.SizeF = new System.Drawing.SizeF(113.3334F, 32.16667F);
             this.lblRokarDate.StylePriority.UseFont = false;
             this.lblRokarDate.StylePriority.UseTextAlignment = false;
@@ -163,7 +163,7 @@
             this.lblPrevBalState.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.lblPrevBalState.LocationFloat = new DevExpress.Utils.PointFloat(673.2501F, 0F);
             this.lblPrevBalState.Name = "lblPrevBalState";
-            this.lblPrevBalState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblPrevBalState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblPrevBalState.SizeF = new System.Drawing.SizeF(50.83344F, 35.91668F);
             this.lblPrevBalState.StylePriority.UseBorders = false;
             this.lblPrevBalState.StylePriority.UseFont = false;
@@ -179,7 +179,7 @@
             this.lblPrevBal.LocationFloat = new DevExpress.Utils.PointFloat(724.0836F, 0F);
             this.lblPrevBal.Multiline = true;
             this.lblPrevBal.Name = "lblPrevBal";
-            this.lblPrevBal.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblPrevBal.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblPrevBal.SizeF = new System.Drawing.SizeF(130.8334F, 35.91668F);
             this.lblPrevBal.StylePriority.UseBorders = false;
             this.lblPrevBal.StylePriority.UseFont = false;
@@ -197,7 +197,7 @@
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(854.9169F, 0F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel2.SizeF = new System.Drawing.SizeF(104.1667F, 35.91668F);
             this.xrLabel2.StylePriority.UseBackColor = false;
             this.xrLabel2.StylePriority.UseBorders = false;
@@ -215,7 +215,7 @@
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(485.75F, 0F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(157.5F, 35.91667F);
             this.xrLabel1.StylePriority.UseBackColor = false;
             this.xrLabel1.StylePriority.UseFont = false;
@@ -249,7 +249,7 @@
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(754.3333F, 43.91666F);
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
-            this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel7.SizeF = new System.Drawing.SizeF(157.5F, 35.91667F);
             this.xrLabel7.StylePriority.UseBackColor = false;
             this.xrLabel7.StylePriority.UseFont = false;
@@ -266,7 +266,7 @@
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(217.1667F, 43.91666F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel5.SizeF = new System.Drawing.SizeF(157.5F, 35.91667F);
             this.xrLabel5.StylePriority.UseBackColor = false;
             this.xrLabel5.StylePriority.UseFont = false;
@@ -280,7 +280,7 @@
             this.xrPageInfo1.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 43.91666F);
             this.xrPageInfo1.Name = "xrPageInfo1";
-            this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 2, 0, 0, 100F);
+            this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 2F, 0F, 0F, 100F);
             this.xrPageInfo1.SizeF = new System.Drawing.SizeF(100F, 19.00001F);
             this.xrPageInfo1.StylePriority.UseFont = false;
             this.xrPageInfo1.StylePriority.UsePadding = false;
@@ -325,7 +325,7 @@
             this.lblBanamTotal.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblBanamTotal.LocationFloat = new DevExpress.Utils.PointFloat(27.33356F, 0F);
             this.lblBanamTotal.Name = "lblBanamTotal";
-            this.lblBanamTotal.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblBanamTotal.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblBanamTotal.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow4});
             this.lblBanamTotal.SizeF = new System.Drawing.SizeF(1074.333F, 32.29167F);
@@ -403,14 +403,14 @@
             // xrTable2
             // 
             this.xrTable2.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(795.8333F, 0F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(754.3334F, 0F);
             this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5,
             this.xrTableRow6,
             this.xrTableRow7});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(305.8333F, 86.66666F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(347.3333F, 86.66666F);
             this.xrTable2.StylePriority.UseBorderColor = false;
             // 
             // xrTableRow5
@@ -431,7 +431,7 @@
             this._expnse.ForeColor = System.Drawing.Color.Black;
             this._expnse.Multiline = true;
             this._expnse.Name = "_expnse";
-            this._expnse.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this._expnse.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this._expnse.StylePriority.UseBackColor = false;
             this._expnse.StylePriority.UseBorderColor = false;
             this._expnse.StylePriority.UseBorders = false;
@@ -442,7 +442,7 @@
             this._expnse.StylePriority.UseTextAlignment = false;
             this._expnse.Text = "lblTotalJama";
             this._expnse.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._expnse.Weight = 1.8499998521929377D;
+            this._expnse.Weight = 1.828470253688705D;
             // 
             // xrTableCell7
             // 
@@ -454,7 +454,7 @@
             this.xrTableCell7.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell7.StylePriority.UseBackColor = false;
             this.xrTableCell7.StylePriority.UseBorderColor = false;
             this.xrTableCell7.StylePriority.UseBorders = false;
@@ -463,9 +463,9 @@
             this.xrTableCell7.StylePriority.UseForeColor = false;
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "کل اخراجات";
+            this.xrTableCell7.Text = "کل  بل اخراجات";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell7.Weight = 1.341666865336359D;
+            this.xrTableCell7.Weight = 1.7962888241244523D;
             // 
             // xrTableRow6
             // 
@@ -485,7 +485,7 @@
             this._wasooli.ForeColor = System.Drawing.Color.Black;
             this._wasooli.Multiline = true;
             this._wasooli.Name = "_wasooli";
-            this._wasooli.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this._wasooli.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this._wasooli.StylePriority.UseBackColor = false;
             this._wasooli.StylePriority.UseBorderColor = false;
             this._wasooli.StylePriority.UseBorders = false;
@@ -496,7 +496,7 @@
             this._wasooli.StylePriority.UseTextAlignment = false;
             this._wasooli.Text = "lblTotalBanam";
             this._wasooli.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._wasooli.Weight = 1.8499998521929377D;
+            this._wasooli.Weight = 1.8284696167277577D;
             // 
             // xrTableCell9
             // 
@@ -508,7 +508,7 @@
             this.xrTableCell9.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell9.Multiline = true;
             this.xrTableCell9.Name = "xrTableCell9";
-            this.xrTableCell9.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell9.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell9.StylePriority.UseBackColor = false;
             this.xrTableCell9.StylePriority.UseBorderColor = false;
             this.xrTableCell9.StylePriority.UseBorders = false;
@@ -517,9 +517,9 @@
             this.xrTableCell9.StylePriority.UseForeColor = false;
             this.xrTableCell9.StylePriority.UsePadding = false;
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
-            this.xrTableCell9.Text = "کل وصولی";
+            this.xrTableCell9.Text = "کل وصولی کیش";
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell9.Weight = 1.341666865336359D;
+            this.xrTableCell9.Weight = 1.7962894610853997D;
             // 
             // xrTableRow7
             // 
@@ -539,7 +539,7 @@
             this._banam.ForeColor = System.Drawing.Color.Black;
             this._banam.Multiline = true;
             this._banam.Name = "_banam";
-            this._banam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this._banam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this._banam.StylePriority.UseBackColor = false;
             this._banam.StylePriority.UseBorders = false;
             this._banam.StylePriority.UseBorderWidth = false;
@@ -549,7 +549,7 @@
             this._banam.StylePriority.UseTextAlignment = false;
             this._banam.Text = "lblRemainingCash";
             this._banam.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._banam.Weight = 1.8499998521929377D;
+            this._banam.Weight = 1.828470253688705D;
             // 
             // xrTableCell11
             // 
@@ -561,7 +561,7 @@
             this.xrTableCell11.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell11.Multiline = true;
             this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell11.StylePriority.UseBackColor = false;
             this.xrTableCell11.StylePriority.UseBorders = false;
             this.xrTableCell11.StylePriority.UseBorderWidth = false;
@@ -569,9 +569,9 @@
             this.xrTableCell11.StylePriority.UseForeColor = false;
             this.xrTableCell11.StylePriority.UsePadding = false;
             this.xrTableCell11.StylePriority.UseTextAlignment = false;
-            this.xrTableCell11.Text = "کل بنام";
+            this.xrTableCell11.Text = "کل بنام کیش";
             this.xrTableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell11.Weight = 1.341666865336359D;
+            this.xrTableCell11.Weight = 1.7962888241244523D;
             // 
             // xrLabel4
             // 
@@ -584,7 +584,7 @@
             this.xrLabel4.ForeColor = System.Drawing.Color.White;
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 28.88891F);
             this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(62.50009F, 28.88886F);
             this.xrLabel4.StylePriority.UseBackColor = false;
             this.xrLabel4.StylePriority.UseBorderColor = false;
@@ -607,7 +607,7 @@
             this.xrLabel3.ForeColor = System.Drawing.Color.White;
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 0F);
             this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(62.50011F, 28.88891F);
             this.xrLabel3.StylePriority.UseBackColor = false;
             this.xrLabel3.StylePriority.UseBorderColor = false;
@@ -628,7 +628,7 @@
             this.lblEndBalanceState.ForeColor = System.Drawing.Color.White;
             this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 57.77776F);
             this.lblEndBalanceState.Name = "lblEndBalanceState";
-            this.lblEndBalanceState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblEndBalanceState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblEndBalanceState.SizeF = new System.Drawing.SizeF(62.5001F, 28.88891F);
             this.lblEndBalanceState.StylePriority.UseBackColor = false;
             this.lblEndBalanceState.StylePriority.UseBorders = false;
@@ -645,7 +645,7 @@
             this.xrTable1.BorderColor = System.Drawing.Color.Transparent;
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(189.0001F, 0F);
             this.xrTable1.Name = "xrTable1";
-            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow3,
@@ -671,7 +671,7 @@
             this.lblTotalJama.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this.lblTotalJama.ForeColor = System.Drawing.Color.White;
             this.lblTotalJama.Name = "lblTotalJama";
-            this.lblTotalJama.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblTotalJama.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblTotalJama.StylePriority.UseBackColor = false;
             this.lblTotalJama.StylePriority.UseBorderColor = false;
             this.lblTotalJama.StylePriority.UseBorders = false;
@@ -695,7 +695,7 @@
             this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrTableCell2.ForeColor = System.Drawing.Color.White;
             this.xrTableCell2.Name = "xrTableCell2";
-            this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell2.StylePriority.UseBackColor = false;
             this.xrTableCell2.StylePriority.UseBorderColor = false;
             this.xrTableCell2.StylePriority.UseBorders = false;
@@ -728,7 +728,7 @@
             this.lblTotalBanam.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this.lblTotalBanam.ForeColor = System.Drawing.Color.White;
             this.lblTotalBanam.Name = "lblTotalBanam";
-            this.lblTotalBanam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblTotalBanam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblTotalBanam.StylePriority.UseBackColor = false;
             this.lblTotalBanam.StylePriority.UseBorderColor = false;
             this.lblTotalBanam.StylePriority.UseBorders = false;
@@ -753,7 +753,7 @@
             this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrTableCell6.ForeColor = System.Drawing.Color.White;
             this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell6.StylePriority.UseBackColor = false;
             this.xrTableCell6.StylePriority.UseBorderColor = false;
             this.xrTableCell6.StylePriority.UseBorders = false;
@@ -786,7 +786,7 @@
             this.lblRemainingCash.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this.lblRemainingCash.ForeColor = System.Drawing.Color.White;
             this.lblRemainingCash.Name = "lblRemainingCash";
-            this.lblRemainingCash.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.lblRemainingCash.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblRemainingCash.StylePriority.UseBackColor = false;
             this.lblRemainingCash.StylePriority.UseBorders = false;
             this.lblRemainingCash.StylePriority.UseBorderWidth = false;
@@ -810,7 +810,7 @@
             this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrTableCell4.ForeColor = System.Drawing.Color.White;
             this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell4.StylePriority.UseBackColor = false;
             this.xrTableCell4.StylePriority.UseBorders = false;
             this.xrTableCell4.StylePriority.UseBorderWidth = false;
@@ -835,10 +835,10 @@
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
             this.Margins = new DevExpress.Drawing.DXMargins(20F, 20F, 20F, 20F);
-            this.PageHeight = 827;
-            this.PageWidth = 1169;
+            this.PageHeightF = 826.7717F;
+            this.PageWidthF = 1169.291F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
-            this.Version = "24.2";
+            this.Version = "25.1";
             this.VerticalContentSplitting = DevExpress.XtraPrinting.VerticalContentSplitting.Smart;
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {

@@ -232,7 +232,7 @@ namespace MandiPOS.Reports
             //                dtBanamMaster.ImportRow(row);
             //            } 
             #endregion
-            sql=$@"Select * from vw_BanamRokar Where EntryDate='{_date:yyyy-MM-dd}'";
+            sql=$@"Select * from vw_BanamRokar Where EntryDate='{_date:yyyy-MM-dd}' Order By Case MasterID When 4 Then 0 When 6 Then 1 When 3 Then 2 When 1 Then 4 Else 5 End";
             dtBanamMaster = General.FetchRecords(sql, null);
             //Set DataSource for Subreport
             totalbanam = dtBanamMaster.Compute("Sum(Amount)", string.Empty) is DBNull ? 0 : Convert.ToDecimal(dtBanamMaster.Compute("Sum(Amount)", string.Empty));
@@ -284,7 +284,7 @@ namespace MandiPOS.Reports
             //                dtJamaMaster.ImportRow(row);
             //            } 
             #endregion
-            sql = $@"Select * from vw_JamaRokar Where EntryDate='{_date:yyyy-MM-dd}'";
+            sql = $@"Select * from vw_JamaRokar Where EntryDate='{_date:yyyy-MM-dd}' Order By MasterId Desc";
              dtJamaMaster = General.FetchRecords(sql, null);
             totaljama = dtJamaMaster.Compute("Sum(Amount)", string.Empty) is DBNull ? 0 : Convert.ToDecimal(dtJamaMaster.Compute("Sum(Amount)", string.Empty));
             var subreport = new rokarDetails("جمع")

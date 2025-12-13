@@ -76,7 +76,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 47);
             this.label2.TabIndex = 2;
-            this.label2.Text = "موجودہ تاریخ";
+            this.label2.Text = "نئی تاریخ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // uiButton1
