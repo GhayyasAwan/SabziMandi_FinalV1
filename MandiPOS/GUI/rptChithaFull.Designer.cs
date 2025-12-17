@@ -41,6 +41,12 @@
             this.SubBand2 = new DevExpress.XtraReports.UI.SubBand();
             this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
             this.SubBand3 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.SubBand4 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrSubreport3 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubBand5 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrSubreport4 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubBand6 = new DevExpress.XtraReports.UI.SubBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lblJama = new DevExpress.XtraReports.UI.XRTableCell();
@@ -119,7 +125,10 @@
             this.ReportFooter.SubBands.AddRange(new DevExpress.XtraReports.UI.SubBand[] {
             this.SubBand1,
             this.SubBand2,
-            this.SubBand3});
+            this.SubBand3,
+            this.SubBand4,
+            this.SubBand5,
+            this.SubBand6});
             // 
             // SubBand1
             // 
@@ -153,13 +162,64 @@
             // SubBand3
             // 
             this.SubBand3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable1});
-            this.SubBand3.HeightF = 115F;
+            this.xrLabel2});
+            this.SubBand3.HeightF = 34.45837F;
             this.SubBand3.Name = "SubBand3";
+            this.SubBand3.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
+            // 
+            // xrLabel2
+            // 
+            this.xrLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 14F);
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrLabel2.Multiline = true;
+            this.xrLabel2.Name = "xrLabel2";
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(810.0001F, 34.45837F);
+            this.xrLabel2.StylePriority.UseBackColor = false;
+            this.xrLabel2.StylePriority.UseFont = false;
+            this.xrLabel2.StylePriority.UseTextAlignment = false;
+            this.xrLabel2.Text = "ڈوبت کھاتے";
+            this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // SubBand4
+            // 
+            this.SubBand4.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrSubreport3});
+            this.SubBand4.HeightF = 23F;
+            this.SubBand4.Name = "SubBand4";
+            // 
+            // xrSubreport3
+            // 
+            this.xrSubreport3.CanShrink = true;
+            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(9.536743E-05F, 0F);
+            this.xrSubreport3.Name = "xrSubreport3";
+            this.xrSubreport3.SizeF = new System.Drawing.SizeF(810.0001F, 23F);
+            // 
+            // SubBand5
+            // 
+            this.SubBand5.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrSubreport4});
+            this.SubBand5.HeightF = 23F;
+            this.SubBand5.Name = "SubBand5";
+            // 
+            // xrSubreport4
+            // 
+            this.xrSubreport4.CanShrink = true;
+            this.xrSubreport4.LocationFloat = new DevExpress.Utils.PointFloat(3.178914E-05F, 0F);
+            this.xrSubreport4.Name = "xrSubreport4";
+            this.xrSubreport4.SizeF = new System.Drawing.SizeF(810.0001F, 23F);
+            // 
+            // SubBand6
+            // 
+            this.SubBand6.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable1});
+            this.SubBand6.HeightF = 105F;
+            this.SubBand6.Name = "SubBand6";
             // 
             // xrTable1
             // 
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(10F, 10F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -304,5 +364,11 @@
         private DevExpress.XtraReports.UI.SubBand SubBand3;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport2;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel2;
+        private DevExpress.XtraReports.UI.SubBand SubBand4;
+        private DevExpress.XtraReports.UI.XRSubreport xrSubreport3;
+        private DevExpress.XtraReports.UI.SubBand SubBand5;
+        private DevExpress.XtraReports.UI.XRSubreport xrSubreport4;
+        private DevExpress.XtraReports.UI.SubBand SubBand6;
     }
 }

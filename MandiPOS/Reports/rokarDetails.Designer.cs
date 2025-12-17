@@ -83,7 +83,7 @@
             this.xrTable1.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 12F);
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable1.Name = "xrTable1";
-            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
             this.xrTable1.SizeF = new System.Drawing.SizeF(518F, 25F);
@@ -106,9 +106,9 @@
             this.xrTableCell1.CanGrow = false;
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Amount]")});
-            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 12F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("calibri", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
@@ -123,30 +123,32 @@
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Narration]")});
-            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("calibri", 10F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
-            this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
+            this.xrTableCell2.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UsePadding = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
-            this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell2.Weight = 1.4589912235870084D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[AccountTitle]")});
-            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("calibri", 12F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 12F);
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
+            this.xrTableCell3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UsePadding = false;
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "xrTableCell3";
-            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             this.xrTableCell3.Weight = 2.0797113838343084D;
             // 
             // xrTableCell5
@@ -156,7 +158,7 @@
             this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("calibri", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.StylePriority.UsePadding = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
@@ -178,7 +180,7 @@
             this.xrTable2.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 12F);
             this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
             this.xrTable2.SizeF = new System.Drawing.SizeF(518.0001F, 33.33333F);
@@ -199,10 +201,10 @@
             this.xrTableCell4.BorderWidth = 0.25F;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Amount])")});
-            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 14F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("calibri", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 2, 0, 0, 100F);
+            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 2F, 0F, 0F, 100F);
             this.xrTableCell4.StylePriority.UseBorders = false;
             this.xrTableCell4.StylePriority.UseBorderWidth = false;
             this.xrTableCell4.StylePriority.UseFont = false;
@@ -231,7 +233,7 @@
             this.xrTable3.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 12F);
             this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable3.Name = "xrTable3";
-            this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3});
             this.xrTable3.SizeF = new System.Drawing.SizeF(518.0001F, 30.83333F);
@@ -251,7 +253,7 @@
             // lblAmunt
             // 
             this.lblAmunt.CanGrow = false;
-            this.lblAmunt.Font = new DevExpress.Drawing.DXFont("calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblAmunt.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblAmunt.Name = "lblAmunt";
             this.lblAmunt.StylePriority.UseFont = false;
             this.lblAmunt.StylePriority.UseTextAlignment = false;
@@ -262,7 +264,7 @@
             // 
             // xrTableCell6
             // 
-            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseFont = false;
@@ -273,7 +275,7 @@
             // 
             // lblAccount
             // 
-            this.lblAccount.Font = new DevExpress.Drawing.DXFont("calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblAccount.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblAccount.Multiline = true;
             this.lblAccount.Name = "lblAccount";
             this.lblAccount.StylePriority.UseFont = false;
@@ -301,10 +303,10 @@
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
             this.Margins = new DevExpress.Drawing.DXMargins(10F, 10F, 10F, 10F);
-            this.PageHeight = 400;
-            this.PageWidth = 538;
+            this.PageHeightF = 400F;
+            this.PageWidthF = 538F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.Custom;
-            this.Version = "24.2";
+            this.Version = "25.1";
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
             xrWatermark1});

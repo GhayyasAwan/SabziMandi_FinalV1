@@ -26,6 +26,7 @@ namespace MandiPOS.GUI
         public frmReportsNew(int reportID)
         {
             InitializeComponent();
+            dtp.Value =dtp2.Value = DateTime.Now.Date;
             pnlMain.Resize += FlowLayoutPanel1_Resize;
             _pname.KeyDown += (s, e) =>
             {
@@ -237,7 +238,21 @@ namespace MandiPOS.GUI
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Show(); lblDate2.Show();
-                    _pname.Show(); lblParty.Show(); 
+                    _pname.Show(); lblParty.Show();
+                    txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
+                case "rbBqayaSale": //بقایا سیل
+                    ReportID = 22;
+                    bsParties.DataSource = dtParties;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show();
                     txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
@@ -505,7 +520,13 @@ namespace MandiPOS.GUI
 
 
             }
-            cmbSort.Visible = lblSort.Visible = cmbCity.Visible;
+            cmbSort.Visible = lblSort.Visible=cbZero.Visible=cbSummary.Visible= cmbCity.Visible;
+            cbInActive.Checked =true;
+            cbInActive.Visible = false;
+            cbZero.Checked = !cbZero.Visible;
+            cbSummary.Checked =!cbSummary.Visible;
+
+
         }
 
         private void UncheckAll(object sender)
@@ -517,14 +538,18 @@ namespace MandiPOS.GUI
         {
             if (ReportID == 1) //لین دین کھاتہ
             {
-                ShowLedger(0);return;
+                ShowLedger(0); return;
+            }
+            if (ReportID == 22) //لین دین کھاتہ
+            {
+                ShowBaqayaSale(); return;
             }
             if (ReportID == 2) //کیش روکڑ
             {
                 using (new waitForm())
                 {
                     var report = new rptRokar(dtp.Value.Date);
-                    ShowReport(report);
+                    ShowReport(report,1.4f);
                 }
                 return;
             }
@@ -606,6 +631,22 @@ namespace MandiPOS.GUI
                 ShowRefReport(); return;
             }
         }
+
+        private void ShowBaqayaSale()
+        {
+            DateTime d1=dtp.Value.Date;
+            DateTime d2=dtp2.Value.Date;
+            int partyid = _pid.Text.Trim().toInt();
+            using (new waitForm())
+            {
+                var data= vwBaqayaSaleService.GetBaqayaSaleList(d1,d2,partyid).ToList();
+                string dateRange = $"{d1:dd-MM-yyyy}-{d2:dd-MM-yyyy}";
+                var report = new rptBaqayaSale(data,dateRange,partyid);
+                report.CreateDocument();
+                ShowReport(report);
+            }
+        }
+
         private void ShowRefReport()
         {
             using (new waitForm())
@@ -833,10 +874,10 @@ Order By mas.id";
             }
         }
 
-        private void ShowReport(XtraReport rpt)
+        private void ShowReport(XtraReport rpt, float zoom=1.5f)
         {
             if (rpt == null) return;
-            var frm= new XtraForm1(rpt);
+            var frm= new XtraForm1(rpt,zoom);
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.Show();frm.BringToFront();
             return;
@@ -899,13 +940,12 @@ mas.AccountTitle as 'MasterAccount',
         acc.RefName,
         acc.Contact,
         city.CityName,
-        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive
     FROM EndBalances eb 
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
-    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
-";
+    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")} {(cbInActive.Checked?"":" and ISNULL(Acc.IsActive,1)=1")};";
                 DataTable dt = new DataTable();
                 using (var db = new db())
                 {
@@ -914,9 +954,9 @@ mas.AccountTitle as 'MasterAccount',
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt());
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt(),cbZero.Checked,cbInActive.Checked,cbSummary.Checked);
                     report.CreateDocument();
-                    ShowReport(report);
+                    ShowReport(report,1.5f);
                 }
                 else
                 {

@@ -319,5 +319,15 @@ namespace MandiPOS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhatsApp_Root_QYB7VQ27uN {
+            get {
+                object obj = ResourceManager.GetObject("WhatsApp.Root_QYB7VQ27uN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

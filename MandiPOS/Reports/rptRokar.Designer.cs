@@ -113,7 +113,7 @@
             // 
             // lblPrintDate
             // 
-            this.lblPrintDate.Font = new DevExpress.Drawing.DXFont("Consolas", 12F);
+            this.lblPrintDate.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
             this.lblPrintDate.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblPrintDate.Multiline = true;
             this.lblPrintDate.Name = "lblPrintDate";
@@ -128,7 +128,7 @@
             // xrLabel6
             // 
             this.xrLabel6.BackColor = System.Drawing.Color.Black;
-            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrLabel6.ForeColor = System.Drawing.Color.White;
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(1078.167F, 0F);
             this.xrLabel6.Multiline = true;
@@ -144,7 +144,7 @@
             // 
             // lblRokarDate
             // 
-            this.lblRokarDate.Font = new DevExpress.Drawing.DXFont("Consolas", 12F);
+            this.lblRokarDate.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
             this.lblRokarDate.LocationFloat = new DevExpress.Utils.PointFloat(964.8331F, 3.74999F);
             this.lblRokarDate.Multiline = true;
             this.lblRokarDate.Name = "lblRokarDate";
@@ -160,7 +160,7 @@
             this.lblPrevBalState.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblPrevBalState.CanGrow = false;
-            this.lblPrevBalState.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.lblPrevBalState.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.lblPrevBalState.LocationFloat = new DevExpress.Utils.PointFloat(673.2501F, 0F);
             this.lblPrevBalState.Name = "lblPrevBalState";
             this.lblPrevBalState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
@@ -192,7 +192,7 @@
             this.xrLabel2.BackColor = System.Drawing.Color.Black;
             this.xrLabel2.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrLabel2.ForeColor = System.Drawing.Color.White;
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(854.9169F, 0F);
             this.xrLabel2.Multiline = true;
@@ -210,7 +210,7 @@
             // xrLabel1
             // 
             this.xrLabel1.BackColor = System.Drawing.Color.Black;
-            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrLabel1.ForeColor = System.Drawing.Color.White;
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(485.75F, 0F);
             this.xrLabel1.Multiline = true;
@@ -244,7 +244,7 @@
             // xrLabel7
             // 
             this.xrLabel7.BackColor = System.Drawing.Color.Black;
-            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrLabel7.ForeColor = System.Drawing.Color.White;
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(754.3333F, 43.91666F);
             this.xrLabel7.Multiline = true;
@@ -261,7 +261,7 @@
             // xrLabel5
             // 
             this.xrLabel5.BackColor = System.Drawing.Color.Black;
-            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrLabel5.ForeColor = System.Drawing.Color.White;
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(217.1667F, 43.91666F);
             this.xrLabel5.Multiline = true;
@@ -358,7 +358,7 @@
             // xrTableCell1
             // 
             this.xrTableCell1.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("calibri", 14F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseBorders = false;
@@ -381,7 +381,7 @@
             // 
             this.xrTableCell5.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("calibri", 14F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseBorders = false;
@@ -397,20 +397,20 @@
             this.xrLabel3,
             this.lblEndBalanceState,
             this.xrTable1});
-            this.SubBand2.HeightF = 86.66667F;
+            this.SubBand2.HeightF = 178.2083F;
             this.SubBand2.Name = "SubBand2";
             // 
             // xrTable2
             // 
             this.xrTable2.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(754.3334F, 0F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(797.0417F, 0F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5,
             this.xrTableRow6,
             this.xrTableRow7});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(347.3333F, 86.66666F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(304.6251F, 121.0417F);
             this.xrTable2.StylePriority.UseBorderColor = false;
             // 
             // xrTableRow5
@@ -427,7 +427,7 @@
             this._expnse.BorderColor = System.Drawing.Color.White;
             this._expnse.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this._expnse.BorderWidth = 0.25F;
-            this._expnse.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this._expnse.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this._expnse.ForeColor = System.Drawing.Color.Black;
             this._expnse.Multiline = true;
             this._expnse.Name = "_expnse";
@@ -442,7 +442,7 @@
             this._expnse.StylePriority.UseTextAlignment = false;
             this._expnse.Text = "lblTotalJama";
             this._expnse.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._expnse.Weight = 1.828470253688705D;
+            this._expnse.Weight = 1.8828238782014433D;
             // 
             // xrTableCell7
             // 
@@ -450,7 +450,7 @@
             this.xrTableCell7.BorderColor = System.Drawing.Color.White;
             this.xrTableCell7.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell7.BorderWidth = 0.25F;
-            this.xrTableCell7.Font = new DevExpress.Drawing.DXFont("calibri", 18F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell7.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell7.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
@@ -465,7 +465,7 @@
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "کل  بل اخراجات";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell7.Weight = 1.7962888241244523D;
+            this.xrTableCell7.Weight = 1.2962326441312926D;
             // 
             // xrTableRow6
             // 
@@ -481,7 +481,7 @@
             this._wasooli.BorderColor = System.Drawing.Color.White;
             this._wasooli.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this._wasooli.BorderWidth = 0.25F;
-            this._wasooli.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this._wasooli.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this._wasooli.ForeColor = System.Drawing.Color.Black;
             this._wasooli.Multiline = true;
             this._wasooli.Name = "_wasooli";
@@ -496,7 +496,7 @@
             this._wasooli.StylePriority.UseTextAlignment = false;
             this._wasooli.Text = "lblTotalBanam";
             this._wasooli.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._wasooli.Weight = 1.8284696167277577D;
+            this._wasooli.Weight = 1.8828232412404962D;
             // 
             // xrTableCell9
             // 
@@ -504,7 +504,7 @@
             this.xrTableCell9.BorderColor = System.Drawing.Color.White;
             this.xrTableCell9.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell9.BorderWidth = 0.25F;
-            this.xrTableCell9.Font = new DevExpress.Drawing.DXFont("calibri", 18F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell9.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell9.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell9.Multiline = true;
             this.xrTableCell9.Name = "xrTableCell9";
@@ -519,7 +519,7 @@
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.Text = "کل وصولی کیش";
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell9.Weight = 1.7962894610853997D;
+            this.xrTableCell9.Weight = 1.2962332810922397D;
             // 
             // xrTableRow7
             // 
@@ -535,7 +535,7 @@
             this._banam.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this._banam.BorderWidth = 0.25F;
-            this._banam.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this._banam.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this._banam.ForeColor = System.Drawing.Color.Black;
             this._banam.Multiline = true;
             this._banam.Name = "_banam";
@@ -549,7 +549,7 @@
             this._banam.StylePriority.UseTextAlignment = false;
             this._banam.Text = "lblRemainingCash";
             this._banam.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this._banam.Weight = 1.828470253688705D;
+            this._banam.Weight = 1.8828238782014433D;
             // 
             // xrTableCell11
             // 
@@ -557,7 +557,7 @@
             this.xrTableCell11.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell11.BorderWidth = 0.25F;
-            this.xrTableCell11.Font = new DevExpress.Drawing.DXFont("calibri", 18F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell11.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell11.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell11.Multiline = true;
             this.xrTableCell11.Name = "xrTableCell11";
@@ -571,7 +571,7 @@
             this.xrTableCell11.StylePriority.UseTextAlignment = false;
             this.xrTableCell11.Text = "کل بنام کیش";
             this.xrTableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell11.Weight = 1.7962888241244523D;
+            this.xrTableCell11.Weight = 1.2962326441312926D;
             // 
             // xrLabel4
             // 
@@ -582,10 +582,10 @@
             this.xrLabel4.CanGrow = false;
             this.xrLabel4.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrLabel4.ForeColor = System.Drawing.Color.White;
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 28.88891F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 40.34723F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(62.50009F, 28.88886F);
+            this.xrLabel4.SizeF = new System.Drawing.SizeF(62.50009F, 40.34723F);
             this.xrLabel4.StylePriority.UseBackColor = false;
             this.xrLabel4.StylePriority.UseBorderColor = false;
             this.xrLabel4.StylePriority.UseBorders = false;
@@ -608,7 +608,7 @@
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 0F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(62.50011F, 28.88891F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(62.50012F, 40.34724F);
             this.xrLabel3.StylePriority.UseBackColor = false;
             this.xrLabel3.StylePriority.UseBorderColor = false;
             this.xrLabel3.StylePriority.UseBorders = false;
@@ -624,12 +624,12 @@
             this.lblEndBalanceState.BackColor = System.Drawing.Color.Black;
             this.lblEndBalanceState.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.lblEndBalanceState.CanGrow = false;
-            this.lblEndBalanceState.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.lblEndBalanceState.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.lblEndBalanceState.ForeColor = System.Drawing.Color.White;
-            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 57.77776F);
+            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 80.69445F);
             this.lblEndBalanceState.Name = "lblEndBalanceState";
             this.lblEndBalanceState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
-            this.lblEndBalanceState.SizeF = new System.Drawing.SizeF(62.5001F, 28.88891F);
+            this.lblEndBalanceState.SizeF = new System.Drawing.SizeF(62.5001F, 40.34723F);
             this.lblEndBalanceState.StylePriority.UseBackColor = false;
             this.lblEndBalanceState.StylePriority.UseBorders = false;
             this.lblEndBalanceState.StylePriority.UseFont = false;
@@ -650,7 +650,7 @@
             this.xrTableRow1,
             this.xrTableRow3,
             this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(252.5F, 86.66666F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(252.5F, 121.0417F);
             this.xrTable1.StylePriority.UseBorderColor = false;
             // 
             // xrTableRow1
@@ -668,7 +668,7 @@
             this.lblTotalJama.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.lblTotalJama.BorderWidth = 0.25F;
             this.lblTotalJama.CanGrow = false;
-            this.lblTotalJama.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this.lblTotalJama.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this.lblTotalJama.ForeColor = System.Drawing.Color.White;
             this.lblTotalJama.Name = "lblTotalJama";
             this.lblTotalJama.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
@@ -692,7 +692,7 @@
             this.xrTableCell2.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell2.BorderWidth = 0.25F;
             this.xrTableCell2.CanGrow = false;
-            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrTableCell2.ForeColor = System.Drawing.Color.White;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
@@ -725,7 +725,7 @@
             this.lblTotalBanam.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.lblTotalBanam.BorderWidth = 0.25F;
             this.lblTotalBanam.CanGrow = false;
-            this.lblTotalBanam.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this.lblTotalBanam.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this.lblTotalBanam.ForeColor = System.Drawing.Color.White;
             this.lblTotalBanam.Name = "lblTotalBanam";
             this.lblTotalBanam.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
@@ -750,7 +750,7 @@
             this.xrTableCell6.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell6.BorderWidth = 0.25F;
             this.xrTableCell6.CanGrow = false;
-            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrTableCell6.ForeColor = System.Drawing.Color.White;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
@@ -783,7 +783,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblRemainingCash.BorderWidth = 0.25F;
             this.lblRemainingCash.CanGrow = false;
-            this.lblRemainingCash.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
+            this.lblRemainingCash.Font = new DevExpress.Drawing.DXFont("calibri", 16F);
             this.lblRemainingCash.ForeColor = System.Drawing.Color.White;
             this.lblRemainingCash.Name = "lblRemainingCash";
             this.lblRemainingCash.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
@@ -807,7 +807,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell4.BorderWidth = 0.25F;
             this.xrTableCell4.CanGrow = false;
-            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
+            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.xrTableCell4.ForeColor = System.Drawing.Color.White;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);

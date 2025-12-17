@@ -13,6 +13,7 @@ namespace MandiPOS.Reports
         public CustomerBill(int CustomerID, DateTime date)
         {
             InitializeComponent();
+            this.HideWarnings();
             string sql = $@"SELECT 
 	p.ItemTitle as 'Item',
     CustomerRate  as Rate,
@@ -44,18 +45,18 @@ ORDER BY
             var city = SQL.GetCities().Where(x => x.ID == acc.CityID).FirstOrDefault();
             var prevBalance = new db().ExecuteScalar<decimal>("sp_Ledger", new { AccountID = CustomerID, GetBalanceBeforeDate = date.Date },
              commandType: CommandType.StoredProcedure);
-            _prevbal.Text = Math.Abs(prevBalance).ToString("0.##");
-            prevState.Text = prevBalance < 0 ? "جمع" : "بنام";
+            _prevbal.Text = Math.Abs(prevBalance).ToString("N0");
+            //prevState.Text = prevBalance < 0 ? "جمع" : "بنام";
             lblPartyTitle.Text = $@"{acc.AccountTitle}";
             lblDate.Text = $@"{date:dd-MMM-yyyy}";
             this.DataSource = data;
-            _laga.Text = data.Sum(x => x.Laga).ToString("0.##");
+            _laga.Text = data.Sum(x => x.Laga).ToString("N0");
             decimal _totalAmount = 0;
             _totalAmount = data.Sum(x => x.Amount) + data.Sum(x => x.Laga);
-            _netSale.Text = _totalAmount.ToString("0.##");
+            _netSale.Text = _totalAmount.ToString("N0");
             decimal recAble = prevBalance + _totalAmount;
-            _lastBalance.Text = $"{recAble.ToString("0.##")}";
-            currstate.Text = recAble < 0 ? "جمع" : "بنام";
+            _lastBalance.Text = $"{recAble.ToString("N0")}";
+            //currstate.Text = recAble < 0 ? "جمع" : "بنام";
 
         }
 
@@ -71,18 +72,42 @@ ORDER BY
                 }
             }
         }
-
+        decimal qty= 0;
+        decimal weight= 0;
+        
         private void xrTableCell2_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
         {
+
             XRTableCell cell = sender as XRTableCell;
-            if (cell != null)
+            if (cell == null) return;
+
+            // Get the current row from the report's datasource
+            var row = GetCurrentRow() as clsCustomerBill;
+            if (row == null) return;
+            qty += row.Qty;
+            weight += row.Weight;
+            cell.RightToLeft = RightToLeft.Yes;
+            
+            // Decide what to display
+            if (row.Weight != 0)
             {
-                // Check if the value is 0 (you might need to handle different numeric types)
-                if (cell.Text == "0" || cell.Text == "0.00" || cell.Text == "0.0")
-                {
-                    cell.Text = "";
-                }
+                cell.Text = $"{row.Qty.ToString("N0")} / {row.Weight.ToString("N0")}کلو";
             }
+            else
+            {
+                cell.Text = $"{row.Qty.ToString("N0")}";
+            }
+        }
+
+        private void xrTableCell13_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            XRTableCell cell = sender as XRTableCell;
+            if (cell == null) return;
+            cell.RightToLeft = RightToLeft.Yes;
+            if (weight==0)
+                cell.Text = $"{qty:N0}";
+            else
+                cell.Text = $"{qty:N0}/{weight:N0}کلو";
         }
     }
 }

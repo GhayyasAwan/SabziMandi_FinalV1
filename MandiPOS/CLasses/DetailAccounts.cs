@@ -75,6 +75,7 @@ namespace MandiPOS.CLasses
         public decimal Commission { get; set; }
         [DisplayName("معرفت")]
         public string RefName { get; set; }
+        public bool IsActive { get; set; }
 
     }
     public static class DetailAccountService

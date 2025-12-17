@@ -232,7 +232,14 @@ namespace MandiPOS.Reports
             //                dtBanamMaster.ImportRow(row);
             //            } 
             #endregion
-            sql=$@"Select * from vw_BanamRokar Where EntryDate='{_date:yyyy-MM-dd}' Order By Case MasterID When 4 Then 0 When 6 Then 1 When 3 Then 2 When 1 Then 4 Else 5 End";
+            sql=$@"Select * from vw_BanamRokar Where EntryDate='{_date:yyyy-MM-dd}' 
+            Order By Case MasterID  
+            When 7 Then 0 
+            When 4 Then 1 
+            When 6 Then 2 
+            When 9 Then 3
+            When 3 Then 4
+            Else 5 End";
             dtBanamMaster = General.FetchRecords(sql, null);
             //Set DataSource for Subreport
             totalbanam = dtBanamMaster.Compute("Sum(Amount)", string.Empty) is DBNull ? 0 : Convert.ToDecimal(dtBanamMaster.Compute("Sum(Amount)", string.Empty));

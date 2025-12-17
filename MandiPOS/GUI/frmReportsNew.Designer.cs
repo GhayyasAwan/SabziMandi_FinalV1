@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout cmbCity_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportsNew));
             Janus.Windows.GridEX.GridEXLayout cmbGroups_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout dgvHelp_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
-            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
-            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.uiGroupBox1 = new Janus.Windows.EditControls.UIGroupBox();
             this.rb_Report21 = new System.Windows.Forms.RadioButton();
             this.rb_Report19 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbBqayaSale = new System.Windows.Forms.RadioButton();
             this.rb_Report20 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.rb_Report17 = new System.Windows.Forms.RadioButton();
@@ -66,6 +66,11 @@
             this.dtp2 = new Janus.Windows.CalendarCombo.CalendarCombo();
             this.lblDate2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbSummary = new Janus.Windows.EditControls.UICheckBox();
+            this.cbInActive = new Janus.Windows.EditControls.UICheckBox();
+            this.cbZero = new Janus.Windows.EditControls.UICheckBox();
+            this.cmbSort = new Janus.Windows.EditControls.UIComboBox();
+            this.lblSort = new System.Windows.Forms.Label();
             this.btnViewReport = new Janus.Windows.EditControls.UIButton();
             this.lblBill = new System.Windows.Forms.Label();
             this.txtBillNo = new Janus.Windows.GridEX.EditControls.EditBox();
@@ -78,8 +83,6 @@
             this.lblParty = new System.Windows.Forms.Label();
             this._pid = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSort = new System.Windows.Forms.Label();
-            this.cmbSort = new Janus.Windows.EditControls.UIComboBox();
             this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.bsParties = new System.Windows.Forms.BindingSource(this.components);
             this.chartDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -116,7 +119,7 @@
             this.uiGroupBox1.Controls.Add(this.rb_Report21);
             this.uiGroupBox1.Controls.Add(this.rb_Report19);
             this.uiGroupBox1.Controls.Add(this.radioButton3);
-            this.uiGroupBox1.Controls.Add(this.radioButton2);
+            this.uiGroupBox1.Controls.Add(this.rbBqayaSale);
             this.uiGroupBox1.Controls.Add(this.rb_Report20);
             this.uiGroupBox1.Controls.Add(this.label3);
             this.uiGroupBox1.Controls.Add(this.rb_Report17);
@@ -205,25 +208,26 @@
             this.radioButton3.UseCompatibleTextRendering = true;
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbBqayaSale
             // 
-            this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Enabled = false;
-            this.radioButton2.FlatAppearance.BorderSize = 0;
-            this.radioButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButton2.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(585, 90);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(140, 46);
-            this.radioButton2.TabIndex = 20;
-            this.radioButton2.Text = "بقایا سیل رپورٹ";
-            this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton2.UseCompatibleTextRendering = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbBqayaSale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbBqayaSale.AutoSize = true;
+            this.rbBqayaSale.BackColor = System.Drawing.Color.Transparent;
+            this.rbBqayaSale.Enabled = false;
+            this.rbBqayaSale.FlatAppearance.BorderSize = 0;
+            this.rbBqayaSale.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rbBqayaSale.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.rbBqayaSale.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbBqayaSale.Location = new System.Drawing.Point(585, 90);
+            this.rbBqayaSale.Margin = new System.Windows.Forms.Padding(2);
+            this.rbBqayaSale.Name = "rbBqayaSale";
+            this.rbBqayaSale.Size = new System.Drawing.Size(140, 46);
+            this.rbBqayaSale.TabIndex = 20;
+            this.rbBqayaSale.Text = "بقایا سیل رپورٹ";
+            this.rbBqayaSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbBqayaSale.UseCompatibleTextRendering = true;
+            this.rbBqayaSale.UseVisualStyleBackColor = true;
+            this.rbBqayaSale.CheckedChanged += new System.EventHandler(this.SetReport);
             // 
             // rb_Report20
             // 
@@ -634,6 +638,7 @@
             this.dtp.Name = "dtp";
             this.dtp.Size = new System.Drawing.Size(172, 33);
             this.dtp.TabIndex = 2;
+            this.dtp.Value = new System.DateTime(2025, 1, 1, 0, 0, 0, 0);
             // 
             // dtp2
             // 
@@ -646,6 +651,7 @@
             this.dtp2.Name = "dtp2";
             this.dtp2.Size = new System.Drawing.Size(172, 33);
             this.dtp2.TabIndex = 5;
+            this.dtp2.Value = new System.DateTime(2025, 12, 13, 0, 0, 0, 0);
             // 
             // lblDate2
             // 
@@ -661,6 +667,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel1.Controls.Add(this.cbSummary);
+            this.panel1.Controls.Add(this.cbInActive);
+            this.panel1.Controls.Add(this.cbZero);
             this.panel1.Controls.Add(this.cmbSort);
             this.panel1.Controls.Add(this.lblSort);
             this.panel1.Controls.Add(this.btnViewReport);
@@ -685,6 +694,74 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(897, 572);
             this.panel1.TabIndex = 5;
+            // 
+            // cbSummary
+            // 
+            this.cbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSummary.AutoSize = true;
+            this.cbSummary.Location = new System.Drawing.Point(231, 106);
+            this.cbSummary.Name = "cbSummary";
+            this.cbSummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbSummary.Size = new System.Drawing.Size(43, 36);
+            this.cbSummary.TabIndex = 18;
+            this.cbSummary.Text = "مختصر";
+            this.cbSummary.TextVerticalAlignment = Janus.Windows.EditControls.TextAlignment.Near;
+            // 
+            // cbInActive
+            // 
+            this.cbInActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbInActive.AutoSize = true;
+            this.cbInActive.Location = new System.Drawing.Point(168, 128);
+            this.cbInActive.Name = "cbInActive";
+            this.cbInActive.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbInActive.Size = new System.Drawing.Size(106, 36);
+            this.cbInActive.TabIndex = 17;
+            this.cbInActive.Text = "بشمول ڈوبت کھاتے";
+            this.cbInActive.TextVerticalAlignment = Janus.Windows.EditControls.TextAlignment.Near;
+            this.cbInActive.Visible = false;
+            // 
+            // cbZero
+            // 
+            this.cbZero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbZero.AutoSize = true;
+            this.cbZero.Location = new System.Drawing.Point(204, 81);
+            this.cbZero.Name = "cbZero";
+            this.cbZero.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbZero.Size = new System.Drawing.Size(70, 36);
+            this.cbZero.TabIndex = 6;
+            this.cbZero.Text = " بشمول زیرو";
+            this.cbZero.TextVerticalAlignment = Janus.Windows.EditControls.TextAlignment.Near;
+            // 
+            // cmbSort
+            // 
+            this.cmbSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            uiComboBoxItem1.FormatStyle.Alpha = 0;
+            uiComboBoxItem1.IsSeparator = false;
+            uiComboBoxItem1.Text = "موجودہ کوڈ";
+            uiComboBoxItem1.Value = 0;
+            uiComboBoxItem2.FormatStyle.Alpha = 0;
+            uiComboBoxItem2.IsSeparator = false;
+            uiComboBoxItem2.Text = "پرانا کوڈ";
+            uiComboBoxItem2.Value = 1;
+            this.cmbSort.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
+            uiComboBoxItem1,
+            uiComboBoxItem2});
+            this.cmbSort.Location = new System.Drawing.Point(301, 125);
+            this.cmbSort.Name = "cmbSort";
+            this.cmbSort.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cmbSort.Size = new System.Drawing.Size(143, 39);
+            this.cmbSort.TabIndex = 16;
+            // 
+            // lblSort
+            // 
+            this.lblSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSort.AutoSize = true;
+            this.lblSort.Location = new System.Drawing.Point(449, 125);
+            this.lblSort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSort.Name = "lblSort";
+            this.lblSort.Size = new System.Drawing.Size(44, 32);
+            this.lblSort.TabIndex = 15;
+            this.lblSort.Text = "ترتیب";
             // 
             // btnViewReport
             // 
@@ -846,37 +923,6 @@
             this.lblTitle.Text = "label3";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblSort
-            // 
-            this.lblSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSort.AutoSize = true;
-            this.lblSort.Location = new System.Drawing.Point(449, 125);
-            this.lblSort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSort.Name = "lblSort";
-            this.lblSort.Size = new System.Drawing.Size(44, 32);
-            this.lblSort.TabIndex = 15;
-            this.lblSort.Text = "ترتیب";
-            // 
-            // cmbSort
-            // 
-            this.cmbSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            uiComboBoxItem1.FormatStyle.Alpha = 0;
-            uiComboBoxItem1.IsSeparator = false;
-            uiComboBoxItem1.Text = "موجودہ کوڈ";
-            uiComboBoxItem1.Value = 0;
-            uiComboBoxItem2.FormatStyle.Alpha = 0;
-            uiComboBoxItem2.IsSeparator = false;
-            uiComboBoxItem2.Text = "پرانا کوڈ";
-            uiComboBoxItem2.Value = 1;
-            this.cmbSort.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
-            uiComboBoxItem1,
-            uiComboBoxItem2});
-            this.cmbSort.Location = new System.Drawing.Point(301, 125);
-            this.cmbSort.Name = "cmbSort";
-            this.cmbSort.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmbSort.Size = new System.Drawing.Size(143, 39);
-            this.cmbSort.TabIndex = 16;
-            // 
             // bs
             // 
             this.bs.DataSource = typeof(MandiPOS.CLasses.MasterAccounts);
@@ -964,12 +1010,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbBqayaSale;
         private System.Windows.Forms.RadioButton rb_Report20;
         private System.Windows.Forms.RadioButton rb_Report21;
         private System.Windows.Forms.RadioButton rb_Report19;
         private System.Windows.Forms.RadioButton radioButton3;
         private Janus.Windows.EditControls.UIComboBox cmbSort;
         private System.Windows.Forms.Label lblSort;
+        private Janus.Windows.EditControls.UICheckBox cbSummary;
+        private Janus.Windows.EditControls.UICheckBox cbInActive;
+        private Janus.Windows.EditControls.UICheckBox cbZero;
     }
 }

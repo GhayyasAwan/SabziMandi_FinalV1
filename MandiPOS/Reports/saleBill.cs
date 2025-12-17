@@ -26,11 +26,11 @@ namespace MandiPOS.Reports
             }
             if (!string.IsNullOrEmpty(sale.Marka))
             {
-                lblMarka.Text = $@"مارکہ {sale.Marka} ";
+                //lblMarka.Text = $@"مارکہ {sale.Marka} ";
             }
             else
             {
-                lblMarka.Text = string.Empty;
+               // lblMarka.Text = string.Empty;
             }
             DetailAccounts acc = DetailAccountService.GetDetailAccountByID(sale.PartyID);
             if (acc.AccountTitle.Contains("نقد") && !string.IsNullOrEmpty(sale.PartyTitle))
@@ -50,80 +50,56 @@ namespace MandiPOS.Reports
             List<vwSale3> newCart = new List<vwSale3>();
 
 
-            foreach (vwSale3 d in (cart as List<vwSale3>))
-            {
-                Grossale += d.PartyAmount;
-                if (!string.IsNullOrEmpty(d.Marka))
-                {
-                    d.ItemTitle = $"{d.ItemTitle}  {d.Marka}";
-                }
+            //foreach (vwSale3 d in (cart as List<vwSale3>))
+            //{
+            //    Grossale += d.PartyAmount;
+            //    if (!string.IsNullOrEmpty(d.Marka))
+            //    {
+            //        d.ItemTitle = $"{d.ItemTitle}  {d.Marka}";
+            //    }
 
-                if (newCart.Any(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate))
-                {
-                    vwSale3 existingItem = newCart.FirstOrDefault(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate);
-                    existingItem.PartyAmount += d.PartyAmount;
-                    existingItem.ItemQty += d.ItemQty;
-                }
-                else
-                {
-                    newCart.Add(d);
-                }
-            }
+            //    if (newCart.Any(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate))
+            //    {
+            //        vwSale3 existingItem = newCart.FirstOrDefault(x => x.ItemID == d.ItemID && x.ParyRate == d.ParyRate);
+            //        existingItem.PartyAmount += d.PartyAmount;
+            //        existingItem.ItemQty += d.ItemQty;
+            //    }
+            //    else
+            //    {
+            //        newCart.Add(d);
+            //    }
+            //}
 
 
-
+            newCart = cart as List<vwSale3>;
 
             this.DataSource = newCart.OrderByDescending(x => x.ParyRate);
-            decimal total = 0, commission = 0, mazdoori = 0, munshiana = 0, karaya = 0, store = 0;
+            decimal total = 0, commission = 0, mazdoori = 0, munshiana = 0, karaya = 0, store = 0, _sale=0;
+            Grossale = newCart.Sum(x => x.PartyAmount);
             commission = sale.CommissionAmount;
             mazdoori = sale.MazdooriAmount;
             munshiana = sale.MunshianaAmount;
             karaya = sale.KarayaAmount;
+            rowKarya.Visible = karaya != 0;
             store = sale.StoreRent;
-            total = commission + mazdoori + munshiana + karaya + store;
+            total = commission + mazdoori + munshiana +  store;
             _commission.Text = commission.ToString("N0");
             _mazdoori.Text = mazdoori.ToString("N0");
             _munshiana.Text = munshiana.ToString("N0");
             _kraya.Text = karaya.ToString("N0");
-            _store.Text = store.ToString("N0");
+            //_store.Text = store.ToString("N0");
             _total.Text = total.ToString("N0");
             _expenses.Text = total.ToString("N0");
             _netSale.Text = (Grossale - total).ToString("N0");
-            if (sale.PaidAmount != 0)
-            {
-                lblstate2.Text = string.Empty;
-                lblNetPaid.Visible = lblNetPaidValue.Visible = true;
-                lblNetPaidValue.Text = sale.PaidAmount.ToString("0,0.##");
-                decimal tobePaid = (Grossale - total) - sale.PaidAmount;
-                if (tobePaid != 0)
-                {
-                    lblRemAmount.Visible = lblRemAmountValue.Visible = true;
-                    lblRemAmountValue.Text = Math.Abs(tobePaid).ToString("0,0.##");
-                    lblRemAmountValue.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-                    lblRemAmountValue.ForeColor = System.Drawing.Color.Black;
-                    lblState.Visible = true;
-                    lblState.Text = tobePaid > 0 ? "جمع" : "بنام";
-                }
-                else
-                {
-                    lblRemAmountValue.Visible = true;
-                    lblRemAmountValue.Text = "NIL";
-                    lblRemAmountValue.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-                    lblRemAmountValue.Borders = DevExpress.XtraPrinting.BorderSide.None;
-                    lblRemAmountValue.BackColor = System.Drawing.Color.Transparent;
-                    lblRemAmountValue.ForeColor = System.Drawing.Color.ForestGreen;
-
-                }
-            }
-            else
-            {
-                lblstate2.Text = "جمع";
-            }
-
-
-            //lblPrintTime.Text = $"Print Time: {DateTime.Now:dd-MMM-yyyy hh:mm tt}";
+            decimal tobePaid = (Grossale - total - karaya) - sale.PaidAmount;
+            rowPaid.Visible = true;
+            lblNetPaidValue.Text = sale.PaidAmount.ToString("0,0.##");
+                rowPaid.Visible = true;
+                lblRemAmountValue.Text = Math.Abs(tobePaid).ToString("0,0.##");
+                lblRemAmountValue.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
         }
-
+        decimal qty = 0;
+        decimal weight = 0;
         private void xrTableCell1_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
         {
             XRTableCell cell = sender as XRTableCell;
@@ -140,13 +116,38 @@ namespace MandiPOS.Reports
         private void xrTableCell2_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
         {
             XRTableCell cell = sender as XRTableCell;
-            if (cell != null)
+            if (cell == null) return;
+
+            // Get the current row from the report's datasource
+            var row = GetCurrentRow() as vwSale3;
+            if (row == null) return;
+            qty += row.ItemQty;
+            weight += row.ItemWeight;
+            cell.RightToLeft = RightToLeft.Yes;
+            // Decide what to display
+            if (row.ItemWeight != 0)
             {
-                // Check if the value is 0 (you might need to handle different numeric types)
-                if (cell.Text == "0" || cell.Text == "0.00" || cell.Text == "0.0")
-                {
-                    cell.Text = "";
-                }
+                cell.Text = $"{row.ItemQty.ToString("0.##")} / {row.ItemWeight.ToString("0.##")}کلو";
+            }
+            else
+            {
+                cell.Text = $"{row.ItemQty.ToString("0.##")}";
+            }
+        }
+
+        private void lblTotalQty_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            XRTableCell cell = sender as XRTableCell;
+            
+            if (cell == null) return;
+            cell.RightToLeft = RightToLeft.Yes;
+            if (weight == 0)
+            {
+                cell.Text = $"{qty:0.##}";
+            }
+            else
+            {
+                cell.Text = $"{weight:0.##}/{qty:0.##}کلو";
             }
         }
     }

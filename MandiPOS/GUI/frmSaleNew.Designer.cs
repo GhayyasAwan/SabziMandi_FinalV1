@@ -931,6 +931,7 @@
             0,
             0,
             0});
+            this._store.Visible = false;
             this._store.VisualStyleManager = this.visualStyleManager1;
             // 
             // label22
@@ -941,6 +942,7 @@
             this.label22.Size = new System.Drawing.Size(51, 27);
             this.label22.TabIndex = 66;
             this.label22.Text = "سٹور کرایہ";
+            this.label22.Visible = false;
             // 
             // label23
             // 

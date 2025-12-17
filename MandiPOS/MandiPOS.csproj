@@ -366,6 +366,7 @@
     <Compile Include="CLasses\tblUsers.cs" />
     <Compile Include="CLasses\UpdateHelper.cs" />
     <Compile Include="CLasses\Vouchers.cs" />
+    <Compile Include="CLasses\vwBaqayaSale.cs" />
     <Compile Include="CLasses\vwmarka.cs" />
     <Compile Include="CLasses\vw_CommissionReport.cs" />
     <Compile Include="CLasses\vw_CustomerSale.cs" />
@@ -624,6 +625,12 @@
     <Compile Include="Reports\rptChithaRecords.Designer.cs">
       <DependentUpon>rptChithaRecords.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\rptBaqayaSale.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptBaqayaSale.Designer.cs">
+      <DependentUpon>rptBaqayaSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rptCustomerRecovery.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -738,6 +745,7 @@
     <Compile Include="Reports\uc_Report01.Designer.cs">
       <DependentUpon>uc_Report01.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\WhatsApp.Root_QYB7VQ27uN.png" />
     <Content Include="Scripts\12122025_001.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -754,6 +762,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\13122025_001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\13122025_002.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\13122025_003.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\13122025_004.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\14122025_001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\16122025_001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\16122025_003.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\16122025_004.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\16122025ـ002.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Add Column OldAccountCode.sql">
@@ -936,6 +968,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptChithaRecords.resx">
       <DependentUpon>rptChithaRecords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptBaqayaSale.resx">
+      <DependentUpon>rptBaqayaSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCustomerRecovery.resx">
       <DependentUpon>rptCustomerRecovery.cs</DependentUpon>
