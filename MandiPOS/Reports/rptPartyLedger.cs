@@ -26,7 +26,7 @@ namespace MandiPOS.Reports
             DetailAccounts acc=new DetailAccounts();
             using (var db = new db())
                 acc = db.Get<DetailAccounts>(PartyID);
-            var rpt=new rptHeader(PartyID);
+            var rpt=new rptHeader2(PartyID);
             rpt.CreateDocument();
             this.xrSubreport1.ReportSource = rpt;
             decimal totalBanam = 0, TotalJama=0, endBalance=0;

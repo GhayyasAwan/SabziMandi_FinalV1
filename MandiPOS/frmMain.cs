@@ -15,8 +15,11 @@ using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static System.Net.WebRequestMethods;
 
 namespace MandiPOS
 {
@@ -29,33 +32,64 @@ namespace MandiPOS
         {
             this.Opacity = 0;
             InitializeComponent();
+            General.Security = tblSecurity.Get;
+            this.ControlBox = false;
             General.MultanCityID = General.GetMultanCityID();
             this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
-           this.DoubleBuffered = true;
+            this.DoubleBuffered = true;
             using (var frm = new frmLogin())
-            { 
-                if(frm.ShowDialog() != DialogResult.OK)
+            {
+                if (frm.ShowDialog() != DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
             }
             menuStrip1.Visible = General.IsAdmin;
-            var lbl = new Label()
-            {
-                Height = 60, // Set your preferred height
-                Font = new Font("jameel noori nastaleeq", 30, FontStyle.Bold), // Use Urdu font
-                ForeColor = Color.Black,
-                BackColor = Color.Transparent,
-                AutoSize = false,
-                Dock = DockStyle.Fill,
-                Text = "چوہدری محمد شریف، چوہدری محمد سلیم اینڈ کو، دکان نمبر 63",
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-            panel2.Height = lbl.Height;
-            panel2.Controls.Add(lbl);
-            panel2.BackColor = Color.Transparent;
-            lbl.BringToFront();
+            l1.BackColor = l2.BackColor = lblTime.BackColor = lblFiscalYear.BackColor = l3.BackColor = Color.Transparent;
+
+
+            //var lbl = new Label()
+            //{
+            //    Height = 120, // Set your preferred height
+            //    Font = new Font("jameel noori nastaleeq", 50, FontStyle.Bold), // Use Urdu font
+            //    ForeColor = Color.Black,
+            //    BackColor = Color.Transparent,
+            //    AutoSize = false,
+            //    Dock = DockStyle.Top,
+            //    Text = line1,
+            //    TextAlign = ContentAlignment.MiddleCenter
+            //};
+            // panel2.Height = lbl.Height;
+            //panel2.Controls.Add(lbl);
+            //var lbl2 = new Label()
+            //{
+            //    Height = 120, // Set your preferred height
+            //    Font = new Font("jameel noori nastaleeq", 50, FontStyle.Bold), // Use Urdu font
+            //    ForeColor = Color.Black,
+            //    BackColor = Color.Transparent,
+            //    AutoSize = false,
+            //    Dock = DockStyle.Top,
+            //    Text = line2,
+            //    TextAlign = ContentAlignment.MiddleCenter
+            //};
+            //// panel2.Height = lbl.Height;
+            //panel2.Controls.Add(lbl2);
+            //var lbl3 = new Label()
+            //{
+            //    Height = 120, // Set your preferred height
+            //    Font = new Font("jameel noori nastaleeq", 50, FontStyle.Bold), // Use Urdu font
+            //    ForeColor = Color.Black,
+            //    BackColor = Color.Transparent,
+            //    AutoSize = false,
+            //    Dock = DockStyle.Top,
+            //    Text = line3,
+            //    TextAlign = ContentAlignment.MiddleCenter
+            //};
+            //// panel2.Height = lbl.Height;
+            //panel2.Controls.Add(txt);
+
+            //lbl.BringToFront();
 
 
 
@@ -82,13 +116,13 @@ namespace MandiPOS
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟","Confirm",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (result==DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
                 string dir = new db().ExecuteScalar<string>($"Select ConfigValue From tblConfigs Where ConfigName like 'BackupDirectory';");
                 Directory.CreateDirectory(dir);
@@ -101,7 +135,7 @@ namespace MandiPOS
 
         private void FrmMain_Shown1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void FrmMain_Shown(object sender, EventArgs e)
@@ -123,14 +157,17 @@ namespace MandiPOS
             //btnCity.Enabled = General.IsAdmin;
             btnBanamVoucher.Enabled = true;
             btnJamaVoucher.Enabled = true;
-            btnBeejBardana.Enabled = true;
+            btnBeejBardana.Enabled = General.IsAdmin;
             btnSale.Enabled = true;
-            btnJV.Enabled = true;
+            btnJV.Enabled = General.IsAdmin;
             btnLedger.Enabled = General.IsAdmin;
             btnRokar.Enabled = General.IsAdmin;
-            btnKhasra.Enabled = General.IsAdmin;
+            btnKhasra.Enabled = true;
             btnBeejak.Enabled = true;
             bnRecovery.Enabled = General.IsAdmin;
+            // btnSale is inside flowLayoutPanel1
+            flowLayoutPanel1.SetFlowBreak(btnSale, General.IsAdmin);
+
             btnCustomerBill.Enabled = true;
             btnbackup.Enabled = Environment.MachineName.ToLower() == General.dbSystemName.ToLower(); ;
             btnExit.Enabled = true;
@@ -140,12 +177,12 @@ namespace MandiPOS
             //btnCity.Visible = General.IsAdmin;
             btnBanamVoucher.Visible = true;
             btnJamaVoucher.Visible = true;
-            btnBeejBardana.Visible = true;
+            btnBeejBardana.Visible = General.IsAdmin;
             btnSale.Visible = true;
-            btnJV.Visible = true;
+            btnJV.Visible = General.IsAdmin;
             btnLedger.Visible = General.IsAdmin;
             btnRokar.Visible = General.IsAdmin;
-            btnKhasra.Visible = General.IsAdmin;
+            btnKhasra.Visible = true;
             btnBeejak.Visible = true;
             bnRecovery.Visible = General.IsAdmin;
             btnCustomerBill.Visible = true;
@@ -175,11 +212,11 @@ namespace MandiPOS
         private void Wrkr_DoWork(object sender, DoWorkEventArgs e)
         {
             SQL.SetDefaultAccount();
-            SaleService.RepostSales();
-            using(var rpt=new rptRokar(DateTime.Now.Date.AddDays(365)))
-            {
-                rpt.CreateDocument();
-            }
+            //SaleService.RepostSales();
+            //using (var rpt = new rptRokar(DateTime.Now.Date.AddDays(365)))
+            //{
+            //    rpt.CreateDocument();
+            //}
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -206,7 +243,7 @@ namespace MandiPOS
             //}
 
             wrkr.RunWorkerAsync();
-            
+
         }
 
         private void FrmMain_Activated(object sender, EventArgs e)
@@ -487,7 +524,7 @@ namespace MandiPOS
             }
 
         }
-        
+
         private void button5_Click(object sender, EventArgs e)
         {
             var frm = new frmVoucherNew(1) { Name = Name + "_1" };
@@ -518,7 +555,7 @@ namespace MandiPOS
 
         }
 
-        private void OpenBardanaVoucher(int type=3)
+        private void OpenBardanaVoucher(int type = 3)
         {
             var frm = new frmBVNew(type) { StartPosition = FormStartPosition.CenterScreen };
             var f = Application.OpenForms[frm.Name];
@@ -568,9 +605,20 @@ namespace MandiPOS
 
         private void button15_Click(object sender, EventArgs e)
         {
-            OpenReportForm(2);
+            using (new waitForm())
+            {
+                var report = new rptRokar(DateTime.Now.Date);
+                ShowReport(report, 1.4f);
+            }
         }
-
+        private void ShowReport(XtraReport rpt, float zoom = 1.5f)
+        {
+            if (rpt == null) return;
+            var frm = new XtraForm1(rpt, zoom);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show(); frm.BringToFront();
+            return;
+        }
         private void button10_Click(object sender, EventArgs e)
         {
             using (var frm = new frmBackup() { StartPosition = FormStartPosition.CenterScreen })
@@ -591,12 +639,19 @@ namespace MandiPOS
 
         private void button16_Click(object sender, EventArgs e)
         {
-            OpenReportForm(10);
+            var frm = new frmKhasraSummary(DateTime.Now.Date);
+            frm.Show();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            OpenReportForm(13);
+            using (new waitForm())
+            {
+                var rpt = new rptCustomerRecovery(DateTime.Now.Date);
+
+                rpt.CreateDocument();
+                ShowReport(rpt);
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -606,21 +661,21 @@ namespace MandiPOS
 
         private void changeWallpaperToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new frWPChanger() 
-            { 
-                ShowInTaskbar = false, 
-                ShowIcon = false, 
-                MinimizeBox = false, 
-                MaximizeBox = false, 
-                StartPosition = FormStartPosition.CenterScreen 
+            var frm = new frWPChanger()
+            {
+                ShowInTaskbar = false,
+                ShowIcon = false,
+                MinimizeBox = false,
+                MaximizeBox = false,
+                StartPosition = FormStartPosition.CenterScreen
             };
-                frm.Show();
+            frm.Show();
         }
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var frm = new frmUsers() { StartPosition = FormStartPosition.CenterScreen })
-            { 
+            {
                 frm.ShowDialog(this);
             }
         }
@@ -630,7 +685,7 @@ namespace MandiPOS
     string destinationPath,
     IProgress<int> progress)
         {
-            using (var client = new HttpClient()) 
+            using (var client = new HttpClient())
             {
                 using (var response = await client.GetAsync(
                     downloadUrl,
@@ -676,8 +731,8 @@ namespace MandiPOS
             }
             // GitHub requires a User-Agent for API calls; downloads are direct so not strictly needed here
 
-            
-            
+
+
         }
 
 
@@ -750,7 +805,7 @@ namespace MandiPOS
                 // Path of Updater/Activator in the same folder as Main Application
                 string updaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater", "Updater.exe");
 
-                if (!File.Exists(updaterPath))
+                if (!System.IO.File.Exists(updaterPath))
                 {
                     MessageBox.Show("Activator.exe not found in application folder.");
                     return;
@@ -774,6 +829,68 @@ namespace MandiPOS
             catch (Exception ex)
             {
                 MessageBox.Show("Error launching Activator: " + ex.Message);
+            }
+        }
+
+        private void repostVouchersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmRepostVouchers())
+            {
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void بیوپاریڈوبتکھاتToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new VendorDobatKhatay())
+            {
+                frm.ShowIcon = frm.ShowInTaskbar = false;
+                frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void securityPasswordsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmSecurityPasswords())
+            {
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowIcon = frm.ShowInTaskbar = false;
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void گاہکڈوبتکھاتہToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new CustomerDobatKhatay())
+            {
+                frm.ShowIcon = frm.ShowInTaskbar = false;
+                frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void minimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void secToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmSecurityPasswords())
+            {
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.ShowInTaskbar = frm.ShowIcon = false;
+                frm.Text = "Change Passwords";
+                frm.ShowDialog(this);
+                General.Security = tblSecurity.Get;
             }
         }
     }

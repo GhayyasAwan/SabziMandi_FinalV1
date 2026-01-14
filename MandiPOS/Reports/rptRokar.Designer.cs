@@ -78,6 +78,7 @@
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lblRemainingCash = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrPanel1 = new DevExpress.XtraReports.UI.XRPanel();
             ((System.ComponentModel.ISupportInitialize)(this.lblBanamTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -101,15 +102,15 @@
             // 
             // xrSubreport2
             // 
-            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(27.3335F, 0F);
+            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrSubreport2.Name = "xrSubreport2";
-            this.xrSubreport2.SizeF = new System.Drawing.SizeF(537.1664F, 101.3333F);
+            this.xrSubreport2.SizeF = new System.Drawing.SizeF(564.4999F, 101.3333F);
             // 
             // xrSubreport1
             // 
             this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(564.5001F, 0F);
             this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(537.1664F, 101.3333F);
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(564.5F, 101.3333F);
             // 
             // lblPrintDate
             // 
@@ -323,12 +324,12 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblBanamTotal.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 14F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblBanamTotal.LocationFloat = new DevExpress.Utils.PointFloat(27.33356F, 0F);
+            this.lblBanamTotal.LocationFloat = new DevExpress.Utils.PointFloat(3.814697E-06F, 0F);
             this.lblBanamTotal.Name = "lblBanamTotal";
             this.lblBanamTotal.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.lblBanamTotal.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow4});
-            this.lblBanamTotal.SizeF = new System.Drawing.SizeF(1074.333F, 32.29167F);
+            this.lblBanamTotal.SizeF = new System.Drawing.SizeF(1129F, 32.29167F);
             this.lblBanamTotal.StylePriority.UseBorders = false;
             this.lblBanamTotal.StylePriority.UseFont = false;
             this.lblBanamTotal.StylePriority.UsePadding = false;
@@ -353,7 +354,7 @@
             this.cellBanamTotal.Name = "cellBanamTotal";
             this.cellBanamTotal.StylePriority.UseBorders = false;
             this.cellBanamTotal.Text = "cellBanamTotal";
-            this.cellBanamTotal.Weight = 0.27924305769784685D;
+            this.cellBanamTotal.Weight = 0.33012775620813051D;
             // 
             // xrTableCell1
             // 
@@ -387,23 +388,19 @@
             this.xrTableCell5.StylePriority.UseBorders = false;
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.Text = "کُل جمع";
-            this.xrTableCell5.Weight = 0.72075694230215315D;
+            this.xrTableCell5.Weight = 0.77164141638341854D;
             // 
             // SubBand2
             // 
             this.SubBand2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable2,
-            this.xrLabel4,
-            this.xrLabel3,
-            this.lblEndBalanceState,
-            this.xrTable1});
-            this.SubBand2.HeightF = 178.2083F;
+            this.xrPanel1});
+            this.SubBand2.HeightF = 136.3333F;
             this.SubBand2.Name = "SubBand2";
             // 
             // xrTable2
             // 
             this.xrTable2.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(797.0417F, 0F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(779.4999F, 7.629395E-06F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -582,7 +579,7 @@
             this.xrLabel4.CanGrow = false;
             this.xrLabel4.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrLabel4.ForeColor = System.Drawing.Color.White;
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 40.34723F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 40.34723F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(62.50009F, 40.34723F);
@@ -605,7 +602,7 @@
             this.xrLabel3.CanGrow = false;
             this.xrLabel3.Font = new DevExpress.Drawing.DXFont("calibri", 18F);
             this.xrLabel3.ForeColor = System.Drawing.Color.White;
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(126.4999F, 0F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(62.50012F, 40.34724F);
@@ -626,7 +623,7 @@
             this.lblEndBalanceState.CanGrow = false;
             this.lblEndBalanceState.Font = new DevExpress.Drawing.DXFont("jameel Noori Nastaleeq", 18F);
             this.lblEndBalanceState.ForeColor = System.Drawing.Color.White;
-            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(126.5001F, 80.69445F);
+            this.lblEndBalanceState.LocationFloat = new DevExpress.Utils.PointFloat(0.0001907349F, 80.69446F);
             this.lblEndBalanceState.Name = "lblEndBalanceState";
             this.lblEndBalanceState.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblEndBalanceState.SizeF = new System.Drawing.SizeF(62.5001F, 40.34723F);
@@ -643,7 +640,7 @@
             // xrTable1
             // 
             this.xrTable1.BorderColor = System.Drawing.Color.Transparent;
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(189.0001F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(62.50018F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -824,6 +821,18 @@
             this.xrTableCell4.Weight = 1.7224449334706187D;
             this.xrTableCell4.WordWrap = false;
             // 
+            // xrPanel1
+            // 
+            this.xrPanel1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable2,
+            this.xrLabel4,
+            this.xrTable1,
+            this.lblEndBalanceState,
+            this.xrLabel3});
+            this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(22.66639F, 10.00001F);
+            this.xrPanel1.Name = "xrPanel1";
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(1084.125F, 126.3333F);
+            // 
             // rptRokar
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -838,7 +847,7 @@
             this.PageHeightF = 826.7717F;
             this.PageWidthF = 1169.291F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
-            this.Version = "25.1";
+            this.Version = "25.2";
             this.VerticalContentSplitting = DevExpress.XtraPrinting.VerticalContentSplitting.Smart;
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
@@ -901,5 +910,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow7;
         private DevExpress.XtraReports.UI.XRTableCell _banam;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
+        private DevExpress.XtraReports.UI.XRPanel xrPanel1;
     }
 }

@@ -114,12 +114,31 @@ namespace MandiPOS.GUI
         {
             Refresh();
         }
+        List<tblCity> cities = new List<tblCity>();
         public override void Refresh()
         {
-            tblCityBindingSource.DataSource=SQL.GetCities();
-            city=new tblCity();
+            cities=SQL.GetCities();
+            tblCityBindingSource.DataSource = cities;
+            city =new tblCity();
             txtName.Clear();
             txtName.Select();
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtName.Focused)
+            {
+                if (txtName.Text.Trim().Length == 0)
+                {
+                    tblCityBindingSource.DataSource = cities;
+                }
+                else
+                {
+                    tblCityBindingSource.DataSource = cities.Where(x=>x.CityName.StartsWith(txtName.Text.Trim()));
+                    
+                }
+                tblCityBindingSource.ResetBindings(false);
+            }
         }
     }
 }

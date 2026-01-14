@@ -1,4 +1,5 @@
 ﻿using MandiPOS.Reports;
+
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -15,17 +16,19 @@ namespace MandiPOS.GUI
         bool ShowZero = false;
         bool showInacive = false;
         bool SummaryOnly = false;
-        public rptChithaFull(DataTable dt = null, string date = "", int sortOrder = 0, bool _showZero = false, bool _showInacive = false, bool _summaryOnly = false)
+        public rptChithaFull(DataTable dt = null, string date = "", int sortOrder = 0, int reportType = 1, string title = "چٹھہ مکمل", DataTable dt2 = null)
         {
             InitializeComponent();
-            ShowZero = _showZero;
-            showInacive = _showInacive;
-            SummaryOnly = _summaryOnly;
+            this.HideWarnings();
+            lblTitle.Text = title;
+            ShowZero = reportType == 2;
+            showInacive = true;
+            SummaryOnly = reportType == 3;
             lblDate.Text = date;
-            _dtAll = dt;
-            _dtActive=dt.Select("IsActive=1").CopyToDataTable();
-            var rows = dt.Select("IsActive=0");
-            _dtInActive = rows.Length > 0 ? rows.CopyToDataTable() : dt.Clone();
+
+            _dtActive = dt;
+            var rows = dt.Select("MasterID=11 and MasterID=12");
+            _dtInActive = dt2;
             SortOrder = sortOrder;
             GetJamaRecords();
             GetBanamRecords();
@@ -33,7 +36,7 @@ namespace MandiPOS.GUI
             GetBanamRecords_InActive();
             if (!showInacive)
             {
-                SubBand3.Visible = SubBand4.Visible = SubBand5.Visible=false;
+                SubBand3.Visible = SubBand4.Visible = SubBand5.Visible = false;
                 SubBand3.Controls.Clear();
                 SubBand3.HeightF = 0;
                 SubBand4.Controls.Clear();
@@ -48,16 +51,27 @@ namespace MandiPOS.GUI
 
         decimal banam = 0;
         decimal jama = 0;
+        decimal banamIA = 0;
+        decimal jamaIA = 0;
         void GetTotals()
         {
-            if (_dtAll != null)
+            if (_dtActive != null)
             {
-                banam = _dtAll.Compute("SUM(EndBalance)", "EndBalance > 0").toDecimal();
-                jama = _dtAll.Compute("SUM(EndBalance)", "EndBalance < 0").toDecimal();
+                banam = _dtActive.Compute("SUM(EndBalance)", "EndBalance > 0").toDecimal();
+                jama = _dtActive.Compute("SUM(EndBalance)", "EndBalance < 0").toDecimal();
             }
-            lblBanam.Text = banam.ToString("N0");
-            lblJama.Text = Math.Abs(jama).ToString("N0");
-            lblDiff.Text = (banam + jama).ToString("N0");
+            if (_dtInActive != null)
+            {
+                banamIA = _dtInActive.Compute("SUM(EndBalance)", "EndBalance > 0").toDecimal();
+                jamaIA = _dtInActive.Compute("SUM(EndBalance)", "EndBalance < 0").toDecimal();
+            }
+            lblBanam.Text = (banam + banamIA).ToString("N0");
+            lblJama.Text = Math.Abs(jama + jamaIA).ToString("N0");
+            decimal diff = banam + banamIA + jamaIA + jama;
+            lbldiff1.Text = $"{Math.Abs((diff)).ToString("N0")} {(diff < 0 ? "جمع" : "بنام")}";
+            lblRokar.Text = $"{Math.Abs((diff)).ToString("N0")} {(diff > 0 ? "جمع" : "بنام")}";
+            lblEnd.Text = "0";
+
         }
         private void XrSubreport2_BeforePrint(object sender, CancelEventArgs e)
         {
@@ -66,7 +80,7 @@ namespace MandiPOS.GUI
         }
         private void GetJamaRecords_InActive()
         {
-            string filter = (ShowZero ? "EndBalance<=0" : "EndBalance<0");
+            string filter = "EndBalance<0";
             var rows = _dtInActive.Select(filter);
             if (SortOrder == 0)
             {
@@ -78,6 +92,7 @@ namespace MandiPOS.GUI
             }
             if (rows.Length > 0)
             {
+
                 var subReport = new rptChithaRecords("جمع", SortOrder, SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
 
@@ -94,7 +109,7 @@ namespace MandiPOS.GUI
         }
         private void GetJamaRecords()
         {
-            string filter = (ShowZero ? "EndBalance<=0" : "EndBalance<0");
+            string filter = "EndBalance<0";
             var rows = _dtActive.Select(filter);
             if (SortOrder == 0)
             {
@@ -108,7 +123,7 @@ namespace MandiPOS.GUI
             {
                 var subReport = new rptChithaRecords("جمع", SortOrder, SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
-                
+
                 subReport.CreateDocument();
                 xrSubreport1.ReportSource = subReport;
 
@@ -128,8 +143,8 @@ namespace MandiPOS.GUI
 
         private void GetBanamRecords()
         {
-
-            var rows = _dtActive.Select("EndBalance > 0");
+            string filter = ShowZero ? "EndBalance >= 0" : "EndBalance > 0";
+            var rows = _dtActive.Select(filter);
             if (SortOrder == 0)
             {
                 rows.OrderBy(r => r["ID"]);
@@ -154,7 +169,7 @@ namespace MandiPOS.GUI
         }
         private void GetBanamRecords_InActive()
         {
-
+            string filter = (ShowZero ? "EndBalance>=0" : "EndBalance>0");
             var rows = _dtInActive.Select("EndBalance > 0");
             if (SortOrder == 0)
             {
@@ -166,7 +181,7 @@ namespace MandiPOS.GUI
             }
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("بنام",summary: SummaryOnly);
+                var subReport = new rptChithaRecords("بنام", summary: SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
                 subReport.CreateDocument();
                 xrSubreport4.ReportSource = subReport;

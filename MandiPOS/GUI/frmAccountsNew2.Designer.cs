@@ -58,6 +58,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Lavender;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -115,6 +116,7 @@
             // txtCredit
             // 
             this.txtCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCredit.BackColor = System.Drawing.Color.Lavender;
             this.txtCredit.Location = new System.Drawing.Point(16, 87);
             this.txtCredit.Name = "txtCredit";
             this.txtCredit.Size = new System.Drawing.Size(125, 35);
@@ -130,6 +132,7 @@
             // txtDebit
             // 
             this.txtDebit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDebit.BackColor = System.Drawing.Color.Lavender;
             this.txtDebit.Location = new System.Drawing.Point(147, 87);
             this.txtDebit.Name = "txtDebit";
             this.txtDebit.Size = new System.Drawing.Size(119, 35);
@@ -145,6 +148,7 @@
             // cmbCity
             // 
             this.cmbCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCity.BackColor = System.Drawing.Color.Lavender;
             this.cmbCity.DataSource = this.bsCity;
             this.cmbCity.DisplayMember = "CityName";
             this.cmbCity.Location = new System.Drawing.Point(272, 87);
@@ -161,6 +165,7 @@
             // txtContact
             // 
             this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContact.BackColor = System.Drawing.Color.Lavender;
             this.txtContact.Location = new System.Drawing.Point(544, 86);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(129, 35);
@@ -170,6 +175,7 @@
             // txtName
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.BackColor = System.Drawing.Color.Lavender;
             this.txtName.Location = new System.Drawing.Point(679, 87);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -180,6 +186,7 @@
             // txtCode
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCode.BackColor = System.Drawing.Color.Lavender;
             this.txtCode.Location = new System.Drawing.Point(868, 87);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(87, 35);
@@ -203,6 +210,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridEX1.AutoEdit = true;
+            this.gridEX1.BackColor = System.Drawing.Color.Lavender;
             this.gridEX1.ColumnAutoResize = true;
             this.gridEX1.DataSource = this.bsAccount1;
             gridEX1_DesignTimeLayout.LayoutString = resources.GetString("gridEX1_DesignTimeLayout.LayoutString");
@@ -230,6 +238,7 @@
             // txtOldAcc
             // 
             this.txtOldAcc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOldAcc.BackColor = System.Drawing.Color.Lavender;
             this.txtOldAcc.Location = new System.Drawing.Point(403, 86);
             this.txtOldAcc.Name = "txtOldAcc";
             this.txtOldAcc.Size = new System.Drawing.Size(135, 35);
@@ -257,6 +266,7 @@
             // frmAccountsNew2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(963, 579);
             this.Controls.Add(this.uiCheckBox1);
             this.Controls.Add(this.label7);

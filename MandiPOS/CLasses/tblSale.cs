@@ -132,6 +132,15 @@ namespace MandiPOS.CLasses
     }
     public class vwSale3
     {
+        private static int _counter = 0;
+
+        public vwSale3()
+        {
+            RowIndex = ++_counter;
+        }
+
+        [Browsable(false)]
+        public int RowIndex { get; private set; }
         [Key]
         [Browsable(false)]
         public int SaleID { get; set; }
@@ -162,11 +171,36 @@ namespace MandiPOS.CLasses
         [DisplayName("گاہک ریٹ")]
         public decimal CustomerRate { get; set; }
         [DisplayName("رقم گاہک")]
-        public decimal CustomerAmount { get; set; }
+        public decimal CustomerAmount 
+        { 
+            get
+            {
+            if(ItemWeight>0)
+                {
+                    return CustomerRate * ItemWeight;
+                }
+            else
+                {
+                    return CustomerRate * ItemQty;
+                }
+            } 
+        }
         [DisplayName("بیوپاری ریٹ")]
         public decimal ParyRate { get; set; }
         [DisplayName("رقم بیوپاری")]
-        public decimal PartyAmount { get; set; }
+        public decimal PartyAmount {
+            get
+            { 
+                if (ItemWeight > 0)
+                {
+                    return ParyRate * ItemWeight;
+                }
+                else
+                {
+                    return ParyRate * ItemQty;
+                }
+            }
+        }
         [DisplayName("مارکہ")]
         public string Marka { get; set; }
 
@@ -350,7 +384,10 @@ namespace MandiPOS.CLasses
             foreach (var record in result)
             {
                 var item = connecion.Get<tblItems>(record.ItemID, transaction: trx);
-                string itemText = $"{item.ItemTitle} {(record.TotalWeight != 0 ? record.TotalWeight.ToString("N0") : record.TotalQuantity.ToString("N0"))} نگ";
+                string itemText = $"{item.ItemTitle}";
+                itemText += $" {record.TotalQuantity.ToString("N0")} نگ";
+                if(record.TotalWeight != 0)
+                    itemText += $" ,{record.TotalWeight.ToString("N0")} کلو";
                 items.Add(itemText);
             }
 

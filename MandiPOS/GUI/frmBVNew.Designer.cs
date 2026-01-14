@@ -66,11 +66,12 @@
             this.lblType = new System.Windows.Forms.Label();
             this.txtVno = new System.Windows.Forms.NumericUpDown();
             this._wt = new Janus.Windows.GridEX.EditControls.NumericEditBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblwt = new System.Windows.Forms.Label();
             this.uiButton2 = new Janus.Windows.EditControls.UIButton();
             this.uiButton3 = new Janus.Windows.EditControls.UIButton();
             this.lblStock = new System.Windows.Forms.Label();
             this.lblwtStock = new System.Windows.Forms.Label();
+            this.uiCheckBox1 = new Janus.Windows.EditControls.UICheckBox();
             this.groupBox1.SuspendLayout();
             this.grpMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).BeginInit();
@@ -405,10 +406,10 @@
             dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
             this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
             this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(501, 154);
+            this.dgvHelp.Location = new System.Drawing.Point(264, 154);
             this.dgvHelp.Name = "dgvHelp";
             this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvHelp.Size = new System.Drawing.Size(359, 371);
+            this.dgvHelp.Size = new System.Drawing.Size(596, 371);
             this.dgvHelp.TabIndex = 26;
             this.dgvHelp.Visible = false;
             this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
@@ -459,14 +460,14 @@
             0,
             0});
             // 
-            // label10
+            // lblwt
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(276, 84);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 27);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "وزن (کلو)";
+            this.lblwt.AutoSize = true;
+            this.lblwt.Location = new System.Drawing.Point(276, 84);
+            this.lblwt.Name = "lblwt";
+            this.lblwt.Size = new System.Drawing.Size(50, 27);
+            this.lblwt.TabIndex = 31;
+            this.lblwt.Text = "وزن (کلو)";
             // 
             // uiButton2
             // 
@@ -511,21 +512,32 @@
             this.lblwtStock.TabIndex = 35;
             this.lblwtStock.Text = "وزن (کلو)";
             // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.Location = new System.Drawing.Point(420, 40);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiCheckBox1.Size = new System.Drawing.Size(104, 30);
+            this.uiCheckBox1.TabIndex = 36;
+            this.uiCheckBox1.Text = "اندراج وزن";
+            this.uiCheckBox1.CheckedChanged += new System.EventHandler(this.uiCheckBox1_CheckedChanged);
+            // 
             // frmBVNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(938, 609);
+            this.Controls.Add(this.dgvHelp);
+            this.Controls.Add(this.uiCheckBox1);
             this.Controls.Add(this.lblwtStock);
             this.Controls.Add(this.lblStock);
             this.Controls.Add(this.uiButton3);
             this.Controls.Add(this.uiButton2);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblwt);
             this.Controls.Add(this._wt);
             this.Controls.Add(this.txtVno);
             this.Controls.Add(this.grpMode);
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.partyBal);
-            this.Controls.Add(this.dgvHelp);
             this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this._cr);
@@ -599,10 +611,11 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.NumericUpDown txtVno;
         private Janus.Windows.GridEX.EditControls.NumericEditBox _wt;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblwt;
         private Janus.Windows.EditControls.UIButton uiButton2;
         private Janus.Windows.EditControls.UIButton uiButton3;
         private System.Windows.Forms.Label lblStock;
         private System.Windows.Forms.Label lblwtStock;
+        private Janus.Windows.EditControls.UICheckBox uiCheckBox1;
     }
 }

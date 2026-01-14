@@ -75,6 +75,8 @@ namespace MandiPOS.CLasses
         public decimal Commission { get; set; }
         [DisplayName("معرفت")]
         public string RefName { get; set; }
+        [DisplayName("قسم کھاتہ")]
+        public string MasterAccount { get; set; }
         public bool IsActive { get; set; }
 
     }
@@ -93,13 +95,14 @@ acc.Contact,
 c.CityName as 'City',
 acc.OpCredit,
 acc.OpDebit,
-acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
+acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName, mas.AccountTitle as MasterAccount
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
+left join MasterAccounts mas on acc.MasterID=mas.ID
 Where acc.MasterID in (Select AccountID From BankCashAccounts) ORDER BY 
   CASE 
-    WHEN AccountTitle LIKE N'‎کیش روکڑ' THEN 0 
+    WHEN acc.AccountTitle LIKE N'‎کیش روکڑ' THEN 0 
     ELSE 1 
   END,
   ID";
@@ -112,11 +115,12 @@ acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
 c.CityName as 'City',
-acc.OpCredit,
+acc.OpCredit,mas.AccountTitle as MasterAccount,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
+left join MasterAccounts mas on acc.MasterID=mas.ID
 left join tblCity c on acc.cityID=c.ID {(IncludeInActive?"":"Where ISNULL(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql);
         }
@@ -127,12 +131,13 @@ acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
 c.CityName as 'City',
-acc.OpCredit,
+acc.OpCredit,mas.AccountTitle as MasterAccount,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
+left join MasterAccounts mas on acc.MasterID=mas.ID
 Where acc.MasterID =4 {(IncludeInActive?"":" and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
@@ -142,13 +147,14 @@ Where acc.MasterID =4 {(IncludeInActive?"":" and Isnull(IsActive,1)=1")}";
 acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
-c.CityName as 'City',
+c.CityName as 'City',mas.AccountTitle as MasterAccount,
 acc.OpCredit,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
+left join MasterAccounts mas on acc.MasterID=mas.ID
 Where acc.MasterID =7 {(IncludeInActive ? "" : " and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }

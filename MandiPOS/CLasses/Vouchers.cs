@@ -143,18 +143,19 @@ namespace MandiPOS.CLasses
         [DisplayName("رقم جمع")]
         public decimal CreditAmount { get; set; }
         [Browsable(false)]
-        public string ItemDescription { 
-            get 
+        public string ItemDescription
+        {
+            get
             {
                 if (ItemWeight == 0)
                 {
-                    return $"{ItemName} => {ItemQty} x {ItemRate}";
+                    return $"{ItemName} {ItemQty:#,#.##} ریٹ {ItemRate:#,#.##}";
                 }
                 else
                 {
-                    return $"{ItemName} تعداد:{ItemQty}{(ItemWeight == 0 ? string.Empty : $" وزن:{ItemWeight:#,#.##} کلو")}  , ریٹ:{ItemRate}";
+                    return $"{ItemName} تعداد:{ItemQty:0.##}{(ItemWeight == 0 ? string.Empty : $" وزن:{ItemWeight:#,#.##} کلو")}  , ریٹ:{ItemRate:#,#.##}";
                 }
-            } 
+            }
         }
         public int EnteredBy { get; set; }
         public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
@@ -186,9 +187,9 @@ namespace MandiPOS.CLasses
     }
     public static class VoucherService
     {
-        public static string NextVocuherNo(int vtype=1)
+        public static string NextVocuherNo(int vtype = 1)
         {
-                return new db().ExecuteScalar<string>($"Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers Where VoucherType='{vtype}'");
+            return new db().ExecuteScalar<string>($"Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers Where VoucherType='{vtype}'");
         }
         public static Vouchers GetVoucher(int vtype = 0, DateTime? date = null)
         {
@@ -197,7 +198,16 @@ namespace MandiPOS.CLasses
             using (var db = new db())
             {
                 var query = $"Select * from Vouchers  WHERE VoucherType = '{vtype}' AND VoucherDate = '{targetDate:yyyy-MM-dd}';";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = targetDate, VoucherNo=NextVocuherNo(vtype)};
+                var voucher = db.Query<Vouchers>(query, new
+                {
+                    VoucherType = vtype,
+                    VoucherDate = targetDate
+                }).ToList().FirstOrDefault() ?? new Vouchers()
+                {
+                    VoucherType = vtype.ToString(),
+                    VoucherDate = targetDate,
+                    VoucherNo = NextVocuherNo(vtype)
+                };
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -213,7 +223,7 @@ from voucherDetails vd
 left join DetailAccounts cp on vd.cashAccountID=cp.ID
 left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
-                    if (voucher.VoucherType == 3.ToString()||voucher.VoucherType == 5.ToString())
+                    if (voucher.VoucherType == 3.ToString() || voucher.VoucherType == 5.ToString())
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
@@ -230,7 +240,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     }
                     if (voucher.VoucherType == 2.ToString()) //Journal Voucher
                     {
-                        sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
+                        sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID";
                         voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x => x.id);
                     }
 
@@ -248,14 +258,14 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                 return voucher;
             }
         }
-        public static Vouchers GetVoucherById(int vtype = 0, int id=0)
+        public static Vouchers GetVoucherById(int vtype = 0, int id = 0)
         {
-            
+
 
             using (var db = new db())
             {
                 var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherID = @VoucherID";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherID = id }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = DateTime.Now.Date, VoucherNo=NextVocuherNo(vtype) };
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherID = id }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype.ToString(), VoucherDate = DateTime.Now.Date, VoucherNo = NextVocuherNo(vtype) };
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -271,11 +281,11 @@ from voucherDetails vd
 left join DetailAccounts cp on vd.cashAccountID=cp.ID
 left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
-                    if (voucher.VoucherType == 3.ToString())
+                    if (voucher.VoucherType == 3.ToString() || voucher.VoucherType == 5.ToString())
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
-bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
+bd.ItemQty,bd.ItemRate,bd.DebitAmount,bd.CreditAmount,bd.EnteredBy
 from VoucherBardanaDetails bd
 left join tblItems p on bd.itemID=p.ID
 left join DetailAccounts acc on bd.accountiD=acc.ID
@@ -312,11 +322,11 @@ Where VoucherID=@VoucherID Order by bd.id desc";
             using (var db = new db())
             {
                 var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherNo = @VoucherNo";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherNo = id }).ToList().FirstOrDefault(); 
-                    if(voucher == null)
-                    {
-                       return GetVoucher(vtype, null);
-                    }
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherNo = id }).ToList().FirstOrDefault();
+                if (voucher == null)
+                {
+                    return GetVoucher(vtype, null);
+                }
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
                     string sql = $@"Select vd.EntryID,
@@ -331,7 +341,7 @@ from voucherDetails vd
 left join DetailAccounts cp on vd.cashAccountID=cp.ID
 left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
-                    if (voucher.VoucherType == 3.ToString()|| voucher.VoucherType == 5.ToString())
+                    if (voucher.VoucherType == 3.ToString() || voucher.VoucherType == 5.ToString())
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
@@ -362,6 +372,8 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     voucher.Entries = new List<VoucherCart>();
                     voucher.BardanaEntries = new List<BardanaCart>();
                 }
+
+
                 return voucher;
             }
         }
@@ -444,6 +456,11 @@ Where VoucherID=@VoucherID Order by bd.id desc";
             {
                 throw ex;
             }
+        }
+
+        internal static IEnumerable<Vouchers> GetList(int type)
+        {
+            return new db().Query<Vouchers>($"Select * From Vouchers Where VoucherType='{type}'");
         }
     }
 }

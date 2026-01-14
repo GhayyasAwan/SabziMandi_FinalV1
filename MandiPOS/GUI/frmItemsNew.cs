@@ -1,6 +1,8 @@
 ﻿using MandiPOS.CLasses;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -12,6 +14,7 @@ namespace MandiPOS.GUI
         {
             InitializeComponent();
             txtName.Leave += controlLeave;
+            txtName.TextChanged += TxtName_TextChanged;
             txtLaga.Leave += controlLeave;
             txtKaraya.Leave += controlLeave;
             txtmazdoori.Leave += controlLeave;
@@ -33,6 +36,22 @@ namespace MandiPOS.GUI
             cmbItemType.SelectedIndexChanged += CmbItemType_SelectedIndexChanged;
             this.Load += FrmItemsNew_Load;
             dgv.RowDoubleClick += Dgv_RowDoubleClick;
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtName.Focused)
+            {
+                if (txtName.Text.Trim().Length > 0)
+                {
+                    tblItemsBindingSource.DataSource = items.Where(x => x.ItemTitle.StartsWith(txtName.Text)).ToList();
+                }
+                else
+                {
+                    tblItemsBindingSource.DataSource = items;
+                }
+                tblItemsBindingSource.ResetBindings(false);
+            }
         }
 
         private void Dgv_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
@@ -151,6 +170,7 @@ namespace MandiPOS.GUI
             }
         }
         tblItems item;
+        List<tblItems> items = new List<tblItems>();
         public override void Refresh()
         {
             ClearControls();
@@ -158,7 +178,9 @@ namespace MandiPOS.GUI
             item.Code = SQL.GetNewCode();
             try
             {
-                tblItemsBindingSource.DataSource = SQL.GetAllItems($" where ItemType like N'{cmbItemType.Text.Trim()}'");
+                items = SQL.GetAllItems($" where ItemType like N'{cmbItemType.Text.Trim()}'");
+                tblItemsBindingSource.DataSource= items;
+                tblItemsBindingSource.ResetBindings(false);
                 BindObject();
                 cmbItemType.Select();
             }

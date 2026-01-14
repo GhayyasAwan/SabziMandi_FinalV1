@@ -20,8 +20,9 @@ namespace MandiPOS
 
     public static class SQL
     {
-        public static int LastArrivalNo { 
-            get 
+        public static int LastArrivalNo
+        {
+            get
             {
                 try
                 {
@@ -35,7 +36,8 @@ namespace MandiPOS
                 {
                     return 0;
                 }
-            } }
+            }
+        }
 
         internal static bool DeleteCity(int iD)
         {
@@ -86,7 +88,15 @@ namespace MandiPOS
             get
             {
                 string sql = "SELECT dbo.fn_GetNetSaleAccount()";
-               return new db().ExecuteScalar<int>(sql);
+                return new db().ExecuteScalar<int>(sql);
+            }
+        }
+
+        public static DateTime ServerDate
+        {
+            get
+            {
+                return new db().ExecuteScalar<DateTime>("Select Cast(GetDate() as Date)");
             }
         }
 
@@ -125,7 +135,7 @@ namespace MandiPOS
                 return default;
             }
         }
-        internal static tblCity GetCity(string whercondition="")
+        internal static tblCity GetCity(string whercondition = "")
         {
             try
             {
@@ -159,7 +169,7 @@ namespace MandiPOS
                     case "mazdoori": General.MazdooriAccount = c.ConfigValue.toInt(); break;
                     case "munshiana": General.MunshianaAccount = c.ConfigValue.toInt(); break;
                     case "netpaid": General.NetPaidAccount = c.ConfigValue.toInt(); break;
-                    case "pendingsale": General.PendingSaleAccount = c.ConfigValue.toInt(); break;
+                    case "pending": General.PendingSaleAccount = c.ConfigValue.toInt(); break;
                     case "store": General.StoreAccount = c.ConfigValue.toInt(); break;
                     case "laga": General.LagaAccount = c.ConfigValue.toInt(); break;
                 }
@@ -315,7 +325,7 @@ namespace MandiPOS
                     banam = data.TotalBanam;
                     jama = data.TotalJama;
                 }
-               income= db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
+                income = db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
             }
         }
 
@@ -348,7 +358,34 @@ namespace MandiPOS
 
         internal static object GetNextVoucherNo(int vType)
         {
-            return new db().ExecuteScalar<object>($"Select ISNULL(MAx(VoucherNo),0)+1 from Vouchers Where VoucherType="+vType);
+            return new db().ExecuteScalar<object>($"Select ISNULL(MAx(VoucherNo),0)+1 from Vouchers Where VoucherType=" + vType);
+        }
+
+        internal static bool ShiftAccount(object AccountID, int SourceMasterID, int TargetMasterID, bool IsActive)
+        {
+            using (var db = new db())
+            {
+                using (var trx = db.BeginTransaction())
+                {
+                    try
+                    {
+                        var account = db.QueryFirstOrDefault<DetailAccounts>($"Select Top 1 * from DetailAccounts Where AccountCode=@AccountCode", new { AccountCode = AccountID }, transaction: trx);
+                        if (account == null)
+                            throw new Exception("Account Not Found");
+                        if (account.MasterID != SourceMasterID)
+                            throw new Exception("Invalid Current Master ID.");
+                        account.MasterID = TargetMasterID;
+                        account.IsActive = IsActive;
+                        db.Update<DetailAccounts>(account, transaction: trx);
+                        trx.Commit(); return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        return ex.ExcError();
+                    }
+                }
+            }
         }
     }
 

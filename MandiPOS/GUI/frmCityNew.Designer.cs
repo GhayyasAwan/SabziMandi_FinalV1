@@ -48,7 +48,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(930, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 41);
+            this.label1.Size = new System.Drawing.Size(55, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "شہر کا نام";
             // 
@@ -59,9 +59,10 @@
             this.txtName.Location = new System.Drawing.Point(136, 56);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtName.Size = new System.Drawing.Size(860, 48);
+            this.txtName.Size = new System.Drawing.Size(860, 40);
             this.txtName.TabIndex = 1;
             this.txtName.VisualStyleManager = this.visualStyleManager1;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // visualStyleManager1
             // 

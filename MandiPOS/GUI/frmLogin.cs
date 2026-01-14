@@ -69,6 +69,7 @@ namespace MandiPOS.GUI
                 if (user != null)
                 {
                    General.IsAdmin=user.IsAdmin;
+                    General.MinimumDate = new db().ExecuteScalar<DateTime>("Select Cast(ISNULL(Min(VoucherDate),GetDate()) as Date) as MinDate from Vouchers").Date;
                     General.UserName = user.UserName;
                     General.CurrentUserID = user.UserID;
                     this.DialogResult = DialogResult.OK;

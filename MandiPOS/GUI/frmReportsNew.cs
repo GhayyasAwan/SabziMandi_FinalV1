@@ -1,6 +1,7 @@
 ﻿using Dapper;
 
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraRichEdit.Model.History;
 
 using MandiPOS.CLasses;
 using MandiPOS.Reports;
@@ -26,7 +27,8 @@ namespace MandiPOS.GUI
         public frmReportsNew(int reportID)
         {
             InitializeComponent();
-            dtp.Value =dtp2.Value = DateTime.Now.Date;
+            cmbType.SelectedIndex = 0;
+            dtp.Value = dtp2.Value = DateTime.Now.Date;
             pnlMain.Resize += FlowLayoutPanel1_Resize;
             _pname.KeyDown += (s, e) =>
             {
@@ -137,8 +139,8 @@ namespace MandiPOS.GUI
         {
             StringBuilder b = new StringBuilder();
             foreach (Control c in uiGroupBox1.Controls)
-            { 
-                if(c is RadioButton rb)
+            {
+                if (c is RadioButton rb)
                 {
                     //                   b.AppendLine($@"MERGE [dbo].[tblPermissions] AS target
                     //USING (SELECT N'{rb.Text}' AS PermissionTitle) AS source
@@ -151,16 +153,16 @@ namespace MandiPOS.GUI
                     switch (rb.Name)
                     {
                         case "rb_Report15":
-                            rb.Enabled = true;break;
+                            rb.Enabled = rb.Visible = true; break;
                         case "rb_Report06":
-                            rb.Enabled = true; break;
-                        default: rb.Enabled = General.IsAdmin; break;
+                            rb.Enabled = rb.Visible = true; break;
+                        default: rb.Enabled = rb.Visible = General.IsAdmin; break;
                     }
                 }
             }
-            if(!string.IsNullOrEmpty(b.ToString()))
+            if (!string.IsNullOrEmpty(b.ToString()))
             {
-                using(var db = new db())
+                using (var db = new db())
                 {
                     using (var trx = db.BeginTransaction())
                     {
@@ -169,7 +171,7 @@ namespace MandiPOS.GUI
                             db.Execute(b.ToString(), transaction: trx);
                             trx.Commit();
                         }
-                        catch 
+                        catch
                         {
                             trx.Rollback();
                         }
@@ -193,7 +195,7 @@ namespace MandiPOS.GUI
             dtp.RegisterFocus(false); dtp.EnterToNext();
             dtp2.RegisterFocus(false); dtp2.EnterToNext();
             _pname.RegisterFocus(true);
-            this.WindowState = FormWindowState.Maximized;
+            // this.WindowState = FormWindowState.Maximized;
 
         }
 
@@ -223,10 +225,13 @@ namespace MandiPOS.GUI
 
         private void SetReport(object sender, System.EventArgs e)
         {
+
             if (!triggerSetReport) { return; }
+            dtp.MinDate = dtp2.MinDate = General.MinimumDate.AddDays(-5);
+            dtp.Value = dtp2.Value = DateTime.Now;
             lblTitle.Text = ((RadioButton)sender).Text.ToString();
             string reportName = ((RadioButton)sender).Name.ToString();
-           // ((RadioButton)sender).Checked = true;
+            // ((RadioButton)sender).Checked = true;
             switch (reportName)
             {
                 case "rb_Report01": //لین دین
@@ -323,7 +328,7 @@ namespace MandiPOS.GUI
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
-                    _pname.Show(); 
+                    _pname.Show();
                     lblParty.Show();
                     _pname.Clear();
                     cmbCity.Hide(); lblCity.Hide();
@@ -502,10 +507,10 @@ namespace MandiPOS.GUI
                     dtp2.Show(); lblDate2.Show();
                     _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
-                    dtp.Select(); 
+                    dtp.Select();
                     break;
                 case "rb_Report21":
-                    ReportID= 21;
+                    ReportID = 21;
                     bsParties.DataSource = null;
                     dtParties = DetailAccountService.GetRefferalsList().ToDataTable();
                     bsParties.DataSource = dtParties;
@@ -520,13 +525,11 @@ namespace MandiPOS.GUI
 
 
             }
-            cmbSort.Visible = lblSort.Visible=cbZero.Visible=cbSummary.Visible= cmbCity.Visible;
-            cbInActive.Checked =true;
-            cbInActive.Visible = false;
+            cmbSort.Visible = lblSort.Visible = cmbType.Visible = cmbCity.Visible;
+            cbInActive.Checked = true;
+            cbInActive.Visible = cbZero.Visible = cbSummary.Visible = false;
             cbZero.Checked = !cbZero.Visible;
-            cbSummary.Checked =!cbSummary.Visible;
-
-
+            cbSummary.Checked = !cbSummary.Visible;
         }
 
         private void UncheckAll(object sender)
@@ -549,7 +552,7 @@ namespace MandiPOS.GUI
                 using (new waitForm())
                 {
                     var report = new rptRokar(dtp.Value.Date);
-                    ShowReport(report,1.4f);
+                    ShowReport(report, 1.4f);
                 }
                 return;
             }
@@ -577,7 +580,7 @@ namespace MandiPOS.GUI
             {
                 ShowCustomerSale(); return;
             }
-            
+
             if (ReportID == 9) //گاہک خسرہ
             {
                 ShowKhasra(); return;
@@ -634,14 +637,14 @@ namespace MandiPOS.GUI
 
         private void ShowBaqayaSale()
         {
-            DateTime d1=dtp.Value.Date;
-            DateTime d2=dtp2.Value.Date;
+            DateTime d1 = dtp.Value.Date;
+            DateTime d2 = dtp2.Value.Date;
             int partyid = _pid.Text.Trim().toInt();
             using (new waitForm())
             {
-                var data= vwBaqayaSaleService.GetBaqayaSaleList(d1,d2,partyid).ToList();
+                var data = vwBaqayaSaleService.GetBaqayaSaleList(d1, d2, partyid).ToList();
                 string dateRange = $"{d1:dd-MM-yyyy}-{d2:dd-MM-yyyy}";
-                var report = new rptBaqayaSale(data,dateRange,partyid);
+                var report = new rptBaqayaSale(data, dateRange, partyid);
                 report.CreateDocument();
                 ShowReport(report);
             }
@@ -700,7 +703,7 @@ Order By mas.id";
             {
                 using (new waitForm())
                 {
-                    var report = new rptMasterSheet(_pid.Text.toInt(),dtp.Value.Date,dtp2.Value.Date);
+                    var report = new rptMasterSheet(_pid.Text.toInt(), dtp.Value.Date, dtp2.Value.Date);
                     report.CreateDocument();
                     ShowReport(report);
                 }
@@ -760,7 +763,7 @@ Order By mas.id";
 
                 // Apply sorting
                 DataView view = table.DefaultView;
-               // view.Sort = "SearchPriority ASC";
+                // view.Sort = "SearchPriority ASC";
                 bsParties.ResetBindings(false);
             }
 
@@ -819,7 +822,7 @@ Order By mas.id";
             using (new waitForm())
             {
                 var rpt = new rptCustomerRecovery(dtp.Value.Date);
-                
+
                 rpt.CreateDocument();
                 var frm = new XtraForm1(rpt);
                 frm.StartPosition = FormStartPosition.CenterScreen;
@@ -866,20 +869,48 @@ Order By mas.id";
         {
             using (new waitForm())
             {
-                var rpt = new rptCustomerSale(dtp.Value.Date);
-                rpt.CreateDocument();
-                ShowReport(rpt);
+                var data = new db().Query<vw_CustomerSale>($@" SELECT 
+    [ArrivalDate],
+    [ArrivalNo],
+    [VendorName],
+    [CustomerName],
+    [ItemTitle],
+    [ItemQty],
+    [ItemWeight],
+    [CustomerRate],
+    [CustomerAmount],
+    [LagaAmount]
+FROM 
+    [vw_CustomerSale]
+WHERE 
+    [ArrivalDate] = '{dtp.Value.Date:yyyy-MM-dd}'
+ORDER BY 
+    CASE WHEN CustomerName LIKE N'نقد سیل%' THEN 0 ELSE 1 END,
+    SUM([CustomerAmount] + [LagaAmount]) OVER (PARTITION BY [CustomerName]) DESC").ToDataTable();
+                bool isWeighted = data.Compute("Sum(ItemWeight)", "").toDecimal() != 0;
+                if (isWeighted)
+                {
+                    var rpt = new rptCustomerSale(dtp.Value.Date, data);
+                    rpt.CreateDocument();
+                    ShowReport(rpt);
+                }
+                else
+                {
+                    var rpt = new rptCustomerSale2(dtp.Value.Date, data);
+                    rpt.CreateDocument();
+                    ShowReport(rpt);
+                }
 
 
             }
         }
 
-        private void ShowReport(XtraReport rpt, float zoom=1.5f)
+        private void ShowReport(XtraReport rpt, float zoom = 1.5f)
         {
             if (rpt == null) return;
-            var frm= new XtraForm1(rpt,zoom);
+            var frm = new XtraForm1(rpt, zoom);
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.Show();frm.BringToFront();
+            frm.Show(); frm.BringToFront();
             return;
         }
 
@@ -887,7 +918,7 @@ Order By mas.id";
         {
             using (new waitForm())
             {
-                var frm = new rptVendorSale(dtp.Value.Date,_pid.Text.Trim().toInt());
+                var frm = new rptVendorSale(dtp.Value.Date, _pid.Text.Trim().toInt());
                 ShowReport(frm);
             }
         }
@@ -924,7 +955,21 @@ Order By mas.id";
                     .Where(acc => acc != null && acc.ID != null)
                     .Select(acc => acc.ID.ToString()) ?? Enumerable.Empty<string>());
                 }
-
+                string surfix = "چٹھہ جات";
+                string prefix = "مکمل";
+                if (!string.IsNullOrEmpty(groups) && string.IsNullOrEmpty(cities))
+                {
+                    prefix = "گروپ وار";
+                }
+                else if (!string.IsNullOrEmpty(cities) && string.IsNullOrEmpty(groups))
+                {
+                    prefix = "شہر وار";
+                }
+                else if (!string.IsNullOrEmpty(cities) && !string.IsNullOrEmpty(groups))
+                {
+                    prefix = "گروپ وار / شہر وار";
+                }
+                string title = $"{prefix} {surfix}";
 
 
                 string sql = $@"WITH EndBalances AS
@@ -940,23 +985,45 @@ mas.AccountTitle as 'MasterAccount',
         acc.RefName,
         acc.Contact,
         city.CityName,
-        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive,acc.MasterID
     FROM EndBalances eb 
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
-    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")} {(cbInActive.Checked?"":" and ISNULL(Acc.IsActive,1)=1")};";
+    WHERE MasterID Not IN (11,12) and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")};";
+                string sql2 = $@"WITH EndBalances AS
+    (
+        SELECT AccountID, SUM(DebitAmount - CreditAmount) AS 'EndBalance'
+        FROM vwTrx 
+        WHERE VoucherDate <= '{dtp.Value.Date:yyyy-MM-dd}'
+        GROUP BY AccountID
+    )
+    SELECT acc.AccountCode as ID,
+        acc.AccountTitle,
+mas.AccountTitle as 'MasterAccount',
+        acc.RefName,
+        acc.Contact,
+        city.CityName,
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive,acc.MasterID
+    FROM EndBalances eb 
+    LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
+    left Join MasterAccounts mas ON acc.MasterID = mas.ID
+    LEFT JOIN tblCity city ON acc.CityID = city.ID
+    WHERE MasterID IN (11,12) and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")};";
                 DataTable dt = new DataTable();
+                DataTable dt2 = new DataTable();
                 using (var db = new db())
                 {
                     var reader = db.ExecuteReader(sql);
                     dt.Load(reader);
+                    var reader2 = db.ExecuteReader(sql2);
+                    dt2.Load(reader2);
                 }
-                if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0 || dt2.Rows.Count > 2)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt(),cbZero.Checked,cbInActive.Checked,cbSummary.Checked);
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt(), cmbType.SelectedValue.toInt(), title, dt2);
                     report.CreateDocument();
-                    ShowReport(report,1.5f);
+                    ShowReport(report, 1.5f);
                 }
                 else
                 {
@@ -987,7 +1054,7 @@ mas.AccountTitle as 'MasterAccount',
              commandType: CommandType.StoredProcedure).ToList<clsLedger>();
 
                 System.Collections.Generic.List<clsLedger> FinalData = result;
-                if (reportType==1)
+                if (reportType == 1)
                 {
                     switch (acc.MasterID)
                     {
@@ -995,7 +1062,7 @@ mas.AccountTitle as 'MasterAccount',
                                 // 1️⃣ Group Credit Entries
                             var creditGrouped4 = result
                                 .Where(x => x.Credit != 0)
-                                .GroupBy(x => new { x.VoucherDate.Date, x.VoucherTitle })
+                                .GroupBy(x => new { x.VoucherDate.Date, x.VoucherType, x.VoucherTitle })
                                 .Select(g => new clsLedger
                                 {
                                     VoucherDate = g.Key.Date,
@@ -1086,11 +1153,11 @@ mas.AccountTitle as 'MasterAccount',
                             }
                             FinalData = combined7;
                             break;
-                    } 
+                    }
                 }
 
 
-                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date,reportType,acc.MasterID);
+                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date, reportType, acc.MasterID);
                 frm.Show();
             }
         }
@@ -1108,6 +1175,9 @@ mas.AccountTitle as 'MasterAccount',
 
         }
 
+        private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

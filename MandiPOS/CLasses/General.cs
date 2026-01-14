@@ -1,8 +1,12 @@
 ﻿using Dapper;
+
 using DevExpress.XtraEditors;
 
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
+
+using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,9 +51,16 @@ namespace MandiPOS
 
         public static string GetPartyBalance(this Form f, int AccountID)
         {
-            decimal bal = new db().ExecuteScalar<decimal>($"Select ISNULL(Sum(ISNULL(DebitAmount,0)-ISNULL(CreditAmount,0)),0) as Bal from vwTrx Where AccountID='{AccountID}'");
+            if (General.IsAdmin)
+            {
+                decimal bal = new db().ExecuteScalar<decimal>($"Select ISNULL(Sum(ISNULL(DebitAmount,0)-ISNULL(CreditAmount,0)),0) as Bal from vwTrx Where AccountID='{AccountID}'");
 
-            return $"{bal.ToString("#,0.##")}";
+                return $"{bal.ToString("#,0.##")}";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         public static void EnterToNext(this Control c, KeyEventArgs e)
@@ -197,6 +208,11 @@ namespace MandiPOS
         public static bool IsAdmin { get; internal set; }
         public static string UserName { get; internal set; }
         public static int MultanCityID { get; internal set; }
+        public static DateTime MinimumDate { get; internal set; }
+        public static DateTime ServerDate { get { return SQL.ServerDate; } }
+
+        public static tblSecurity Security { get; internal set; }
+
         internal static int GetMultanCityID()
         {
             var cities = SQL.GetCities();
@@ -294,7 +310,28 @@ namespace MandiPOS
 
             return 0;
         }
-
+        public static string Decrypt(this string cipherText)
+        {
+            try
+            {
+                return Eramake.eCryptography.Decrypt(cipherText);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+        public static string Encrypt(this string simpleText)
+        {
+            try
+            {
+                return Eramake.eCryptography.Encrypt(simpleText);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
         public static decimal toDecimal(this object o)
         {
             decimal.TryParse(
@@ -304,6 +341,11 @@ namespace MandiPOS
                 out decimal result
             );
             return result;
+        }
+
+        public static decimal toRound(this decimal o)
+        {
+            return Math.Round(o, 0, MidpointRounding.AwayFromZero);
         }
 
         public static string ProperDecimals(this decimal d)

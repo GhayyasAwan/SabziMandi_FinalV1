@@ -23,6 +23,8 @@ namespace MandiPOS.GUI
         public XtraForm1(XtraReport rpt, float zoom=1.5f)
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.KeyDown += XtraForm1_KeyDown1;
             this.WindowState = FormWindowState.Maximized;
             
             Report = rpt;
@@ -37,6 +39,35 @@ namespace MandiPOS.GUI
             this.Load += XtraForm1_Load;
             
             
+        }
+
+        private void XtraForm1_KeyDown1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                documentViewer1.PrintingSystem.ExecCommand(PrintingSystemCommand.ZoomToPageWidth);
+            }
+            if (e.KeyCode == Keys.F1)
+            {
+                _zoom = 1f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                _zoom = 1.4f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                _zoom = 1.5f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                _zoom = 2f;
+                documentViewer1.Zoom = _zoom;
+            }
+
         }
 
         private void XtraForm1_Activated(object sender, EventArgs e)

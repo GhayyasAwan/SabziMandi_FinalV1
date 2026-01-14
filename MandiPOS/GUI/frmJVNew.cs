@@ -20,6 +20,7 @@ namespace MandiPOS.GUI
         public frmJVNew()
         {
             InitializeComponent();
+            txtVoucherNumber.KeyDown += TxtVoucherNumber_KeyDown;
             this.FormClosing += FrmJVNew_FormClosing;
             SetPartybalance();
             _narration.RegisterFocus(true);
@@ -36,7 +37,8 @@ namespace MandiPOS.GUI
             _cr.TextChanged += _cr_TextChanged;
             _dr.TextChanged += _dr_TextChanged;
             this.Text = "Journal Voucher";
-            dtp.Value = DateTime.Now;
+            dtp.Value = SQL.ServerDate.Date;
+            dtp.Enabled = General.IsAdmin;
             objResizer = new clsResize(this);
             _name.TextChanged += _name_TextChanged;
             this.Load += FrmJVNew_Load;
@@ -46,11 +48,24 @@ namespace MandiPOS.GUI
 
         }
 
+        private void TxtVoucherNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtVoucherNumber.Value.toInt() != 0)
+            {
+                var v = VoucherService.GetVoucherByNo(txtVoucherNumber.Value.toInt());
+                if (v != null)
+                {
+                    dtp.Value = v.VoucherDate.Date;
+                    Refresh();
+                }
+            }
+        }
+
         private void FrmJVNew_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing)
                 return;
-            decimal dr = main.JVEntries.Sum(x=>x.DebitAmount);
+            decimal dr = main.JVEntries.Sum(x => x.DebitAmount);
             decimal cr = main.JVEntries.Sum(x => x.CreditAmount);
             if (dr != cr)
             {
@@ -62,7 +77,7 @@ namespace MandiPOS.GUI
 
         void SetPartybalance()
         {
-            if (curent != 0)
+            if (curent != 0 && General.IsAdmin)
             {
                 partyBal.Text = this.GetPartyBalance(curent);
                 if (partyBal.Text.Trim().toDecimal() > 0)
@@ -134,16 +149,34 @@ namespace MandiPOS.GUI
                 JVCart c = dgv.CurrentRow.DataRow as JVCart;
                 if (c != null)
                 {
-                    _name.Text = c.PartyTitle;
-                    _code.Text = c.AccountCode;
-                    _narration.Text = c.Narration;
-                    _dr.Text = c.CreditAmount.ToString("0.##");
-                    _dr.Text = c.DebitAmount.ProperDecimals();
-                    curent = c.AccountID;
-                    SetPartybalance();
-                    bs.Remove(c);
-                    bs.ResetBindings(false);
-                    _name.Select(); Program.UrduInput(true);
+                    using (var db = new db())
+                    {
+                        using (var trx = db.BeginTransaction())
+                        {
+                            try
+                            {
+
+                                db.Execute($"Delete From JVentries Where VoucherID={CurrentID} and ID={c.id}", transaction: trx);
+                                trx.Commit();
+                                _name.Text = c.PartyTitle;
+                                _code.Text = c.AccountCode;
+                                _narration.Text = c.Narration;
+                                _cr.Text = c.CreditAmount.ToString("0.##");
+                                _dr.Text = c.DebitAmount.ProperDecimals();
+                                curent = c.AccountID;
+                                SetPartybalance();
+                                Refresh();
+                                _name.Select(); Program.UrduInput(true);
+                            }
+                            catch (Exception ex)
+                            {
+                                trx.Rollback();
+                                ex.ExcError();
+                            }
+                        }
+                    }
+
+
                 }
             }
         }
@@ -152,7 +185,11 @@ namespace MandiPOS.GUI
         {
             if (e.EnterKey())
             {
-                _cr.Select();
+                bool flowControl = AddToCart();
+                if (!flowControl)
+                {
+                    return;
+                }
             }
         }
 
@@ -160,7 +197,7 @@ namespace MandiPOS.GUI
         {
             if (e.EnterKey())
             {
-                _dr.Select();
+                _cr.Select();
             }
         }
 
@@ -196,77 +233,88 @@ namespace MandiPOS.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (curent == 0 || _name.Text.Trim() == string.Empty || _code.Text.Trim().toInt() == 0)
+                _dr.Select();
+            }
+        }
+
+        private bool AddToCart()
+        {
+            if (curent == 0 || _name.Text.Trim() == string.Empty || _code.Text.Trim().toInt() == 0)
+            {
+                MessageBox.Show("براہ کرم پارٹی کا انتخاب کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _name.Select();
+                return false;
+            }
+            if (_dr.Text.toDecimal() == 0 && _cr.Text.toDecimal() == 0)
+            {
+                MessageBox.Show("براہ کرم رقم درج کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _dr.Select();
+                return false;
+            }
+            if (_dr.Text.toDecimal() > 0 && _cr.Text.toDecimal() > 0)
+            {
+                MessageBox.Show("براہ کرم  جمع یا بنام میں سے ایک رقم درج کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _dr.Select();
+                return false;
+            }
+            JVCart c = new JVCart()
+            {
+                AccountID = curent,
+                PartyTitle = _name.Text.Trim(),
+                CreditAmount = _cr.Text.toDecimal(),
+                DebitAmount = _dr.Text.toDecimal(),
+                Narration = _narration.Text.Trim(),
+                AccountCode = _code.Text.Trim()
+            };
+            using (var db = new db())
+            {
+                using (var trx = db.BeginTransaction())
                 {
-                    MessageBox.Show("براہ کرم پارٹی کا انتخاب کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _name.Select();
-                    return;
-                }
-                if (_dr.Text.toDecimal() == 0 && _cr.Text.toDecimal() == 0)
-                {
-                    MessageBox.Show("براہ کرم رقم درج کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _dr.Select();
-                    return;
-                }
-                if (_dr.Text.toDecimal() > 0 && _cr.Text.toDecimal() > 0)
-                {
-                    MessageBox.Show("براہ کرم  جمع یا بنام میں سے ایک رقم درج کریں۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _dr.Select();
-                    return;
-                }
-                JVCart c = new JVCart()
-                {
-                    AccountID = curent,
-                    PartyTitle = _name.Text.Trim(),
-                    CreditAmount = _cr.Text.toDecimal(),
-                    DebitAmount = _dr.Text.toDecimal(),
-                    Narration = _narration.Text.Trim(),
-                    AccountCode = _code.Text.Trim()
-                };
-                using (var db = new db())
-                {
-                    using (var trx = db.BeginTransaction())
+                    try
                     {
-                        try
+                        Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
+                        if (vmain.VoucherID == 0)
                         {
-                            Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
-                            if (vmain.VoucherID == 0)
+                            vmain = new Vouchers()
                             {
-                                vmain = new Vouchers()
-                                {
-                                    VoucherType = VoucherType.ToString(),
-                                    CreatedBy = General.CurrentUserID.ToString(),
-                                    CreatedDate = DateTime.Now,
-                                    VoucherDate = dtp.Value.Date,
-                                    VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
-                                };
-                                db.Insert<Vouchers>(vmain, transaction: trx);
-                            }
-                            JVEntries d = new JVEntries()
-                            {
-                                 AccountID=c.AccountID, CreditAmount=c.CreditAmount, 
-                                  DebitAmount=c.DebitAmount, Narration=c.Narration, VoucherID=vmain.VoucherID, EnteredBy = General.CurrentUserID,
+                                VoucherType = VoucherType.ToString(),
+                                CreatedBy = General.CurrentUserID.ToString(),
+                                CreatedDate = DateTime.Now,
+                                VoucherDate = dtp.Value.Date,
+                                VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
                             };
-                            db.Insert<JVEntries>(d, transaction: trx);
-                            trx.Commit();
+                            db.Insert<Vouchers>(vmain, transaction: trx);
                         }
-                        catch (Exception ex)
+                        JVEntries d = new JVEntries()
                         {
-                            trx.Rollback();
-                            ex.ExcError(null);
-                            return;
-                        }
+                            AccountID = c.AccountID,
+                            CreditAmount = c.CreditAmount,
+                            DebitAmount = c.DebitAmount,
+                            Narration = c.Narration,
+                            VoucherID = vmain.VoucherID,
+                            EnteredBy = General.CurrentUserID,
+                        };
+                        db.Insert<JVEntries>(d, transaction: trx);
+                        trx.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        ex.ExcError(null);
+                        return false;
                     }
                 }
-                main = VoucherService.GetVoucher(VoucherType, dtp.Value);
-                bs.DataSource = main.JVEntries;
-                bs.ResetBindings(false);
-                _narration.Clear();
-                _name.Clear();
-                _dr.Text = 0.ToString("0.##");
-                _cr.Text = 0.ToString("0.##");
-                _name.Select(); Program.UrduInput(true);
             }
+            main = VoucherService.GetVoucher(VoucherType, dtp.Value);
+            txtVoucherNumber.Value = main.VoucherNo.toDecimal(); ;
+            bs.DataSource = main.JVEntries;
+            bs.ResetBindings(false);
+            // _narration.Clear();
+            //_name.Clear();
+            //_dr.Text = 0.ToString("0.##");
+            //_cr.Text = 0.ToString("0.##");
+            _name.Select(); Program.UrduInput(true); _name.SelectAll();
+            return true;
         }
 
         private void _dr_TextChanged(object sender, EventArgs e)
@@ -305,7 +353,7 @@ namespace MandiPOS.GUI
                 }
             }
         }
-
+        int CurrentID = 0;
         private void _name_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -328,20 +376,21 @@ namespace MandiPOS.GUI
         DataTable dtParties = new DataTable();
         public override void Refresh()
         {
-            if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
+            if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
             {
                 this.Info("آپکو پرانا ووچر دیکھنے کی اجازت نہیں ہے۔");
-                dtp.Value = DateTime.Now.Date;
+                dtp.Value = SQL.ServerDate.Date;
                 return;
             }
-            if (dtp.Value.Date < DateTime.Now.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
+            if (dtp.Value.Date < SQL.ServerDate.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
             {
                 return;
             }
-
             main = VoucherService.GetVoucher(VoucherType, dtp.Value);
+            txtVoucherNumber.Value = main.VoucherNo.toDecimal();
+            CurrentID = main.VoucherID;
             bs.DataSource = main.JVEntries;
-            dtParties = DetailAccountService.GetAccountsViewList(0,false).ToDataTable();
+            dtParties = DetailAccountService.GetAccountsViewList(0, false).ToDataTable();
             bsParties.DataSource = dtParties;
             bsParties.ResetBindings(false);
             bs.ResetBindings(false);
@@ -389,12 +438,12 @@ namespace MandiPOS.GUI
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
+            if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
             {
                 this.Info("آپکو پرانا ووچر محفوظ کرنے کی اجازت نہیں ہے۔");
                 return;
             }
-            if (dtp.Value.Date < DateTime.Now.Date && !this.Ask("کیا آپ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟"))
+            if (dtp.Value.Date < SQL.ServerDate.Date && !this.Ask("کیا آپ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟"))
             {
                 return;
             }
@@ -426,6 +475,19 @@ namespace MandiPOS.GUI
             else
             {
                 MessageBox.Show("ریکارڈ محفوظ کرنے میں مسئلہ پیش آہا۔", "غلطی", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            if (main.VoucherID == 0)
+                return;
+            using (var frm = new frmDateChanger(VoucherType, main.VoucherID, main.VoucherDate))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Refresh();
+                }
             }
         }
     }

@@ -81,35 +81,38 @@
     <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
       <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.BonusSkins.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Charts.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.Desktop.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.DataAccess.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Drawing.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Pdf.v25.1.Drawing, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.PivotGrid.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v25.1.Export, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v25.1.UI, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpo.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraBars.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v25.1.UI, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v25.1.Wizard, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGauges.v25.1.Core, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v25.1.Extensions, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraTreeList.v25.1, Version=25.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.BonusSkins.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Charts.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v25.2.Drawing, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v25.2.Export, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v25.2.UI, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v25.2.UI, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v25.2.Wizard, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v25.2.Core, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v25.2.Extensions, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v25.2, Version=25.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="eCryptography, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eramake.eCryptography.1.1.6\lib\net45\eCryptography.dll</HintPath>
+    </Reference>
     <Reference Include="Fasterflect.Reflect">
       <HintPath>..\..\MandiSoftware\packages\Fasterflect.Reflect.3.1.0\lib\net45\Fasterflect.Reflect.dll</HintPath>
     </Reference>
@@ -363,6 +366,7 @@
     <Compile Include="CLasses\tblConfigs.cs" />
     <Compile Include="CLasses\tblItems.cs" />
     <Compile Include="CLasses\tblSale.cs" />
+    <Compile Include="CLasses\tblSecurity.cs" />
     <Compile Include="CLasses\tblUsers.cs" />
     <Compile Include="CLasses\UpdateHelper.cs" />
     <Compile Include="CLasses\Vouchers.cs" />
@@ -381,6 +385,18 @@
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\VendorDobatKhatay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\VendorDobatKhatay.Designer.cs">
+      <DependentUpon>VendorDobatKhatay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CustomerDobatKhatay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CustomerDobatKhatay.Designer.cs">
+      <DependentUpon>CustomerDobatKhatay.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frm Configuration.cs">
       <SubType>Form</SubType>
@@ -472,6 +488,12 @@
     <Compile Include="GUI\frmReportsNew.Designer.cs">
       <DependentUpon>frmReportsNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmRepostVouchers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmRepostVouchers.Designer.cs">
+      <DependentUpon>frmRepostVouchers.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmRokar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -483,6 +505,12 @@
     </Compile>
     <Compile Include="GUI\frmSaleNew.Designer.cs">
       <DependentUpon>frmSaleNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmSecurityPasswords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmSecurityPasswords.Designer.cs">
+      <DependentUpon>frmSecurityPasswords.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmSubPartiesSale.cs">
       <SubType>Form</SubType>
@@ -612,6 +640,7 @@
     <Compile Include="Reports\MarkaReportDetail.Designer.cs">
       <DependentUpon>MarkaReportDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ReportClasses\clsChitha.cs" />
     <Compile Include="Reports\ReportClasses\clsLedger.cs" />
     <Compile Include="Reports\rokarDetails.cs">
       <SubType>Component</SubType>
@@ -637,6 +666,12 @@
     <Compile Include="Reports\rptCustomerRecovery.Designer.cs">
       <DependentUpon>rptCustomerRecovery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\rptCustomerSale2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptCustomerSale2.Designer.cs">
+      <DependentUpon>rptCustomerSale2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rptCustomerSale.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -648,6 +683,12 @@
     </Compile>
     <Compile Include="Reports\rptBarChart.Designer.cs">
       <DependentUpon>rptBarChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptHeader2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptHeader2.Designer.cs">
+      <DependentUpon>rptHeader2.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\rptHeader.cs">
       <SubType>Component</SubType>
@@ -788,6 +829,49 @@
     <Content Include="Scripts\16122025ـ002.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\20260102\001. Recreate detail sp.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260104\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260114\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\22-12-2025\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\002.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\003.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\004.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\006.sql" />
+    <Content Include="Scripts\25-12-2025\RokarSettings.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\25-12-2025\RokarSettings2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\26-12-2025\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\26-12-2025\RokarSettings.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\26-12-2025\RokarSettings3.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\26-12-2025\RokarSettings2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Add Column OldAccountCode.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -803,6 +887,9 @@
     <None Include="Resources\download %281%29.png" />
     <None Include="Resources\download.png" />
     <Content Include="Scripts\20250907_backupDatabase.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260102\002. Alter Table tblAccounts.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Compile Include="SQL.cs" />
@@ -835,6 +922,12 @@
     </Content>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\VendorDobatKhatay.resx">
+      <DependentUpon>VendorDobatKhatay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CustomerDobatKhatay.resx">
+      <DependentUpon>CustomerDobatKhatay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frm Configuration.resx">
       <DependentUpon>frm Configuration.cs</DependentUpon>
@@ -883,11 +976,17 @@
     <EmbeddedResource Include="GUI\frmReportsNew.resx">
       <DependentUpon>frmReportsNew.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmRepostVouchers.resx">
+      <DependentUpon>frmRepostVouchers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmRokar.resx">
       <DependentUpon>frmRokar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmSaleNew.resx">
       <DependentUpon>frmSaleNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmSecurityPasswords.resx">
+      <DependentUpon>frmSecurityPasswords.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmSubPartiesSale.resx">
       <DependentUpon>frmSubPartiesSale.cs</DependentUpon>
@@ -975,11 +1074,17 @@
     <EmbeddedResource Include="Reports\rptCustomerRecovery.resx">
       <DependentUpon>rptCustomerRecovery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptCustomerSale2.resx">
+      <DependentUpon>rptCustomerSale2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptCustomerSale.resx">
       <DependentUpon>rptCustomerSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptBarChart.resx">
       <DependentUpon>rptBarChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptHeader2.resx">
+      <DependentUpon>rptHeader2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptHeader.resx">
       <DependentUpon>rptHeader.cs</DependentUpon>
@@ -1062,6 +1167,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Scripts\20260107\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -1222,4 +1330,7 @@ for /R "$(TargetDir)" %25%25f in (*.xml) do del /Q "%25%25f"
 REM delete all .pdb files under the output directory
 for /R "$(TargetDir)" %25%25f in (*.pdb) do del /Q "%25%25f"</PostBuildEvent>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\DevExpress 25.2\Components\Offline Packages\devexpress.data\25.2.3\analyzers\dotnet\DevExpress.Generator.dll" Visible="false" Condition="Exists('C:\Program Files\DevExpress 25.2\Components\Offline Packages\devexpress.data\25.2.3\analyzers\dotnet\DevExpress.Generator.dll')" />
+  </ItemGroup>
 </Project>

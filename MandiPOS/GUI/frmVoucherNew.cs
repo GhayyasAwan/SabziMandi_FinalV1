@@ -55,7 +55,8 @@ namespace MandiPOS.GUI
             VoucherType = _voucherType;
             switch (VoucherType)
             {
-                case 0: this.Text = lblTitle.Text = "رقم بنام ووچر";
+                case 0:
+                    this.Text = lblTitle.Text = "رقم بنام ووچر";
                     this.BackColor = Color.LightSalmon; break;
                 case 1: this.Text = lblTitle.Text = "رقم جمع ووچر"; this.BackColor = Color.LightSkyBlue; break;
             }
@@ -79,7 +80,7 @@ namespace MandiPOS.GUI
                         {
                             db.Delete<VoucherDetails>(c.EntryID, transaction: trx);
                             trx.Commit();
-                            
+
                         }
                         catch (Exception ex)
                         {
@@ -142,13 +143,13 @@ namespace MandiPOS.GUI
                 {
                     return;
                 }
-                if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
+                if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
                 {
                     this.Info("آپکو پرانا ووچر دیکھنے کی اجازت نہیں ہے۔");
-                    dtp.Value = DateTime.Now.Date;
+                    dtp.Value = SQL.ServerDate.Date;
                     return;
                 }
-                if (dtp.Value.Date < DateTime.Now.Date)
+                if (dtp.Value.Date < SQL.ServerDate.Date)
                 {
                     if (this.Ask("کیا آپ یہ ووچر کھولنا چاہتےہین؟") == false)
                     {
@@ -157,12 +158,15 @@ namespace MandiPOS.GUI
                 }
                 isLoading = true;
                 main = VoucherService.GetVoucher(VoucherType, dtp.Value.Date);
-                txtVoucherNumber.Value =main.VoucherNo.toDecimal();
-                bsCart.DataSource = main.Entries.OrderByDescending(x=>x.EntryID);
+                txtVoucherNumber.Value = main.VoucherNo.toDecimal();
+                bsCart.DataSource = main.Entries.OrderByDescending(x => x.EntryID);
                 bsCashBank.DataSource = DetailAccountService.BankCashAccounts();
                 dtParties = DetailAccountService.PartyAccounts().ToDataTable();
                 bsParties.DataSource = dtParties;
-                txtCashBank.SelectedIndex = 0;
+                if (txtCashBank.Items.Count != 0)
+                {
+                    txtCashBank.SelectedIndex = 0;
+                }
                 index = 0;
                 isLoading = false;
                 txtName.Select();
@@ -172,19 +176,19 @@ namespace MandiPOS.GUI
                 ex.ExcError("While Loading Voucher...");
             }
         }
-        public  void RefreshByNo()
+        public void RefreshByNo()
         {
             try
             {
-                var record= VoucherService.GetVoucherByNo(VoucherType, txtVoucherNumber.Value.toInt());
+                var record = VoucherService.GetVoucherByNo(VoucherType, txtVoucherNumber.Value.toInt());
                 if (record == null || record.VoucherID == 0)
                 {
                     this.Error("واؤچر نمبر درست نہیں ہے۔");
                     return;
                 }
                 else
-                { 
-                    dtp.Value= record.VoucherDate;
+                {
+                    dtp.Value = record.VoucherDate;
                     Refresh();
                 }
             }
@@ -232,7 +236,8 @@ namespace MandiPOS.GUI
             index++;
             VoucherCart c = new VoucherCart()
             {
-                Amount = txtAmount.Text.toDecimal(), index = index,
+                Amount = txtAmount.Text.toDecimal(),
+                index = index,
                 CashAccount = txtCashBank.Text,
                 CashAccountID = txtCashBank.SelectedValue.toInt(),
                 EntryID = 0,
@@ -241,45 +246,46 @@ namespace MandiPOS.GUI
                 PartyID = currentAccount,
                 PartyName = txtName.Text.Trim()
             };
-                using (var db = new db())
+            using (var db = new db())
+            {
+                using (var trx = db.BeginTransaction())
                 {
-                    using (var trx = db.BeginTransaction())
+                    try
                     {
-                        try
+                        Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'", transaction: trx).FirstOrDefault() ?? new Vouchers();
+                        if (main.VoucherID == 0)
                         {
-                            Vouchers vmain = db.Query<Vouchers>($"Select Top 1 * from Vouchers Where VoucherType='{VoucherType}' and VoucherDate='{dtp.Value.Date:yyyy-MM-dd}'",transaction:trx).FirstOrDefault()??new Vouchers();
-                            if (main.VoucherID == 0)
+                            vmain = new Vouchers()
                             {
-                                vmain = new Vouchers()
-                                {
-                                    VoucherType = VoucherType.ToString(),
-                                    CreatedBy = General.CurrentUserID.ToString(),
-                                    CreatedDate = DateTime.Now,
-                                    VoucherDate = dtp.Value.Date,
-                                    VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
-                                };
-                                db.Insert<Vouchers>(vmain, transaction: trx);
-                            }
-                                VoucherDetails d = new VoucherDetails()
-                                {
-                                    Amount = c.Amount,
-                                    Narration = c.Narration,
-                                    CashAccountID = c.CashAccountID,
-                                    PartyID = c.PartyID,
-                                    VoucherID = vmain.VoucherID, EnteredBy=General.CurrentUserID
-                                };
-                            db.Insert<VoucherDetails>(d, transaction: trx);
-                            trx.Commit();
-                            Refresh();
-                            ClearControls();
-                            txtName.Select();
+                                VoucherType = VoucherType.ToString(),
+                                CreatedBy = General.CurrentUserID.ToString(),
+                                CreatedDate = DateTime.Now,
+                                VoucherDate = dtp.Value.Date,
+                                VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
+                            };
+                            db.Insert<Vouchers>(vmain, transaction: trx);
                         }
-                        catch (Exception ex)
+                        VoucherDetails d = new VoucherDetails()
                         {
-                            trx.Rollback();
-                            ex.ExcError(null);
-                        }
+                            Amount = c.Amount,
+                            Narration = c.Narration,
+                            CashAccountID = c.CashAccountID,
+                            PartyID = c.PartyID,
+                            VoucherID = vmain.VoucherID,
+                            EnteredBy = General.CurrentUserID
+                        };
+                        db.Insert<VoucherDetails>(d, transaction: trx);
+                        trx.Commit();
+                        Refresh();
+                        ClearControls();
+                        txtName.Select();
                     }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        ex.ExcError(null);
+                    }
+                }
             }
 
 
@@ -288,7 +294,7 @@ namespace MandiPOS.GUI
             //bsCart.Add(c);
             //bsCart.ResetBindings(false);
             //isChanged = true;
-           
+
         }
 
         private void ClearControls()
@@ -326,7 +332,7 @@ namespace MandiPOS.GUI
             {
                 dgvHelp.Select();
             }
-            if(e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 dgvHelp.Visible = false;
                 txtName.Select();
@@ -347,7 +353,7 @@ namespace MandiPOS.GUI
         {
             resizer._get_initial_size();
             this.WindowState = FormWindowState.Maximized;
-            dtp.Value = DateTime.Now;
+            dtp.Value = SQL.ServerDate.Date;
             Refresh();
         }
 
@@ -396,7 +402,7 @@ namespace MandiPOS.GUI
         }
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
+            if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
             {
                 this.Info("آپکو پرانا ووچر محفوظ کرنے کی اجازت نہیں ہے۔");
                 return;
@@ -406,7 +412,7 @@ namespace MandiPOS.GUI
                 this.Error("کم از کم ایک اندراج ضروری ہے۔");
                 return;
             }
-            if (dtp.Value.Date < DateTime.Now.Date)
+            if (dtp.Value.Date < SQL.ServerDate)
             {
                 if (this.Ask("کیا آپ یہ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟") == false)
                 {

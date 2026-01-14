@@ -89,6 +89,7 @@
             // txtCode
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCode.BackColor = System.Drawing.Color.Lavender;
             this.txtCode.Location = new System.Drawing.Point(1234, 55);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(87, 39);
@@ -107,6 +108,7 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.BackColor = System.Drawing.Color.Lavender;
             this.txtName.Location = new System.Drawing.Point(904, 55);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -117,6 +119,7 @@
             // 
             // txtContact
             // 
+            this.txtContact.BackColor = System.Drawing.Color.Lavender;
             this.txtContact.Location = new System.Drawing.Point(739, 54);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(159, 39);
@@ -126,6 +129,7 @@
             // 
             // cmbCity
             // 
+            this.cmbCity.BackColor = System.Drawing.Color.Lavender;
             this.cmbCity.DataSource = this.bsCity;
             this.cmbCity.DisplayMember = "CityName";
             this.cmbCity.Location = new System.Drawing.Point(549, 54);
@@ -142,6 +146,7 @@
             // 
             // txtDebit
             // 
+            this.txtDebit.BackColor = System.Drawing.Color.Lavender;
             this.txtDebit.Location = new System.Drawing.Point(395, 55);
             this.txtDebit.Name = "txtDebit";
             this.txtDebit.Size = new System.Drawing.Size(148, 39);
@@ -157,6 +162,7 @@
             // 
             // txtCredit
             // 
+            this.txtCredit.BackColor = System.Drawing.Color.Lavender;
             this.txtCredit.Location = new System.Drawing.Point(241, 55);
             this.txtCredit.Name = "txtCredit";
             this.txtCredit.Size = new System.Drawing.Size(148, 39);
@@ -190,6 +196,7 @@
             // 
             // cmbRefParty
             // 
+            this.cmbRefParty.BackColor = System.Drawing.Color.Lavender;
             this.cmbRefParty.DataSource = this.bss;
             this.cmbRefParty.DisplayMember = "AccountTitle";
             this.cmbRefParty.Location = new System.Drawing.Point(10, 136);
@@ -320,6 +327,7 @@
             // 
             this.txtRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRemarks.BackColor = System.Drawing.Color.Lavender;
             this.txtRemarks.Location = new System.Drawing.Point(703, 148);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -347,6 +355,7 @@
             // 
             // txtCommisionRatio
             // 
+            this.txtCommisionRatio.BackColor = System.Drawing.Color.Lavender;
             this.txtCommisionRatio.Location = new System.Drawing.Point(241, 148);
             this.txtCommisionRatio.Name = "txtCommisionRatio";
             this.txtCommisionRatio.Size = new System.Drawing.Size(148, 39);
@@ -362,6 +371,7 @@
             // 
             // txtCreditLimit
             // 
+            this.txtCreditLimit.BackColor = System.Drawing.Color.Lavender;
             this.txtCreditLimit.Location = new System.Drawing.Point(395, 148);
             this.txtCreditLimit.Name = "txtCreditLimit";
             this.txtCreditLimit.Size = new System.Drawing.Size(148, 39);
@@ -392,6 +402,7 @@
             this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv.BackColor = System.Drawing.Color.Lavender;
             this.dgv.ColumnAutoResize = true;
             this.dgv.DataSource = this.bsAccount1;
             dgv_DesignTimeLayout.LayoutString = resources.GetString("dgv_DesignTimeLayout.LayoutString");
@@ -419,6 +430,7 @@
             // 
             // txtOldAccNo
             // 
+            this.txtOldAccNo.BackColor = System.Drawing.Color.Lavender;
             this.txtOldAccNo.Location = new System.Drawing.Point(549, 148);
             this.txtOldAccNo.Name = "txtOldAccNo";
             this.txtOldAccNo.Size = new System.Drawing.Size(148, 39);
@@ -451,6 +463,7 @@
             // frmAccountsNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1333, 732);
             this.Controls.Add(this.uiCheckBox1);
             this.Controls.Add(this.label10);

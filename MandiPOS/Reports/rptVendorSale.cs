@@ -16,6 +16,7 @@ namespace MandiPOS.Reports
             xrLabel1.Text = $"{date:dd-MMM-yyyy}";
             string items = new db().ExecuteScalar<string>($"Exec sp_GetItemsDetails '{date:yyyy-MM-dd}','{PartyID}'");
             lblItems.Text = items;
+            
         }
     }
 }

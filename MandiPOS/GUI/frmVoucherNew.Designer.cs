@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Janus.Windows.Common.JanusColorScheme janusColorScheme2 = new Janus.Windows.Common.JanusColorScheme();
+            Janus.Windows.Common.JanusColorScheme janusColorScheme1 = new Janus.Windows.Common.JanusColorScheme();
             Janus.Windows.GridEX.GridEXLayout gridEX1_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVoucherNew));
             Janus.Windows.GridEX.GridEXLayout dgvHelp_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
@@ -94,10 +94,10 @@
             // 
             // visualStyleManager1
             // 
-            janusColorScheme2.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
-            janusColorScheme2.Name = "Scheme0";
-            janusColorScheme2.OfficeCustomColor = System.Drawing.Color.Empty;
-            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme2);
+            janusColorScheme1.HighlightTextColor = System.Drawing.SystemColors.HighlightText;
+            janusColorScheme1.Name = "Scheme0";
+            janusColorScheme1.OfficeCustomColor = System.Drawing.Color.Empty;
+            this.visualStyleManager1.ColorSchemes.Add(janusColorScheme1);
             // 
             // label2
             // 
@@ -278,10 +278,10 @@
             dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
             this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
             this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(352, 134);
+            this.dgvHelp.Location = new System.Drawing.Point(267, 134);
             this.dgvHelp.Name = "dgvHelp";
             this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvHelp.Size = new System.Drawing.Size(353, 340);
+            this.dgvHelp.Size = new System.Drawing.Size(438, 340);
             this.dgvHelp.TabIndex = 15;
             this.dgvHelp.Visible = false;
             this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
