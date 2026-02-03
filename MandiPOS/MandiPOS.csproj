@@ -348,6 +348,7 @@
     <Compile Include="CLasses\backupHelper.cs" />
     <Compile Include="CLasses\clsCahrt.cs" />
     <Compile Include="CLasses\clsCustomerBill.cs" />
+    <Compile Include="CLasses\clsStock.cs" />
     <Compile Include="CLasses\CustomMessageBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,6 +386,12 @@
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmBVNew2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBVNew2.Designer.cs">
+      <DependentUpon>frmBVNew2.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\VendorDobatKhatay.cs">
       <SubType>Form</SubType>
@@ -786,6 +793,7 @@
     <Compile Include="Reports\uc_Report01.Designer.cs">
       <DependentUpon>uc_Report01.cs</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\MandiPOS.CLasses.clsStock.datasource" />
     <None Include="Resources\WhatsApp.Root_QYB7VQ27uN.png" />
     <Content Include="Scripts\12122025_001.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -836,6 +844,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\20260114\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260114\002.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260115\001.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20260203\101.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\22-12-2025\001.sql">
@@ -922,6 +939,9 @@
     </Content>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmBVNew2.resx">
+      <DependentUpon>frmBVNew2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\VendorDobatKhatay.resx">
       <DependentUpon>VendorDobatKhatay.cs</DependentUpon>

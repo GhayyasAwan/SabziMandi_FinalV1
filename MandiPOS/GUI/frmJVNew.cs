@@ -52,7 +52,7 @@ namespace MandiPOS.GUI
         {
             if (e.KeyCode == Keys.Enter && txtVoucherNumber.Value.toInt() != 0)
             {
-                var v = VoucherService.GetVoucherByNo(txtVoucherNumber.Value.toInt());
+                var v = VoucherService.GetVoucherByNo(VoucherType, txtVoucherNumber.Value.toInt());
                 if (v != null)
                 {
                     dtp.Value = v.VoucherDate.Date;

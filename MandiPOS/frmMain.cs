@@ -893,6 +893,30 @@ namespace MandiPOS
                 General.Security = tblSecurity.Get;
             }
         }
+
+        private void StockInVoucher(object sender, EventArgs e)
+        {
+            var frm = new frmBVNew2(0) { StartPosition = FormStartPosition.CenterScreen };
+            var f = Application.OpenForms[frm.Name];
+            if (f != null) { f.BringToFront(); }
+            else
+            {
+                frm.Icon = this.Icon;
+                frm.Show();
+            }
+        }
+
+        private void StockOutVoucher(object sender, EventArgs e)
+        {
+            var frm = new frmBVNew2(1) { StartPosition = FormStartPosition.CenterScreen };
+            var f = Application.OpenForms[frm.Name];
+            if (f != null) { f.BringToFront(); }
+            else
+            {
+                frm.Icon = this.Icon;
+                frm.Show();
+            }
+        }
     }
     public class crsr : IDisposable
     {

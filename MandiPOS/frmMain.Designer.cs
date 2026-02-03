@@ -67,6 +67,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnJV = new System.Windows.Forms.Button();
             this.btnSale = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.btnLedger = new System.Windows.Forms.Button();
             this.btnRokar = new System.Windows.Forms.Button();
             this.btnKhasra = new System.Windows.Forms.Button();
@@ -258,14 +260,14 @@
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // secToolStripMenuItem
             // 
             this.secToolStripMenuItem.Name = "secToolStripMenuItem";
-            this.secToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.secToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.secToolStripMenuItem.Text = "Security Passwords";
             this.secToolStripMenuItem.Click += new System.EventHandler(this.secToolStripMenuItem_Click);
             // 
@@ -346,6 +348,8 @@
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.btnJV);
             this.flowLayoutPanel1.Controls.Add(this.btnSale);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Controls.Add(this.btnLedger);
             this.flowLayoutPanel1.Controls.Add(this.btnRokar);
             this.flowLayoutPanel1.Controls.Add(this.btnKhasra);
@@ -454,7 +458,6 @@
             // 
             this.btnSale.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSale.BackColor = System.Drawing.Color.PaleGreen;
-            this.flowLayoutPanel1.SetFlowBreak(this.btnSale, true);
             this.btnSale.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSale.Image = global::MandiPOS.Properties.Resources.purchase;
             this.btnSale.Location = new System.Drawing.Point(289, 155);
@@ -465,6 +468,36 @@
             this.btnSale.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSale.UseVisualStyleBackColor = false;
             this.btnSale.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.PaleGreen;
+            this.button2.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Image = global::MandiPOS.Properties.Resources.voucher;
+            this.button2.Location = new System.Drawing.Point(151, 155);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(132, 70);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "باردانہ آمد";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.StockInVoucher);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.PaleGreen;
+            this.button3.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Image = global::MandiPOS.Properties.Resources.voucher;
+            this.button3.Location = new System.Drawing.Point(13, 155);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(132, 70);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "باردانہ نکاس";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.StockOutVoucher);
             // 
             // btnLedger
             // 
@@ -742,5 +775,7 @@
         private System.Windows.Forms.Label l2;
         private System.Windows.Forms.Label l3;
         private System.Windows.Forms.ToolStripMenuItem secToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -12,7 +12,7 @@ BEGIN
     SELECT @Amount = SUM(ISNULL(vd.CreditAmount,0))
     FROM Vouchers vm
     LEFT JOIN JVEntries vd ON vm.VoucherID = vd.VoucherID
-    WHERE vm.VoucherDate = @VoucherDate
+    WHERE VoucherType<>2 and vm.VoucherDate = @VoucherDate
       AND vd.AccountID IN (
             Select AccountID from DetailAccounts Where MasterID IN(Select MasterAccounts.ID from MasterAccounts Where AccountType like 'Income')
       );

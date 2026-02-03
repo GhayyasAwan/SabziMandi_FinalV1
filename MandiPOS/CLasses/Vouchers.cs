@@ -159,6 +159,20 @@ namespace MandiPOS.CLasses
         }
         public int EnteredBy { get; set; }
         public int IsCurrentUserEntry { get { return EnteredBy == General.CurrentUserID ? 1 : 0; } }
+        public int SourceID { get; set; } = 0;
+        public string sourceTitle
+        {
+            get
+            {
+                if (SourceID == 0)
+                    return "";
+                else
+                {
+                    return new db().Get<DetailAccounts>(SourceID)?.AccountTitle ?? "";
+                }
+
+            }
+        }
     }
     public class VoucherBardanaDetails
     {
@@ -183,6 +197,7 @@ namespace MandiPOS.CLasses
 
         public string ItemDescription { get; set; }
         public int EnteredBy { get; set; }
+        public int sourceId { get; set; } = 0;
 
     }
     public static class VoucherService
@@ -227,7 +242,7 @@ left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
-bd.ItemQty,bd.ItemRate,bd.ItemWeight,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy
+bd.ItemQty,bd.ItemRate,bd.ItemWeight,bd.DebitAmount,bd.CreditAmount,bd.ItemDescription,bd.EnteredBy,bd.sourceid
 from VoucherBardanaDetails bd
 left join tblItems p on bd.itemID=p.ID
 left join DetailAccounts acc on bd.accountiD=acc.ID
