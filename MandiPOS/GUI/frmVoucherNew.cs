@@ -21,6 +21,13 @@ namespace MandiPOS.GUI
         public frmVoucherNew(int _voucherType)
         {
             InitializeComponent();
+            txtVno.KeyDown += (s, e) =>
+            {
+                if (e.EnterKey())
+                {
+                    RefreshById(txtVno.Value.toInt());
+                }
+            };
             partyBal.Visible = General.IsAdmin;
             txtCode.RegisterFocus(true);
             txtCashBank.RegisterFocus(true);
@@ -149,6 +156,7 @@ namespace MandiPOS.GUI
                 }
                 isLoading = true;
                 main = VoucherService.GetVoucher(VoucherType, dtp.Value.Date);
+                txtVno.Value = main.VoucherNo;
                 bsCart.DataSource = main.Entries;
                 bsCashBank.DataSource = DetailAccountService.BankCashAccounts();
                 dtParties = DetailAccountService.PartyAccounts().ToDataTable();
@@ -161,6 +169,12 @@ namespace MandiPOS.GUI
             {
                 ex.ExcError("While Loading Voucher...");
             }
+        }
+        void RefreshById(int id)
+        {
+            var voucher = VoucherService.GetVoucherByNo(VoucherType, id);
+            dtp.Value = voucher.VoucherDate;
+            Refresh();
         }
         private void Dtp_KeyDown(object sender, KeyEventArgs e)
         {
@@ -220,11 +234,11 @@ namespace MandiPOS.GUI
                             {
                                 vmain = new Vouchers()
                                 {
-                                    VoucherType = VoucherType.ToString(),
+                                    VoucherType = VoucherType,
                                     CreatedBy = General.CurrentUserID.ToString(),
                                     CreatedDate = DateTime.Now,
                                     VoucherDate = dtp.Value.Date,
-                                    VoucherNo = db.ExecuteScalar<string>($"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
+                                    VoucherNo = db.ExecuteScalar<int>($"SELECT ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NextCode FROM Vouchers Where VoucherType='{VoucherType}'", transaction: trx)
                                 };
                                 db.Insert<Vouchers>(vmain, transaction: trx);
                             }

@@ -51,7 +51,7 @@ namespace MandiPOS.GUI
             var rows = _dt.Select(condition);
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("جمع",SummaryOnly);
+                var subReport = new rptChithaRecords("جمع",0,SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
                 subReport.CreateDocument();
                 xrSubreport1.ReportSource = subReport;
@@ -75,7 +75,7 @@ namespace MandiPOS.GUI
             var rows = _dt.Select("EndBalance > 0");
             if (rows.Length > 0)
             {
-                var subReport = new rptChithaRecords("بنام",SummaryOnly);
+                var subReport = new rptChithaRecords("بنام",0, SummaryOnly);
                 subReport.DataSource = rows.CopyToDataTable();
                 subReport.CreateDocument();
                 xrSubreport2.ReportSource = subReport;

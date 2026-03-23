@@ -428,8 +428,8 @@ namespace MandiPOS.CLasses
             {
                 main = new Vouchers()
                 {
-                    VoucherNo = connecion.ExecuteScalar<string>("Select Cast(Max(ISNULL(VoucherNo,0))+1 as nvarchar) as nextNo from Vouchers", transaction: trx),
-                    VoucherType = 4.ToString(),
+                    VoucherNo = connecion.ExecuteScalar<int>("Select Max(ISNULL(VoucherNo,0))+1 as nextNo from Vouchers", transaction: trx),
+                    VoucherType = 4,
                     VoucherDate = sale.ArrivalDate
                 };
                 connecion.Insert<Vouchers>(main, transaction: trx);

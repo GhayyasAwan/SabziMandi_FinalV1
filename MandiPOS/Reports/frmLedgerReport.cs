@@ -134,9 +134,10 @@ namespace MandiPOS.Reports
                 }
                 var entry = dgvLedger.CurrentRow.DataRow as clsLedger;
 
-                if (entry.TrxType == 0)
+                if (entry.TrxType != 4)
                 {
-                    return; // No bill number to show
+                    Console.Beep(2000, 50);
+                    return;
                 }
                 using (new crsr())
                 {
@@ -144,7 +145,7 @@ namespace MandiPOS.Reports
                     using (var rpt = new saleBill(billNo, 1))
                     {
                         rpt.CreateDocument();
-                        using (var frm = new XtraForm1(rpt))
+                        using (var frm = new XtraForm1(rpt,true))
                         {
                             frm.StartPosition = FormStartPosition.CenterScreen;
                             frm.WindowState = FormWindowState.Normal;

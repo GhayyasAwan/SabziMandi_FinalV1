@@ -23,6 +23,13 @@ namespace MandiPOS.GUI
             InitializeComponent();
             RegisterEnter();
             RegisterFocus();
+            this.KeyPreview = true;
+            this.KeyDown += ((s,e) =>{
+                if (e.KeyCode == Keys.F1)
+                {
+                    SaveRecord();
+                }
+            });
             PopulateMasterAccounts();
             gridEX1.RowDoubleClick += GridEX1_RowDoubleClick;
             this.Resize += FrmAccountsNew2_Resize;
@@ -86,12 +93,12 @@ namespace MandiPOS.GUI
             {
                 account.MasterID = MasterID;
                 DetailAccountService.SaveDetailAccount(account);
-                Refresh();
+                Refresh();this.Info("ریکارڈ محفوظ ہوگیا۔");
             }
             else
             {
                 DetailAccountService.SaveDetailAccount(account);
-                Refresh();
+                Refresh(); this.Info("ریکارڈ اپڈیٹ ہوگیا۔");
             }
         }
         private bool EntryValid()
@@ -141,7 +148,7 @@ namespace MandiPOS.GUI
             txtDebit.Text = (account.OpDebit).ToString("0.##");
             cmbCity.SelectedValue = account.CityID;
             if (!account.RefrenceType.HasValue) { account.RefrenceType = 0; }
-            txtName.Select();
+            txtName.Select();txtName.SelectAll();
         }
         private void FrmAccountsNew2_Resize(object sender, EventArgs e)
         {

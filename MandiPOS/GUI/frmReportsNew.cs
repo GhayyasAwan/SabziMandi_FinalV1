@@ -589,6 +589,8 @@ namespace MandiPOS.GUI
                     dtp.Select();
                     break;
             }
+            cbIncludeZero.Visible = cbSummary.Visible = ReportID == 3;
+            dtp.Value = dtp2.Value = DateTime.Now.Date;
         }
 
         private void UncheckAll(object sender)
@@ -617,7 +619,7 @@ namespace MandiPOS.GUI
             }
             if (ReportID == 4) //چٹھہ گروپ وار
             {
-                ShowChitha(1, cbIncludeZero.Checked,cbSummary.Checked); return;
+                ShowChitha(1, cbIncludeZero.Checked, cbSummary.Checked); return;
             }
             if (ReportID == 5) //چٹھہ شہر وار
             {
@@ -859,6 +861,8 @@ Order By mas.id";
                     return;
                 }
                 var rpt = new rptVendorWiseSale(dtp.Value.Date, type, data);
+
+
                 rpt.CreateDocument();
                 ShowReport(rpt);
             }
@@ -1044,7 +1048,7 @@ Order By mas.id";
                 }
                 if (dt.Rows.Count > 0)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"),@checked,checked1);
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), @checked, checked1);
                     report.CreateDocument();
                     ShowReport(report);
                 }

@@ -212,7 +212,7 @@ namespace MandiPOS.GUI
                 return;
             }
             main.VoucherDate = dt.Value;
-            main.VoucherType = VoucherType.ToString();
+            main.VoucherType = VoucherType;
             main.JVEntries = bs.List.Cast<JVCart>().ToList();
             if (VoucherService.SaveVoucher(main))
             {

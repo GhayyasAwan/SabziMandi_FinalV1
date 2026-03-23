@@ -6,6 +6,7 @@ using DevExpress.XtraWaitForm;
 using Squirrel;
 
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -181,6 +182,11 @@ namespace MandiPOS
         private static void CheckForDatabaseUpgrade()
         {
             string path = Path.Combine(Application.StartupPath, "Scripts");
+            List<string> files = Directory
+     .GetFiles(path)
+     .Select(Path.GetFileName)
+     .ToList();
+
             var upgrader = DeployChanges.To
               .SqlDatabase(MainConnectionstring)
               .WithScriptsFromFileSystem(path, new FileSystemScriptOptions
@@ -198,7 +204,7 @@ namespace MandiPOS
                 var result = upgrader.PerformUpgrade();
                 if (!result.Successful)
                 {
-                    MessageBox.Show("Upgrade failed:\n" + result.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Upgrade failed:\n {result.ErrorScript.Name}. \n" + result.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

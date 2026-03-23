@@ -1,5 +1,9 @@
 ﻿using Dapper;
+
+using DevExpress.Export.Xl;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Data;
 
@@ -14,13 +18,14 @@ namespace MandiPOS.Reports
         public rptVendorWiseSale(DateTime date, int type = 0, DataTable data = null)
         {
             InitializeComponent();
-            
+            string summary = "";
             if (type == 1)
             {
                 lblTitle.Text = $"بکری نقد";
                 bndCustomer.Visible = false;
                 var records = data.Select("CustomerAccountFull Like '%نقد سیل%'").CopyToDataTable();
                 this.DataSource = records;
+                summary = new db().QuerySingle<string>($"Select dbo.fn_GetPartyItemSummary2('{date:yyyy-MM-dd}') as summary");
             }
             else if (type == 2)
             {
@@ -33,6 +38,7 @@ namespace MandiPOS.Reports
 
 
             lblDate.Text = $@"{date:dd-MMM-yyyy}";
+            lblSummary.Text = summary;
         }
 
     }

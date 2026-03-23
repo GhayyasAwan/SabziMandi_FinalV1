@@ -124,12 +124,132 @@
     <value>409, 17</value>
   </metadata>
   <data name="dgv_DesignTimeLayout.LayoutString" xml:space="preserve">
-    <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;BardanaCart&lt;/Key&gt;&lt;Caption&gt;BardanaCart&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="Code"&gt;&lt;AggregateFunction&gt;Count&lt;/AggregateFunction&gt;&lt;Caption&gt;کوڈ&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Code&lt;/DataMember&gt;&lt;Key&gt;Code&lt;/Key&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;Width&gt;113&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column0&gt;&lt;Column1 ID="PartyName"&gt;&lt;Caption&gt;نام پارٹی&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;PartyName&lt;/DataMember&gt;&lt;Key&gt;PartyName&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;Width&gt;113&lt;/Width&gt;&lt;/Column1&gt;&lt;Column2 ID="Narration"&gt;&lt;Caption&gt;تفصیل&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Narration&lt;/DataMember&gt;&lt;Key&gt;Narration&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;Width&gt;114&lt;/Width&gt;&lt;/Column2&gt;&lt;Column3 ID="ItemName"&gt;&lt;Caption&gt;اشیاء&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemName&lt;/DataMember&gt;&lt;Key&gt;ItemName&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;Width&gt;114&lt;/Width&gt;&lt;/Column3&gt;&lt;Column4 ID="ItemQty"&gt;&lt;AggregateFunction&gt;Count&lt;/AggregateFunction&gt;&lt;Caption&gt;تعداد&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemQty&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;ItemQty&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;Width&gt;114&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column4&gt;&lt;Column5 ID="ItemRate"&gt;&lt;Caption&gt;ریٹ&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemRate&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;ItemRate&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;Width&gt;114&lt;/Width&gt;&lt;/Column5&gt;&lt;Column6 ID="DebitAmount"&gt;&lt;AggregateFunction&gt;Sum&lt;/AggregateFunction&gt;&lt;Caption&gt;رقم بنام&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;DebitAmount&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;DebitAmount&lt;/Key&gt;&lt;Position&gt;6&lt;/Position&gt;&lt;Width&gt;115&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column6&gt;&lt;Column7 ID="CreditAmount"&gt;&lt;AggregateFunction&gt;Sum&lt;/AggregateFunction&gt;&lt;Caption&gt;رقم جمع&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;CreditAmount&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;CreditAmount&lt;/Key&gt;&lt;Position&gt;7&lt;/Position&gt;&lt;Width&gt;115&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column7&gt;&lt;Column8 ID="IsCurrentUserEntry"&gt;&lt;Caption&gt;Is Current User Entry&lt;/Caption&gt;&lt;DataTypeCode&gt;Int32&lt;/DataTypeCode&gt;&lt;DataMember&gt;IsCurrentUserEntry&lt;/DataMember&gt;&lt;Key&gt;IsCurrentUserEntry&lt;/Key&gt;&lt;Position&gt;8&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column8&gt;&lt;/Columns&gt;&lt;FormatConditions Collection="true" ElementName="Condition"&gt;&lt;Condition0 ID="FormatCondition1"&gt;&lt;ColIndex&gt;8&lt;/ColIndex&gt;&lt;FormatStyle&gt;&lt;ForeColor&gt;Red&lt;/ForeColor&gt;&lt;/FormatStyle&gt;&lt;Key&gt;FormatCondition1&lt;/Key&gt;&lt;FilterCondition&gt;&lt;ColumnIndex&gt;8&lt;/ColumnIndex&gt;&lt;ConditionOperator&gt;NotEqual&lt;/ConditionOperator&gt;&lt;TypeNameValue1&gt;System.Int32&lt;/TypeNameValue1&gt;&lt;Value1&gt;1&lt;/Value1&gt;&lt;/FilterCondition&gt;&lt;/Condition0&gt;&lt;/FormatConditions&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
+    <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;BardanaCart&lt;/Key&gt;&lt;Caption&gt;BardanaCart&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="Code"&gt;&lt;AggregateFunction&gt;Count&lt;/AggregateFunction&gt;&lt;Caption&gt;کوڈ&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Code&lt;/DataMember&gt;&lt;Key&gt;Code&lt;/Key&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;Width&gt;102&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column0&gt;&lt;Column1 ID="PartyName"&gt;&lt;Caption&gt;نام پارٹی&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;PartyName&lt;/DataMember&gt;&lt;Key&gt;PartyName&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;Width&gt;102&lt;/Width&gt;&lt;/Column1&gt;&lt;Column2 ID="Narration"&gt;&lt;Caption&gt;تفصیل&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Narration&lt;/DataMember&gt;&lt;Key&gt;Narration&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;Width&gt;103&lt;/Width&gt;&lt;/Column2&gt;&lt;Column3 ID="ItemName"&gt;&lt;Caption&gt;اشیاء&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemName&lt;/DataMember&gt;&lt;Key&gt;ItemName&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;Width&gt;103&lt;/Width&gt;&lt;/Column3&gt;&lt;Column4 ID="ItemQty"&gt;&lt;AggregateFunction&gt;Count&lt;/AggregateFunction&gt;&lt;Caption&gt;تعداد&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemQty&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;ItemQty&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;Width&gt;103&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column4&gt;&lt;Column5 ID="ItemWeight"&gt;&lt;Caption&gt;وزن&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemWeight&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;ItemWeight&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;SelectableCells&gt;FilterRowCells&lt;/SelectableCells&gt;&lt;Width&gt;91&lt;/Width&gt;&lt;/Column5&gt;&lt;Column6 ID="ItemRate"&gt;&lt;Caption&gt;ریٹ&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;ItemRate&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;ItemRate&lt;/Key&gt;&lt;Position&gt;6&lt;/Position&gt;&lt;Width&gt;102&lt;/Width&gt;&lt;/Column6&gt;&lt;Column7 ID="DebitAmount"&gt;&lt;AggregateFunction&gt;Sum&lt;/AggregateFunction&gt;&lt;Caption&gt;رقم بنام&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;DebitAmount&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;DebitAmount&lt;/Key&gt;&lt;Position&gt;7&lt;/Position&gt;&lt;Width&gt;103&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column7&gt;&lt;Column8 ID="CreditAmount"&gt;&lt;AggregateFunction&gt;Sum&lt;/AggregateFunction&gt;&lt;Caption&gt;رقم جمع&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;CreditAmount&lt;/DataMember&gt;&lt;FormatString&gt;0.##&lt;/FormatString&gt;&lt;Key&gt;CreditAmount&lt;/Key&gt;&lt;Position&gt;8&lt;/Position&gt;&lt;Width&gt;103&lt;/Width&gt;&lt;TotalFormatString&gt;0.##&lt;/TotalFormatString&gt;&lt;/Column8&gt;&lt;Column9 ID="IsCurrentUserEntry"&gt;&lt;Caption&gt;Is Current User Entry&lt;/Caption&gt;&lt;DataTypeCode&gt;Int32&lt;/DataTypeCode&gt;&lt;DataMember&gt;IsCurrentUserEntry&lt;/DataMember&gt;&lt;Key&gt;IsCurrentUserEntry&lt;/Key&gt;&lt;Position&gt;9&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column9&gt;&lt;/Columns&gt;&lt;FormatConditions Collection="true" ElementName="Condition"&gt;&lt;Condition0 ID="FormatCondition1"&gt;&lt;ColIndex&gt;9&lt;/ColIndex&gt;&lt;FormatStyle&gt;&lt;ForeColor&gt;Red&lt;/ForeColor&gt;&lt;/FormatStyle&gt;&lt;Key&gt;FormatCondition1&lt;/Key&gt;&lt;FilterCondition&gt;&lt;ColumnIndex&gt;9&lt;/ColumnIndex&gt;&lt;ConditionOperator&gt;NotEqual&lt;/ConditionOperator&gt;&lt;TypeNameValue1&gt;System.Int32&lt;/TypeNameValue1&gt;&lt;Value1&gt;1&lt;/Value1&gt;&lt;/FilterCondition&gt;&lt;/Condition0&gt;&lt;/FormatConditions&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
   </data>
   <metadata name="bsParties.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>592, 17</value>
   </metadata>
   <data name="dgvHelp_DesignTimeLayout.LayoutString" xml:space="preserve">
     <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;DetailAccountView&lt;/Key&gt;&lt;Caption&gt;DetailAccountView&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="ID"&gt;&lt;Caption&gt;ID&lt;/Caption&gt;&lt;DataTypeCode&gt;Int32&lt;/DataTypeCode&gt;&lt;DataMember&gt;ID&lt;/DataMember&gt;&lt;Key&gt;ID&lt;/Key&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column0&gt;&lt;Column1 ID="AccountCode"&gt;&lt;Caption&gt;کوڈ&lt;/Caption&gt;&lt;DataTypeCode&gt;Int64&lt;/DataTypeCode&gt;&lt;DataMember&gt;AccountCode&lt;/DataMember&gt;&lt;Key&gt;AccountCode&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;Selectable&gt;False&lt;/Selectable&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column1&gt;&lt;Column2 ID="AccountTitle"&gt;&lt;Caption&gt;نام پارٹی&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;AccountTitle&lt;/DataMember&gt;&lt;Key&gt;AccountTitle&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;Selectable&gt;False&lt;/Selectable&gt;&lt;Width&gt;126&lt;/Width&gt;&lt;/Column2&gt;&lt;Column3 ID="Contact"&gt;&lt;Caption&gt;رابطہ نمبر&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Contact&lt;/DataMember&gt;&lt;Key&gt;Contact&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;Selectable&gt;False&lt;/Selectable&gt;&lt;Width&gt;119&lt;/Width&gt;&lt;/Column3&gt;&lt;Column4 ID="City"&gt;&lt;Caption&gt;شہر&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;City&lt;/DataMember&gt;&lt;Key&gt;City&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;SelectableCells&gt;FilterRowCells&lt;/SelectableCells&gt;&lt;Width&gt;112&lt;/Width&gt;&lt;/Column4&gt;&lt;Column5 ID="OpCredit"&gt;&lt;Caption&gt;سابقہ جمع&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;OpCredit&lt;/DataMember&gt;&lt;FormatString&gt;c&lt;/FormatString&gt;&lt;Key&gt;OpCredit&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column5&gt;&lt;Column6 ID="OpDebit"&gt;&lt;Caption&gt;سابقہ بنام&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;OpDebit&lt;/DataMember&gt;&lt;FormatString&gt;c&lt;/FormatString&gt;&lt;Key&gt;OpDebit&lt;/Key&gt;&lt;Position&gt;6&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column6&gt;&lt;Column7 ID="Remarks"&gt;&lt;Caption&gt;تفصیل&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Remarks&lt;/DataMember&gt;&lt;Key&gt;Remarks&lt;/Key&gt;&lt;Position&gt;7&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column7&gt;&lt;Column8 ID="CreditLimit"&gt;&lt;Caption&gt;بیلنش حد&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;CreditLimit&lt;/DataMember&gt;&lt;FormatString&gt;c&lt;/FormatString&gt;&lt;Key&gt;CreditLimit&lt;/Key&gt;&lt;Position&gt;8&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column8&gt;&lt;Column9 ID="Commission"&gt;&lt;Caption&gt;کمیشن&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;Commission&lt;/DataMember&gt;&lt;FormatString&gt;c&lt;/FormatString&gt;&lt;Key&gt;Commission&lt;/Key&gt;&lt;Position&gt;9&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column9&gt;&lt;Column10 ID="RefName"&gt;&lt;Caption&gt;معرفت&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;RefName&lt;/DataMember&gt;&lt;Key&gt;RefName&lt;/Key&gt;&lt;Position&gt;10&lt;/Position&gt;&lt;Visible&gt;False&lt;/Visible&gt;&lt;/Column10&gt;&lt;/Columns&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="uiButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        PV+3JOWr0YgAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="uiButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
 </root>

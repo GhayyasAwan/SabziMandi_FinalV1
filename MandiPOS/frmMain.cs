@@ -194,10 +194,7 @@ namespace MandiPOS
         {
             SQL.SetDefaultAccount();
             //SaleService.RepostSales();
-            using(var rpt=new rptRokar(DateTime.Now.Date.AddDays(365)))
-            {
-                rpt.CreateDocument();
-            }
+            
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -214,7 +211,7 @@ namespace MandiPOS
 
         }
 
-        private async void FrmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
 
             //for (int i = 0; i <= 10; i++)
@@ -328,7 +325,7 @@ namespace MandiPOS
                     frmAccounts.BringToFront();
                 }
                 else
-                {
+                {   frmAccounts.WindowState = FormWindowState.Maximized;
                     frmAccounts.BringToFront();
                 }
             }
@@ -346,6 +343,7 @@ namespace MandiPOS
                 }
                 else
                 {
+                    frmVoucher.WindowState = FormWindowState.Maximized;
                     frmVoucher.BringToFront();
                 }
             }
@@ -358,7 +356,7 @@ namespace MandiPOS
                 var frm = new frmBardanaVoucher();
                 frm.Icon = this.Icon;
                 var f = Application.OpenForms[frm.Name];
-                if (f != null) { f.BringToFront(); }
+                if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
                 else
                 {
                     frm.Show();
@@ -372,6 +370,7 @@ namespace MandiPOS
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             {
+                f.WindowState = FormWindowState.Maximized;
                 f.BringToFront();
             }
             else
@@ -389,6 +388,7 @@ namespace MandiPOS
                 var f = Application.OpenForms[frm.Name];
                 if (f != null)
                 {
+                    f.WindowState = FormWindowState.Maximized;
                     f.BringToFront();
                 }
                 else
@@ -415,6 +415,7 @@ namespace MandiPOS
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             {
+                f.WindowState = FormWindowState.Maximized;
                 f.BringToFront();
             }
             else
@@ -428,7 +429,7 @@ namespace MandiPOS
         {
             var frm = new frmAccountsNew();
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
 
             {
@@ -444,6 +445,7 @@ namespace MandiPOS
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             {
+                f.WindowState = FormWindowState.Maximized;
                 f.BringToFront();
             }
             else
@@ -468,7 +470,9 @@ namespace MandiPOS
             var frm = new frmAccountsNew2();
             var f = Application.OpenForms[frm.Name];
             if (f != null)
-            { f.BringToFront(); }
+            {
+                f.WindowState = FormWindowState.Maximized;
+                f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
@@ -480,7 +484,7 @@ namespace MandiPOS
         {
             var frm = new frmVoucherNew(0) { Name = Name + "_0" };
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
@@ -493,7 +497,7 @@ namespace MandiPOS
         {
             var frm = new frmSaleNew();
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
@@ -506,7 +510,7 @@ namespace MandiPOS
         {
             var frm = new frmVoucherNew(1) { Name = Name + "_1" };
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
@@ -518,7 +522,7 @@ namespace MandiPOS
         {
             var frm = new frmJVNew();
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
@@ -528,15 +532,19 @@ namespace MandiPOS
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var frm = new frmBVNew() { StartPosition = FormStartPosition.CenterScreen };
+            LoadBVForm(3);
+        }
+
+        private void LoadBVForm(int type)
+        {
+            var frm = new frmBVNew(type) { StartPosition = FormStartPosition.CenterScreen };
             var f = Application.OpenForms[frm.Name];
-            if (f != null) { f.BringToFront(); }
+            if (f != null) { f.WindowState = FormWindowState.Maximized; f.BringToFront(); }
             else
             {
                 frm.Icon = this.Icon;
                 frm.Show();
             }
-
         }
 
         private void defaultAccountsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -555,9 +563,12 @@ namespace MandiPOS
         private void OpenReportForm(int v)
         {
             var frm = new frmReportsNew(v);
-            if (Application.OpenForms[frm.Name] != null)
+            var f = Application.OpenForms[frm.Name];
+            if (f != null)
             {
-                Application.OpenForms[frm.Name].BringToFront();
+                if(f.WindowState == FormWindowState.Minimized)
+                    f.WindowState = FormWindowState.Maximized;
+                f.BringToFront();
             }
             else
             {
@@ -777,6 +788,11 @@ namespace MandiPOS
                 SaleService.RepostSales(frm);
                 this.Info("Action Completed Successfully.");
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            LoadBVForm(5);
         }
     }
     public class crsr : IDisposable

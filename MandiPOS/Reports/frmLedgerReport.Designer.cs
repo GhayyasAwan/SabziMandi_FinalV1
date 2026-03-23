@@ -366,7 +366,7 @@
             this.dgvLedger.TabIndex = 3;
             this.dgvLedger.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.dgvLedger.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
-            this.dgvLedger.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2010;
+            this.dgvLedger.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007;
             // 
             // clsLedgerBindingSource
             // 

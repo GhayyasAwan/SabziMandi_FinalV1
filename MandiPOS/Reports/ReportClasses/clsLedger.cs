@@ -18,14 +18,16 @@ namespace MandiPOS.Reports.ReportClasses
                     case 1:
                         return "جمع ووچر"; 
                     case 2:
-                        return "جنرل ووچر"; 
+                        return "جنرل ووچر";
                     case 3:
-                        return "بیج باردانہ ووچر"; 
+                        return "بیج ووچر";
+                    case 5:
+                        return "باردانہ ووچر";
                     case 4:
                         return "فروخت ووچر"; 
-                    case -1: return "اوپننگ ووچر";
+                    case -1: return "اوپننگ";
                     default:
-                        return "جنرل ووچر";
+                        return "";
                 }
             } 
         }

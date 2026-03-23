@@ -1,17 +1,17 @@
-﻿using System;
+﻿using DevExpress.XtraReports.UI;
+using System;
 
 namespace MandiPOS.Reports
 {
     public partial class rptChithaRecords : DevExpress.XtraReports.UI.XtraReport
     {
-        string _type = "";
-        public rptChithaRecords(string type = "", bool summaryOnly = false)
+        public rptChithaRecords(string type = "", int sortOrder = 0,bool summary=false)
         {
             InitializeComponent();
-            _type = type;
             lblrqm.Text = $"رقم {type}";
             lblTotal.Text = $"کُل {type}";
-            xrTable1.Visible = !summaryOnly;
+            Detail.Visible = !summary;
+            
         }
 
         private void xrTableCell1_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
@@ -31,7 +31,13 @@ namespace MandiPOS.Reports
 
         private void xrTableCell14_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            xrTableCell14.Text = _type;
+            XRTableCell cell = sender as XRTableCell;
+            int value = xrTableCell14.Text.toInt();
+            if (value == 0)
+            {
+                cell.Text = "";
+            }
+            
         }
     }
 }
