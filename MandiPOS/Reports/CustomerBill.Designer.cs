@@ -111,7 +111,7 @@
             this.xrTable1.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(294.3172F, 22.83F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(325.1953F, 22.83F);
             this.xrTable1.StylePriority.UseFont = false;
             // 
             // xrTableRow1
@@ -184,7 +184,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "xrTableCell3";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell3.Weight = 0.69417748850276073D;
+            this.xrTableCell3.Weight = 1.00441719555017D;
             // 
             // ReportHeader
             // 
@@ -217,12 +217,12 @@
             this.xrLabel3.BackColor = System.Drawing.Color.White;
             this.xrLabel3.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
             this.xrLabel3.ForeColor = System.Drawing.Color.Black;
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(520.6694F, 38.74995F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(539.4194F, 38.74995F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(82.63306F, 23.67001F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(84.71649F, 23.67001F);
             this.xrLabel3.StylePriority.UseBackColor = false;
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseForeColor = false;
@@ -233,7 +233,7 @@
             // xrLabel1
             // 
             this.xrLabel1.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(217.3733F, 0F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(282.3733F, 0F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
@@ -253,7 +253,7 @@
             this.xrTable2.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(294.3173F, 28.83333F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(325.1953F, 28.83333F);
             this.xrTable2.StylePriority.UseFont = false;
             // 
             // xrTableRow2
@@ -280,7 +280,7 @@
             this.xrTableCell6.StylePriority.UseFont = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.Text = "ٹوٹل";
-            this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell6.Weight = 0.66344237598798761D;
             // 
             // xrTableCell7
@@ -297,7 +297,7 @@
             this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "ریٹ";
-            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell7.Weight = 0.50985488097147025D;
             // 
             // xrTableCell9
@@ -312,7 +312,7 @@
             this.xrTableCell9.StylePriority.UseFont = false;
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.Text = "تعداد";
-            this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell9.Weight = 0.52268116973932677D;
             // 
             // xrTableCell10
@@ -327,14 +327,14 @@
             this.xrTableCell10.StylePriority.UsePadding = false;
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
             this.xrTableCell10.Text = "جنس";
-            this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell10.Weight = 0.52026590253344185D;
+            this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell10.Weight = 0.75278085788743365D;
             // 
             // lblDate
             // 
             this.lblDate.CanGrow = false;
             this.lblDate.Font = new DevExpress.Drawing.DXFont("calibri", 12F);
-            this.lblDate.LocationFloat = new DevExpress.Utils.PointFloat(118.9483F, 0F);
+            this.lblDate.LocationFloat = new DevExpress.Utils.PointFloat(183.9483F, 0F);
             this.lblDate.Name = "lblDate";
             this.lblDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblDate.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.No;
@@ -356,7 +356,7 @@
             this.lblPartyTitle.Name = "lblPartyTitle";
             this.lblPartyTitle.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.lblPartyTitle.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.lblPartyTitle.SizeF = new System.Drawing.SizeF(235.2707F, 23.67F);
+            this.lblPartyTitle.SizeF = new System.Drawing.SizeF(254.0206F, 23.67F);
             this.lblPartyTitle.StylePriority.UseBackColor = false;
             this.lblPartyTitle.StylePriority.UseFont = false;
             this.lblPartyTitle.StylePriority.UseForeColor = false;
@@ -594,7 +594,7 @@
             this.xrTable3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(294.3173F, 25.17F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(325.1953F, 25.17F);
             this.xrTable3.StylePriority.UseFont = false;
             // 
             // xrTableRow3
@@ -669,9 +669,9 @@
             this.xrTableCell14.StylePriority.UsePadding = false;
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
             this.xrTableCell14.Text = "کُل تعداد";
-            this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell14.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
-            this.xrTableCell14.Weight = 1.3526916294951612D;
+            this.xrTableCell14.Weight = 1.9572307312256449D;
             // 
             // PageHeader
             // 

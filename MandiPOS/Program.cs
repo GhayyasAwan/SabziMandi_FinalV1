@@ -1,10 +1,9 @@
-﻿using DbUp;
+﻿using Configurations;
+using DbUp;
 using DbUp.ScriptProviders;
-
+using DevExpress.Xpo.Helpers;
 using DevExpress.XtraWaitForm;
-
-using Squirrel;
-
+using MandiPOS.GUI;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -23,16 +22,53 @@ namespace MandiPOS
         private static InputLanguage english = InputLanguage.FromCulture(new CultureInfo("en-US"));
         public static Image AppBackground;
         public static string MainConnectionstring { get; set; }
+        private static string filePath = Path.Combine(Application.StartupPath, "MandiPOS");
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static async Task Main()
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SetBGImage();
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["CS"].ConnectionString);
+            GetConnectionstring();
+            
+                
+            CheckForDatabaseUpgrade();
+
+            Application.ApplicationExit += OnExit;
+            //Application.AddMessageFilter(new FocusMessageFilter());
+            var main = new frmMain();
+            //var updateTask = Task.Run(() => CheckAndDownloadUpdateAsync(main));
+
+            Application.Run(main);
+           // try { await updateTask; }
+           // catch(Exception ex) { ex.ExcError(null); }
+
+        }
+
+        private static void GetConnectionstring()
+        {
+            
+            if (!File.Exists(filePath))
+            {
+                using (var frm = new frmConnectionWriter(filePath))
+                {
+                    frm.ShowDialog();
+                    Application.Restart();
+                }
+            }
+            string _cstr = File.ReadAllText(filePath);
+            if (string.IsNullOrEmpty(_cstr))
+            {
+                using (var frm = new frmConnectionWriter(filePath))
+                {
+                    frm.ShowDialog();
+                    Application.Restart();
+                }
+            }
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(_cstr);
             builder.Encrypt = true;
             builder.ConnectTimeout = 0;
             builder.MaxPoolSize = 2000;
@@ -46,18 +82,8 @@ namespace MandiPOS
             {
                 General.dbSystemName = builder.DataSource.Split('\\')[0];
             }
-                CheckForDatabaseUpgrade();
-
-            Application.ApplicationExit += OnExit;
-            //Application.AddMessageFilter(new FocusMessageFilter());
-            var main = new frmMain();
-            //var updateTask = Task.Run(() => CheckAndDownloadUpdateAsync(main));
-
-            Application.Run(main);
-           // try { await updateTask; }
-           // catch(Exception ex) { ex.ExcError(null); }
-
         }
+
         public static void ResetBG()
         {
             if (AppBackground != null)
@@ -99,33 +125,33 @@ namespace MandiPOS
 
         static async Task CheckAndDownloadUpdateAsync(frmMain form)
         {
-            using (var mgr = await UpdateManager.GitHubUpdateManager(
-                "https://github.com/GhayyasAwan/MandiPOS"))
-            {
+            //using (var mgr = await UpdateManager.GitHubUpdateManager(
+            //    "https://github.com/GhayyasAwan/MandiPOS"))
+            //{
 
 
-                var info = await mgr.CheckForUpdate();
+            //    var info = await mgr.CheckForUpdate();
 
-                if (info.ReleasesToApply.Any())
-                {
-                    await mgr.DownloadReleases(info.ReleasesToApply).ConfigureAwait(false);
+            //    if (info.ReleasesToApply.Any())
+            //    {
+            //        await mgr.DownloadReleases(info.ReleasesToApply).ConfigureAwait(false);
 
-                    // marshal back to UI thread
-                    form.Invoke((Action)(async () =>
-                    {
-                        var result = MessageBox.Show(
-                            "New update ready. Install now?",
-                            "Update Available",
-                            MessageBoxButtons.YesNo);
+            //        // marshal back to UI thread
+            //        form.Invoke((Action)(async () =>
+            //        {
+            //            var result = MessageBox.Show(
+            //                "New update ready. Install now?",
+            //                "Update Available",
+            //                MessageBoxButtons.YesNo);
 
-                        if (result == DialogResult.Yes)
-                        {
-                            await mgr.ApplyReleases(info).ConfigureAwait(false);
-                            UpdateManager.RestartApp();
-                        }
-                    }));
-                }
-            }
+            //            if (result == DialogResult.Yes)
+            //            {
+            //                await mgr.ApplyReleases(info).ConfigureAwait(false);
+            //                UpdateManager.RestartApp();
+            //            }
+            //        }));
+            //    }
+            //}
         }
 
         public static string GetBGImageFilePath()
@@ -161,7 +187,7 @@ namespace MandiPOS
                 var result = upgrader.PerformUpgrade();
                 if (!result.Successful)
                 {
-                    MessageBox.Show("Upgrade failed:\n" + result.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Upgrade failed.\n"+$"Error File:{result.ErrorScript.Name}\r\nError Message:{result.Error.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

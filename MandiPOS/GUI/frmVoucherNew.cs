@@ -1,8 +1,7 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using MandiPOS.CLasses;
-
-using SharpCompress.Common;
 
 using System;
 using System.Data;
@@ -18,6 +17,18 @@ namespace MandiPOS.GUI
         clsResize resizer;
         private bool isLoading;
         Vouchers main = new Vouchers();
+        bool _verified = false;
+        bool verified
+        {
+            get
+            {
+                if (!_verified)
+                {
+                    _verified = this.IsVerified();
+                }
+                return _verified;
+            }
+        }
         public frmVoucherNew(int _voucherType)
         {
             InitializeComponent();
@@ -62,6 +73,7 @@ namespace MandiPOS.GUI
             }
         }
 
+        public int CurrentEntryID = 0;
         private void GridEX1_DoubleClick(object sender, EventArgs e)
         {
             if (gridEX1.IsRow())
@@ -97,6 +109,7 @@ namespace MandiPOS.GUI
                 txtCashBank.SelectedValue = c.CashAccountID;
                 txtNarration.Text = c.Narration;
                 txtAmount.Text = c.Amount.ToString("0.##");
+                CurrentEntryID = c.EntryID;
                 txtName.Select();
             }
         }
@@ -149,14 +162,12 @@ namespace MandiPOS.GUI
                     dtp.Value = SQL.ServerDate.Date;
                     return;
                 }
-                if (dtp.Value.Date < SQL.ServerDate.Date)
+                if (dtp.Value.Date < SQL.ServerDate.Date && !verified)
                 {
-                    if (this.Ask("کیا آپ یہ ووچر کھولنا چاہتےہین؟") == false)
-                    {
-                        return;
-                    }
+                    return;
                 }
                 isLoading = true;
+                CurrentEntryID = 0;
                 main = VoucherService.GetVoucher(VoucherType, dtp.Value.Date);
                 txtVoucherNumber.Value = main.VoucherNo.toDecimal();
                 bsCart.DataSource = main.Entries.OrderByDescending(x => x.EntryID);
@@ -272,9 +283,18 @@ namespace MandiPOS.GUI
                             CashAccountID = c.CashAccountID,
                             PartyID = c.PartyID,
                             VoucherID = vmain.VoucherID,
-                            EnteredBy = General.CurrentUserID
+                            EnteredBy = General.CurrentUserID,
+                            EntryID = CurrentEntryID
                         };
-                        db.Insert<VoucherDetails>(d, transaction: trx);
+                        if (d.EntryID == 0)
+                        {
+                            db.Insert<VoucherDetails>(d, transaction: trx);
+                        }
+                        else
+                        {
+                            db.Execute("dbo.usp_VoucherDetails_Insert", d, trx, commandType: CommandType.StoredProcedure);
+                        }
+
                         trx.Commit();
                         Refresh();
                         ClearControls();
@@ -412,12 +432,9 @@ namespace MandiPOS.GUI
                 this.Error("کم از کم ایک اندراج ضروری ہے۔");
                 return;
             }
-            if (dtp.Value.Date < SQL.ServerDate)
+            if (dtp.Value.Date < SQL.ServerDate && !verified)
             {
-                if (this.Ask("کیا آپ یہ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟") == false)
-                {
                     return;
-                }
             }
             try
             {
@@ -445,6 +462,19 @@ namespace MandiPOS.GUI
         private void uiButton2_Click(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void uiButton4_Click(object sender, EventArgs e)
+        {
+            if (main.VoucherID == 0)
+                return;
+            using (var frm = new frmDateChanger(VoucherType, main.VoucherID, main.VoucherDate))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Refresh();
+                }
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Dapper;
+﻿
+
+using Dapper;
 
 namespace MandiPOS.CLasses
 {

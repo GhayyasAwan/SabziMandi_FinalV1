@@ -19,7 +19,7 @@ namespace MandiPOS.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -193,6 +193,26 @@ namespace MandiPOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Plus_36851 {
+            get {
+                object obj = ResourceManager.GetObject("Plus_36851", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus_sign_in_a_black_circle_icon_icons_com_73452 {
+            get {
+                object obj = ResourceManager.GetObject("plus-sign-in-a-black-circle_icon-icons.com_73452", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap power_on {
             get {
                 object obj = ResourceManager.GetObject("power-on", resourceCulture);
@@ -246,6 +266,16 @@ namespace MandiPOS.Properties {
         internal static System.Drawing.Bitmap refresh_149_16 {
             get {
                 object obj = ResourceManager.GetObject("refresh-149-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_arrow_1546 {
+            get {
+                object obj = ResourceManager.GetObject("refresh_arrow_1546", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

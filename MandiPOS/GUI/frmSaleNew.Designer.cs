@@ -299,12 +299,15 @@
             // txtTitle
             // 
             this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.Location = new System.Drawing.Point(951, 593);
+            this.txtTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(235)))), ((int)(((byte)(179)))));
+            this.txtTitle.Location = new System.Drawing.Point(491, 464);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(117, 35);
+            this.txtTitle.Size = new System.Drawing.Size(258, 35);
             this.txtTitle.TabIndex = 15;
             this.txtTitle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.txtTitle.Visible = false;
             this.txtTitle.VisualStyleManager = this.visualStyleManager1;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // _dateRemaining
             // 
@@ -481,6 +484,7 @@
             // 
             this.ArrivalNo.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ArrivalNo.Location = new System.Drawing.Point(158, 5);
+            this.ArrivalNo.Maximum = 10000;
             this.ArrivalNo.Name = "ArrivalNo";
             this.ArrivalNo.Size = new System.Drawing.Size(101, 53);
             this.ArrivalNo.TabIndex = 32;
@@ -1277,7 +1281,7 @@
             // 
             this._RemQty.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._RemQty.FormatString = "0.##";
-            this._RemQty.Location = new System.Drawing.Point(637, 468);
+            this._RemQty.Location = new System.Drawing.Point(377, 468);
             this._RemQty.Name = "_RemQty";
             this._RemQty.ReadOnly = true;
             this._RemQty.Size = new System.Drawing.Size(56, 23);
@@ -1292,7 +1296,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(699, 464);
+            this.label33.Location = new System.Drawing.Point(439, 464);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(46, 27);
             this.label33.TabIndex = 92;

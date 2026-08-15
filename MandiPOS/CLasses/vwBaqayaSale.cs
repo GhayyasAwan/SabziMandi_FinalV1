@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿
+using Dapper;
 using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;

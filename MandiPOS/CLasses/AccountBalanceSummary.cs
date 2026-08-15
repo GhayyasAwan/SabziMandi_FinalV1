@@ -7,6 +7,7 @@ namespace MandiPOS.CLasses
         public int AccountID { get; set; }
         public long AccountCode { get; set; }
         public string AccountTitle { get; set; }
+        public string Contact { get; set; }
 
         public decimal PreviousBalance { get; set; }
 

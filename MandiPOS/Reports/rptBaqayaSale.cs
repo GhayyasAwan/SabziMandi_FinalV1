@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿
 using DevExpress.XtraReports.UI;
 using MandiPOS.CLasses;
 using System;

@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿
 using MandiPOS.CLasses;
 using System;
 using System.Data;

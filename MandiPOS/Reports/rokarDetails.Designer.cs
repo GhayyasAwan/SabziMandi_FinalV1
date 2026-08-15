@@ -59,12 +59,12 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 10F;
+            this.TopMargin.HeightF = 0F;
             this.TopMargin.Name = "TopMargin";
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 10F;
+            this.BottomMargin.HeightF = 0F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // Detail
@@ -86,7 +86,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(518F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(536F, 25F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseBorderWidth = false;
             this.xrTable1.StylePriority.UseFont = false;
@@ -116,15 +116,15 @@
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell1.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
             this.xrTableCell1.TextFormatString = "{0:N0}";
-            this.xrTableCell1.Weight = 0.95534481524549064D;
+            this.xrTableCell1.Weight = 0.71191528516434921D;
             this.xrTableCell1.WordWrap = false;
             // 
             // xrTableCell2
             // 
+            this.xrTableCell2.CanGrow = false;
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Narration]")});
             this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("calibri", 10F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell2.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -133,14 +133,16 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell2.Weight = 1.4589912235870084D;
+            this.xrTableCell2.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
+            this.xrTableCell2.Weight = 1.7024207536681497D;
+            this.xrTableCell2.WordWrap = false;
             // 
             // xrTableCell3
             // 
+            this.xrTableCell3.CanGrow = false;
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[AccountTitle]")});
             this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("calibri", 12F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
             this.xrTableCell3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -149,22 +151,26 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "xrTableCell3";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell3.Weight = 2.0797113838343084D;
+            this.xrTableCell3.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
+            this.xrTableCell3.Weight = 2.2067181207958795D;
+            this.xrTableCell3.WordWrap = false;
             // 
             // xrTableCell5
             // 
+            this.xrTableCell5.CanGrow = false;
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[EntryID]")});
             this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("calibri", 10F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(10F, 10F, 0F, 0F, 100F);
+            this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(0F, 0F, 0F, 0F, 100F);
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.StylePriority.UsePadding = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.Text = "xrTableCell5";
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell5.Weight = 0.50595257733319254D;
+            this.xrTableCell5.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
+            this.xrTableCell5.Weight = 0.3789458403716216D;
+            this.xrTableCell5.WordWrap = false;
             this.xrTableCell5.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrTableCell5_BeforePrint);
             // 
             // ReportFooter
@@ -183,7 +189,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(518.0001F, 33.33333F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(536F, 33.33333F);
             this.xrTable2.StylePriority.UseFont = false;
             // 
             // xrTableRow2
@@ -236,7 +242,7 @@
             this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 96F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(518.0001F, 30.83333F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(536F, 30.83333F);
             this.xrTable3.StylePriority.UseBorders = false;
             this.xrTable3.StylePriority.UseBorderWidth = false;
             this.xrTable3.StylePriority.UseFont = false;
@@ -259,7 +265,7 @@
             this.lblAmunt.StylePriority.UseTextAlignment = false;
             this.lblAmunt.Text = "رقم";
             this.lblAmunt.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lblAmunt.Weight = 0.716508532096169D;
+            this.lblAmunt.Weight = 0.53393631709552225D;
             this.lblAmunt.WordWrap = false;
             // 
             // xrTableCell6
@@ -271,7 +277,7 @@
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.Text = "تفصیل";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell6.Weight = 1.0942411555994997D;
+            this.xrTableCell6.Weight = 1.2768133706001465D;
             // 
             // lblAccount
             // 
@@ -302,11 +308,11 @@
             this.DataSource = this.objectDataSource1;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new DevExpress.Drawing.DXMargins(10F, 10F, 10F, 10F);
+            this.Margins = new DevExpress.Drawing.DXMargins(1F, 1F, 0F, 0F);
             this.PageHeightF = 400F;
             this.PageWidthF = 538F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.Custom;
-            this.Version = "25.2";
+            this.Version = "26.1";
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
             xrWatermark1});

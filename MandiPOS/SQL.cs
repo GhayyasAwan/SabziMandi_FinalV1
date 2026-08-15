@@ -1,8 +1,7 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using DevExpress.XtraEditors;
-
-using Janus.Data;
 
 using MandiPOS.CLasses;
 
@@ -15,11 +14,14 @@ using System.Linq;
 namespace MandiPOS
 {
 
-
-
-
+    public enum SettingKeys
+    { 
+        IsLocked
+    }
     public static class SQL
     {
+
+        
         public static int LastArrivalNo
         {
             get
@@ -38,7 +40,61 @@ namespace MandiPOS
                 }
             }
         }
+        public static bool IsLocked
+        {
+            get
+            {
+                var result = new db().ExecuteScalar<string>("SELECT ISNULL([Value],0) From Settings Where SettingKey like 'IsLocked'");
+                if (result!=null && ( result == "1" || result.ToLower() == "true"))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        internal static bool SaveSettingsByKey(string settingkey,string value)
+        {
+            Settings model = new Settings()
+            {
+                SettingKey = settingkey,
+                Value = value
+            };
+            string sql = $"Delete From Settings Where SettingKey=@SettingKey; Insert Into Settings (SettingKey,[Value]) Values (@settingkey,@Value);";
+            using (var xdb = new db())
+            {
+                using (var trx = xdb.BeginTransaction())
+                {
+                    try
+                    {
+                        xdb.Execute(sql, model, trx);
+                        trx.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        throw ex;
+                    }
+                }
+            }
+        }
+        public static T GetSettingByKey<T>(string key, T defaultValue = default)
+        {
+            using (var db = new db())
+            {
+                var rawResult = db.ExecuteScalar<object>(
+                    "SELECT TOP 1 Value FROM Settings WHERE SettingKey = @SettingKey",
+                    new { SettingKey = key }
+                );
 
+                if (rawResult == null || rawResult == DBNull.Value)
+                {
+                    return defaultValue;
+                }
+
+                return (T)Convert.ChangeType(rawResult, typeof(T));
+            }
+        }
         internal static bool DeleteCity(int iD)
         {
             try
@@ -256,6 +312,7 @@ namespace MandiPOS
             }
         }
 
+        
         internal static bool SaveCity(tblCity city)
         {
             try
@@ -386,6 +443,16 @@ namespace MandiPOS
                     }
                 }
             }
+        }
+
+        internal static IEnumerable<vw_BardanaLedger> GetBardanaLedger(DateTime date1, DateTime date2, int itemID)
+        {
+            return new db().Query<vw_BardanaLedger>($"Select * from vw_BardanaLedger Where [Date] Between '{date1:yyyy-MM-dd}' and '{date2:yyyy-MM-dd}' and ItemID='{itemID}';");
+        }
+
+        internal static IEnumerable<tblItems> GetBardanaItems()
+        {
+            return new db().Query<tblItems>($"SELECT * FROM tblItems i WHERE i.ItemType LIKE N'%دیگر%';");
         }
     }
 

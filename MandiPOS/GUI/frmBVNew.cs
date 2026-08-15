@@ -1,7 +1,6 @@
-﻿using Dapper;
+﻿
 
-using DevExpress.XtraEditors.Repository;
-
+using Dapper;
 using Janus.Windows.GridEX;
 
 using MandiPOS.CLasses;
@@ -11,7 +10,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace MandiPOS.GUI
 {
@@ -21,7 +19,18 @@ namespace MandiPOS.GUI
         Vouchers main = new Vouchers();
         int vType;
         bool isChanged = false;
-
+        bool _verified = false;
+        bool verified
+        {
+            get
+            {
+                if (!_verified)
+                {
+                    _verified = this.IsVerified();
+                }
+                return _verified;
+            }
+        }
         public frmBVNew(int v = 3)
         {
             InitializeComponent();
@@ -549,7 +558,7 @@ namespace MandiPOS.GUI
         private void FrmBVNew_FormClosing(object sender, FormClosingEventArgs e)
         {
             return;
-            if (isChanged && !this.Ask("ووچر میں کی گئی تبدیلیاں محفوظ نہیں ہیں، کیا آپ واقعی فارم بند کرنا چاہتے ہیں؟"))
+            if (isChanged && !this.IsVerified())
             {
                 e.Cancel = true;
             }
@@ -577,7 +586,7 @@ namespace MandiPOS.GUI
                 dtp.Value = DateTime.Now.Date;
                 return;
             }
-            if (dtp.Value.Date < DateTime.Today.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
+            if (dtp.Value.Date < DateTime.Today.Date && !this.verified)
             {
                 return;
             }
@@ -597,7 +606,7 @@ namespace MandiPOS.GUI
                 dtp.Value = DateTime.Now.Date;
                 return;
             }
-            if (voucher.VoucherDate.Date < DateTime.Today.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
+            if (voucher.VoucherDate.Date < DateTime.Today.Date && !verified)
             {
                 return;
             }
@@ -617,6 +626,7 @@ namespace MandiPOS.GUI
             dtp.Value = DateTime.Today.Date;
             txtVno.Value = SQL.GetNextVoucherNo(vType).toDecimal();
             CheckEntryMode(null, null);
+            Refresh();
         }
 
         private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)

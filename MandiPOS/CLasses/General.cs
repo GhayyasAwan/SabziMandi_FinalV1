@@ -1,5 +1,6 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using DevExpress.XtraEditors;
 
 using Janus.Windows.GridEX;
@@ -10,6 +11,7 @@ using MandiPOS.CLasses;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -48,7 +50,17 @@ namespace MandiPOS
         public static int NetPaidAccount = 0;
         public static int LagaAccount = 0;
         internal static string dbSystemName;
-
+        internal static bool CheckIsApplicationLocked()
+        {
+            return SQL.IsLocked;
+        }
+        public static bool IsVerified(this Form f,int VerficationID = 1)
+        {
+            using (var frm = new frmVerfication(VerficationID))
+            { 
+                return frm.ShowDialog()== DialogResult.OK;
+            }
+        }
         public static string GetPartyBalance(this Form f, int AccountID)
         {
             if (General.IsAdmin)
@@ -194,6 +206,14 @@ namespace MandiPOS
                     continue;
                 }
                 col.SelectableCells = SelectableCells.FilterRowCells;
+                if (col.FormatString == "c")
+                {
+                    col.FormatString = "N2";
+                }
+                if (col.FormatString == "d")
+                {
+                    col.FormatString = "dd-MMM-yyyy";
+                }
             }
         }
         public static object RecordID(this GridEX dgv, int columIndex = 0)
@@ -249,13 +269,47 @@ namespace MandiPOS
         {
             return ShowMessage(ex.Message + $"{ex.Message}\r\nDetails:{ex.InnerException}", "Exception", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
         }
+        private static string ExtractCleanSqlErrorMessage(Exception ex)
+        {
+            if (ex == null || string.IsNullOrWhiteSpace(ex.Message))
+                return string.Empty;
+
+            string fullMessage = ex.Message;
+
+            // SQL Keywords jin ka index check karna hai
+            string[] sqlKeywords = new string[] { "SELECT", "INSERT", "UPDATE", "DELETE" };
+
+            int firstKeywordIndex = -1;
+
+            // Sabse pehle aane wale keyword ka index nikalen
+            foreach (var keyword in sqlKeywords)
+            {
+                int index = fullMessage.IndexOf(keyword, StringComparison.OrdinalIgnoreCase);
+
+                if (index != -1)
+                {
+                    if (firstKeywordIndex == -1 || index < firstKeywordIndex)
+                    {
+                        firstKeywordIndex = index;
+                    }
+                }
+            }
+
+            // Agar SQL Keyword mil jaye, toh us se pehle wala text return karein
+            if (firstKeywordIndex > 0)
+            {
+                return fullMessage.Substring(0, firstKeywordIndex).Trim();
+            }
+
+            return fullMessage.Trim();
+        }
         public static bool ExcError(this Exception ex, string errorPoint = "")
         {
-            string message = ex.Message;
-
-            if (ex.InnerException != null)
+            string message =ExtractCleanSqlErrorMessage(ex);
+            
+            if (ex.InnerException != null && ex.InnerException.Message.Length > 0)
             {
-                message += $"\r\nDetails: {ex.InnerException}";
+                message +="\n"+ ex.InnerException.ToString();
             }
 
             string caption = string.IsNullOrEmpty(errorPoint) ? "Exception" : $"Error on: {errorPoint}";

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Janus.Windows.GridEX.GridEXLayout dgvHelp_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportsNew));
+            Janus.Windows.GridEX.GridEXLayout dgvAgreements_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem3 = new Janus.Windows.EditControls.UIComboBoxItem();
@@ -36,8 +39,6 @@
             Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem5 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout cmbCity_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout cmbGroups_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
-            Janus.Windows.GridEX.GridEXLayout dgvHelp_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportsNew));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.uiGroupBox1 = new Janus.Windows.EditControls.UIGroupBox();
             this.rb_Report21 = new System.Windows.Forms.RadioButton();
@@ -69,6 +70,14 @@
             this.dtp2 = new Janus.Windows.CalendarCombo.CalendarCombo();
             this.lblDate2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbRecoverySummary = new Janus.Windows.EditControls.UICheckBox();
+            this.dgvHelp = new Janus.Windows.GridEX.GridEX();
+            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
+            this.grpAgreements = new Janus.Windows.EditControls.UIGroupBox();
+            this.dgvAgreements = new Janus.Windows.GridEX.GridEX();
+            this.bsAgreements = new System.Windows.Forms.BindingSource(this.components);
+            this.btnNewAgreement = new Janus.Windows.EditControls.UIButton();
+            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.cmbType = new Janus.Windows.EditControls.UIComboBox();
             this.cbSummary = new Janus.Windows.EditControls.UICheckBox();
             this.cbInActive = new Janus.Windows.EditControls.UICheckBox();
@@ -82,21 +91,25 @@
             this.cmbCity = new Janus.Windows.GridEX.EditControls.CheckedComboBox();
             this.lblgroup = new System.Windows.Forms.Label();
             this.cmbGroups = new Janus.Windows.GridEX.EditControls.CheckedComboBox();
-            this.dgvHelp = new Janus.Windows.GridEX.GridEX();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this._pname = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblParty = new System.Windows.Forms.Label();
             this._pid = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            this.gridEXExporter1 = new Janus.Windows.GridEX.Export.GridEXExporter(this.components);
             this.chartDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bsSubParties = new System.Windows.Forms.BindingSource(this.components);
+            this.rpt_BardanaReportRadio = new System.Windows.Forms.RadioButton();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpAgreements)).BeginInit();
+            this.grpAgreements.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgreements)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAgreements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSubParties)).BeginInit();
@@ -120,6 +133,7 @@
             this.uiGroupBox1.AutoScroll = true;
             this.uiGroupBox1.BackColor = System.Drawing.Color.PeachPuff;
             this.uiGroupBox1.BorderColor = System.Drawing.Color.PeachPuff;
+            this.uiGroupBox1.Controls.Add(this.rpt_BardanaReportRadio);
             this.uiGroupBox1.Controls.Add(this.rb_Report21);
             this.uiGroupBox1.Controls.Add(this.rb_Report19);
             this.uiGroupBox1.Controls.Add(this.radioButton3);
@@ -671,7 +685,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel1.Controls.Add(this.cbRecoverySummary);
             this.panel1.Controls.Add(this.dgvHelp);
+            this.panel1.Controls.Add(this.grpAgreements);
             this.panel1.Controls.Add(this.cmbType);
             this.panel1.Controls.Add(this.cbSummary);
             this.panel1.Controls.Add(this.cbInActive);
@@ -699,6 +715,106 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(796, 658);
             this.panel1.TabIndex = 5;
+            // 
+            // cbRecoverySummary
+            // 
+            this.cbRecoverySummary.Location = new System.Drawing.Point(506, 81);
+            this.cbRecoverySummary.Name = "cbRecoverySummary";
+            this.cbRecoverySummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbRecoverySummary.Size = new System.Drawing.Size(104, 33);
+            this.cbRecoverySummary.TabIndex = 21;
+            this.cbRecoverySummary.Text = "مختصر";
+            // 
+            // dgvHelp
+            // 
+            this.dgvHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvHelp.ColumnAutoResize = true;
+            this.dgvHelp.DataSource = this.bsParties;
+            dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
+            this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
+            this.dgvHelp.GroupByBoxVisible = false;
+            this.dgvHelp.Location = new System.Drawing.Point(148, 189);
+            this.dgvHelp.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvHelp.Name = "dgvHelp";
+            this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvHelp.Size = new System.Drawing.Size(636, 371);
+            this.dgvHelp.TabIndex = 12;
+            this.dgvHelp.Visible = false;
+            this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
+            // 
+            // bsParties
+            // 
+            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
+            // 
+            // grpAgreements
+            // 
+            this.grpAgreements.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpAgreements.BackColor = System.Drawing.Color.Bisque;
+            this.grpAgreements.BorderColor = System.Drawing.Color.Red;
+            this.grpAgreements.Controls.Add(this.dgvAgreements);
+            this.grpAgreements.Controls.Add(this.btnNewAgreement);
+            this.grpAgreements.Controls.Add(this.uiButton1);
+            this.grpAgreements.FrameStyle = Janus.Windows.EditControls.FrameStyle.Top;
+            this.grpAgreements.Location = new System.Drawing.Point(115, 233);
+            this.grpAgreements.Name = "grpAgreements";
+            this.grpAgreements.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grpAgreements.Size = new System.Drawing.Size(669, 422);
+            this.grpAgreements.TabIndex = 20;
+            this.grpAgreements.Text = "معاہدہ جات";
+            this.grpAgreements.VisualStyle = Janus.Windows.UI.Dock.PanelVisualStyle.Office2010;
+            // 
+            // dgvAgreements
+            // 
+            this.dgvAgreements.AllowColumnDrag = false;
+            this.dgvAgreements.AlternatingColors = true;
+            this.dgvAgreements.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAgreements.AutoEdit = true;
+            this.dgvAgreements.ColumnAutoResize = true;
+            this.dgvAgreements.DataSource = this.bsAgreements;
+            dgvAgreements_DesignTimeLayout.LayoutString = resources.GetString("dgvAgreements_DesignTimeLayout.LayoutString");
+            this.dgvAgreements.DesignTimeLayout = dgvAgreements_DesignTimeLayout;
+            this.dgvAgreements.DynamicFiltering = true;
+            this.dgvAgreements.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic;
+            this.dgvAgreements.GroupByBoxVisible = false;
+            this.dgvAgreements.Location = new System.Drawing.Point(13, 65);
+            this.dgvAgreements.Name = "dgvAgreements";
+            this.dgvAgreements.OfficeColorScheme = Janus.Windows.GridEX.OfficeColorScheme.Blue;
+            this.dgvAgreements.RecordNavigator = true;
+            this.dgvAgreements.Size = new System.Drawing.Size(640, 351);
+            this.dgvAgreements.TabIndex = 2;
+            this.dgvAgreements.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
+            this.dgvAgreements.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
+            this.dgvAgreements.UpdateMode = Janus.Windows.GridEX.UpdateMode.CellUpdate;
+            this.dgvAgreements.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007;
+            // 
+            // bsAgreements
+            // 
+            this.bsAgreements.DataSource = typeof(MandiPOS.CLasses.vwAgreements);
+            // 
+            // btnNewAgreement
+            // 
+            this.btnNewAgreement.Location = new System.Drawing.Point(408, 11);
+            this.btnNewAgreement.Name = "btnNewAgreement";
+            this.btnNewAgreement.Size = new System.Drawing.Size(124, 48);
+            this.btnNewAgreement.TabIndex = 1;
+            this.btnNewAgreement.Text = "نیا معاہدہ";
+            this.btnNewAgreement.Click += new System.EventHandler(this.AddNewAgreement);
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.Image = global::MandiPOS.Properties.Resources.refresh_arrow_1546;
+            this.uiButton1.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.Center;
+            this.uiButton1.ImageSize = new System.Drawing.Size(45, 45);
+            this.uiButton1.Location = new System.Drawing.Point(538, 11);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Size = new System.Drawing.Size(59, 48);
+            this.uiButton1.TabIndex = 0;
+            this.uiButton1.VisualStyle = Janus.Windows.UI.VisualStyle.Office2010;
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click_1);
             // 
             // cmbType
             // 
@@ -889,22 +1005,9 @@
             this.cmbGroups.TabIndex = 6;
             this.cmbGroups.ValuesDataMember = null;
             // 
-            // dgvHelp
+            // bs
             // 
-            this.dgvHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvHelp.ColumnAutoResize = true;
-            this.dgvHelp.DataSource = this.bsParties;
-            dgvHelp_DesignTimeLayout.LayoutString = resources.GetString("dgvHelp_DesignTimeLayout.LayoutString");
-            this.dgvHelp.DesignTimeLayout = dgvHelp_DesignTimeLayout;
-            this.dgvHelp.GroupByBoxVisible = false;
-            this.dgvHelp.Location = new System.Drawing.Point(151, 190);
-            this.dgvHelp.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvHelp.Name = "dgvHelp";
-            this.dgvHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvHelp.Size = new System.Drawing.Size(636, 371);
-            this.dgvHelp.TabIndex = 12;
-            this.dgvHelp.Visible = false;
-            this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
+            this.bs.DataSource = typeof(MandiPOS.CLasses.MasterAccounts);
             // 
             // _pname
             // 
@@ -956,14 +1059,6 @@
             this.lblTitle.Text = "label3";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // bsParties
-            // 
-            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
-            // 
-            // bs
-            // 
-            this.bs.DataSource = typeof(MandiPOS.CLasses.MasterAccounts);
-            // 
             // chartDataBindingSource
             // 
             this.chartDataBindingSource.DataSource = typeof(MandiPOS.CLasses.ChartData);
@@ -971,6 +1066,25 @@
             // bsSubParties
             // 
             this.bsSubParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
+            // 
+            // rpt_BardanaReportRadio
+            // 
+            this.rpt_BardanaReportRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rpt_BardanaReportRadio.AutoSize = true;
+            this.rpt_BardanaReportRadio.BackColor = System.Drawing.Color.Transparent;
+            this.rpt_BardanaReportRadio.FlatAppearance.BorderSize = 0;
+            this.rpt_BardanaReportRadio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rpt_BardanaReportRadio.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.rpt_BardanaReportRadio.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rpt_BardanaReportRadio.Location = new System.Drawing.Point(235, 193);
+            this.rpt_BardanaReportRadio.Margin = new System.Windows.Forms.Padding(2);
+            this.rpt_BardanaReportRadio.Name = "rpt_BardanaReportRadio";
+            this.rpt_BardanaReportRadio.Size = new System.Drawing.Size(123, 46);
+            this.rpt_BardanaReportRadio.TabIndex = 24;
+            this.rpt_BardanaReportRadio.Text = "تفصیل باردانہ";
+            this.rpt_BardanaReportRadio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rpt_BardanaReportRadio.UseCompatibleTextRendering = true;
+            this.rpt_BardanaReportRadio.UseVisualStyleBackColor = true;
             // 
             // frmReportsNew
             // 
@@ -994,6 +1108,10 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpAgreements)).EndInit();
+            this.grpAgreements.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgreements)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAgreements)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSubParties)).EndInit();
@@ -1056,5 +1174,13 @@
         private Janus.Windows.EditControls.UICheckBox cbInActive;
         private Janus.Windows.EditControls.UICheckBox cbZero;
         private Janus.Windows.EditControls.UIComboBox cmbType;
+        private Janus.Windows.EditControls.UIGroupBox grpAgreements;
+        private Janus.Windows.EditControls.UIButton btnNewAgreement;
+        private Janus.Windows.EditControls.UIButton uiButton1;
+        private Janus.Windows.GridEX.GridEX dgvAgreements;
+        private Janus.Windows.GridEX.Export.GridEXExporter gridEXExporter1;
+        private System.Windows.Forms.BindingSource bsAgreements;
+        private Janus.Windows.EditControls.UICheckBox cbRecoverySummary;
+        private System.Windows.Forms.RadioButton rpt_BardanaReportRadio;
     }
 }

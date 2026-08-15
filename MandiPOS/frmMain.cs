@@ -1,6 +1,6 @@
-﻿using Dapper;
+﻿
 
-using DevExpress.XtraPrinting;
+using Dapper;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
@@ -14,12 +14,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Net.WebRequestMethods;
 
 namespace MandiPOS
 {
@@ -28,10 +24,12 @@ namespace MandiPOS
 
         BackgroundWorker wrkr;
         Timer timer;
+        bool IsLocked = false;
         public frmMain()
         {
             this.Opacity = 0;
             InitializeComponent();
+            
             General.Security = tblSecurity.Get;
             this.ControlBox = false;
             General.MultanCityID = General.GetMultanCityID();
@@ -45,6 +43,7 @@ namespace MandiPOS
                     Environment.Exit(0);
                 }
             }
+            IsLocked = General.CheckIsApplicationLocked();
             menuStrip1.Visible = General.IsAdmin;
             l1.BackColor = l2.BackColor = lblTime.BackColor = lblFiscalYear.BackColor = l3.BackColor = Color.Transparent;
 
@@ -112,24 +111,48 @@ namespace MandiPOS
             this.Load += FrmMain_Load;
             this.Resize += FrmMain_Resize;
             SetButtonsvisibility();
+            CheckForSoftwareLocked();
         }
-
+        private void CheckForSoftwareLocked()
+        {
+            btnParty.Enabled = !IsLocked;
+            btnBanamVoucher.Enabled = !IsLocked;
+            btnJamaVoucher.Enabled = !IsLocked;
+            btnBeejVoucher.Enabled = !IsLocked;
+            btnBardanaVoucher.Enabled = !IsLocked;
+            btnJV.Enabled=btnSale.Enabled= !IsLocked;
+            btnbardanaAamad.Enabled = btnBardanaNakas.Enabled = !IsLocked;
+            mnu_Utilities.Enabled = mnu_COA.Enabled = mnu_Security.Enabled = !IsLocked;
+            masterAccountsToolStripMenuItem.Enabled = !IsLocked;
+            detailAccountsToolStripMenuItem.Enabled = !IsLocked;
+            defaultAccountsToolStripMenuItem.Enabled = !IsLocked;
+        }
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.Cancel)
+            if (Environment.MachineName==General.dbSystemName)
             {
-                e.Cancel = true;
-                return;
-            }
-            if (result == DialogResult.Yes)
-            {
-                string dir = new db().ExecuteScalar<string>($"Select ConfigValue From tblConfigs Where ConfigName like 'BackupDirectory';");
-                Directory.CreateDirectory(dir);
-                using (var db = new db())
+                var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Cancel)
                 {
-                    db.Execute("exec BackupDatabase");
+                    e.Cancel = true;
+                    return;
                 }
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string dir = new db().ExecuteScalar<string>($"Select ConfigValue From tblConfigs Where ConfigName like 'BackupDirectory';");
+                        Directory.CreateDirectory(dir);
+                        using (var db = new db())
+                        {
+                            db.Execute("exec BackupDatabase");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ExcError();
+                    }
+                } 
             }
         }
 
@@ -157,7 +180,7 @@ namespace MandiPOS
             //btnCity.Enabled = General.IsAdmin;
             btnBanamVoucher.Enabled = true;
             btnJamaVoucher.Enabled = true;
-            btnBeejBardana.Enabled = General.IsAdmin;
+            btnBeejVoucher.Enabled = General.IsAdmin;
             btnSale.Enabled = true;
             btnJV.Enabled = General.IsAdmin;
             btnLedger.Enabled = General.IsAdmin;
@@ -177,7 +200,7 @@ namespace MandiPOS
             //btnCity.Visible = General.IsAdmin;
             btnBanamVoucher.Visible = true;
             btnJamaVoucher.Visible = true;
-            btnBeejBardana.Visible = General.IsAdmin;
+            btnBeejVoucher.Visible = General.IsAdmin;
             btnSale.Visible = true;
             btnJV.Visible = General.IsAdmin;
             btnLedger.Visible = General.IsAdmin;
@@ -803,28 +826,34 @@ namespace MandiPOS
             try
             {
                 // Path of Updater/Activator in the same folder as Main Application
-                string updaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater", "Updater.exe");
+                string updaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,  "UpdaterV2.exe");
 
-                if (!System.IO.File.Exists(updaterPath))
-                {
-                    MessageBox.Show("Activator.exe not found in application folder.");
-                    return;
-                }
+                string versionJsonUrl = "https://raw.githubusercontent.com/GhayyasAwan/MandiPOS_Muqaddam/main/update/version.json";
+                Process currentProcess = Process.GetCurrentProcess();
+                string processName = currentProcess.ProcessName;
+                string arguments = $"\"{versionJsonUrl}\" \"{processName}\" \"{General.UserName}\"";
+                Process.Start(updaterPath, arguments);
 
-                // Main application's process name (without .exe)
-                string mainProcessName = Process.GetCurrentProcess().ProcessName;
+                //if (!System.IO.File.Exists(updaterPath))
+                //{
+                //    MessageBox.Show("Activator.exe not found in application folder.");
+                //    return;
+                //}
 
-                // Main application's current version
-                string mainVersion = Application.ProductVersion; // Or your custom version string
+                //// Main application's process name (without .exe)
+                //string mainProcessName = Process.GetCurrentProcess().ProcessName;
 
-                // GitHub Release URL (or any update URL)
-                string githubReleaseUrl = "https://api.github.com/repos/GhayyasAwan/MandiPOS_Muqaddam/releases/latest";
+                //// Main application's current version
+                //string mainVersion = Application.ProductVersion; // Or your custom version string
 
-                // Pass arguments: "ProcessName Version GitHubURL"
-                string args = $"\"{mainProcessName}\" \"{mainVersion}\" \"{githubReleaseUrl}\"";
+                //// GitHub Release URL (or any update URL)
+                //string githubReleaseUrl = "https://api.github.com/repos/GhayyasAwan/MandiPOS_Muqaddam/releases/latest";
 
-                // Launch Updater/Activator
-                Process.Start(updaterPath, args);
+                //// Pass arguments: "ProcessName Version GitHubURL"
+                //string args = $"\"{mainProcessName}\" \"{mainVersion}\" \"{githubReleaseUrl}\"";
+
+                //// Launch Updater/Activator
+                //Process.Start(updaterPath, args);
             }
             catch (Exception ex)
             {
@@ -915,6 +944,14 @@ namespace MandiPOS
             {
                 frm.Icon = this.Icon;
                 frm.Show();
+            }
+        }
+
+        private void باردانہرپورٹToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmBardanaReport())
+            {
+                frm.ShowDialog(this);
             }
         }
     }

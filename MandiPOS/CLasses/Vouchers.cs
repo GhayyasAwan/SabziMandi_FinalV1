@@ -1,5 +1,6 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -204,7 +205,8 @@ namespace MandiPOS.CLasses
     {
         public static string NextVocuherNo(int vtype = 1)
         {
-            return new db().ExecuteScalar<string>($"Select Cast(ISNULL(Max(VoucherNo),0)+1 as nvarchar) as 'NextCode' from Vouchers Where VoucherType='{vtype}'");
+            return new db().ExecuteScalar<string>($@"SELECT CAST(ISNULL(MAX(CAST(VoucherNo AS INT)), 0) + 1 AS NVARCHAR) AS 'NextCode' 
+  FROM Vouchers  WHERE VoucherType = '{vtype}'");
         }
         public static Vouchers GetVoucher(int vtype = 0, DateTime? date = null)
         {

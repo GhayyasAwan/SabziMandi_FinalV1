@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -26,6 +19,8 @@ namespace MandiPOS.GUI
             this.vType = vType;
             VID = vID;
             this.currentDate = currentDate;
+            calendarCombo1.Value = calendarCombo2.Value = currentDate;
+            calendarCombo1.Enabled = false;
         }
 
         private void calendarCombo2_ValueChanged(object sender, EventArgs e)
@@ -36,7 +31,7 @@ namespace MandiPOS.GUI
             }
             else
             {
-                bool IsAlreadyAssigned =SQL.IsDateAssigned(calendarCombo2.Value.Date, vType);
+                bool IsAlreadyAssigned = SQL.IsDateAssigned(calendarCombo2.Value.Date, vType);
                 uiButton1.Enabled = !IsAlreadyAssigned;
             }
         }

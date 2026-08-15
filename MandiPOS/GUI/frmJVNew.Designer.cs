@@ -45,18 +45,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgv = new Janus.Windows.GridEX.GridEX();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.dgvHelp = new Janus.Windows.GridEX.GridEX();
-            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
             this.partyBal = new System.Windows.Forms.Label();
             this.txtVoucherNumber = new System.Windows.Forms.NumericUpDown();
             this.uiButton3 = new Janus.Windows.EditControls.UIButton();
+            this.uiButton2 = new Janus.Windows.EditControls.UIButton();
+            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsParties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsParties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -137,7 +138,7 @@
             // _cr
             // 
             this._cr.EditMode = Janus.Windows.GridEX.NumericEditMode.Value;
-            this._cr.Location = new System.Drawing.Point(126, 90);
+            this._cr.Location = new System.Drawing.Point(12, 90);
             this._cr.Name = "_cr";
             this._cr.Size = new System.Drawing.Size(108, 35);
             this._cr.TabIndex = 11;
@@ -152,7 +153,7 @@
             // _dr
             // 
             this._dr.EditMode = Janus.Windows.GridEX.NumericEditMode.Value;
-            this._dr.Location = new System.Drawing.Point(12, 90);
+            this._dr.Location = new System.Drawing.Point(126, 90);
             this._dr.Name = "_dr";
             this._dr.Size = new System.Drawing.Size(108, 35);
             this._dr.TabIndex = 9;
@@ -177,7 +178,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(203, 51);
+            this.label5.Location = new System.Drawing.Point(89, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 27);
             this.label5.TabIndex = 8;
@@ -186,7 +187,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(79, 51);
+            this.label6.Location = new System.Drawing.Point(193, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 27);
             this.label6.TabIndex = 10;
@@ -212,10 +213,6 @@
             this.dgv.TotalRowFormatStyle.BackColor = System.Drawing.SystemColors.Info;
             this.dgv.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.True;
             this.dgv.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
-            // 
-            // bs
-            // 
-            this.bs.DataSource = typeof(MandiPOS.CLasses.JVCart);
             // 
             // uiButton1
             // 
@@ -245,10 +242,6 @@
             this.dgvHelp.Visible = false;
             this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
             // 
-            // bsParties
-            // 
-            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
-            // 
             // partyBal
             // 
             this.partyBal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -264,6 +257,11 @@
             // 
             this.txtVoucherNumber.Font = new System.Drawing.Font("Verdana", 12F);
             this.txtVoucherNumber.Location = new System.Drawing.Point(12, 12);
+            this.txtVoucherNumber.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
             this.txtVoucherNumber.Name = "txtVoucherNumber";
             this.txtVoucherNumber.Size = new System.Drawing.Size(87, 27);
             this.txtVoucherNumber.TabIndex = 18;
@@ -279,12 +277,34 @@
             this.uiButton3.Name = "uiButton3";
             this.uiButton3.Size = new System.Drawing.Size(44, 34);
             this.uiButton3.TabIndex = 34;
-            this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);
+            this.uiButton3.Click += new System.EventHandler(this.OpenDateChanger);
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton2.Image = global::MandiPOS.Properties.Resources.printernew;
+            this.uiButton2.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.uiButton2.ImageSize = new System.Drawing.Size(32, 32);
+            this.uiButton2.Location = new System.Drawing.Point(575, 484);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.Size = new System.Drawing.Size(124, 41);
+            this.uiButton2.TabIndex = 35;
+            this.uiButton2.Text = "پرنٹ کریں";
+            this.uiButton2.Click += new System.EventHandler(this.uiButton2_Click);
+            // 
+            // bsParties
+            // 
+            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
+            // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(MandiPOS.CLasses.JVCart);
             // 
             // frmJVNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(841, 527);
+            this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.uiButton3);
             this.Controls.Add(this.txtVoucherNumber);
             this.Controls.Add(this.partyBal);
@@ -307,10 +327,10 @@
             this.Name = "frmJVNew";
             this.Text = "frmJVNew";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsParties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsParties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +358,6 @@
         private System.Windows.Forms.Label partyBal;
         private System.Windows.Forms.NumericUpDown txtVoucherNumber;
         private Janus.Windows.EditControls.UIButton uiButton3;
+        private Janus.Windows.EditControls.UIButton uiButton2;
     }
 }

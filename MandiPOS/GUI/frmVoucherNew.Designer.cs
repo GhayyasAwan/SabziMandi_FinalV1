@@ -57,6 +57,7 @@
             this.txtVoucherNumber = new System.Windows.Forms.NumericUpDown();
             this.uiButton2 = new Janus.Windows.EditControls.UIButton();
             this.uiButton3 = new Janus.Windows.EditControls.UIButton();
+            this.uiButton4 = new Janus.Windows.EditControls.UIButton();
             ((System.ComponentModel.ISupportInitialize)(this.bsCashBank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).BeginInit();
@@ -306,6 +307,11 @@
             // 
             this.txtVoucherNumber.Font = new System.Drawing.Font("Verdana", 12F);
             this.txtVoucherNumber.Location = new System.Drawing.Point(12, 7);
+            this.txtVoucherNumber.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
             this.txtVoucherNumber.Name = "txtVoucherNumber";
             this.txtVoucherNumber.Size = new System.Drawing.Size(87, 27);
             this.txtVoucherNumber.TabIndex = 17;
@@ -333,12 +339,25 @@
             this.uiButton3.TabIndex = 33;
             this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);
             // 
+            // uiButton4
+            // 
+            this.uiButton4.BackColor = System.Drawing.Color.Transparent;
+            this.uiButton4.Image = global::MandiPOS.Properties.Resources.download__1_;
+            this.uiButton4.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.AfterText;
+            this.uiButton4.ImageSize = new System.Drawing.Size(32, 32);
+            this.uiButton4.Location = new System.Drawing.Point(113, 2);
+            this.uiButton4.Name = "uiButton4";
+            this.uiButton4.Size = new System.Drawing.Size(44, 34);
+            this.uiButton4.TabIndex = 35;
+            this.uiButton4.Click += new System.EventHandler(this.uiButton4_Click);
+            // 
             // frmVoucherNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(803, 575);
+            this.Controls.Add(this.uiButton4);
             this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.uiButton3);
             this.Controls.Add(this.txtVoucherNumber);
@@ -401,5 +420,6 @@
         private System.Windows.Forms.NumericUpDown txtVoucherNumber;
         private Janus.Windows.EditControls.UIButton uiButton2;
         private Janus.Windows.EditControls.UIButton uiButton3;
+        private Janus.Windows.EditControls.UIButton uiButton4;
     }
 }

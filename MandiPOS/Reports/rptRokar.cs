@@ -1,8 +1,6 @@
-﻿using Dapper;
+﻿
 
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.XtraGauges.Core.Model;
-
+using Dapper;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -243,24 +241,50 @@ namespace MandiPOS.Reports
             //When 3 Then 5   
             //Else 6 End";
             //dtBanamMaster = General.FetchRecords(sql, null);
-            sql = $@"Select * from vw_BanamRokar Where EntryDate='{_date:yyyy-MM-dd}'";
+            sql = $@"Select * from vw_BanamRokar VBR Where EntryDate='{_date:yyyy-MM-dd}' 
+ORDER BY 
+    CASE 
+        -- 1. Pehlay VoucherType = 0 (Except Expenses)
+        WHEN VBR.VoucherType = 0 AND (VBR.AccountType <> 'Expenses' and AccountID not in (Select ID from vwBankAccounts)) THEN 1
+        
+        -- 2. Phir VoucherType = 1
+        WHEN VBR.VoucherType = 1 THEN 2
+
+        WHEN VBR.VoucherType = 0 AND AccountID in (Select ID from vwBankAccounts) THEN 3
+        -- 3. Phir VoucherType = 0 (Sirf Expenses AccountType)
+        WHEN VBR.VoucherType = 0 AND VBR.AccountType = 'Expenses' THEN 4
+        
+        -- 4. Aakhir mein baqi sab (Other VoucherTypes like 100)
+        ELSE 5 
+    END ASC,
+    VBR.EntryNo ASC";
             DataTable dtAll = General.FetchRecords(sql, null);
-            EnumerableRowCollection<DataRow> allRows = dtAll.AsEnumerable();
-            System.Collections.Generic.List<DataRow> group7 = allRows.Where(r => r.Field<int>("MasterID") == 7).ToList();
-            System.Collections.Generic.List<DataRow> group4 = allRows.Where(r => r.Field<int>("MasterID") == 4).ToList();
-            System.Collections.Generic.List<DataRow> group6 = allRows.Where(r => r.Field<int>("MasterID") == 6).ToList();
-            System.Collections.Generic.List<DataRow> group9 = allRows.Where(r => r.Field<int>("MasterID") == 9).ToList();
-            System.Collections.Generic.List<DataRow> group5 = allRows.Where(r => r.Field<int>("MasterID") == 5).ToList();
-            System.Collections.Generic.List<DataRow> group3 = allRows.Where(r => r.Field<int>("MasterID") == 3).ToList();
-            System.Collections.Generic.List<DataRow> finalOrderedList = group7
-    .Concat(group4)
-    .Concat(group6)
-    .Concat(group9)
-    .Concat(group5)
-    .Concat(group3)
-    .Concat(allRows.Where(r => !new[] { 7, 4, 6, 9, 5, 3 }.Contains(r.Field<int>("MasterID"))))
-    .ToList();
-            dtBanamMaster = finalOrderedList.CopyToDataTable();
+            //        EnumerableRowCollection<DataRow> allRows = dtAll.AsEnumerable();
+            //        System.Collections.Generic.List<DataRow> BanamVouchers = allRows.Where(r => r.Field<int>("VoucherType") == 0).OrderBy(x=>x.Field<int>("EntryNo")).ToList();
+            //        System.Collections.Generic.List<DataRow> group4 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 4).ToList();
+            //        System.Collections.Generic.List<DataRow> group7 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 7).ToList();
+            //        System.Collections.Generic.List<DataRow> group2 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 2).ToList();
+            //        System.Collections.Generic.List<DataRow> group1 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 1).ToList();
+            //        System.Collections.Generic.List<DataRow> group6 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 6).ToList();
+            //        System.Collections.Generic.List<DataRow> group9 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 9).ToList();
+            //        System.Collections.Generic.List<DataRow> group5 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 5).ToList();
+            //        System.Collections.Generic.List<DataRow> group3 = allRows.Where(r => r.Field<int>("VoucherType") != 0 && r.Field<int>("MasterID") == 3).ToList();
+            //        System.Collections.Generic.List<DataRow> finalOrderedList = BanamVouchers.Concat(group4)
+            //.Concat(group7).Concat(group1).Concat(group3).Concat(group2)
+            //.Concat(group6)
+            //.Concat(group9)
+            //.Concat(group5)
+            //.Concat(allRows.Where(r => !new[] { 7, 4, 6, 9, 5, 3, 1, 2 }.Contains(r.Field<int>("MasterID")) && r.Field<int>("VoucherType") != 0))
+            //.ToList();
+            //if (finalOrderedList.Any())
+            //{
+            //    dtBanamMaster = finalOrderedList.CopyToDataTable();
+            //}
+            //else
+            //{
+            //    dtBanamMaster = dtAll.Clone();
+            //}
+            dtBanamMaster = dtAll;
             //Set DataSource for Subreport
             totalbanam = dtBanamMaster.Compute("Sum(Amount)", string.Empty) is DBNull ? 0 : Convert.ToDecimal(dtBanamMaster.Compute("Sum(Amount)", string.Empty));
             var subreport = new rokarDetails("بنام")
@@ -311,7 +335,7 @@ namespace MandiPOS.Reports
             //                dtJamaMaster.ImportRow(row);
             //            } 
             #endregion
-            sql = $@"Select * from vw_JamaRokar Where EntryDate='{_date:yyyy-MM-dd}' Order by SortOrder";
+            sql = $@"Select * from vw_JamaRokar Where EntryDate='{_date:yyyy-MM-dd}' Order by SortOrder,ENTRYID";
             dtJamaMaster = General.FetchRecords(sql, null);
             totaljama = dtJamaMaster.Compute("Sum(Amount)", string.Empty) is DBNull ? 0 : Convert.ToDecimal(dtJamaMaster.Compute("Sum(Amount)", string.Empty));
             var subreport = new rokarDetails("جمع")

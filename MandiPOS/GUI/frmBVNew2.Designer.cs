@@ -446,6 +446,11 @@
             // txtVno
             // 
             this.txtVno.Location = new System.Drawing.Point(3, 1);
+            this.txtVno.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
             this.txtVno.Name = "txtVno";
             this.txtVno.Size = new System.Drawing.Size(85, 35);
             this.txtVno.TabIndex = 29;

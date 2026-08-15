@@ -1,10 +1,12 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using Janus.Windows.GridEX;
 
 using MandiPOS.CLasses;
-
+using MandiPOS.Reports;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +19,19 @@ namespace MandiPOS.GUI
         clsResize objResizer;
         int VoucherType = 2;
         Vouchers main = new Vouchers(); int curent = 0;
+        string _title = "جنرل ووچر";
+        bool _verified = false;
+        bool verified
+        {
+            get 
+            {
+                if (!_verified)
+                { 
+                    _verified=this.IsVerified();
+                }
+                return _verified;
+            }
+        }
         public frmJVNew()
         {
             InitializeComponent();
@@ -36,7 +51,7 @@ namespace MandiPOS.GUI
             _cr.KeyDown += _cr_KeyDown;
             _cr.TextChanged += _cr_TextChanged;
             _dr.TextChanged += _dr_TextChanged;
-            this.Text = "Journal Voucher";
+            this.Text = _title;
             dtp.Value = SQL.ServerDate.Date;
             dtp.Enabled = General.IsAdmin;
             objResizer = new clsResize(this);
@@ -185,11 +200,7 @@ namespace MandiPOS.GUI
         {
             if (e.EnterKey())
             {
-                bool flowControl = AddToCart();
-                if (!flowControl)
-                {
-                    return;
-                }
+                _cr.Select();
             }
         }
 
@@ -197,7 +208,7 @@ namespace MandiPOS.GUI
         {
             if (e.EnterKey())
             {
-                _cr.Select();
+                _dr.Select();
             }
         }
 
@@ -233,7 +244,11 @@ namespace MandiPOS.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _dr.Select();
+                bool flowControl = AddToCart();
+                if (!flowControl)
+                {
+                    return;
+                }
             }
         }
 
@@ -382,7 +397,7 @@ namespace MandiPOS.GUI
                 dtp.Value = SQL.ServerDate.Date;
                 return;
             }
-            if (dtp.Value.Date < SQL.ServerDate.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
+            if (dtp.Value.Date < SQL.ServerDate.Date && !verified)
             {
                 return;
             }
@@ -399,6 +414,30 @@ namespace MandiPOS.GUI
         private void FrmJVNew_Resize(object sender, System.EventArgs e)
         {
             objResizer._resize();
+            foreach (GridEXColumn col in dgv.RootTable.Columns)
+            {
+                col.AllowSize = true;
+                if (col.Key == "AccountCode")
+                {
+                    col.Width = _code.Width;
+                    col.AllowSize = false;
+                }
+                if (col.Key == "PartyTitle")
+                {
+                    col.Width = _name.Width;
+                    col.AllowSize = false;
+                }
+                if (col.Key == "DebitAmount")
+                {
+                    col.Width = _dr.Width;
+                    col.AllowSize = false;
+                }
+                if (col.Key == "CreditAmount")
+                {
+                    col.Width = _cr.Width;
+                    col.AllowSize = false;
+                }
+            }
         }
 
         private void FrmJVNew_Load(object sender, System.EventArgs e)
@@ -438,12 +477,12 @@ namespace MandiPOS.GUI
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
-            {
-                this.Info("آپکو پرانا ووچر محفوظ کرنے کی اجازت نہیں ہے۔");
-                return;
-            }
-            if (dtp.Value.Date < SQL.ServerDate.Date && !this.Ask("کیا آپ پُرانا ووچر محفوظ کرنا چاہتے ہیں؟"))
+            //if (dtp.Value.Date < SQL.ServerDate.Date && !General.IsAdmin)
+            //{
+            //    this.Info("آپکو پرانا ووچر محفوظ کرنے کی اجازت نہیں ہے۔");
+            //    return;
+            //}
+            if (dtp.Value.Date < SQL.ServerDate.Date && !this.verified)
             {
                 return;
             }
@@ -470,7 +509,7 @@ namespace MandiPOS.GUI
             if (VoucherService.SaveVoucher(main))
             {
                 MessageBox.Show("ریکارڈ کامیابی سے محفوظ ہو گیا۔", "کامیابی", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Refresh();
+                this.Close(); return;
             }
             else
             {
@@ -487,6 +526,37 @@ namespace MandiPOS.GUI
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     Refresh();
+                }
+            }
+        }
+
+        private void OpenDateChanger(object sender, EventArgs e)
+        {
+            if (main.VoucherID == 0)
+                return;
+            using (var frm = new frmDateChanger(VoucherType, main.VoucherID, main.VoucherDate))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Refresh();
+                }
+            }
+        }
+
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            if (bs.Count > 0)
+            {
+                using (new crsr())
+                {
+                    using (var rpt = new rptJVPrint(bs.List.Cast<JVCart>().ToList(), title: _title, vno: txtVoucherNumber.Value.ToString(), date: dtp.Value.ToString("dd-MM-yyyy")))
+                    {
+                        using (var frm = new XtraForm1(rpt, 1.5f))
+                        {
+                            frm.StartPosition = FormStartPosition.CenterScreen;
+                            frm.ShowDialog(this); frm.BringToFront();
+                        }
+                    } 
                 }
             }
         }

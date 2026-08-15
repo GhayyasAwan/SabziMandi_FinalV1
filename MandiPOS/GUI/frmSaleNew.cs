@@ -1,6 +1,6 @@
-﻿using Dapper;
+﻿
 
-using DevExpress.Utils.Filtering.Internal;
+using Dapper;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
@@ -97,11 +97,43 @@ namespace MandiPOS.GUI
             bsCart.DataSource = Cart;
             bsCart.ResetBindings(false);
             GetTotals();
+            toggleTitleBox();
             objectToControls();
+            
+        }
+        private void OnActiveControlChanged(Control newControl)
+        {
+            if (newControl.Name != "_partyHelper" || newControl.Name != "_partyHelper")
+            {
+                _partyHelper.Hide();
+            }
+            //if (newControl.Name != _partySearchHelper.Name || newControl.Name != partysearch.Name)
+            //{
+            //    _partySearchHelper.Hide();
+            //}
+            //if (newControl.Name != _customer.Name || newControl.Name != _CustomerHelper.Name)
+            //{
+            //    _CustomerHelper.Hide();
+            //}
+        }
+        private void BindActiveControlChanged(Control container)
+        {
+            foreach (Control ctrl in container.Controls)
+            {
+                // Attach the Enter event
+                ctrl.Enter += (s, e) =>
+                {
+                    OnActiveControlChanged(ctrl);
+                };
+
+                // If the control has children (like a Panel or GroupBox), recurse
+                if (ctrl.HasChildren) BindActiveControlChanged(ctrl);
+            }
         }
         public frmSaleNew()
         {
             InitializeComponent();
+            BindActiveControlChanged(this);
             commissionPerc.KeyDown += CommissionPerc_KeyDown;
             mazdooriPerc.KeyDown += MazdooriPerc_KeyDown;
             mushianaPerc.KeyDown += MushianaPerc_KeyDown;
@@ -192,12 +224,17 @@ namespace MandiPOS.GUI
             _ArrivalQty.Enter += _ArrivalQty_Enter;
             _vendor.Leave += _vendor_Leave;
             _ArrivalQty.Leave += _ArrivalQty_Leave;
+            
         }
 
         private void CommissionPerc_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                _commission.Value = Math.Round(_grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100);
+            {
+                _commission.Value = Math.Round(_grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100, 0, MidpointRounding.AwayFromZero);
+                _commission.Select();
+                _commission.SelectAll();
+            }
         }
 
         private void MazdooriPerc_KeyDown(object sender, KeyEventArgs e)
@@ -414,6 +451,7 @@ namespace MandiPOS.GUI
         private void ControlEnter(object sender, EventArgs e)
         {
             ((Control)sender).BackColor = Color.Yellow;
+            ((Control)sender).Select();
         }
         private void ControlLeave(object sender, EventArgs e)
         {
@@ -428,7 +466,7 @@ namespace MandiPOS.GUI
         private void _vendor_Leave(object sender, EventArgs e)
         {
             _vendor.BackColor = SystemColors.Window;
-
+            toggleTitleBox();
         }
 
         private void _ArrivalQty_Enter(object sender, EventArgs e)
@@ -457,7 +495,14 @@ namespace MandiPOS.GUI
         {
             if (e.EnterKey())
             {
-                _store.Select();
+                if (txtTitle.Visible)
+                {
+                    txtTitle.Select();
+                }
+                else
+                {
+                    _store.Select();
+                }
             }
         }
 
@@ -493,11 +538,24 @@ namespace MandiPOS.GUI
             {
                 _mazdoori.Select();
             }
+            CalculateCommissionPercentageValue();
+        }
+
+        private void CalculateCommissionPercentageValue()
+        {
+            if (string.IsNullOrEmpty(_commission.Text.Trim()) || _commission.Text.toDecimal() == 0)
+            {
+                
+            }
+            else
+            {
+                commissionPerc.Value = (_commission.Value.toDecimal() / _grossSale.Value.toDecimal()) * 100;
+            }
         }
 
         private void _grossSale_TextChanged(object sender, EventArgs e)
         {
-            _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
+            _commission.Value = Math.Round(_grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100, 0, MidpointRounding.AwayFromZero);
             _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
             _munshiana.Value = Math.Round(_grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal() / 100), 0, MidpointRounding.AwayFromZero);
         }
@@ -613,22 +671,25 @@ namespace MandiPOS.GUI
                 return;
             }
             {
-                CurrentID = iD;
+                CurrentID = 0;
                 object cart = new object();
                 object dtsummary = new object();
-                _sale = SaleService.GetSaleByArrivalNo(iD, ref cart, ref dtsummary);
-                if (_sale.ArrivalDate < DateTime.Now.Date && !General.IsAdmin)
+                var sale = SaleService.GetSaleByArrivalNo(iD, ref cart, ref dtsummary);
+                if (sale.ArrivalDate < DateTime.Now.Date && !this.IsVerified(2))
                 {
-                    this.Info("آپکو پرانے ریکارڈ دیکھنے کی اجازت نہیں ہے۔");
                     return;
                 }
+                _sale = sale;
+                CurrentID = _sale.ID;
                 bsCart.DataSource = cart;
                 CurrentID = _sale.ID;
                 bsCart.ResetBindings(false);
                 GetTotals();
                 objectToControls();
                 dgv.AutoSizeColumns();
+                toggleTitleBox();
                 _vendor.Select();
+                
 
             }
         }
@@ -660,6 +721,7 @@ namespace MandiPOS.GUI
 
         private void CalculateInvoiceTotals(object sender, EventArgs e)
         {
+            
             CalculateGrandTotals();
         }
 
@@ -779,7 +841,7 @@ namespace MandiPOS.GUI
                 TotalQty = _ArrivalQty.Text.toDecimal().toRound(),
                 ID = CurrentID,
                 VehicleNo = _vehNo.Text.Trim(),
-                CommissionAmount = _commission.Value.toDecimal(),
+                CommissionAmount = Math.Round(_commission.Value.toDecimal(), 0, MidpointRounding.AwayFromZero),
                 CommisionPerc = commissionPerc.Text.toDecimal(),
                 MazdooriPerc = mazdooriPerc.Text.toDecimal(),
                 MunshianaPerc = mushianaPerc.Text.toDecimal(),
@@ -844,6 +906,7 @@ namespace MandiPOS.GUI
                     bsVendors.Filter = $"AccountTitle Like '%{_vendor.Text.Trim()}%'";
                     bsVendors.ResetBindings(false);
                     _vendor.Select();
+                    
                 }
                 else
                 {
@@ -852,10 +915,22 @@ namespace MandiPOS.GUI
                     _partyHelper.Hide();
                     _vendor.Select();
                 }
-
+                toggleTitleBox();
             }
             _currentVendor = 0;
 
+        }
+
+        private void toggleTitleBox()
+        {
+            if (_vendor.Text.Contains("نقد"))
+            {
+                txtTitle.Visible = true;
+            }
+            else
+            {
+                txtTitle.Visible = false;
+            }
         }
 
         private void _item_Enter(object sender, EventArgs e)
@@ -1034,6 +1109,11 @@ namespace MandiPOS.GUI
 
             }
             CurrentCustomer = 0;
+            toogleCustomerbalance();
+        }
+
+        private void toogleCustomerbalance()
+        {
             if (_customer.Text == "نقد سیل")
             {
                 customerBal.Text = string.Empty;
@@ -1115,7 +1195,7 @@ namespace MandiPOS.GUI
             }
             else
             {
-                _commission.Select();
+                commissionPerc.Select();
             }
         }
         private void ClearEntryPanel(bool complete = false)
@@ -1154,7 +1234,8 @@ namespace MandiPOS.GUI
                 bsCart.ResetBindings(false);
                 objectToControls();
                 GetTotals();
-
+                toggleTitleBox();
+                
             }
         }
         void GetMazddori()
@@ -1224,13 +1305,15 @@ namespace MandiPOS.GUI
             _grossSale.Value = _sale.SaleAmount2.ProperDecimals();
             _ArrivalQty.Text = _sale.TotalQty.ProperDecimals();
             txtTitle.Text = _sale.PartyTitle;
-            _commission.Text = _sale.CommissionAmount.ProperDecimals();
-            //commissionPerc.Text = _sale.CommisionPerc.ProperDecimals();
-            _kraya.Text = _sale.KarayaAmount.ToString("0.##");
-            _mazdoori.Text = _sale.MazdooriAmount.ToString("0.##");
+            _commission.Value = Math.Round(_sale.CommissionAmount, 0, MidpointRounding.AwayFromZero);
+            commissionPerc.Text = _sale.CommisionPerc.ProperDecimals();
+            CalculateCommissionPercentageValue();
+            
+            _kraya.Value = Math.Round(_sale.KarayaAmount, 0, MidpointRounding.AwayFromZero);
+            _mazdoori.Value = Math.Round(_sale.MazdooriAmount, 0, MidpointRounding.AwayFromZero);
             _munshiana.Value = Math.Round(_sale.MunshianaAmount, 0, MidpointRounding.AwayFromZero);
-            _store.Text = _sale.StoreRent.ToString("0.##");
-            _paid.Text = _sale.PaidAmount.ToString("0.##");
+            _store.Value = Math.Round(_sale.StoreRent, 0, MidpointRounding.AwayFromZero);
+            _paid.Value = Math.Round(_sale.PaidAmount, 0, MidpointRounding.AwayFromZero);
             arrivalDate.Value = _sale.ArrivalDate;
             ArrivalNo.Text = _sale.ArrivalNo.ToString();
             _vehNo.Text = _sale.VehicleNo;
@@ -1311,8 +1394,9 @@ namespace MandiPOS.GUI
             mushianaPerc.Value = 0.10;
             CalculateGrandTotals();
             ClearEntryPanel(true);
+            toggleTitleBox();
             _vendor.Select();
-
+            
         }
 
         private void LoadVendors()
@@ -1367,6 +1451,7 @@ namespace MandiPOS.GUI
                 ArrivalNo.Value = ArrivalNo.Value.toInt() - 1;
                 LoadRecordByArrivalNo();
                 _partyHelper.Hide();
+                toggleTitleBox();
             }
             if (e.KeyCode == Keys.PageUp)
             {
@@ -1377,6 +1462,7 @@ namespace MandiPOS.GUI
                 ArrivalNo.Value = ArrivalNo.Value.toInt() + 1;
                 LoadRecordByArrivalNo();
                 _partyHelper.Hide();
+                toggleTitleBox();
             }
             if (e.Control && e.KeyCode == Keys.G)
             {
@@ -1623,7 +1709,10 @@ namespace MandiPOS.GUI
             LoadVendors();
         }
 
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 public class waitForm : IDisposable

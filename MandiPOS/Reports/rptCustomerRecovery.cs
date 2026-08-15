@@ -1,10 +1,12 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using DevExpress.XtraReports.UI;
 
 using MandiPOS.CLasses;
 
 using System;
+using System.Data;
 using System.Linq;
 
 namespace MandiPOS.Reports
@@ -15,46 +17,15 @@ namespace MandiPOS.Reports
         {
             InitializeComponent();
             this.HideWarnings();
-            string sql = $@"DECLARE @SelectedDate DATE = '{date:yyyy-MM-dd}';
-SELECT 
-    t.AccountID,
-    acc.AccountCode,
-    acc.AccountTitle,
-    ISNULL(SUM(CASE WHEN VoucherDate < @SelectedDate THEN DebitAmount - CreditAmount END), 0) AS PreviousBalance,
-    ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN DebitAmount END), 0) AS TodayDebit,
-    ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN CreditAmount END), 0) AS TodayCredit,
-    ISNULL(SUM(CASE WHEN VoucherDate <= @SelectedDate THEN DebitAmount - CreditAmount END), 0) AS CurrentBalance,
-    MAX(VoucherDate) AS LastDate,
-    -- Added for sorting
-    CASE WHEN ISNULL(SUM(CASE WHEN VoucherDate = @SelectedDate THEN DebitAmount END), 0) > 0 THEN 1 ELSE 0 END AS HasTodayDebit
-FROM vwTrx t
-LEFT JOIN DetailAccounts acc ON t.AccountID = acc.ID
-WHERE acc.MasterID = 7 and ISNULL(acc.IsActive,1)=1 and acc.ID <> (SELECT ISNULL(
-        (SELECT ConfigValue 
-         FROM tblConfigs 
-         WHERE ConfigName = 'netsale'), 0
-       ) AS NetSale)
-GROUP BY t.AccountID, acc.AccountCode, acc.AccountTitle
-HAVING 
-    ISNULL(SUM(CASE WHEN VoucherDate <= @SelectedDate THEN DebitAmount + CreditAmount END), 0) <> 0
-    --ISNULL(SUM(DebitAmount-CreditAmount),0) <> 0  OR MAX(VoucherDate) = @SelectedDate
-ORDER BY 
-    HasTodayDebit DESC,  -- Accounts with TodayDebit > 0 first
-    LastDate DESC,      -- Then sort by date descending within each group
-    AccountCode         -- Secondary sort for consistent ordering";
+            string sql = $@"exec usp_GetRecoveryReport '{date:yyyy-MM-dd}'";
             System.Collections.Generic.List<AccountBalanceSummary> data = new db().Query<AccountBalanceSummary>(sql).ToList();
             var toRemove = data
      .Where(x => x.CurrentBalance < 0 && x.LastDate.Date < DateTime.Today)
      .ToList();
-
             var accountBalanceList = data
                 .Where(x => !(x.CurrentBalance <= 0 && x.LastDate.Date < date.Date))
                 .ToList();
-            //System.Collections.Generic.List<AccountBalanceSummary> data2 = new System.Collections.Generic.List<AccountBalanceSummary>();
-            //foreach (var item in data)
-            //{ 
 
-            //}
             this.DataSource = accountBalanceList;
             this.lblDate.Text = $@"{date:dd-MMM-yyyy}";
             this.lbl2.Text = $@"Print on: {DateTime.Now.Date:dd-MMM-yyyy hh:mm tt}";

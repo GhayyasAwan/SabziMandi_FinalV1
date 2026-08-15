@@ -20,4 +20,9 @@ namespace MandiPOS.CLasses
         public string CityNameEnglish { get; set; }
 
     }
+    public class Settings
+    {
+        public string SettingKey { get; set; }
+        public string Value { get; set; }
+    }
 }
