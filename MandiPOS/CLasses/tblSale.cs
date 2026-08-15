@@ -1,4 +1,5 @@
 ﻿using Dapper;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
 namespace MandiPOS.CLasses
 {
     public class tblSale
@@ -63,6 +65,7 @@ namespace MandiPOS.CLasses
         public string UpdationDevice { get; set; } = Environment.MachineName;
         public int VoucherID { get; set; } = 0;
         public string Marka { get; set; }
+        public DateTime? PrintTime { get; set; }
 
     }
     public class tblSaleDetail
@@ -162,6 +165,7 @@ namespace MandiPOS.CLasses
         public decimal SoldQty { get; set; }
         [DisplayName("بقایا")]
         public decimal RemainingQty { get { return TotalQty - SoldQty; } }
+        public int Printed { get; set; }
 
     }
     public class vwSale2
@@ -201,19 +205,19 @@ namespace MandiPOS.CLasses
         [Browsable(false)]
         public int ItemUnit { get; set; }
         [DisplayName("یونٹ")]
-        public string UnitTitle 
-        { 
-            get 
-            { 
-                switch (ItemUnit) 
+        public string UnitTitle
+        {
+            get
+            {
+                switch (ItemUnit)
                 {
                     case 1: return "کلو";
                     case 2: return "من";
                     case 0: return "تعداد";
                     case -1: return "";
-                    default: return ""; 
-                } 
-            } 
+                    default: return "";
+                }
+            }
         }
         [DisplayName("وزن")]
         public decimal ItemWeight { get; set; }
@@ -318,7 +322,7 @@ namespace MandiPOS.CLasses
                         int running = 1;
                         foreach (var sale in sales)
                         {
-                            progress=(running / count) * 100;
+                            progress = (running / count) * 100;
                             frm.UpdateStatus($"{running} of {count}", $"Processing Sale No: {sale.ArrivalNo}");
                             var saleDetails = db.Query<tblSaleDetail>($"Select * from tblSaleDetail Where SaleID={sale.ID}", transaction: trx).ToList();
                             int voucherID = 0;
@@ -357,7 +361,7 @@ namespace MandiPOS.CLasses
                         }
                         if (sale.ID != 0)
                         {
-                            
+
                             voucherID = sale.VoucherID;
                         }
                         PostAccountEntries(sale, saleDetails, bd, trx, ref voucherID);
@@ -397,7 +401,7 @@ namespace MandiPOS.CLasses
             }
         }
 
-        private static void  PostAccountEntries(tblSale sale, List<tblSaleDetail> saleDetails, db connecion, System.Data.IDbTransaction trx, ref int voucherID)
+        private static void PostAccountEntries(tblSale sale, List<tblSaleDetail> saleDetails, db connecion, System.Data.IDbTransaction trx, ref int voucherID)
         {
 
             string partyNarration = "";
@@ -420,8 +424,8 @@ namespace MandiPOS.CLasses
             }
 
             partyNarration = "بکری ";
-            partyNarration = partyNarration+ string.Join(", ", items);
-           
+            partyNarration = partyNarration + string.Join(", ", items);
+
 
             Vouchers main = new Vouchers();
             if (sale.VoucherID == 0)
@@ -499,14 +503,30 @@ namespace MandiPOS.CLasses
             if (sale.SaleAmount1 != sale.SaleAmount2)
             {
                 var diff = sale.SaleAmount1 - sale.SaleAmount2;
-                JVEntries jv = new JVEntries()
+                if (diff > 0)
                 {
-                    VoucherID = main.VoucherID,
-                    AccountID = General.PendingSaleAccount,
-                    CreditAmount = diff,
-                    DebitAmount = 0,
-                    Narration = $"بقایا سیل آمد نمبر {sale.ArrivalNo}"
-                };
+                    JVEntries jv = new JVEntries()
+                    {
+                        VoucherID = main.VoucherID,
+                        AccountID = General.PendingSaleAccount,
+                        CreditAmount = Math.Abs(diff),
+                        DebitAmount = 0,
+                        Narration = $"بقایا سیل آمد نمبر {sale.ArrivalNo}"
+                    };
+                    details.Add(jv);
+                }
+                else
+                {
+                    JVEntries jv = new JVEntries()
+                    {
+                        VoucherID = main.VoucherID,
+                        AccountID = General.PendingSaleAccount,
+                        DebitAmount = Math.Abs(diff),
+                        CreditAmount = 0,
+                        Narration = $"بقایا سیل آمد نمبر {sale.ArrivalNo}"
+                    };
+                    details.Add(jv);
+                }
             }
             //commission
             if (sale.CommissionAmount != 0)
@@ -588,7 +608,7 @@ namespace MandiPOS.CLasses
                         AccountID = (int)record.PartyID,
                         CreditAmount = 0,
                         DebitAmount = record.CustomerAmount + record.LagaAmount,
-                        Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0} => {(record.ItemWeight==0?string.Empty:($"{record.ItemWeight:N0} {(record.ItemUnit==1?"کلو":"من")}"))}"
+                        Narration = $"{items1.ItemTitle} {record.CustomerRate:N0}/{record.ItemQty:N0} => {(record.ItemWeight == 0 ? string.Empty : ($"{record.ItemWeight:N0} {(record.ItemUnit == 1 ? "کلو" : "من")}"))}"
                     }; details.Add(jv);
                 }
                 decimal laga_amount = saleDetails.Sum(x => x.LagaAmount).toDecimal();

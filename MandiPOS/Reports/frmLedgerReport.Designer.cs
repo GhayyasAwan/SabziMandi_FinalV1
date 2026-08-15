@@ -57,9 +57,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLedger = new Janus.Windows.GridEX.GridEX();
             this.clsLedgerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblSummary = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clsLedgerBindingSource)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -362,7 +365,7 @@
             this.dgvLedger.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvLedger.Size = new System.Drawing.Size(1226, 470);
+            this.dgvLedger.Size = new System.Drawing.Size(1226, 442);
             this.dgvLedger.TabIndex = 3;
             this.dgvLedger.TotalRow = Janus.Windows.GridEX.InheritableBoolean.True;
             this.dgvLedger.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed;
@@ -372,12 +375,32 @@
             // 
             this.clsLedgerBindingSource.DataSource = typeof(MandiPOS.Reports.ReportClasses.clsLedger);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblSummary});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 545);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1226, 28);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblSummary
+            // 
+            this.lblSummary.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSummary.Name = "lblSummary";
+            this.lblSummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblSummary.Size = new System.Drawing.Size(1211, 23);
+            this.lblSummary.Spring = true;
+            this.lblSummary.Text = "toolStripStatusLabel1";
+            // 
             // frmLedgerReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1226, 573);
             this.Controls.Add(this.dgvLedger);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -387,7 +410,10 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clsLedgerBindingSource)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -416,5 +442,7 @@
         private System.Windows.Forms.Label label6;
         private Janus.Windows.EditControls.UIButton uiButton1;
         private Janus.Windows.EditControls.UIComboBox uiComboBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblSummary;
     }
 }

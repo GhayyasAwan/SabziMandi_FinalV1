@@ -1,8 +1,10 @@
 ﻿using Dapper;
+
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
+
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +12,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
 namespace MandiPOS
 {
     public static class KeyEventArgsExtensions
@@ -365,7 +368,7 @@ namespace MandiPOS
 
         internal static int GetMultanCityID()
         {
-            var cities=SQL.GetCities();
+            var cities = SQL.GetCities();
             if (cities.Any(x => x.CityName == "ملتان"))
             {
                 return cities.Where(x => x.CityName == "ملتان").FirstOrDefault().ID;

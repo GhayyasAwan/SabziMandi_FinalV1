@@ -1,5 +1,6 @@
 ﻿using Dapper;
 
+using static MandiPOS.SQL;
 namespace MandiPOS.CLasses
 {
     public class tblConfigs

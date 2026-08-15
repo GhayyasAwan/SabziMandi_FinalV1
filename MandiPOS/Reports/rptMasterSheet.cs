@@ -1,14 +1,12 @@
 ﻿using Dapper;
 
-using DevExpress.XtraReports.UI;
-
 using MandiPOS.CLasses;
 
 using System;
-using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
@@ -19,8 +17,8 @@ namespace MandiPOS.Reports
             InitializeComponent();
             string sql = $"Select * from MasterSheet Where PartyID='{PartyID}' and ArrivalDate between '{d1:yyyy-MM-dd}' and '{d2:yyyy-MM-dd}'";
             var data = new db().Query<MasterSheet>(sql).ToList();
-            var acc=DetailAccountService.GetDetailAccountByID(PartyID);
-            _party.Text=acc.AccountTitle;
+            var acc = DetailAccountService.GetDetailAccountByID(PartyID);
+            _party.Text = acc.AccountTitle;
             _d1.Text = $"{d1:dd-MMM-yyyy}"; _d2.Text = $"{d2:dd-MMM-yyyy}";
             string summary = new db().QuerySingle<string>($"Select dbo.fn_GetPartyItemSummary('{d1:yyyy-MM-dd}','{d2:yyyy-MM-dd}',{PartyID}) as summary");
             this.objectDataSource1.DataSource = data;

@@ -6,41 +6,42 @@ using MandiPOS.CLasses;
 using MandiPOS.Reports.ReportClasses;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
     public partial class rptPartyLedgerBanam : DevExpress.XtraReports.UI.XtraReport
     {
         int rType = 0;
-        public rptPartyLedgerBanam(string date1,string date2,int PartyID, List<clsLedger> data, int ReportType=0)
+        public rptPartyLedgerBanam(string date1, string date2, int PartyID, List<clsLedger> data, int ReportType = 0)
         {
             InitializeComponent();
             lblDate1.Text = date1;
             lblDate2.Text = date2;
             rType = ReportType;
-            DetailAccounts acc=new DetailAccounts();
+            DetailAccounts acc = new DetailAccounts();
             using (var db = new db())
                 acc = db.Get<DetailAccounts>(PartyID);
-            var rpt=new rptHeader(PartyID);
+            var rpt = new rptHeader(PartyID);
             rpt.CreateDocument();
             this.xrSubreport1.ReportSource = rpt;
-            decimal totalBanam = 0, TotalJama=0, endBalance=0;
+            decimal totalBanam = 0, TotalJama = 0, endBalance = 0;
             TotalJama = data.Sum(x => x.Credit);
             totalBanam = data.Sum(x => x.Debit);
             endBalance = totalBanam - TotalJama;
             //_endBal.Text = Math.Abs(endBalance).ToString("#,0.##");
             if (endBalance >= 0)
             {
-               // _endSate.Text = "بنام";
+                // _endSate.Text = "بنام";
             }
             else
             {
-               // _endSate.Text = "جمع";
+                // _endSate.Text = "جمع";
             }
             if (ReportType == 1)
             {
@@ -95,8 +96,8 @@ namespace MandiPOS.Reports
                 cell.Text = string.Empty;
             }
             if (cell.Value.toDecimal() < 0)
-            { 
-                cell.Text=Math.Abs(cell.Value.toDecimal()).ToString("N0");
+            {
+                cell.Text = Math.Abs(cell.Value.toDecimal()).ToString("N0");
             }
         }
 
@@ -111,7 +112,7 @@ namespace MandiPOS.Reports
 
         private void xrTableRow1_BeforePrint(object sender, CancelEventArgs e)
         {
-            
+
         }
 
         private void xrTableRow2_BeforePrint(object sender, CancelEventArgs e)
@@ -134,7 +135,7 @@ namespace MandiPOS.Reports
 
         private void xrTable2_BeforePrint(object sender, CancelEventArgs e)
         {
-            if (rType==1)
+            if (rType == 1)
             {
                 XRTableRow row = xrTableRow1;
                 XRTableCell cellToRemove = row.Cells.Cast<XRTableCell>()
@@ -143,7 +144,7 @@ namespace MandiPOS.Reports
                 if (cellToRemove != null)
                 {
                     row.Cells.Remove(cellToRemove);
-                } 
+                }
             }
 
 

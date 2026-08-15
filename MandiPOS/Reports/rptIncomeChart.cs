@@ -1,8 +1,13 @@
 ﻿using Dapper;
+
 using DevExpress.XtraCharts;
 using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
+
 using System;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {

@@ -1,14 +1,10 @@
 ﻿using Dapper;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {
@@ -35,7 +31,7 @@ namespace MandiPOS.GUI
 
         private void GetEditor(object value)
         {
-            using(var frm=new frmUserEditor(value))
+            using (var frm = new frmUserEditor(value))
             {
                 frm.ShowDialog();
                 Refresh();
@@ -45,7 +41,7 @@ namespace MandiPOS.GUI
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (gridEX1.IsRow())
-            { 
+            {
                 GetEditor(gridEX1.GetValue(0));
             }
         }

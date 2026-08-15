@@ -62,13 +62,13 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.lblSummary = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this._endBal = new DevExpress.XtraReports.UI.XRLabel();
             this._endSate = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.lblSummary = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -138,6 +138,7 @@
             this.xrTableCell7.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
             this.xrTableCell7.Weight = 0.29996217922183266D;
             this.xrTableCell7.WordWrap = false;
+            this.xrTableCell7.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrTableCell7_BeforePrint);
             // 
             // xrTableCell14
             // 
@@ -413,6 +414,19 @@
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.StylePriority.UseFont = false;
             // 
+            // lblSummary
+            // 
+            this.lblSummary.Font = new DevExpress.Drawing.DXFont("Jameel Noori Nastaleeq", 11F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblSummary.LocationFloat = new DevExpress.Utils.PointFloat(12.5F, 50F);
+            this.lblSummary.Multiline = true;
+            this.lblSummary.Name = "lblSummary";
+            this.lblSummary.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
+            this.lblSummary.SizeF = new System.Drawing.SizeF(750F, 23F);
+            this.lblSummary.StylePriority.UseFont = false;
+            this.lblSummary.StylePriority.UseTextAlignment = false;
+            this.lblSummary.Text = "lblSummary";
+            this.lblSummary.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
             // xrLabel3
             // 
             this.xrLabel3.BackColor = System.Drawing.Color.Silver;
@@ -558,19 +572,6 @@
             // 
             this.bindingSource1.DataSource = typeof(MandiPOS.Reports.ReportClasses.clsLedger);
             // 
-            // lblSummary
-            // 
-            this.lblSummary.Font = new DevExpress.Drawing.DXFont("Jameel Noori Nastaleeq", 11F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblSummary.LocationFloat = new DevExpress.Utils.PointFloat(12.5F, 50F);
-            this.lblSummary.Multiline = true;
-            this.lblSummary.Name = "lblSummary";
-            this.lblSummary.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
-            this.lblSummary.SizeF = new System.Drawing.SizeF(750F, 23F);
-            this.lblSummary.StylePriority.UseFont = false;
-            this.lblSummary.StylePriority.UseTextAlignment = false;
-            this.lblSummary.Text = "lblSummary";
-            this.lblSummary.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
             // rptPartyLedger
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -589,7 +590,7 @@
             this.PageWidthF = 826.7717F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.SnappingMode = ((DevExpress.XtraReports.UI.SnappingMode)((DevExpress.XtraReports.UI.SnappingMode.SnapLines | DevExpress.XtraReports.UI.SnappingMode.SnapToGrid)));
-            this.Version = "25.1";
+            this.Version = "25.2";
             xrWatermark1.Id = "Watermark1";
             this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
             xrWatermark1});

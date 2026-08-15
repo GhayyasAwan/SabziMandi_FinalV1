@@ -1,11 +1,16 @@
 ﻿using Dapper;
+
 using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
 using MandiPOS.Reports;
 using MandiPOS.Reports.ReportClasses;
+
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {

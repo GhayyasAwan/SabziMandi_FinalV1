@@ -1,12 +1,17 @@
 ﻿using Dapper;
+
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {

@@ -7,16 +7,16 @@ namespace MandiPOS.Reports.ReportClasses
         public DateTime VoucherDate { get; set; }
         public int TrxType { get; set; }
         public int VoucherType { get; set; }
-        public  string VoucherTitle 
-        { 
-            get 
+        public string VoucherTitle
+        {
+            get
             {
                 switch (TrxType)
                 {
                     case 0:
-                        return "بنام ووچر"; 
+                        return "بنام ووچر";
                     case 1:
-                        return "جمع ووچر"; 
+                        return "جمع ووچر";
                     case 2:
                         return "جنرل ووچر";
                     case 3:
@@ -24,18 +24,38 @@ namespace MandiPOS.Reports.ReportClasses
                     case 5:
                         return "باردانہ ووچر";
                     case 4:
-                        return "فروخت ووچر"; 
+                        return "فروخت ووچر";
                     case -1: return "اوپننگ";
                     default:
                         return "";
                 }
-            } 
+            }
         }
         public string BillNo { get; set; }
         public string Narration { get; set; }
         public decimal Debit { get; set; }
         public decimal Credit { get; set; }
         public decimal Balance { get; set; }
+        public string Valuecolour
+        {
+            get
+            {
+                if (Debit == 0) return "Green";
+                else if (Credit == 0) return "Red";
+                else return "Black";
+
+            }
+        }
+        public string Statuscolour
+        {
+            get
+            {
+                if (Balance > 0) return "Red";
+                else if (Balance < 0) return "Green";
+                else return "Black";
+
+            }
+        }
         public string Status
         {
             get

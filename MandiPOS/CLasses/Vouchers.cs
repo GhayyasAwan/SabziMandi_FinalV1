@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.CLasses
 {
     public class Vouchers
@@ -195,7 +197,7 @@ namespace MandiPOS.CLasses
             using (var db = new db())
             {
                 var query = "Select Top 1 * from Vouchers  WHERE VoucherType = @VoucherType AND VoucherDate = @VoucherDate";
-                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype, VoucherDate = targetDate,VoucherNo=NextVocuherNo(vtype) };
+                var voucher = db.Query<Vouchers>(query, new { VoucherType = vtype, VoucherDate = targetDate }).ToList().FirstOrDefault() ?? new Vouchers() { VoucherType = vtype, VoucherDate = targetDate, VoucherNo = NextVocuherNo(vtype) };
 
                 if (voucher.VoucherID != 0) // or != null depending on type
                 {
@@ -211,7 +213,7 @@ from voucherDetails vd
 left join DetailAccounts cp on vd.cashAccountID=cp.ID
 left join DetailAccounts p on vd.PartyID=p.ID Where VoucherID=@VoucherID";
                     voucher.Entries = db.Query<VoucherCart>(sql, new { VoucherID = voucher.VoucherID }).ToList();
-                    if (voucher.VoucherType == 3|| voucher.VoucherType == 5)
+                    if (voucher.VoucherType == 3 || voucher.VoucherType == 5)
                     {
                         sql = $@"Select bd.ID, bd.VoucherID,bd.accountID,acc.AccountCode as 'Code',
 acc.AccountTitle as 'PartyName',bd.Narration,p.id as 'ItemID',p.ItemTitle as 'ItemName', 
@@ -290,7 +292,7 @@ Where VoucherID=@VoucherID Order by bd.id desc";
                     if (voucher.VoucherType == 2) //Journal Voucher
                     {
                         sql = "Select jv.id, jv.AccountID,acc.AccountTitle as 'PartyTitle',acc.AccountCode,jv.Narration,jv.DebitAmount,jv.CreditAmount\r\nfrom jvEntries jv left join DetailAccounts acc on jv.AccountID=acc.ID Where jv.VoucherID=@VoucherID order by jv.ID Desc";
-                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x=>x.id).ToList();
+                        voucher.JVEntries = db.Query<JVCart>(sql, new { VoucherID = voucher.VoucherID }).OrderByDescending(x => x.id).ToList();
                     }
 
                     else

@@ -1,20 +1,11 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraPrinting.Native.ExportOptionsControllers;
+﻿using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -23,9 +14,13 @@ namespace MandiPOS.GUI
     {
         XtraReport Report { get; set; }
         bool IsBill = false;
-        public XtraForm1(XtraReport rpt, bool bill=false)
+        public XtraForm1(XtraReport rpt, bool bill = false, bool isPrepared = false)
         {
             InitializeComponent();
+            if (!isPrepared)
+            {
+                rpt.CreateDocument();
+            }
             IsBill = bill;
             this.WindowState = FormWindowState.Maximized;
             Report = rpt;
@@ -51,7 +46,7 @@ namespace MandiPOS.GUI
             // this.documentViewer1.Zoom = 100; // optional: ensure zoom applied
 
             // Delay scrolling until report is fully rendered
-            
+
             documentViewer1.PrintingSystem.ExecCommand(PrintingSystemCommand.ZoomToPageWidth);
             Program.waitFormInstance?.Dispose();
             if (IsBill)
@@ -69,7 +64,7 @@ namespace MandiPOS.GUI
 
         private void DocumentViewer1_DocumentChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void bbiScale_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -102,7 +97,7 @@ namespace MandiPOS.GUI
 
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
+
 
             // Inside your method
             Thread staThread = new Thread(() =>
@@ -117,7 +112,7 @@ namespace MandiPOS.GUI
                             return;
 
                         string exportFolder = fbd.SelectedPath;
-                        
+
                         ImageExportOptions imageOptions = this.Report.ExportOptions.Image;
                         imageOptions.Resolution = 300;
                         imageOptions.Format = ImageFormat.Png; // Or your preferred format

@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,11 +86,11 @@ namespace MandiPOS.Reports
             string totalText = "";
             if (newCart.Sum(x => x.ItemWeight) > 0)
             {
-                var totals = newCart.Where(x=>x.ItemWeight>0).GroupBy(x => x.UnitTitle).Select(g => new { UnitTitle = g.Key, TotalQty = g.Sum(x => x.ItemQty), TotalWeight = g.Sum(x => x.ItemWeight) }).ToList();
+                var totals = newCart.Where(x => x.ItemWeight > 0).GroupBy(x => x.UnitTitle).Select(g => new { UnitTitle = g.Key, TotalQty = g.Sum(x => x.ItemQty), TotalWeight = g.Sum(x => x.ItemWeight) }).ToList();
                 totalText = string.Join(", ", totals.Select(x => $"کل وزن : {x.TotalWeight:0.##} {x.UnitTitle}"));
             }
             lblTotlaSUmmary.Text = totalText;
-
+            // lblPrintTime.Text = sale.PrintTime?.ToString("dd-MM-yyyy HH:mm");
             this.DataSource = newCart.OrderByDescending(x => x.ParyRate);
             decimal total = 0, commission = 0, mazdoori = 0, munshiana = 0, karaya = 0, store = 0;
             commission = sale.CommissionAmount;

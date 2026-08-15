@@ -1,16 +1,10 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraCharts;
-using DevExpress.XtraReports.Design;
 using DevExpress.XtraReports.UI;
 
 using MandiPOS.CLasses;
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 
 namespace MandiPOS.Reports
 {
@@ -20,7 +14,7 @@ namespace MandiPOS.Reports
         {
             InitializeComponent();
             this.DataSource = data;
-           // ConfigureChart(data);
+            // ConfigureChart(data);
         }
         private void ConfigureChart(List<ChartData> data)
         {

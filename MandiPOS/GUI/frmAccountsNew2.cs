@@ -1,20 +1,16 @@
-﻿using DevExpress.Emf;
-using MandiPOS.CLasses;
+﻿using MandiPOS.CLasses;
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
 {
     public partial class frmAccountsNew2 : Form
     {
-        public int MasterID=0;
+        public int MasterID = 0;
         clsResize objR;
         bool isloading = true;
         DetailAccounts account = new DetailAccounts();
@@ -24,7 +20,8 @@ namespace MandiPOS.GUI
             RegisterEnter();
             RegisterFocus();
             this.KeyPreview = true;
-            this.KeyDown += ((s,e) =>{
+            this.KeyDown += ((s, e) =>
+            {
                 if (e.KeyCode == Keys.F1)
                 {
                     SaveRecord();
@@ -36,12 +33,12 @@ namespace MandiPOS.GUI
             this.Load += FrmAccountsNew2_Load;
             txtName.TextChanged += TxtName_TextChanged;
             objR = new clsResize(this);
-            
+
         }
 
         private void GridEX1_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
         {
-            if(gridEX1.CurrentRow!=null)
+            if (gridEX1.CurrentRow != null)
             {
                 int id = gridEX1.CurrentRow.Cells["ID"].Value.toInt();
                 account = DetailAccountService.GetDetailAccountByID(id);
@@ -56,7 +53,7 @@ namespace MandiPOS.GUI
                 bsAccount1.Filter = $"AccountTitle LIKE '%{txtName.Text}%'";
             }
             else
-            { 
+            {
                 bsAccount1.RemoveFilter();
             }
         }
@@ -68,7 +65,7 @@ namespace MandiPOS.GUI
             txtContact.EnterToNext();
             cmbCity.EnterToNext();
             txtDebit.EnterToNext();
-            txtCredit.KeyDown+=((sender, e) =>
+            txtCredit.KeyDown += ((sender, e) =>
             {
                 if (e.EnterKey())
                 {
@@ -93,7 +90,7 @@ namespace MandiPOS.GUI
             {
                 account.MasterID = MasterID;
                 DetailAccountService.SaveDetailAccount(account);
-                Refresh();this.Info("ریکارڈ محفوظ ہوگیا۔");
+                Refresh(); this.Info("ریکارڈ محفوظ ہوگیا۔");
             }
             else
             {
@@ -130,7 +127,7 @@ namespace MandiPOS.GUI
                 bsCity.ResetBindings(false);
                 if (!isloading)
                 {
-                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x=>x.AccountCode).ToDataTable();
+                    bsAccount1.DataSource = DetailAccountService.GetAccountsViewList(MasterID).OrderByDescending(x => x.AccountCode).ToDataTable();
                 }
                 bsAccount1.RemoveFilter();
                 gridEX1.AutoSizeColumns();
@@ -148,12 +145,12 @@ namespace MandiPOS.GUI
             txtDebit.Text = (account.OpDebit).ToString("0.##");
             cmbCity.SelectedValue = account.CityID;
             if (!account.RefrenceType.HasValue) { account.RefrenceType = 0; }
-            txtName.Select();txtName.SelectAll();
+            txtName.Select(); txtName.SelectAll();
         }
         private void FrmAccountsNew2_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)
-            { 
+            {
                 WindowState = FormWindowState.Maximized;
             }
             objR._resize();
@@ -169,23 +166,26 @@ namespace MandiPOS.GUI
         private void PopulateMasterAccounts()
         {
             var master = MasterAccountsService.GetMasterAccounts();
-            bool isFirst = true;
             foreach (var acc in master)
             {
                 Button btn = new Button()
                 {
-                    AutoSize=true,AutoSizeMode=AutoSizeMode.GrowAndShrink,Name=$"btn{acc.ID}",
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                    Name = $"btn{acc.ID}",
                     Text = $"{acc.ID} - {acc.AccountTitle}",
-                    Tag = acc.ID,FlatStyle=FlatStyle.Flat, FlatAppearance={BorderSize=0,MouseOverBackColor=SystemColors.Highlight,MouseDownBackColor=SystemColors.Highlight},
+                    Tag = acc.ID,
+                    FlatStyle = FlatStyle.Flat,
+                    FlatAppearance = { BorderSize = 0, MouseOverBackColor = SystemColors.Highlight, MouseDownBackColor = SystemColors.Highlight },
                     Font = new Font("Jameel Noori nastaleeq", 14),
                     //VisualStyleManager = this.visualStyleManager1,
                     RightToLeft = RightToLeft.Yes,
                     Anchor = AnchorStyles.Top | AnchorStyles.Right
                 };
-                if (acc.ID == 4|| acc.ID == 7)
+                if (acc.ID == 4 || acc.ID == 7)
                 {
                     btn.BackColor = Color.ForestGreen;
-                    btn.ForeColor=Color.White;
+                    btn.ForeColor = Color.White;
                 }
                 btn.Click += Btn_Click;
                 //if (isFirst)
@@ -202,16 +202,16 @@ namespace MandiPOS.GUI
             if (sender is Button btn)
             {
                 MasterID = btn.Tag.toInt();
-                foreach(Button b in flowLayoutPanel1.Controls)
+                foreach (Button b in flowLayoutPanel1.Controls)
                 {
-                    if(b.Name==btn.Name)
+                    if (b.Name == btn.Name)
                     {
                         b.BackColor = SystemColors.Highlight;
                         b.ForeColor = Color.White;
                     }
                     else
                     {
-                        if (b.Tag.toInt() == 4|| b.Tag.toInt() == 7)
+                        if (b.Tag.toInt() == 4 || b.Tag.toInt() == 7)
                         {
                             b.BackColor = Color.ForestGreen;
                             b.ForeColor = Color.White;
@@ -224,7 +224,7 @@ namespace MandiPOS.GUI
                     }
                 }
             }
-            if (MasterID != 4 && MasterID!=7)
+            if (MasterID != 4 && MasterID != 7)
             {
                 Refresh();
             }

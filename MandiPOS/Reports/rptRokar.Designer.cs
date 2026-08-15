@@ -425,6 +425,7 @@
             this._expnse.BorderColor = System.Drawing.Color.White;
             this._expnse.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this._expnse.BorderWidth = 0.25F;
+            this._expnse.CanGrow = false;
             this._expnse.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this._expnse.ForeColor = System.Drawing.Color.White;
             this._expnse.Multiline = true;
@@ -440,6 +441,7 @@
             this._expnse.StylePriority.UseTextAlignment = false;
             this._expnse.Text = "lblTotalJama";
             this._expnse.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this._expnse.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
             this._expnse.Weight = 1.8499998521929377D;
             // 
             // xrTableCell7
@@ -479,6 +481,7 @@
             this._wasooli.BorderColor = System.Drawing.Color.White;
             this._wasooli.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this._wasooli.BorderWidth = 0.25F;
+            this._wasooli.CanGrow = false;
             this._wasooli.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this._wasooli.ForeColor = System.Drawing.Color.White;
             this._wasooli.Multiline = true;
@@ -494,6 +497,7 @@
             this._wasooli.StylePriority.UseTextAlignment = false;
             this._wasooli.Text = "lblTotalBanam";
             this._wasooli.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this._wasooli.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
             this._wasooli.Weight = 1.8499998521929377D;
             // 
             // xrTableCell9
@@ -533,6 +537,7 @@
             this._banam.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this._banam.BorderWidth = 0.25F;
+            this._banam.CanGrow = false;
             this._banam.Font = new DevExpress.Drawing.DXFont("Arial Rounded MT Bold", 16F);
             this._banam.ForeColor = System.Drawing.Color.White;
             this._banam.Multiline = true;
@@ -547,6 +552,7 @@
             this._banam.StylePriority.UseTextAlignment = false;
             this._banam.Text = "lblRemainingCash";
             this._banam.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this._banam.TextFitMode = DevExpress.XtraReports.UI.TextFitMode.ShrinkOnly;
             this._banam.Weight = 1.8499998521929377D;
             // 
             // xrTableCell11

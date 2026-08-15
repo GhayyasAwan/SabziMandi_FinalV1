@@ -42,13 +42,14 @@
             this.txtDebit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.txtCredit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.uiGroupBox1 = new Janus.Windows.EditControls.UIGroupBox();
-            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
+            this.btnCustomLabel = new Janus.Windows.EditControls.UIButton();
             this.txtRefName = new Janus.Windows.GridEX.EditControls.EditBox();
             this.cmbRefParty = new Janus.Windows.EditControls.UIComboBox();
             this.bss = new System.Windows.Forms.BindingSource(this.components);
             this.rbOther = new Janus.Windows.EditControls.UIRadioButton();
             this.rbCustomer = new Janus.Windows.EditControls.UIRadioButton();
             this.rbVendor = new Janus.Windows.EditControls.UIRadioButton();
+            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -171,7 +172,7 @@
             // 
             // uiGroupBox1
             // 
-            this.uiGroupBox1.Controls.Add(this.uiButton1);
+            this.uiGroupBox1.Controls.Add(this.btnCustomLabel);
             this.uiGroupBox1.Controls.Add(this.txtRefName);
             this.uiGroupBox1.Controls.Add(this.cmbRefParty);
             this.uiGroupBox1.Controls.Add(this.rbOther);
@@ -185,15 +186,17 @@
             this.uiGroupBox1.Text = "معرفت";
             this.uiGroupBox1.VisualStyleManager = this.visualStyleManager1;
             // 
-            // uiButton1
+            // btnCustomLabel
             // 
-            this.uiButton1.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uiButton1.Location = new System.Drawing.Point(0, -5);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(107, 40);
-            this.uiButton1.TabIndex = 22;
-            this.uiButton1.Text = "Import";
-            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            this.btnCustomLabel.Enabled = false;
+            this.btnCustomLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomLabel.Location = new System.Drawing.Point(6, 9);
+            this.btnCustomLabel.Name = "btnCustomLabel";
+            this.btnCustomLabel.Size = new System.Drawing.Size(128, 40);
+            this.btnCustomLabel.TabIndex = 23;
+            this.btnCustomLabel.Text = "لیبل";
+            this.btnCustomLabel.Visible = false;
+            this.btnCustomLabel.Click += new System.EventHandler(this.btnCustomLabel_Click);
             // 
             // txtRefName
             // 
@@ -254,6 +257,18 @@
             this.rbVendor.Text = "بیوپاری";
             this.rbVendor.VisualStyleManager = this.visualStyleManager1;
             this.rbVendor.CheckedChanged += new System.EventHandler(this.rbVendor_CheckedChanged);
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.Enabled = false;
+            this.uiButton1.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiButton1.Location = new System.Drawing.Point(1059, 2);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Size = new System.Drawing.Size(107, 40);
+            this.uiButton1.TabIndex = 22;
+            this.uiButton1.Text = "Import";
+            this.uiButton1.Visible = false;
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // label2
             // 
@@ -442,6 +457,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1333, 732);
+            this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.munshiana);
             this.Controls.Add(this.dgv);
@@ -518,5 +534,6 @@
         private Janus.Windows.EditControls.UIButton uiButton1;
         private System.Windows.Forms.Label label10;
         private Janus.Windows.GridEX.EditControls.NumericEditBox munshiana;
+        private Janus.Windows.EditControls.UIButton btnCustomLabel;
     }
 }

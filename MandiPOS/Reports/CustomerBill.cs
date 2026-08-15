@@ -1,10 +1,15 @@
 ﻿using Dapper;
+
 using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
@@ -13,7 +18,7 @@ namespace MandiPOS.Reports
         public CustomerBill(int CustomerID, DateTime date, List<clsCustomerBill> data)
         {
             InitializeComponent();
-            
+
             var acc = DetailAccountService.GetDetailAccountByID(CustomerID);
             var city = SQL.GetCities().Where(x => x.ID == acc.CityID).FirstOrDefault();
             var prevBalance = new db().ExecuteScalar<decimal>("sp_Ledger", new { AccountID = CustomerID, GetBalanceBeforeDate = date.Date },

@@ -1,11 +1,9 @@
 ﻿using Dapper;
 
-using DevExpress.Export.Xl;
-
-using MandiPOS.CLasses;
-
 using System;
 using System.Data;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {

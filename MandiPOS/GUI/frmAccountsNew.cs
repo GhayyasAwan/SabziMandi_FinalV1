@@ -1,4 +1,5 @@
-﻿using MandiPOS.CLasses;
+﻿using DevExpress.XtraEditors.Repository;
+using MandiPOS.CLasses;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace MandiPOS.GUI
         {
             InitializeComponent();
             parentID = _parentID;
+            btnCustomLabel.Enabled = btnCustomLabel.Visible = _parentID == 4;
             txtCode.RegisterFocus(true);
             txtName.RegisterFocus(true);
             txtContact.RegisterFocus(true);
@@ -490,6 +492,7 @@ namespace MandiPOS.GUI
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
+            return;
             using (var frm = new frmImportAccounts() { StartPosition = FormStartPosition.CenterScreen })
             {
                 frm.ShowDialog();
@@ -500,6 +503,17 @@ namespace MandiPOS.GUI
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCustomLabel_Click(object sender, EventArgs e)
+        {
+            if (account == null| account.ID == 0)
+                return;
+            
+            using (var frm = new frmCustomControl2(account.ID))
+            {
+                frm.ShowDialog(this);
+            }
         }
     }
 }

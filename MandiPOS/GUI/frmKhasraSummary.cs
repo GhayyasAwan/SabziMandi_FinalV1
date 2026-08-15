@@ -1,13 +1,19 @@
 ﻿using Dapper;
+
 using DevExpress.XtraReports.UI;
+
 using Janus.Windows.GridEX;
+
 using MandiPOS.CLasses;
 using MandiPOS.Reports;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {
@@ -25,7 +31,7 @@ namespace MandiPOS.GUI
             objresizer = new clsResize(this);
             this.Load += FrmKhasraSummary_Load;
             this.Resize += FrmKhasraSummary_Resize;
-            dtRecords = new db().Query<vw_KhasraSummary>($"Select * from vw_KhasraSummary Where [Date]='{date:yyyy-MM-dd}' Order By SortOrder, Case When SortOrder=1 then TotalAmount else null End Desc").ToDataTable();
+            dtRecords = new db().Query<vw_KhasraSummary>($"exec sp_GetKhasraSummary '{date:yyyy-MM-dd}';").ToDataTable();
             decimal naqad = dtRecords.Compute("Sum(TotalAmount)", "AccountTitle LIKE '%نقد سیل%'").toDecimal();
             decimal udhar = dtRecords.Compute("Sum(TotalAmount)", "AccountTitle Not LIKE '%نقد سیل%'").toDecimal();
             _naqad.Text = naqad.ToString("0.##");

@@ -39,7 +39,7 @@ namespace MandiPOS
         /// </summary>
         public static waitForm waitFormInstance;
         [STAThread]
-        static async Task Main()
+        static  void Main()
         {
             bool createdNew;
             using (var mutex = new System.Threading.Mutex(true, "MyUniqueAppMutexName", out createdNew))

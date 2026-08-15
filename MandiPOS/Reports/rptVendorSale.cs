@@ -1,9 +1,11 @@
 ﻿using Dapper;
-using DevExpress.DataAccess.Wizard.Views;
+
 using MandiPOS.CLasses;
 
 using System;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
@@ -26,7 +28,6 @@ namespace MandiPOS.Reports
                     d.TotalLaga = 0.ToString();
                     d.CommissionAmount = 0;
                     d.MunshianaAmount = 0;
-                    d.MazdooriAmount = 0;
                 }
             }
             this.DataSource = data;
@@ -46,7 +47,7 @@ namespace MandiPOS.Reports
             if (cell != null)
             {
                 // Check if the value is 0 (you might need to handle different numeric types)
-                if (cell.Text == "0"||cell.Text==cell.Name || cell.Text == "0.00" || cell.Text == "0.0" || cell.Value == null || cell.Value == (object)0)
+                if (cell.Text == "0" || cell.Text == cell.Name || cell.Text == "0.00" || cell.Text == "0.0" || cell.Value == null || cell.Value == (object)0)
                 {
                     cell.Text = "";
                 }

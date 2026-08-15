@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.GUI
 {
     public partial class frmMarkaDetails : Form
@@ -118,7 +120,7 @@ FROM (
             {
                 report.Dispose();
             }
-            report = new rptMarkaSummary(marka,partyID, d01.Value.Date, d02.Value.Date, data, label2.Text.Trim());
+            report = new rptMarkaSummary(marka, partyID, d01.Value.Date, d02.Value.Date, data, label2.Text.Trim());
             report.CreateDocument();
         }
 
@@ -137,7 +139,7 @@ FROM (
             var rows = gridEX1.GetCheckedRows();
             if (rows.Length > 0)
             {
-                XtraReport FinalReport =null;
+                XtraReport FinalReport = null;
                 foreach (var row in rows)
                 {
                     var rpt = new saleBill(row.Cells["ArrivalNo"].Value.ToString(), 1);
@@ -153,7 +155,7 @@ FROM (
                 }
                 if (FinalReport != null)
                 {
-                    var fr = new XtraForm1(FinalReport);
+                    var fr = new XtraForm1(FinalReport,isPrepared:true);
                     fr.Show();
                     fr.WindowState = FormWindowState.Maximized;
                     fr.BringToFront();
@@ -168,13 +170,13 @@ FROM (
 
         private void button2_Click(object sender, EventArgs e)
         {
-                if (report != null)
-                {
-                    var fr = new XtraForm1(report);
-                    fr.Show();
-                    fr.WindowState = FormWindowState.Maximized;
-                    fr.BringToFront();
-                }
+            if (report != null)
+            {
+                var fr = new XtraForm1(report);
+                fr.Show();
+                fr.WindowState = FormWindowState.Maximized;
+                fr.BringToFront();
+            }
         }
 
         private void gridEX1_FormattingRow(object sender, Janus.Windows.GridEX.RowLoadEventArgs e)

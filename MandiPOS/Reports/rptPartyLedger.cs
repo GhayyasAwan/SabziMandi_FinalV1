@@ -6,30 +6,31 @@ using MandiPOS.CLasses;
 using MandiPOS.Reports.ReportClasses;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
     public partial class rptPartyLedger : DevExpress.XtraReports.UI.XtraReport
     {
         int rType = 0;
-        public rptPartyLedger(string date1,string date2,int PartyID, List<clsLedger> data, int ReportType=0)
+        public rptPartyLedger(string date1, string date2, int PartyID, List<clsLedger> data, int ReportType = 0)
         {
             InitializeComponent();
             lblDate1.Text = date1;
             lblDate2.Text = date2;
             rType = ReportType;
-            DetailAccounts acc=new DetailAccounts();
+            DetailAccounts acc = new DetailAccounts();
             using (var db = new db())
                 acc = db.Get<DetailAccounts>(PartyID);
-            var rpt=new rptHeader(PartyID);
+            var rpt = new rptHeader(PartyID);
             rpt.CreateDocument();
             this.xrSubreport1.ReportSource = rpt;
-            decimal totalBanam = 0, TotalJama=0, endBalance=0;
+            decimal totalBanam = 0, TotalJama = 0, endBalance = 0;
             TotalJama = data.Sum(x => x.Credit);
             totalBanam = data.Sum(x => x.Debit);
             endBalance = totalBanam - TotalJama;
@@ -58,6 +59,22 @@ namespace MandiPOS.Reports
             {
                 cell.Text = string.Empty;
             }
+            var currentRow = (clsLedger)GetCurrentRow();
+            if (currentRow != null)
+            {
+                if (currentRow.Valuecolour.ToLower() == "red")
+                {
+                    cell.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (currentRow.Valuecolour.ToLower() == "green")
+                {
+                    cell.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    cell.ForeColor = System.Drawing.Color.Black;
+                }
+            }
         }
 
         private void xrTableCell9_BeforePrint(object sender, CancelEventArgs e)
@@ -66,6 +83,22 @@ namespace MandiPOS.Reports
             if (cell.Value.toDecimal() == 0 || cell.Text == "0")
             {
                 cell.Text = string.Empty;
+            }
+            var currentRow = (clsLedger)GetCurrentRow();
+            if (currentRow != null)
+            {
+                if (currentRow.Valuecolour.ToLower() == "red")
+                {
+                    cell.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (currentRow.Valuecolour.ToLower() == "green")
+                {
+                    cell.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    cell.ForeColor = System.Drawing.Color.Black;
+                }
             }
         }
 
@@ -95,8 +128,24 @@ namespace MandiPOS.Reports
                 cell.Text = string.Empty;
             }
             if (cell.Value.toDecimal() < 0)
-            { 
-                cell.Text=Math.Abs(cell.Value.toDecimal()).ToString("N0");
+            {
+                cell.Text = Math.Abs(cell.Value.toDecimal()).ToString("N0");
+            }
+            var currentRow = (clsLedger)GetCurrentRow();
+            if (currentRow != null)
+            {
+                if (currentRow.Statuscolour.ToLower() == "red")
+                {
+                    cell.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (currentRow.Statuscolour.ToLower() == "green")
+                {
+                    cell.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    cell.ForeColor = System.Drawing.Color.Black;
+                }
             }
         }
 
@@ -111,7 +160,7 @@ namespace MandiPOS.Reports
 
         private void xrTableRow1_BeforePrint(object sender, CancelEventArgs e)
         {
-            
+
         }
 
         private void xrTableRow2_BeforePrint2(object sender, CancelEventArgs e)
@@ -133,33 +182,33 @@ namespace MandiPOS.Reports
         }
         private void xrTableRow2_BeforePrint(object sender, CancelEventArgs e)
         {
-            //XRTableRow row = sender as XRTableRow;
+            XRTableRow row = sender as XRTableRow;
 
-            //foreach (XRTableCell cell in row.Cells)
-            //{
-            //    cell.ForeColor = Color.Black; // reset
+            foreach (XRTableCell cell in row.Cells)
+            {
+                cell.ForeColor = Color.Black; // reset
 
-            //    if (cell.DataBindings.Count > 0)
-            //    {
-            //        string fieldName = ((XRBinding)cell.DataBindings[0]).DataMember;
-            //        decimal value;
+                if (cell.DataBindings.Count > 0)
+                {
+                    string fieldName = ((XRBinding)cell.DataBindings[0]).DataMember;
+                    decimal value;
 
-            //        if (decimal.TryParse(cell.Text, out value) && value != 0)
-            //        {
-            //            if (fieldName == "Debit")
-            //                cell.ForeColor = Color.Red;
-            //            else if (fieldName == "Credit")
-            //                cell.ForeColor = Color.Green;
-            //        }
-            //    }
-            //}
+                    if (decimal.TryParse(cell.Text, out value) && value != 0)
+                    {
+                        if (fieldName == "Debit")
+                            cell.ForeColor = Color.Red;
+                        else if (fieldName == "Credit")
+                            cell.ForeColor = Color.Green;
+                    }
+                }
+            }
         }
 
 
 
         private void xrTable2_BeforePrint(object sender, CancelEventArgs e)
         {
-            if (rType==1)
+            if (rType == 1)
             {
                 XRTableRow row = xrTableRow1;
                 XRTableCell cellToRemove = row.Cells.Cast<XRTableCell>()
@@ -168,10 +217,31 @@ namespace MandiPOS.Reports
                 if (cellToRemove != null)
                 {
                     row.Cells.Remove(cellToRemove);
-                } 
+                }
             }
 
 
+        }
+
+        private void xrTableCell7_BeforePrint(object sender, CancelEventArgs e)
+        {
+            XRLabel cell = sender as XRLabel;
+            var currentRow = (clsLedger)GetCurrentRow();
+            if (currentRow != null)
+            {
+                if (currentRow.Statuscolour.ToLower() == "red")
+                {
+                    cell.ForeColor = System.Drawing.Color.Red;
+                }
+                else if (currentRow.Statuscolour.ToLower() == "green")
+                {
+                    cell.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    cell.ForeColor = System.Drawing.Color.Black;
+                }
+            }
         }
     }
 }

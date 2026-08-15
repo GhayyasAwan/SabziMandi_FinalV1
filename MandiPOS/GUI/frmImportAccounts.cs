@@ -1,11 +1,15 @@
 ﻿using Dapper;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {

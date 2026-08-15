@@ -27,6 +27,7 @@ namespace MandiPOS.CLasses
         public decimal TotalAmount { get; set; }
         [Browsable(false)]
         public int SortOrder { get; set; }
+        public int Printed { get; set; }
 
     }
 }

@@ -1,8 +1,5 @@
 ﻿using Dapper;
 
-using DevExpress.Internal;
-using DevExpress.XtraEditors;
-
 using Janus.Windows.GridEX;
 
 using MandiPOS.CLasses;
@@ -12,6 +9,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {
@@ -152,14 +151,14 @@ namespace MandiPOS.GUI
                 JVCart c = dgv.CurrentRow.DataRow as JVCart;
                 if (c != null)
                 {
-                    
+
                     using (var db = new db())
                     {
                         using (var trx = db.BeginTransaction())
                         {
                             try
                             {
-                                db.Execute($"Delete from JVEntries Where VoucherID={currentid} and ID={c.id}", transaction:trx);
+                                db.Execute($"Delete from JVEntries Where VoucherID={currentid} and ID={c.id}", transaction: trx);
                                 trx.Commit();
                                 _name.Text = c.PartyTitle;
                                 _code.Text = c.AccountCode;
@@ -179,7 +178,7 @@ namespace MandiPOS.GUI
                             }
                         }
                     }
-                    
+
                 }
             }
         }

@@ -1,14 +1,15 @@
 ﻿using Dapper;
 
-using DevExpress.Utils.Filtering.Internal;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
+
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
 
 using MandiPOS;
 using MandiPOS.CLasses;
 using MandiPOS.Reports;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,12 +18,14 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.GUI
 {
     public partial class frmSaleNew : Form
     {
         clsResize obj;
-        
+
         tblSale _sale = new tblSale();
         private int _currentID;
         int _currentVendor = 0;
@@ -53,11 +56,11 @@ namespace MandiPOS.GUI
         {
             if (CurrentCustomer != 0)
             {
-                if(_customer.Text == "نقد سیل")
-                    {
+                if (_customer.Text == "نقد سیل")
+                {
                     customerBal.Text = string.Empty;
                 }
-                    else
+                else
                 {
                     customerBal.Text = this.GetPartyBalance(CurrentCustomer);
                 }
@@ -75,7 +78,7 @@ namespace MandiPOS.GUI
             decimal sale1 = 0;
             foreach (vwSale3 sale in bsCart)
             {
-                sale1 += sale.CustomerAmount;
+                sale1 += sale.PartyAmount;
             }
             _grossSale.Text = sale1.ProperDecimals();
             _Expnses.Value = (commission + mazdoori + munshiana + kraya + store).ProperDecimals();
@@ -106,7 +109,7 @@ namespace MandiPOS.GUI
             commissionPerc.KeyDown += CommissionPerc_KeyDown;
             mazdooriPerc.KeyDown += MazdooriPerc_KeyDown;
             mushianaPerc.KeyDown += MushianaPerc_KeyDown;
-            arrivalDate.Enabled=dtp.Enabled=dtp1.Enabled = General.IsAdmin;
+            arrivalDate.Enabled = dtp.Enabled = dtp1.Enabled = General.IsAdmin;
             vendorBal.ValueChanged += VendorBal_ValueChanged;
             txtMarkaMain.RegisterFocus(true);
             txtMarkaMain.KeyDown += TxtMarkaMain_KeyDown;
@@ -197,13 +200,13 @@ namespace MandiPOS.GUI
 
         private void CommissionPerc_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
-            _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
+            if (e.KeyCode == Keys.Enter)
+                _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
         }
 
         private void MazdooriPerc_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
                 _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
         }
 
@@ -211,7 +214,7 @@ namespace MandiPOS.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _munshiana.Value = _grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal()/100);
+                _munshiana.Value = _grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal() / 100);
             }
         }
 
@@ -224,8 +227,8 @@ namespace MandiPOS.GUI
         private void FrmSaleNew_ResizeEnd(object sender, EventArgs e)
         {
             if (!isLoading)
-            { 
-                SetDGVLocations();  
+            {
+                SetDGVLocations();
             }
         }
 
@@ -500,7 +503,7 @@ namespace MandiPOS.GUI
         {
             _commission.Value = _grossSale.Value.toDecimal() * commissionPerc.Value.toDecimal() / 100;
             _mazdoori.Value = _grossSale.Value.toDecimal() * mazdooriPerc.Value.toDecimal() / 100;
-            _munshiana.Value= _grossSale.Value.toDecimal()*(mushianaPerc.Value.toDecimal()/100);
+            _munshiana.Value = _grossSale.Value.toDecimal() * (mushianaPerc.Value.toDecimal() / 100);
         }
 
         private void Dgv1_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
@@ -518,7 +521,7 @@ namespace MandiPOS.GUI
                 {
                     _commission.Select();
                 }
-                
+
             }
         }
 
@@ -967,7 +970,7 @@ namespace MandiPOS.GUI
                     {
                         customerBal.Text = this.GetPartyBalance(CurrentCustomer);
                     }
-                        
+
                     _CustomerHelper.Hide();
                     _customer.Select(); _customer.SelectAll();
                 }
@@ -1013,11 +1016,11 @@ namespace MandiPOS.GUI
 
             }
             CurrentCustomer = 0;
-            if(_customer.Text == "نقد سیل")
-                    {
+            if (_customer.Text == "نقد سیل")
+            {
                 customerBal.Text = string.Empty;
             }
-                    else
+            else
             {
                 customerBal.Text = this.GetPartyBalance(CurrentCustomer);
             }
@@ -1036,7 +1039,7 @@ namespace MandiPOS.GUI
                     return;
                 }
                 decimal sold = summary.Sum(x => x.ItemQty);
-                decimal arrived= _ArrivalQty.Text.toDecimal();
+                decimal arrived = _ArrivalQty.Text.toDecimal();
                 decimal currentQty = _qty.Text.toDecimal();
                 if (sold + currentQty > arrived)
                 {
@@ -1125,6 +1128,7 @@ namespace MandiPOS.GUI
                 object cart = new object();
                 object dtsummary = new object();
                 _sale = SaleService.GetSaleByID(iD, ref cart, ref dtsummary);
+                lblTime.Text = string.Empty;
                 bsCart.DataSource = cart;
                 bsCart.ResetBindings(false);
                 objectToControls();
@@ -1177,7 +1181,7 @@ namespace MandiPOS.GUI
                 ItemQty = g.Sum(x => x.ItemQty)
             }).ToList();
             bsSummry.ResetBindings(false);
-            _grossSale.Value = _sale1.ProperDecimals();
+            _grossSale.Value = _sale2.ProperDecimals();
 
             SetEntryPanel(tobesold - sold == 0);
         }
@@ -1190,9 +1194,11 @@ namespace MandiPOS.GUI
         int voucherID = 0;
         private void objectToControls()
         {
+            lblTime.Text = "";
+            lblTime.Text = _sale.PrintTime?.ToString("HH:mm");
             _partyID.Text = _sale.PartyID.ToString();
             voucherID = _sale.VoucherID;
-            _grossSale.Value = _sale.SaleAmount1.ProperDecimals();
+            _grossSale.Value = _sale.SaleAmount2.ProperDecimals();
             _ArrivalQty.Text = _sale.TotalQty.ProperDecimals();
             txtTitle.Text = _sale.PartyTitle;
             _commission.Text = _sale.CommissionAmount.ProperDecimals();
@@ -1321,6 +1327,8 @@ namespace MandiPOS.GUI
             {
                 if (CurrentID != 0)
                 {
+                    SQL.MarkAsPrinted(new List<int>() { CurrentID });
+                    SearchRecords(false);
                     using (new waitForm())
                     {
                         XtraReport FinalReport = null;
@@ -1348,9 +1356,9 @@ namespace MandiPOS.GUI
             if (e.Control && e.KeyCode == Keys.G)
             {
                 ArrivalNo.Select();
-                ArrivalNo.SelectAll ();
+                ArrivalNo.SelectAll();
             }
-                if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1)
             {
                 if (SaveRecord(true))
                 {
@@ -1391,14 +1399,14 @@ namespace MandiPOS.GUI
             resizeTimer.Stop();
             if (!isLoading)
             {
-                SetDGVLocations(); 
+                SetDGVLocations();
             }
         }
 
         bool isLoading = true;
-        Point loc_dgvMarka ;
-        Point loc__partyHelper ;
-        Point loc__CustomerHelper ;
+        Point loc_dgvMarka;
+        Point loc__partyHelper;
+        Point loc__CustomerHelper;
         Point loc__partySearchHelper;
         private void FrmSaleNew_Load(object sender, System.EventArgs e)
         {
@@ -1406,7 +1414,7 @@ namespace MandiPOS.GUI
             obj._get_initial_size();
             this.WindowState = FormWindowState.Maximized;
             loc_dgvMarka = dgvMarka.Location;
-            loc__partyHelper= _partyHelper.Location;
+            loc__partyHelper = _partyHelper.Location;
             loc__CustomerHelper = _CustomerHelper.Location;
             loc__partySearchHelper = _partySearchHelper.Location;
             isLoading = false;
@@ -1435,17 +1443,33 @@ namespace MandiPOS.GUI
             SearchRecords();
         }
 
-        private void SearchRecords()
+        private void SearchRecords(bool refreshGrid = true)
         {
             if (dtp.Value.Date > dtp1.Value.Date)
             {
                 this.Error("تارخ درست نہیں۔");
                 return;
             }
-            vwSale1BindingSource.DataSource = SaleService.GetviewSale1(dtp.Value.Date, dtp1.Value.Date, partysearch.Text.Trim()).OrderByDescending(x => x.ArrivalNo).ToList();
+            List<vwSale1> ListBills = SaleService.GetviewSale1(dtp.Value.Date, dtp1.Value.Date, partysearch.Text.Trim()).OrderByDescending(x => x.ArrivalNo).ToList();
+            if (refreshGrid)
+            {
+                vwSale1BindingSource.DataSource = ListBills;
+            }
+            else
+            {
+                foreach (vwSale1 item in vwSale1BindingSource)
+                {
+                    var record = ListBills.FirstOrDefault(x => x.ID == item.ID);
+                    if (record != null)
+                    {
+                        item.Printed = record.Printed;
+                    }
+                }
+                vwSale1BindingSource.ResetBindings(false);
+            }
             GetStatus();
             ArrivalNo.Maximum = SaleService.GetMaxSaleNo();
-            dgv1.ColumnAutoSizeMode= ColumnAutoSizeMode.AllCellsAndHeader;
+            dgv1.ColumnAutoSizeMode = ColumnAutoSizeMode.AllCellsAndHeader;
             dgv1.AutoSizeColumns();
 
         }
@@ -1509,16 +1533,16 @@ namespace MandiPOS.GUI
                 return;
             }
 
-            
+
 
             {
                 Program.waitFormInstance = new waitForm();
                 XtraReport Finalreport = null;
+                List<int> saleIds = new List<int>();
                 if (rows.Length == 0 && CurrentID != 0)
                 {
-                    Finalreport = PrintReport(Finalreport, CurrentID, 0);
+                    saleIds.Add(CurrentID);
                 }
-                List<int> saleIds = new List<int>();
                 foreach (GridEXRow row in rows)
                 {
                     vwSale1 record = row.DataRow as vwSale1;
@@ -1526,6 +1550,8 @@ namespace MandiPOS.GUI
                 }
                 if (saleIds.Any())
                 {
+                    SQL.MarkAsPrinted(saleIds);
+                    SearchRecords(false);
                     saleIds.Sort();
                     foreach (int id in saleIds)
                     {
@@ -1534,7 +1560,17 @@ namespace MandiPOS.GUI
                 }
                 if (Finalreport != null)
                 {
-                    using (var frm = new XtraForm1(Finalreport))
+                    Finalreport.PrintingSystem.ContinuousPageNumbering = true;
+                    //Finalreport.CreateDocument();
+                    Finalreport.ShowPreview();
+                    if (Program.waitFormInstance != null)
+                    {
+                        Program.waitFormInstance.Dispose();
+                        Program.waitFormInstance = null;
+                    }
+                    return;
+                    //saleIds.Add(CurrentID);
+                    using (var frm = new XtraForm1(Finalreport, true))
                     {
                         frm.ShowDialog();
                     }
@@ -1592,6 +1628,11 @@ namespace MandiPOS.GUI
         private void _qty_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lblTime_TextChanged(object sender, EventArgs e)
+        {
+            lblTime.Visible = lblTime.Text.Length > 0;
         }
     }
 }

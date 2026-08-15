@@ -1,6 +1,10 @@
 ﻿using Dapper;
+
 using MandiPOS.CLasses;
+
 using System;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {

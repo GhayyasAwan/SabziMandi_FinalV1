@@ -190,7 +190,6 @@ namespace MandiPOS.GUI
         private void PopulateMasterAccounts()
         {
             var master = MasterAccountsService.GetMasterAccounts();
-            bool isFirst = true;
             foreach (var acc in master)
             {
                 SimpleButton btn = new SimpleButton()

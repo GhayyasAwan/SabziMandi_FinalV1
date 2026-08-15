@@ -1,12 +1,9 @@
 ﻿using Dapper;
 
-using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
 using MandiPOS.CLasses;
 using MandiPOS.GUI;
-using MandiPOS.Reports;
 
 using System;
 using System.ComponentModel;
@@ -14,9 +11,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS
 {
@@ -29,38 +27,57 @@ namespace MandiPOS
         public frmMain()
         {
             this.Opacity = 0;
-           
+
             InitializeComponent();
             IsLocked = General.CheckIsApplicationLocked();
-            
+
             this.FormClosing += FrmMain_FormClosing;
             this.Shown += FrmMain_Shown;
-           this.DoubleBuffered = true;
+            this.DoubleBuffered = true;
             General.MultanCityID = General.GetMultanCityID();
             using (var frm = new frmLogin())
-            { 
-                if(frm.ShowDialog() != DialogResult.OK)
+            {
+                if (frm.ShowDialog() != DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
             }
             menuStrip1.Visible = General.IsAdmin;
+            Timer tickerTimer = new Timer();
             var lbl = new Label()
             {
-                Height = 60, // Set your preferred height
+                Height = 80, // Set your preferred height
                 Font = new Font("jameel noori nastaleeq", 30, FontStyle.Bold), // Use Urdu font
                 ForeColor = Color.Black,
-                BackColor = Color.Transparent,
-                AutoSize = false,
-                Dock = DockStyle.Fill,
+                AutoSize = true,
+                Location = new Point(-500, 0),
+                UseCompatibleTextRendering = true,
                 Text = "ملک حاجی صدیق کرناول اینڈ برادرز",
                 TextAlign = ContentAlignment.MiddleCenter
             };
+            this.DoubleBuffered = true;
+
             panel2.Height = lbl.Height;
             panel2.Controls.Add(lbl);
             panel2.BackColor = Color.Transparent;
             lbl.BringToFront();
+            tickerTimer.Interval = 5; // Speed control karne ke liye (jitna kam, utna fast)
+            tickerTimer.Tick += (s, e) =>
+            {
+                lbl.BackColor = panel2.BackColor;
+                // Label ko right ki taraf move karein
+                lbl.Left += 2;
 
+                // Agar label panel ki right side se poora bahar nikal jaye
+                if (lbl.Left > panel2.Width)
+                {
+                    // To wapas left side par (panel se bahar) bhej dein
+                    lbl.Left = -lbl.Width;
+                }
+            };
+
+            // Animation shuru karein
+            tickerTimer.Start();
 
 
             timer = new Timer();
@@ -87,7 +104,7 @@ namespace MandiPOS
 
         private void CheckForSoftwareLocked()
         {
-            btnItem.Enabled=!IsLocked;
+            btnItem.Enabled = !IsLocked;
             btnCity.Enabled = !IsLocked;
             btnParty.Enabled = !IsLocked;
             btnBeejBardana.Enabled = !IsLocked;
@@ -102,13 +119,13 @@ namespace MandiPOS
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟","Confirm",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+            var result = MessageBox.Show("کیا آپ بیک اپ لینا چاہتے ہیں؟", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
-            if (result==DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
                 using (var db = new db())
                 {
@@ -119,7 +136,7 @@ namespace MandiPOS
 
         private void FrmMain_Shown1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void FrmMain_Shown(object sender, EventArgs e)
@@ -194,7 +211,7 @@ namespace MandiPOS
         {
             SQL.SetDefaultAccount();
             //SaleService.RepostSales();
-            
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -221,7 +238,7 @@ namespace MandiPOS
             //}
 
             wrkr.RunWorkerAsync();
-            
+
         }
 
         private void FrmMain_Activated(object sender, EventArgs e)
@@ -325,7 +342,8 @@ namespace MandiPOS
                     frmAccounts.BringToFront();
                 }
                 else
-                {   frmAccounts.WindowState = FormWindowState.Maximized;
+                {
+                    frmAccounts.WindowState = FormWindowState.Maximized;
                     frmAccounts.BringToFront();
                 }
             }
@@ -472,7 +490,8 @@ namespace MandiPOS
             if (f != null)
             {
                 f.WindowState = FormWindowState.Maximized;
-                f.BringToFront(); }
+                f.BringToFront();
+            }
             else
             {
                 frm.Icon = this.Icon;
@@ -566,7 +585,7 @@ namespace MandiPOS
             var f = Application.OpenForms[frm.Name];
             if (f != null)
             {
-                if(f.WindowState == FormWindowState.Minimized)
+                if (f.WindowState == FormWindowState.Minimized)
                     f.WindowState = FormWindowState.Maximized;
                 f.BringToFront();
             }
@@ -626,21 +645,21 @@ namespace MandiPOS
 
         private void changeWallpaperToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new frWPChanger() 
-            { 
-                ShowInTaskbar = false, 
-                ShowIcon = false, 
-                MinimizeBox = false, 
-                MaximizeBox = false, 
-                StartPosition = FormStartPosition.CenterScreen 
+            var frm = new frWPChanger()
+            {
+                ShowInTaskbar = false,
+                ShowIcon = false,
+                MinimizeBox = false,
+                MaximizeBox = false,
+                StartPosition = FormStartPosition.CenterScreen
             };
-                frm.Show();
+            frm.Show();
         }
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var frm = new frmUsers() { StartPosition = FormStartPosition.CenterScreen })
-            { 
+            {
                 frm.ShowDialog(this);
             }
         }
@@ -650,7 +669,7 @@ namespace MandiPOS
     string destinationPath,
     IProgress<int> progress)
         {
-            using (var client = new HttpClient()) 
+            using (var client = new HttpClient())
             {
                 using (var response = await client.GetAsync(
                     downloadUrl,
@@ -696,8 +715,8 @@ namespace MandiPOS
             }
             // GitHub requires a User-Agent for API calls; downloads are direct so not strictly needed here
 
-            
-            
+
+
         }
 
 

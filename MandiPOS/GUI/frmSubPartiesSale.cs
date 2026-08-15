@@ -12,6 +12,8 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.GUI
 {
     public partial class frmSubPartiesSale : Form

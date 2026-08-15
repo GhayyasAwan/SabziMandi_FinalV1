@@ -1,10 +1,13 @@
 ﻿using Dapper;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
+using static MandiPOS.SQL;
 namespace MandiPOS.GUI
 {
     public partial class frmChithaJaatReport : Form

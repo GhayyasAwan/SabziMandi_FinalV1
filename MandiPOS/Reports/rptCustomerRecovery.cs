@@ -1,8 +1,13 @@
 ﻿using Dapper;
+
 using DevExpress.XtraReports.UI;
+
 using MandiPOS.CLasses;
+
 using System;
 using System.Linq;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.Reports
 {
@@ -11,7 +16,7 @@ namespace MandiPOS.Reports
         public rptCustomerRecovery(DateTime date)
         {
             InitializeComponent();
-            
+
             this.HideWarnings();
             string sql = $@"DECLARE @SelectedDate DATE = '{date:yyyy-MM-dd}';
 
@@ -48,7 +53,7 @@ ORDER BY
             //System.Collections.Generic.List<AccountBalanceSummary> data2 = new System.Collections.Generic.List<AccountBalanceSummary>();
             //foreach (var item in data)
             //{ 
-                
+
             //}
             this.DataSource = accountBalanceList;
             this.lblDate.Text = $@"{date:dd-MMM-yyyy}";
@@ -108,6 +113,6 @@ ORDER BY
             SetValueFormat(sender);
         }
 
-        
+
     }
 }

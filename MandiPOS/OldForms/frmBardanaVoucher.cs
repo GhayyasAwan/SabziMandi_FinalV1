@@ -156,7 +156,6 @@ namespace MandiPOS.GUI
                 ID = 0,
                 VoucherID = main.VoucherID
             };
-            bool isChanged = false;
             bsCart.Add(c); isChanged = true;
             bsCart.ResetBindings(false);
             clearEntryPanel();

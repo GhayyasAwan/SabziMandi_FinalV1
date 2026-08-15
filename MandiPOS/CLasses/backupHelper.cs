@@ -1,9 +1,11 @@
 ﻿using Dapper;
-using MandiPOS;
+
 using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.IO.Compression;
+
+using static MandiPOS.SQL;
 
 public class SqlBackupHelper
 {

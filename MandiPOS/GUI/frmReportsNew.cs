@@ -9,12 +9,12 @@ using MandiPOS.Reports.ReportClasses;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
+
+using static MandiPOS.SQL;
 
 namespace MandiPOS.GUI
 {
@@ -325,6 +325,7 @@ namespace MandiPOS.GUI
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
+                
                 case "rb_Report08": //گاہک بکری
                     ReportID = 8;
                     bsParties.DataSource = null;
@@ -499,6 +500,26 @@ namespace MandiPOS.GUI
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
+                case "rb_Report23":
+                    ReportID = 23;
+                    bsParties.DataSource = null;
+                    dtSubParties = DetailAccountService.GetSubPartiesAccountList().ToDataTable();
+                    bsParties.DataSource = dtSubParties;
+                    dtp.Show();
+                    lblgroup.Hide();
+                    cmbGroups.Hide();
+                    cmbGroups.CheckedItems = null;
+                    cmbCity.Hide();
+                    lblCity.Hide();
+                    cmbCity.CheckedItems = null;
+                    dtp2.Hide();
+                    lblDate2.Hide();
+                    _pname.Show();
+                    lblParty.Show();
+                    txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
                 case "rb_Report17": //ادھار سیل
                     ReportID = 17;
                     bsParties.DataSource = null;
@@ -588,7 +609,25 @@ namespace MandiPOS.GUI
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
+                
+                case "rb_BaqayaSaleReport": //بقایا سیل رپورٹ
+                    ReportID = 22;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetRefferalsList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Hide(); lblParty.Hide();
+                    txtBillNo.Visible =
+                    lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    cmbBaqayaSaleReport.SelectedIndex = 0;
+                    break;
             }
+            cmbBaqayaSaleReport.Visible = ReportID == 22;
             cbIncludeZero.Visible = cbSummary.Visible = ReportID == 3;
             dtp.Value = dtp2.Value = DateTime.Now.Date;
         }
@@ -600,10 +639,20 @@ namespace MandiPOS.GUI
 
         private void uiButton1_Click(object sender, System.EventArgs e)
         {
+            if (ReportID == 23) //بل معرکہ وار
+            {
+                using (new waitForm())
+                {
+                    var report = new MarkaBill(_pid.Text.Trim(), dtp.Text.Trim());
+                    ShowReport(report);
+                }
+                return;
+            }
             if (ReportID == 1) //لین دین کھاتہ
             {
                 ShowLedger(0); return;
             }
+
             if (ReportID == 2) //کیش روکڑ
             {
                 using (new waitForm())
@@ -690,6 +739,27 @@ namespace MandiPOS.GUI
             {
                 ShowRefReport(); return;
             }
+            if (ReportID == 22) //بقایا سیل رپورٹ
+            {
+                ShowBaqayaReport(cmbBaqayaSaleReport.SelectedIndex); return;
+            }
+        }
+
+        private void ShowBaqayaReport(int selectedIndex)
+        {
+            if (selectedIndex == -1)
+            {
+                this.Error("رپورٹ کی قسم منتخب کریں۔");
+                return;
+            }
+            List<BaqayaReportModel> records = new BaqayaReportModel().GetRecords(selectedIndex + 1, dtp.Value.Date, dtp2.Value.Date);
+            if (records == null || records.Count == 0)
+            {
+                this.Info("کوئی ریکارڈ موجود نہیں ہے۔");
+                return;
+            }
+            var frm = new frmBaqayaSale(records, selectedIndex + 1);
+            frm.Show();
         }
 
         private void ShowRefReport()
@@ -843,6 +913,7 @@ Order By mas.id";
             }
             using (new waitForm())
             {
+                SQL.MarkAsPrinted(new List<int> { txtBillNo.Text.Trim().toInt() });
                 var report = new saleBill(txtBillNo.Text.Trim(), 1);
                 if (report != null)
                     ShowReport(report);
@@ -874,8 +945,6 @@ Order By mas.id";
             using (new waitForm())
             {
                 var rpt = new rptCustomerRecovery(dtp.Value.Date);
-
-                rpt.CreateDocument();
                 var frm = new XtraForm1(rpt);
                 frm.StartPosition = FormStartPosition.CenterScreen;
                 frm.Show();

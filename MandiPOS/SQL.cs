@@ -47,16 +47,17 @@ namespace MandiPOS
                 return true;
             }
         }
-        public static bool IsLocked 
-        {   get
-            { 
-                var result =new db().ExecuteScalar<string>("SELECT ISNULL([Value],0) From Settings Where SettingKey like 'IsLocked'");
-                if(result == "1"||result.ToLower()=="true")
+        public static bool IsLocked
+        {
+            get
+            {
+                var result = new db().ExecuteScalar<string>("SELECT ISNULL([Value],0) From Settings Where SettingKey like 'IsLocked'");
+                if (result == "1" || result.ToLower() == "true")
                 {
                     return true;
                 }
                 return false;
-            } 
+            }
         }
 
         internal static void GetStats(DateTime date, ref decimal banam, ref decimal jama, ref decimal income)
@@ -311,50 +312,64 @@ namespace MandiPOS
 
         internal static void PrintBillByNo(string billNo)
         {
-            throw new NotImplementedException();
-        }
-    }
 
-
-
-    public class db : IDbConnection
-    {
-        private readonly SqlConnection _connection;
-        public db()
-        {
-            _connection = new SqlConnection(Program.MainConnectionstring);
-            _connection.Open();
         }
 
-        public string ConnectionString
+        internal static void MarkAsPrinted(List<int> saleIds)
         {
-            get => _connection.ConnectionString;
-            set => _connection.ConnectionString = value;
-        }
-
-        public int ConnectionTimeout => _connection.ConnectionTimeout;
-        public string Database => _connection.Database;
-        public ConnectionState State => _connection.State;
-
-        public IDbTransaction BeginTransaction() => _connection.BeginTransaction();
-        public IDbTransaction BeginTransaction(IsolationLevel il) => _connection.BeginTransaction(il);
-        public void ChangeDatabase(string databaseName) => _connection.ChangeDatabase(databaseName);
-        public void Close() => _connection.Close();
-        public IDbCommand CreateCommand() => _connection.CreateCommand();
-        public void Open()
-        {
-            if (_connection.State != ConnectionState.Open)
+            string sql = @"UPDATE tblSale 
+               SET PrintTime = GETDATE() 
+               WHERE ID = @Id AND PrintTime IS NULL";
+            using (var db = new db())
             {
-                _connection.Open();
+                db.Execute(sql, saleIds.Select(id => new { Id = id }).ToList());
             }
         }
-        public void Dispose() => _connection.Dispose();
-
-        internal long GetNextAccountCode()
+        public static IDbConnection GetConnection()
         {
-            throw new NotImplementedException();
+            return new db();
         }
+
+
+        public class db : IDbConnection
+        {
+            private readonly SqlConnection _connection;
+            public db()
+            {
+                _connection = new SqlConnection(Program.MainConnectionstring);
+                _connection.Open();
+            }
+
+            public string ConnectionString
+            {
+                get => _connection.ConnectionString;
+                set => _connection.ConnectionString = value;
+            }
+
+            public int ConnectionTimeout => _connection.ConnectionTimeout;
+            public string Database => _connection.Database;
+            public ConnectionState State => _connection.State;
+
+            public IDbTransaction BeginTransaction() => _connection.BeginTransaction();
+            public IDbTransaction BeginTransaction(IsolationLevel il) => _connection.BeginTransaction(il);
+            public void ChangeDatabase(string databaseName) => _connection.ChangeDatabase(databaseName);
+            public void Close() => _connection.Close();
+            public IDbCommand CreateCommand() => _connection.CreateCommand();
+            public void Open()
+            {
+                if (_connection.State != ConnectionState.Open)
+                {
+                    _connection.Open();
+                }
+            }
+            public void Dispose() => _connection.Dispose();
+
+            internal long GetNextAccountCode()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
     }
-
-
 }

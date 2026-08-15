@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.Reports
 {
     public partial class rptMonthlyIncome : DevExpress.XtraReports.UI.XtraReport

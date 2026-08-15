@@ -29,16 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem1 = new Janus.Windows.EditControls.UIComboBoxItem();
+            Janus.Windows.EditControls.UIComboBoxItem uiComboBoxItem2 = new Janus.Windows.EditControls.UIComboBoxItem();
             Janus.Windows.GridEX.GridEXLayout cmbCity_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportsNew));
             Janus.Windows.GridEX.GridEXLayout cmbGroups_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             Janus.Windows.GridEX.GridEXLayout dgvHelp_DesignTimeLayout = new Janus.Windows.GridEX.GridEXLayout();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.uiGroupBox1 = new Janus.Windows.EditControls.UIGroupBox();
+            this.rb_Report23 = new System.Windows.Forms.RadioButton();
             this.rbRefReport = new System.Windows.Forms.RadioButton();
             this.rb_Report19 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rb_BaqayaSaleReport = new System.Windows.Forms.RadioButton();
             this.rb_Report20 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.rb_Report17 = new System.Windows.Forms.RadioButton();
@@ -64,30 +67,31 @@
             this.dtp2 = new Janus.Windows.CalendarCombo.CalendarCombo();
             this.lblDate2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnViewReport = new Janus.Windows.EditControls.UIButton();
+            this.cmbBaqayaSaleReport = new Janus.Windows.EditControls.UIComboBox();
+            this.cbSummary = new Janus.Windows.EditControls.UICheckBox();
+            this.cbIncludeZero = new Janus.Windows.EditControls.UICheckBox();
             this.lblBill = new System.Windows.Forms.Label();
             this.txtBillNo = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.cmbCity = new Janus.Windows.GridEX.EditControls.CheckedComboBox();
             this.lblgroup = new System.Windows.Forms.Label();
             this.cmbGroups = new Janus.Windows.GridEX.EditControls.CheckedComboBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.dgvHelp = new Janus.Windows.GridEX.GridEX();
+            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
             this._pname = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblParty = new System.Windows.Forms.Label();
             this._pid = new Janus.Windows.GridEX.EditControls.EditBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.cbIncludeZero = new Janus.Windows.EditControls.UICheckBox();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
-            this.bsParties = new System.Windows.Forms.BindingSource(this.components);
+            this.btnViewReport = new Janus.Windows.EditControls.UIButton();
             this.chartDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bsSubParties = new System.Windows.Forms.BindingSource(this.components);
-            this.cbSummary = new Janus.Windows.EditControls.UICheckBox();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiGroupBox1)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSubParties)).BeginInit();
@@ -111,10 +115,11 @@
             this.uiGroupBox1.AutoScroll = true;
             this.uiGroupBox1.BackColor = System.Drawing.Color.PeachPuff;
             this.uiGroupBox1.BorderColor = System.Drawing.Color.PeachPuff;
+            this.uiGroupBox1.Controls.Add(this.rb_Report23);
             this.uiGroupBox1.Controls.Add(this.rbRefReport);
             this.uiGroupBox1.Controls.Add(this.rb_Report19);
             this.uiGroupBox1.Controls.Add(this.radioButton3);
-            this.uiGroupBox1.Controls.Add(this.radioButton2);
+            this.uiGroupBox1.Controls.Add(this.rb_BaqayaSaleReport);
             this.uiGroupBox1.Controls.Add(this.rb_Report20);
             this.uiGroupBox1.Controls.Add(this.label3);
             this.uiGroupBox1.Controls.Add(this.rb_Report17);
@@ -141,6 +146,27 @@
             this.uiGroupBox1.Size = new System.Drawing.Size(750, 684);
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.VisualStyle = Janus.Windows.UI.Dock.PanelVisualStyle.Office2003;
+            // 
+            // rb_Report23
+            // 
+            this.rb_Report23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rb_Report23.AutoSize = true;
+            this.rb_Report23.BackColor = System.Drawing.Color.Transparent;
+            this.rb_Report23.Enabled = false;
+            this.rb_Report23.FlatAppearance.BorderSize = 0;
+            this.rb_Report23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rb_Report23.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.rb_Report23.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb_Report23.Location = new System.Drawing.Point(441, 409);
+            this.rb_Report23.Margin = new System.Windows.Forms.Padding(2);
+            this.rb_Report23.Name = "rb_Report23";
+            this.rb_Report23.Size = new System.Drawing.Size(121, 46);
+            this.rb_Report23.TabIndex = 24;
+            this.rb_Report23.Text = "بل معرکہ وار";
+            this.rb_Report23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rb_Report23.UseCompatibleTextRendering = true;
+            this.rb_Report23.UseVisualStyleBackColor = true;
+            this.rb_Report23.CheckedChanged += new System.EventHandler(this.SetReport);
             // 
             // rbRefReport
             // 
@@ -193,7 +219,7 @@
             this.radioButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.radioButton3.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.Location = new System.Drawing.Point(589, 394);
+            this.radioButton3.Location = new System.Drawing.Point(589, 409);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(153, 46);
@@ -203,25 +229,26 @@
             this.radioButton3.UseCompatibleTextRendering = true;
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rb_BaqayaSaleReport
             // 
-            this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Enabled = false;
-            this.radioButton2.FlatAppearance.BorderSize = 0;
-            this.radioButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButton2.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(603, 90);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(140, 46);
-            this.radioButton2.TabIndex = 20;
-            this.radioButton2.Text = "بقایا سیل رپورٹ";
-            this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton2.UseCompatibleTextRendering = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rb_BaqayaSaleReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rb_BaqayaSaleReport.AutoSize = true;
+            this.rb_BaqayaSaleReport.BackColor = System.Drawing.Color.Transparent;
+            this.rb_BaqayaSaleReport.Enabled = false;
+            this.rb_BaqayaSaleReport.FlatAppearance.BorderSize = 0;
+            this.rb_BaqayaSaleReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rb_BaqayaSaleReport.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.rb_BaqayaSaleReport.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rb_BaqayaSaleReport.Location = new System.Drawing.Point(603, 90);
+            this.rb_BaqayaSaleReport.Margin = new System.Windows.Forms.Padding(2);
+            this.rb_BaqayaSaleReport.Name = "rb_BaqayaSaleReport";
+            this.rb_BaqayaSaleReport.Size = new System.Drawing.Size(140, 46);
+            this.rb_BaqayaSaleReport.TabIndex = 20;
+            this.rb_BaqayaSaleReport.Text = "بقایا سیل رپورٹ";
+            this.rb_BaqayaSaleReport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_BaqayaSaleReport.UseCompatibleTextRendering = true;
+            this.rb_BaqayaSaleReport.UseVisualStyleBackColor = true;
+            this.rb_BaqayaSaleReport.CheckedChanged += new System.EventHandler(this.SetReport);
             // 
             // rb_Report20
             // 
@@ -250,7 +277,7 @@
             this.label3.BackColor = System.Drawing.Color.DodgerBlue;
             this.label3.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(-5, 306);
+            this.label3.Location = new System.Drawing.Point(-5, 321);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(760, 38);
@@ -267,7 +294,7 @@
             this.rb_Report17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report17.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report17.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report17.Location = new System.Drawing.Point(444, 202);
+            this.rb_Report17.Location = new System.Drawing.Point(444, 217);
             this.rb_Report17.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report17.Name = "rb_Report17";
             this.rb_Report17.Size = new System.Drawing.Size(118, 46);
@@ -287,7 +314,7 @@
             this.rb_Report18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report18.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report18.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report18.Location = new System.Drawing.Point(626, 202);
+            this.rb_Report18.Location = new System.Drawing.Point(626, 217);
             this.rb_Report18.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report18.Name = "rb_Report18";
             this.rb_Report18.Size = new System.Drawing.Size(117, 46);
@@ -305,7 +332,7 @@
             this.label2.BackColor = System.Drawing.Color.DodgerBlue;
             this.label2.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(0, 146);
+            this.label2.Location = new System.Drawing.Point(0, 161);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(762, 38);
@@ -322,7 +349,7 @@
             this.rb_Report13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report13.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report13.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report13.Location = new System.Drawing.Point(255, 255);
+            this.rb_Report13.Location = new System.Drawing.Point(255, 270);
             this.rb_Report13.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report13.Name = "rb_Report13";
             this.rb_Report13.Size = new System.Drawing.Size(123, 46);
@@ -342,7 +369,7 @@
             this.rb_Report07.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report07.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report07.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report07.Location = new System.Drawing.Point(406, 346);
+            this.rb_Report07.Location = new System.Drawing.Point(406, 361);
             this.rb_Report07.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report07.Name = "rb_Report07";
             this.rb_Report07.Size = new System.Drawing.Size(156, 46);
@@ -397,7 +424,7 @@
             this.rb_Report06.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report06.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report06.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report06.Location = new System.Drawing.Point(647, 255);
+            this.rb_Report06.Location = new System.Drawing.Point(647, 270);
             this.rb_Report06.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report06.Name = "rb_Report06";
             this.rb_Report06.Size = new System.Drawing.Size(95, 46);
@@ -417,7 +444,7 @@
             this.rb_Report08.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report08.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report08.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report08.Location = new System.Drawing.Point(433, 255);
+            this.rb_Report08.Location = new System.Drawing.Point(433, 270);
             this.rb_Report08.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report08.Name = "rb_Report08";
             this.rb_Report08.Size = new System.Drawing.Size(129, 46);
@@ -446,7 +473,7 @@
             this.rb_Report02.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rb_Report02.UseCompatibleTextRendering = true;
             this.rb_Report02.UseVisualStyleBackColor = true;
-            this.rb_Report02.Click += new System.EventHandler(this.SetReport);
+            this.rb_Report02.CheckedChanged += new System.EventHandler(this.SetReport);
             // 
             // rb_Report03
             // 
@@ -497,7 +524,7 @@
             this.rb_Report14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report14.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report14.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report14.Location = new System.Drawing.Point(567, 346);
+            this.rb_Report14.Location = new System.Drawing.Point(567, 361);
             this.rb_Report14.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report14.Name = "rb_Report14";
             this.rb_Report14.Size = new System.Drawing.Size(176, 46);
@@ -517,7 +544,7 @@
             this.rb_Report15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report15.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report15.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report15.Location = new System.Drawing.Point(307, 346);
+            this.rb_Report15.Location = new System.Drawing.Point(307, 361);
             this.rb_Report15.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report15.Name = "rb_Report15";
             this.rb_Report15.Size = new System.Drawing.Size(72, 46);
@@ -537,7 +564,7 @@
             this.rb_Report09.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report09.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report09.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report09.Location = new System.Drawing.Point(70, 202);
+            this.rb_Report09.Location = new System.Drawing.Point(70, 217);
             this.rb_Report09.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report09.Name = "rb_Report09";
             this.rb_Report09.Size = new System.Drawing.Size(108, 46);
@@ -557,7 +584,7 @@
             this.rb_Report10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.rb_Report10.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.rb_Report10.Font = new System.Drawing.Font("Jameel Noori Nastaleeq", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rb_Report10.Location = new System.Drawing.Point(242, 202);
+            this.rb_Report10.Location = new System.Drawing.Point(242, 217);
             this.rb_Report10.Margin = new System.Windows.Forms.Padding(2);
             this.rb_Report10.Name = "rb_Report10";
             this.rb_Report10.Size = new System.Drawing.Size(137, 46);
@@ -658,6 +685,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel1.Controls.Add(this.cmbBaqayaSaleReport);
             this.panel1.Controls.Add(this.cbSummary);
             this.panel1.Controls.Add(this.cbIncludeZero);
             this.panel1.Controls.Add(this.lblBill);
@@ -683,20 +711,46 @@
             this.panel1.Size = new System.Drawing.Size(810, 684);
             this.panel1.TabIndex = 5;
             // 
-            // btnViewReport
+            // cmbBaqayaSaleReport
             // 
-            this.btnViewReport.AutoSize = true;
-            this.btnViewReport.Image = global::MandiPOS.Properties.Resources.printernew;
-            this.btnViewReport.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.Center;
-            this.btnViewReport.ImageSize = new System.Drawing.Size(48, 48);
-            this.btnViewReport.ImageVerticalAlignment = Janus.Windows.EditControls.ImageVerticalAlignment.BottomOfText;
-            this.btnViewReport.Location = new System.Drawing.Point(11, 134);
-            this.btnViewReport.Margin = new System.Windows.Forms.Padding(2);
-            this.btnViewReport.Name = "btnViewReport";
-            this.btnViewReport.Size = new System.Drawing.Size(89, 110);
-            this.btnViewReport.TabIndex = 11;
-            this.btnViewReport.Text = "رپورٹ دیکھیں";
-            this.btnViewReport.Click += new System.EventHandler(this.uiButton1_Click);
+            this.cmbBaqayaSaleReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            uiComboBoxItem1.FormatStyle.Alpha = 0;
+            uiComboBoxItem1.IsSeparator = false;
+            uiComboBoxItem1.Text = "بیوپاری";
+            uiComboBoxItem1.Value = 1;
+            uiComboBoxItem2.FormatStyle.Alpha = 0;
+            uiComboBoxItem2.IsSeparator = false;
+            uiComboBoxItem2.Text = "گاہک";
+            uiComboBoxItem2.Value = 2;
+            this.cmbBaqayaSaleReport.Items.AddRange(new Janus.Windows.EditControls.UIComboBoxItem[] {
+            uiComboBoxItem1,
+            uiComboBoxItem2});
+            this.cmbBaqayaSaleReport.Location = new System.Drawing.Point(642, 150);
+            this.cmbBaqayaSaleReport.Name = "cmbBaqayaSaleReport";
+            this.cmbBaqayaSaleReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cmbBaqayaSaleReport.Size = new System.Drawing.Size(159, 39);
+            this.cmbBaqayaSaleReport.TabIndex = 26;
+            this.cmbBaqayaSaleReport.VisualStyle = Janus.Windows.UI.VisualStyle.Office2003;
+            // 
+            // cbSummary
+            // 
+            this.cbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSummary.Location = new System.Drawing.Point(225, 125);
+            this.cbSummary.Name = "cbSummary";
+            this.cbSummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbSummary.Size = new System.Drawing.Size(104, 41);
+            this.cbSummary.TabIndex = 25;
+            this.cbSummary.Text = "مختصر";
+            // 
+            // cbIncludeZero
+            // 
+            this.cbIncludeZero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIncludeZero.Location = new System.Drawing.Point(298, 125);
+            this.cbIncludeZero.Name = "cbIncludeZero";
+            this.cbIncludeZero.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbIncludeZero.Size = new System.Drawing.Size(104, 41);
+            this.cbIncludeZero.TabIndex = 24;
+            this.cbIncludeZero.Text = "بشمول زیرو";
             // 
             // lblBill
             // 
@@ -776,6 +830,10 @@
             this.cmbGroups.TabIndex = 6;
             this.cmbGroups.ValuesDataMember = null;
             // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(MandiPOS.CLasses.MasterAccounts);
+            // 
             // dgvHelp
             // 
             this.dgvHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -792,6 +850,10 @@
             this.dgvHelp.TabIndex = 12;
             this.dgvHelp.Visible = false;
             this.dgvHelp.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2003;
+            // 
+            // bsParties
+            // 
+            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
             // 
             // _pname
             // 
@@ -843,23 +905,20 @@
             this.lblTitle.Text = "label3";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // cbIncludeZero
+            // btnViewReport
             // 
-            this.cbIncludeZero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbIncludeZero.Location = new System.Drawing.Point(298, 125);
-            this.cbIncludeZero.Name = "cbIncludeZero";
-            this.cbIncludeZero.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbIncludeZero.Size = new System.Drawing.Size(104, 41);
-            this.cbIncludeZero.TabIndex = 24;
-            this.cbIncludeZero.Text = "بشمول زیرو";
-            // 
-            // bs
-            // 
-            this.bs.DataSource = typeof(MandiPOS.CLasses.MasterAccounts);
-            // 
-            // bsParties
-            // 
-            this.bsParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
+            this.btnViewReport.AutoSize = true;
+            this.btnViewReport.Image = global::MandiPOS.Properties.Resources.printernew;
+            this.btnViewReport.ImageHorizontalAlignment = Janus.Windows.EditControls.ImageHorizontalAlignment.Center;
+            this.btnViewReport.ImageSize = new System.Drawing.Size(48, 48);
+            this.btnViewReport.ImageVerticalAlignment = Janus.Windows.EditControls.ImageVerticalAlignment.BottomOfText;
+            this.btnViewReport.Location = new System.Drawing.Point(11, 134);
+            this.btnViewReport.Margin = new System.Windows.Forms.Padding(2);
+            this.btnViewReport.Name = "btnViewReport";
+            this.btnViewReport.Size = new System.Drawing.Size(89, 110);
+            this.btnViewReport.TabIndex = 11;
+            this.btnViewReport.Text = "رپورٹ دیکھیں";
+            this.btnViewReport.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // chartDataBindingSource
             // 
@@ -868,16 +927,6 @@
             // bsSubParties
             // 
             this.bsSubParties.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
-            // 
-            // cbSummary
-            // 
-            this.cbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSummary.Location = new System.Drawing.Point(225, 125);
-            this.cbSummary.Name = "cbSummary";
-            this.cbSummary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbSummary.Size = new System.Drawing.Size(104, 41);
-            this.cbSummary.TabIndex = 25;
-            this.cbSummary.Text = "مختصر";
             // 
             // frmReportsNew
             // 
@@ -897,8 +946,8 @@
             this.uiGroupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartDataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSubParties)).EndInit();
@@ -950,12 +999,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rb_BaqayaSaleReport;
         private System.Windows.Forms.RadioButton rb_Report20;
         private System.Windows.Forms.RadioButton rbRefReport;
         private System.Windows.Forms.RadioButton rb_Report19;
         private System.Windows.Forms.RadioButton radioButton3;
         private Janus.Windows.EditControls.UICheckBox cbIncludeZero;
         private Janus.Windows.EditControls.UICheckBox cbSummary;
+        private Janus.Windows.EditControls.UIComboBox cmbBaqayaSaleReport;
+        private System.Windows.Forms.RadioButton rb_Report23;
     }
 }

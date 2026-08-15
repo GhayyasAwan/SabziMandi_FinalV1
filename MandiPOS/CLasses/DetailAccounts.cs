@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 
+using static MandiPOS.SQL;
+
 namespace MandiPOS.CLasses
 {
     public class DetailAccounts
@@ -36,6 +38,7 @@ namespace MandiPOS.CLasses
         public decimal Commission { get; set; }
 
         public int? RefrenceType { get; set; }
+        public byte[] CustomLabel { get; set; }
 
         public int? RefrenceID { get; set; }
         [DisplayName("معرفت")]
@@ -275,6 +278,22 @@ Where acc.MasterID =7";
         internal static object GetAllPartyNames()
         {
             throw new NotImplementedException();
+        }
+
+        internal static void SaveCustomLabel(int iD, byte[] bmpArray)
+        {
+            try
+            {
+                using (var db = new db())
+                {
+                    string sql = "Update DetailAccounts Set CustomLabel=@CustomLabel Where ID=@id";
+                    db.Execute(sql, new { id = iD, CustomLabel = bmpArray });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

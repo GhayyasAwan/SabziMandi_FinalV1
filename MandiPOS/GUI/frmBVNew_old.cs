@@ -1,7 +1,5 @@
 ﻿using Dapper;
 
-using DevExpress.XtraEditors.Repository;
-
 using Janus.Windows.GridEX;
 
 using MandiPOS.CLasses;
@@ -11,8 +9,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
+using static MandiPOS.SQL;
 namespace MandiPOS.GUI
 {
     public partial class frmBVNew_old : Form
@@ -171,12 +169,12 @@ namespace MandiPOS.GUI
                             {
                                 db.Delete<VoucherBardanaDetails>(data.ID, transaction: trx);
                                 trx.Commit();
-                                
+
                             }
                             catch (Exception ex)
                             {
                                 trx.Rollback();
-                                ex.ExcError(null);return;
+                                ex.ExcError(null); return;
                             }
                         }
                     }
@@ -226,7 +224,7 @@ namespace MandiPOS.GUI
             {
                 dgvHelp.Select();
             }
-            if(e.EscapeKey())
+            if (e.EscapeKey())
             {
                 dgvHelp.Hide();
             }
@@ -372,7 +370,8 @@ namespace MandiPOS.GUI
                             ItemDescription = c.ItemDescription,
                             ItemID = c.ItemID,
                             ItemQty = c.ItemQty,
-                            VoucherID = vmain.VoucherID, EnteredBy=General.CurrentUserID
+                            VoucherID = vmain.VoucherID,
+                            EnteredBy = General.CurrentUserID
                         };
                         db.Insert<VoucherBardanaDetails>(d, transaction: trx);
                         trx.Commit();
@@ -383,11 +382,11 @@ namespace MandiPOS.GUI
                         ex.ExcError(null);
                         return;
                     }
-                    
+
                 }
             }
             Refresh();
-            clearEntryPanel();_name.Select();
+            clearEntryPanel(); _name.Select();
         }
         private void CalculateAmount(object sender, EventArgs e)
         {
@@ -429,15 +428,15 @@ namespace MandiPOS.GUI
         int current = 0;
         private void clearEntryPanel()
         {
-            
-           // _code.Clear();
-           // _name.Clear();
-           //current = 0;
-           // SetPartybalance();
-           // _cr.Clear();
-           // _dr.Clear();
-           // _narration.Clear();
-           // _items.SelectedIndex = -1;
+
+            // _code.Clear();
+            // _name.Clear();
+            //current = 0;
+            // SetPartybalance();
+            // _cr.Clear();
+            // _dr.Clear();
+            // _narration.Clear();
+            // _items.SelectedIndex = -1;
             //_qty.Clear();
             //_rate.Clear();
             RefreshItems();
@@ -480,7 +479,7 @@ namespace MandiPOS.GUI
             if (dtp.Value.Date < DateTime.Now.Date && !General.IsAdmin)
             {
                 this.Info("آپکو پرانا ووچر دیکھنے کی اجازت نہیں ہے۔");
-                dtp.Value=DateTime.Now.Date;
+                dtp.Value = DateTime.Now.Date;
                 return;
             }
             if (dtp.Value.Date < DateTime.Today.Date && !this.Ask("کیا آپ پُرانا ووچر کھولنا چاہتے ہیں؟"))
