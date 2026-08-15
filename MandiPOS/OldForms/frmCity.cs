@@ -87,7 +87,7 @@ namespace MandiPOS.GUI
             var row = gridView1.FocusedRowHandle;
             if (row != -1)
             {
-                city = tblCityBindingSource.Current as tblCity;
+                city = bs.Current as tblCity;
                 if (city != null)
                 {
                     try
@@ -123,7 +123,7 @@ namespace MandiPOS.GUI
             var row = gridView1.FocusedRowHandle;
             if (row != -1)
             {
-                city = tblCityBindingSource.Current as tblCity;
+                city = bs.Current as tblCity;
                 if (city != null && this.Delete("شہر"))
                 {
                     try
@@ -144,7 +144,7 @@ namespace MandiPOS.GUI
         {
             city = new tblCity();
             txtTitle.Clear();
-            tblCityBindingSource.DataSource = SQL.GetCities();
+            bs.DataSource = SQL.GetCities();
         }
         private void FrmCity_Load(object sender, EventArgs e)
         {
@@ -171,6 +171,22 @@ namespace MandiPOS.GUI
                 }
             }
 
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTitle.Focused)
+            {
+                if (txtTitle.Text.Trim().Length > 0)
+                {
+                    bs.RemoveFilter();
+                }
+                else
+                {
+                    bs.Filter = $"CityName like '%{txtTitle.Text}%'";
+                    bs.ResetBindings(false);
+                }
+            }
         }
     }
 }

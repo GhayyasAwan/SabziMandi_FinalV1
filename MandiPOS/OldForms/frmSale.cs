@@ -240,7 +240,6 @@ namespace MandiPOS.GUI
         {
             vwSale3 c = new vwSale3()
             {
-                CustomerAmount = txtAmount1.Text.toDecimal(),
                 CustomerRate = txtRate1.Text.toDecimal(),
                 ItemID = cmbItems.EditValue.toInt(),
                 ItemQty = txtItemQty.Text.toDecimal(),
@@ -252,10 +251,10 @@ namespace MandiPOS.GUI
                 SaleID = CurrentID,
                 ItemWeight = txtWt.Text.toDecimal(),
                 ParyRate = txtRate2.Text.toDecimal(),
-                PartyAmount = txtAmount2.Text.toDecimal(),
                 Marka = txtmarka.Text
             };
             bsCart.Add(c);
+            bsCart.Sort = "RowIndex Desc";
             bsCart.ResetBindings(false);
             ClearEntryPanel();
             GetTotals();

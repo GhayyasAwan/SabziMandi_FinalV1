@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 
 using System;
@@ -18,17 +19,60 @@ namespace MandiPOS.GUI
     public partial class XtraForm1 : DevExpress.XtraEditors.XtraForm
     {
         XtraReport Report { get; set; }
-        public XtraForm1(XtraReport rpt)
+        float _zoom = 1.5f;
+        public XtraForm1(XtraReport rpt, float zoom=1.5f)
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.KeyDown += XtraForm1_KeyDown1;
             this.WindowState = FormWindowState.Maximized;
+            
             Report = rpt;
+            _zoom = zoom;
             this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.KeyDown += XtraForm1_KeyDown;
+            
             this.documentViewer1.DocumentSource = Report;
+
+            this.Activated += XtraForm1_Activated;
             this.Load += XtraForm1_Load;
-            this.documentViewer1.DocumentChanged += DocumentViewer1_DocumentChanged;
+            
+            
+        }
+
+        private void XtraForm1_KeyDown1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                documentViewer1.PrintingSystem.ExecCommand(PrintingSystemCommand.ZoomToPageWidth);
+            }
+            if (e.KeyCode == Keys.F1)
+            {
+                _zoom = 1f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                _zoom = 1.4f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                _zoom = 1.5f;
+                documentViewer1.Zoom = _zoom;
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                _zoom = 2f;
+                documentViewer1.Zoom = _zoom;
+            }
+
+        }
+
+        private void XtraForm1_Activated(object sender, EventArgs e)
+        {
+            SetZoom();
         }
 
         private void XtraForm1_KeyDown(object sender, KeyEventArgs e)
@@ -41,18 +85,33 @@ namespace MandiPOS.GUI
 
         private void XtraForm1_Load(object sender, EventArgs e)
         {
-            // Force report creation complete before scrolling
-           // this.documentViewer1.Zoom = 100; // optional: ensure zoom applied
+            // // Force report creation complete before scrolling
+            //// this.documentViewer1.Zoom = 100; // optional: ensure zoom applied
 
-            // Delay scrolling until report is fully rendered
-            this.BeginInvoke(new Action(() =>
+            // // Delay scrolling until report is fully rendered
+            // this.BeginInvoke(new Action(() =>
+            // {
+            //     var verticalScroll = documentViewer1.VerticalScroll;
+            //     if (verticalScroll != null)
+            //     {
+            //         verticalScroll.Value = Math.Min(verticalScroll.Maximum, 100); // scroll 100px down
+            //     }
+            // }));
+            this.documentViewer1.DocumentChanged += DocumentViewer1_DocumentChanged;
+            SetZoom();
+        }
+
+        private void SetZoom()
+        {
+            if (_zoom != 1.5f)
             {
-                var verticalScroll = documentViewer1.VerticalScroll;
-                if (verticalScroll != null)
-                {
-                    verticalScroll.Value = Math.Min(verticalScroll.Maximum, 100); // scroll 100px down
-                }
-            }));
+                documentViewer1.PrintingSystem.ExecCommand(PrintingSystemCommand.ZoomToPageWidth);
+            }
+            else
+            {
+                documentViewer1.Zoom = _zoom;
+               // documentViewer1.PrintingSystem.ExecCommand(PrintingSystemCommand.Zoom);
+            }
         }
 
         private void DocumentViewer1_DocumentChanged(object sender, EventArgs e)

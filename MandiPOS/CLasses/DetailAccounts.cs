@@ -1,5 +1,6 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,10 +37,12 @@ namespace MandiPOS.CLasses
         public decimal Commission { get; set; }
 
         public int? RefrenceType { get; set; }
+        public int OldAccountCode { get; set; } = 0;
 
         public int? RefrenceID { get; set; }
         [DisplayName("معرفت")]
         public string RefName { get; set; }
+        public bool IsActive { get; set; } = true;
 
         internal static DetailAccounts GetAccountByID(int accountID)
         {
@@ -65,17 +68,25 @@ namespace MandiPOS.CLasses
         public decimal OpDebit { get; set; }
         [DisplayName("تفصیل")]
         public string Remarks { get; set; }
-        [DisplayName("بیلنش حد")]
+        [DisplayName("پرانا کھاتہ نمبر")]
+        public string OldAccountCode { get; set; }
+        [DisplayName("بیلنس حد")]
         public decimal CreditLimit { get; set; }
         [DisplayName("کمیشن")]
         public decimal Commission { get; set; }
         [DisplayName("معرفت")]
         public string RefName { get; set; }
+        [DisplayName("قسم کھاتہ")]
+        public string MasterAccount { get; set; }
+        public bool IsActive { get; set; }
 
     }
     public static class DetailAccountService
     {
-
+        public static IEnumerable<DetailAccountView> GetRefferalsList()
+        {
+            return new db().Query<DetailAccountView>($"Exec GetReferral").ToList();
+        }
         public static List<DetailAccountView> BankCashAccounts()
         {
             string sql = $@"Select acc.ID,
@@ -85,77 +96,90 @@ acc.Contact,
 c.CityName as 'City',
 acc.OpCredit,
 acc.OpDebit,
-acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
+acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName, mas.AccountTitle as MasterAccount
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
+left join MasterAccounts mas on acc.MasterID=mas.ID
 Where acc.MasterID in (Select AccountID From BankCashAccounts) ORDER BY 
   CASE 
-    WHEN AccountTitle LIKE N'‎کیش روکڑ' THEN 0 
+    WHEN acc.AccountTitle LIKE N'‎کیش روکڑ' THEN 0 
     ELSE 1 
   END,
   ID";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static IEnumerable<DetailAccountView> PartyAccounts()
+        public static IEnumerable<DetailAccountView> PartyAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
 c.CityName as 'City',
-acc.OpCredit,
+acc.OpCredit,mas.AccountTitle as MasterAccount,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
-left join tblCity c on acc.cityID=c.ID";
+left join MasterAccounts mas on acc.MasterID=mas.ID
+left join tblCity c on acc.cityID=c.ID {(IncludeInActive?"":"Where ISNULL(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql);
         }
-        public static List<DetailAccountView> VendorAccounts()
+        public static List<DetailAccountView> VendorAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
 c.CityName as 'City',
-acc.OpCredit,
+acc.OpCredit,mas.AccountTitle as MasterAccount,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
-Where acc.MasterID =4";
+left join MasterAccounts mas on acc.MasterID=mas.ID
+Where acc.MasterID =4 {(IncludeInActive?"":" and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static List<DetailAccountView> CustomerAccounts()
+        public static List<DetailAccountView> CustomerAccounts(bool IncludeInActive = false)
         {
             string sql = $@"Select acc.ID,
 acc.AccountCode,
 acc.AccountTitle,
 acc.Contact,
-c.CityName as 'City',
+c.CityName as 'City',mas.AccountTitle as MasterAccount,
 acc.OpCredit,
 acc.OpDebit,
 acc.Remarks, acc.CreditLimit, acc.Commission, acc.RefName
 from 
 detailAccounts acc
 left join tblCity c on acc.cityID=c.ID
-Where acc.MasterID =7";
+left join MasterAccounts mas on acc.MasterID=mas.ID
+Where acc.MasterID =7 {(IncludeInActive ? "" : " and Isnull(IsActive,1)=1")}";
             return new db().Query<DetailAccountView>(sql).ToList();
         }
-        public static IEnumerable<DetailAccounts> GetAccountsList(int MasteriID = 0)
+        public static IEnumerable<DetailAccounts> GetAccountsList(int MasteriID = 0, bool IncludeInActive = false)
         {
-            return new db().GetList<DetailAccounts>(MasteriID > 0 ? $" Where MasterID = {MasteriID}" : "").ToList();
+            string sql = "where 1=1";
+            if (MasteriID > 0)
+            {
+                sql += $" and MasterID={MasteriID}";
+            }
+            if (!IncludeInActive)
+            {
+                sql += $" and IsnUll(IsActive,1)=1";
+            }
+            return new db().GetList<DetailAccounts>(sql).ToList();
         }
-        public static IEnumerable<DetailAccountView> GetAccountsViewList(int MasteriID = 0)
+        public static IEnumerable<DetailAccountView> GetAccountsViewList(int MasteriID = 0, bool IncludeInActive = false)
         {
-            return new db().Query<DetailAccountView>($"Exec GetDetailAccount '{MasteriID}'").ToList();
+            return new db().Query<DetailAccountView>($"Exec GetDetailAccount '{MasteriID}','{(!IncludeInActive?1:0)}'").ToList();
         }
-        public static IEnumerable<DetailAccountView> GetAccountsViewList()
-        {
-            return new db().Query<DetailAccountView>($"Exec GetDetailAccount").ToList();
-        }
+        //public static IEnumerable<DetailAccountView> GetAccountsViewList(bool IncludeInActive = false)
+        //{
+        //    return new db().Query<DetailAccountView>($"Exec GetDetailAccount '0','{(!IncludeInActive?1:0)}'").ToList();
+        //}
         public static IEnumerable<DetailAccountView> GetSubPartiesAccountList()
         {
             return new db().Query<DetailAccountView>($"Exec GetSubParties").ToList();

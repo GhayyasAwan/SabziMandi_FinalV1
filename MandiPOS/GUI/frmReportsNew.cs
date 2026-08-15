@@ -1,5 +1,6 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using DevExpress.XtraReports.UI;
 
 using MandiPOS.CLasses;
@@ -8,11 +9,10 @@ using MandiPOS.Reports.ReportClasses;
 
 using System;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -26,6 +26,13 @@ namespace MandiPOS.GUI
         public frmReportsNew(int reportID)
         {
             InitializeComponent();
+            rpt_BardanaReportRadio.CheckedChanged += Rpt_BardanaReportRadio_CheckedChanged;
+            dgvAgreements.RowDoubleClick += DgvAgreements_RowDoubleClick;
+            dgvAgreements.ColumnButtonClick += DgvAgreements_ColumnButtonClick;
+            bs.DataSourceChanged += Bs_DataSourceChanged;
+            cmbType.SelectedIndex = 0;
+            grpAgreements.Visible = false;
+            dtp.Value = dtp2.Value = DateTime.Now.Date;
             pnlMain.Resize += FlowLayoutPanel1_Resize;
             _pname.KeyDown += (s, e) =>
             {
@@ -72,6 +79,7 @@ namespace MandiPOS.GUI
             btnViewReport.RegisterFocus(false);
             cmbGroups.RegisterFocus(true);
             cmbGroups.EnterToNext();
+            cmbGroups.CheckedValuesChanged += CmbGroups_CheckedValuesChanged;
             _pname.KeyDown += (s, e) =>
             {
                 if (e.Control && e.KeyCode == Keys.Back)
@@ -80,8 +88,79 @@ namespace MandiPOS.GUI
                 }
             };
 
+            _pid.TextChanged += _pid_TextChanged;
 
         }
+
+        private void Rpt_BardanaReportRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            SetReport(sender, e);
+        }
+
+        private void DgvAgreements_ColumnButtonClick(object sender, Janus.Windows.GridEX.ColumnActionEventArgs e)
+        {
+            if (dgvAgreements.CurrentColumn.Key == "Print" && dgvAgreements.IsRow() && dgvAgreements.RecordID().toInt() != 0)
+            {
+                using (new crsr())
+                {
+                    using (var rpt = new rptAgreementStatistics(dgvAgreements.RecordID().toInt()))
+                    {
+                        using (var frm = new XtraForm1(rpt))
+                        {
+                            frm.ShowDialog(this);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CmbGroups_CheckedValuesChanged(object sender, EventArgs e)
+        {
+            SetGroups();
+            switch (groups)
+            {
+                case "7":
+                case "4":
+                case "7,4":
+                case "4,7":
+                    cmbCity.UncheckAll();
+                    lblCity.Visible = cmbCity.Visible = cmbType.Visible = lblSort.Visible = cmbSort.Visible = true;
+                    break;
+                default:
+                    lblCity.Visible = cmbCity.Visible = cmbType.Visible = lblSort.Visible = cmbSort.Visible = false;
+                    cmbCity.UncheckAll();
+                    cmbType.SelectedValue = null;
+                    cmbSort.SelectedIndex = 0;
+                    break;
+            }
+        }
+
+        private void DgvAgreements_RowDoubleClick(object sender, Janus.Windows.GridEX.RowActionEventArgs e)
+        {
+            if (dgvAgreements.IsRow() && dgvAgreements.GetValue(0) != null)
+            {
+                GetAgreementForm(dgvAgreements.GetValue(0));
+            }
+        }
+
+        private void Bs_DataSourceChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _pid_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_pid.Text.Trim()))
+            {
+                grpAgreements.Visible = DetailAccountService.GetDetailAccountByID(_pid.Text.Trim().toInt()).MasterID == 4;
+            }
+            else
+            {
+                grpAgreements.Visible = false;
+            }
+            bsAgreements.DataSource = null;
+        }
+
         bool triggerSetReport = true;
         private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
         {
@@ -136,8 +215,8 @@ namespace MandiPOS.GUI
         {
             StringBuilder b = new StringBuilder();
             foreach (Control c in uiGroupBox1.Controls)
-            { 
-                if(c is RadioButton rb)
+            {
+                if (c is RadioButton rb)
                 {
                     //                   b.AppendLine($@"MERGE [dbo].[tblPermissions] AS target
                     //USING (SELECT N'{rb.Text}' AS PermissionTitle) AS source
@@ -150,16 +229,16 @@ namespace MandiPOS.GUI
                     switch (rb.Name)
                     {
                         case "rb_Report15":
-                            rb.Enabled = true;break;
+                            rb.Enabled = rb.Visible = true; break;
                         case "rb_Report06":
-                            rb.Enabled = true; break;
-                        default: rb.Enabled = General.IsAdmin; break;
+                            rb.Enabled = rb.Visible = true; break;
+                        default: rb.Enabled = rb.Visible = General.IsAdmin; break;
                     }
                 }
             }
-            if(!string.IsNullOrEmpty(b.ToString()))
+            if (!string.IsNullOrEmpty(b.ToString()))
             {
-                using(var db = new db())
+                using (var db = new db())
                 {
                     using (var trx = db.BeginTransaction())
                     {
@@ -168,7 +247,7 @@ namespace MandiPOS.GUI
                             db.Execute(b.ToString(), transaction: trx);
                             trx.Commit();
                         }
-                        catch 
+                        catch
                         {
                             trx.Rollback();
                         }
@@ -192,7 +271,7 @@ namespace MandiPOS.GUI
             dtp.RegisterFocus(false); dtp.EnterToNext();
             dtp2.RegisterFocus(false); dtp2.EnterToNext();
             _pname.RegisterFocus(true);
-            this.WindowState = FormWindowState.Maximized;
+            // this.WindowState = FormWindowState.Maximized;
 
         }
 
@@ -222,12 +301,18 @@ namespace MandiPOS.GUI
 
         private void SetReport(object sender, System.EventArgs e)
         {
+
             if (!triggerSetReport) { return; }
+            dtp.MinDate = dtp2.MinDate = General.MinimumDate.AddDays(-5);
+            dtp.Value = dtp2.Value = DateTime.Now;
             lblTitle.Text = ((RadioButton)sender).Text.ToString();
             string reportName = ((RadioButton)sender).Name.ToString();
-           // ((RadioButton)sender).Checked = true;
+            // ((RadioButton)sender).Checked = true;
+
+            cbRecoverySummary.Visible = false;
             switch (reportName)
             {
+
                 case "rb_Report01": //لین دین
                     ReportID = 1;
                     bsParties.DataSource = dtParties;
@@ -237,7 +322,35 @@ namespace MandiPOS.GUI
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Show(); lblDate2.Show();
-                    _pname.Show(); lblParty.Show(); 
+                    _pname.Show(); lblParty.Show();
+                    txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
+                case "rpt_BardanaReportRadio": //لین دین
+                    ReportID = 23;
+                    bsParties.DataSource = dtParties;
+                    dtParties = DetailAccountService.PartyAccounts().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show();
+                    txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
+                case "rbBqayaSale": //بقایا سیل
+                    ReportID = 22;
+                    bsParties.DataSource = dtParties;
+                    dtParties = DetailAccountService.GetAccountsViewList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show();
                     txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
@@ -255,10 +368,15 @@ namespace MandiPOS.GUI
                 case "rb_Report03": //Chitha Complete
                     ReportID = 3;
                     bsParties.DataSource = dtParties;
+                    cmbSort.SelectedValue = 0;
+                    cmbSort.Visible = false;
+                    cmbType.Visible = false;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide(); _pname.Clear();
+                    lblCity.Visible = cmbCity.Visible = cmbType.Visible = lblSort.Visible = cmbSort.Visible = false;
                     lblgroup.Show(); cmbGroups.Show(); cmbGroups.CheckedItems = null;
-                    cmbCity.Show(); lblCity.Show(); cmbCity.CheckedItems = null; txtBillNo.Visible = lblBill.Visible = false;
+
+                    cmbCity.CheckedItems = null; txtBillNo.Visible = lblBill.Visible = false;
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
@@ -268,6 +386,7 @@ namespace MandiPOS.GUI
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
                     _pname.Clear();
+                    cmbSort.SelectedValue = 0;
                     cmbCity.Hide(); lblCity.Hide();
                     cmbCity.CheckedItems = null;
                     lblgroup.Show(); cmbGroups.Show(); txtBillNo.Visible = lblBill.Visible = false;
@@ -278,6 +397,7 @@ namespace MandiPOS.GUI
                     ReportID = 5; bsParties.DataSource = dtParties;
                     dtp2.Hide(); lblDate2.Hide();
                     _pname.Hide(); lblParty.Hide();
+                    cmbSort.SelectedValue = 0;
                     _pname.Clear();
                     cmbCity.Show(); lblCity.Show();
                     lblgroup.Hide(); cmbGroups.Hide();
@@ -305,7 +425,7 @@ namespace MandiPOS.GUI
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
-                    _pname.Show(); 
+                    _pname.Show();
                     lblParty.Show();
                     _pname.Clear();
                     cmbCity.Hide(); lblCity.Hide();
@@ -381,6 +501,7 @@ namespace MandiPOS.GUI
                     break;
                 case "rb_Report13": //ریکوری
                     ReportID = 13; bsParties.DataSource = dtParties;
+                    cbRecoverySummary.Visible = true;
                     lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
                     cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
                     dtp2.Hide(); lblDate2.Hide();
@@ -486,7 +607,27 @@ namespace MandiPOS.GUI
                     dtp.Visible = lblDtp.Visible = true;
                     dtp.Select();
                     break;
+                case "rb_Report21":
+                    ReportID = 21;
+                    bsParties.DataSource = null;
+                    dtParties = DetailAccountService.GetRefferalsList().ToDataTable();
+                    bsParties.DataSource = dtParties;
+                    dtp.Show();
+                    lblgroup.Hide(); cmbGroups.Hide(); cmbGroups.CheckedItems = null;
+                    cmbCity.Hide(); lblCity.Hide(); cmbCity.CheckedItems = null;
+                    dtp2.Show(); lblDate2.Show();
+                    _pname.Show(); lblParty.Show(); txtBillNo.Visible = lblBill.Visible = false;
+                    dtp.Visible = lblDtp.Visible = true;
+                    dtp.Select();
+                    break;
+
+
             }
+            cmbSort.Visible = lblSort.Visible = cmbType.Visible = cmbCity.Visible;
+            cbInActive.Checked = true;
+            cbInActive.Visible = cbZero.Visible = cbSummary.Visible = false;
+            cbZero.Checked = !cbZero.Visible;
+            cbSummary.Checked = !cbSummary.Visible;
         }
 
         private void UncheckAll(object sender)
@@ -494,32 +635,48 @@ namespace MandiPOS.GUI
 
         }
 
-        private void uiButton1_Click(object sender, System.EventArgs e)
+        private  void uiButton1_Click(object sender, System.EventArgs e)
         {
             if (ReportID == 1) //لین دین کھاتہ
             {
-                ShowLedger(0);return;
+                ShowLedger(0); return;
+            }
+            if (ReportID == 23) //لین دین کھاتہ
+            {
+                 ShowBardanaReport(); return;
+            }
+            if (ReportID == 22) //لین دین کھاتہ
+            {
+                ShowBaqayaSale(); return;
             }
             if (ReportID == 2) //کیش روکڑ
             {
                 using (new waitForm())
                 {
                     var report = new rptRokar(dtp.Value.Date);
-                    ShowReport(report);
+                    ShowReport(report, 1.4f);
                 }
                 return;
             }
             if (ReportID == 3) //چٹھہ مکمل
-            {
-                ShowChitha(0); return;
+            { if (this.IsVerified(3))
+                {
+                    ShowChitha(0); return;
+                }
             }
             if (ReportID == 4) //چٹھہ گروپ وار
             {
-                ShowChitha(1); return;
+                if (this.IsVerified(3))
+                {
+                    ShowChitha(1); return;
+                }
             }
             if (ReportID == 5) //چٹھہ شہر وار
             {
-                ShowChitha(2); return;
+                if (this.IsVerified(3))
+                {
+                    ShowChitha(2); return;
+                }
             }
             if (ReportID == 6) //گاہک بل
             {
@@ -533,7 +690,7 @@ namespace MandiPOS.GUI
             {
                 ShowCustomerSale(); return;
             }
-            
+
             if (ReportID == 9) //گاہک خسرہ
             {
                 ShowKhasra(); return;
@@ -582,15 +739,112 @@ namespace MandiPOS.GUI
             {
                 ShowLedger(1); return;
             }
+            if (ReportID == 21) //معرفت رپورٹ
+            {
+                ShowRefReport(); return;
+            }
         }
 
+        private  void ShowBardanaReport()
+        {
+            if (dtp.Value.Date > dtp2.Value.Date)
+            {
+                this.Error("Invalid Date Selection."); return;
+            }
+            if (_pid.Text.Trim().toInt() == 0 || string.IsNullOrEmpty(_pname.Text.Trim()))
+            {
+                this.Error("Invalid Party Selection.");return;
+            }
+            
+            {
+                var records = usp_GetBardanaReport.GetReport(_pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date).Result;
+                if (records.Any())
+                {
+                    using (var report = new rpt_BardanaReport(_pname.Text.Trim(), records))
+                    {
+                        report.CreateDocument();
+                        using (var frm = new XtraForm1(report))
+                        {
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    this.Info("No Data."); return;
+                } 
+            }
+        }
+
+        private void ShowBaqayaSale()
+        {
+            DateTime d1 = dtp.Value.Date;
+            DateTime d2 = dtp2.Value.Date;
+            int partyid = _pid.Text.Trim().toInt();
+            using (new waitForm())
+            {
+                var data = vwBaqayaSaleService.GetBaqayaSaleList(d1, d2, partyid).ToList();
+                string dateRange = $"{d1:dd-MM-yyyy}-{d2:dd-MM-yyyy}";
+                var report = new rptBaqayaSale(data, dateRange, partyid);
+                report.CreateDocument();
+                ShowReport(report);
+            }
+        }
+
+        private void ShowRefReport()
+        {
+            using (new waitForm())
+            {
+                int refrerID = _pid.Text.Trim().toInt();
+                string partyName = _pname.Text.Trim();
+
+
+                string sql = $@"WITH EndBalances AS
+    (
+        SELECT AccountID, SUM(DebitAmount - CreditAmount) AS 'EndBalance'
+        FROM vwTrx 
+        WHERE VoucherDate <= '{dtp.Value.Date:yyyy-MM-dd}'
+            AND AccountID IN (SELECT ID FROM DetailAccounts WHERE RefrenceID='{refrerID}')
+        GROUP BY AccountID
+    )
+    SELECT acc.AccountCode as ID,
+        acc.AccountTitle,
+mas.AccountTitle as 'MasterAccount',
+        acc.RefName,
+        acc.Contact,
+        city.CityName,
+        eb.EndBalance 
+    FROM EndBalances eb 
+    LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
+    left Join MasterAccounts mas ON acc.MasterID = mas.ID
+    LEFT JOIN tblCity city ON acc.CityID = city.ID
+    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10
+Order By mas.id";
+                DataTable dt = new DataTable();
+                using (var db = new db())
+                {
+                    var reader = db.ExecuteReader(sql);
+                    dt.Load(reader);
+                }
+                if (dt.Rows.Count > 0)
+                {
+                    var report = new rptRefRalReport(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    report.CreateDocument();
+                    ShowReport(report);
+                }
+                else
+                {
+                    this.Info("کوئی ریکارڈ موجود نہیں ہے۔");
+                }
+            }
+        }
         private void ShowMaterSheet(int reportType)
         {
             if (_pid.Text.toInt() > 0)
             {
                 using (new waitForm())
                 {
-                    var report = new rptMasterSheet(_pid.Text.toInt(),dtp.Value.Date,dtp2.Value.Date);
+                    var report = new rptMasterSheet(_pid.Text.toInt(), dtp.Value.Date, dtp2.Value.Date);
                     report.CreateDocument();
                     ShowReport(report);
                 }
@@ -650,7 +904,7 @@ namespace MandiPOS.GUI
 
                 // Apply sorting
                 DataView view = table.DefaultView;
-               // view.Sort = "SearchPriority ASC";
+                // view.Sort = "SearchPriority ASC";
                 bsParties.ResetBindings(false);
             }
 
@@ -708,8 +962,16 @@ namespace MandiPOS.GUI
         {
             using (new waitForm())
             {
-                var rpt = new rptCustomerRecovery(dtp.Value.Date);
-                
+                var rpt = new XtraReport();
+                if (cbRecoverySummary.Checked)
+                {
+                    rpt = new rptCustomerRecoverySummary(dtp.Value.Date);
+                }
+                else
+                {
+                    rpt = new rptCustomerRecovery(dtp.Value.Date);
+                }
+
                 rpt.CreateDocument();
                 var frm = new XtraForm1(rpt);
                 frm.StartPosition = FormStartPosition.CenterScreen;
@@ -756,20 +1018,48 @@ namespace MandiPOS.GUI
         {
             using (new waitForm())
             {
-                var rpt = new rptCustomerSale(dtp.Value.Date);
-                rpt.CreateDocument();
-                ShowReport(rpt);
+                var data = new db().Query<vw_CustomerSale>($@" SELECT 
+    [ArrivalDate],
+    [ArrivalNo],
+    [VendorName],
+    [CustomerName],
+    [ItemTitle],
+    [ItemQty],
+    [ItemWeight],
+    [CustomerRate],
+    [CustomerAmount],
+    [LagaAmount]
+FROM 
+    [vw_CustomerSale]
+WHERE 
+    [ArrivalDate] = '{dtp.Value.Date:yyyy-MM-dd}'
+ORDER BY 
+    CASE WHEN CustomerName LIKE N'نقد سیل%' THEN 0 ELSE 1 END,
+    SUM([CustomerAmount] + [LagaAmount]) OVER (PARTITION BY [CustomerName]) DESC").ToDataTable();
+                bool isWeighted = data.Compute("Sum(ItemWeight)", "").toDecimal() != 0;
+                if (isWeighted)
+                {
+                    var rpt = new rptCustomerSale(dtp.Value.Date, data);
+                    rpt.CreateDocument();
+                    ShowReport(rpt);
+                }
+                else
+                {
+                    var rpt = new rptCustomerSale2(dtp.Value.Date, data);
+                    rpt.CreateDocument();
+                    ShowReport(rpt);
+                }
 
 
             }
         }
 
-        private void ShowReport(XtraReport rpt)
+        private void ShowReport(XtraReport rpt, float zoom = 1.5f)
         {
             if (rpt == null) return;
-            var frm= new XtraForm1(rpt);
+            var frm = new XtraForm1(rpt, zoom);
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.Show();frm.BringToFront();
+            frm.Show(); frm.BringToFront();
             return;
         }
 
@@ -777,7 +1067,7 @@ namespace MandiPOS.GUI
         {
             using (new waitForm())
             {
-                var frm = new rptVendorSale(dtp.Value.Date,_pid.Text.Trim().toInt());
+                var frm = new rptVendorSale(dtp.Value.Date, _pid.Text.Trim().toInt());
                 ShowReport(frm);
             }
         }
@@ -791,20 +1081,16 @@ namespace MandiPOS.GUI
                 ShowReport(rpt);
             }
         }
-
+        string groups = string.Empty;
         private void ShowChitha(int ChithaType)
         {
             using (new waitForm())
             {
                 string cities = string.Empty;
-                string groups = string.Empty;
+
                 // if (ChithaType == 1)
                 {
-                    groups = string.Join(",",
-            cmbGroups?.CheckedItems?
-                .Cast<MasterAccounts>()
-                .Where(acc => acc != null && acc.ID != null)
-                .Select(acc => acc.ID.ToString()) ?? Enumerable.Empty<string>());
+                    SetGroups();
                 }
                 // else if (ChithaType == 2)
                 {
@@ -814,7 +1100,21 @@ namespace MandiPOS.GUI
                     .Where(acc => acc != null && acc.ID != null)
                     .Select(acc => acc.ID.ToString()) ?? Enumerable.Empty<string>());
                 }
-
+                string surfix = "چٹھہ جات";
+                string prefix = "مکمل";
+                if (!string.IsNullOrEmpty(groups) && string.IsNullOrEmpty(cities))
+                {
+                    prefix = "گروپ وار";
+                }
+                else if (!string.IsNullOrEmpty(cities) && string.IsNullOrEmpty(groups))
+                {
+                    prefix = "شہر وار";
+                }
+                else if (!string.IsNullOrEmpty(cities) && !string.IsNullOrEmpty(groups))
+                {
+                    prefix = "گروپ وار / شہر وار";
+                }
+                string title = $"{prefix} {surfix}";
 
 
                 string sql = $@"WITH EndBalances AS
@@ -830,24 +1130,45 @@ mas.AccountTitle as 'MasterAccount',
         acc.RefName,
         acc.Contact,
         city.CityName,
-        eb.EndBalance 
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive,acc.MasterID
     FROM EndBalances eb 
     LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
     left Join MasterAccounts mas ON acc.MasterID = mas.ID
     LEFT JOIN tblCity city ON acc.CityID = city.ID
-    WHERE 1=1 and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")}
-Order By mas.id";
+    WHERE MasterID Not IN (11,12) and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")};";
+                string sql2 = $@"WITH EndBalances AS
+    (
+        SELECT AccountID, SUM(DebitAmount - CreditAmount) AS 'EndBalance'
+        FROM vwTrx 
+        WHERE VoucherDate <= '{dtp.Value.Date:yyyy-MM-dd}'
+        GROUP BY AccountID
+    )
+    SELECT acc.AccountCode as ID,
+        acc.AccountTitle,
+mas.AccountTitle as 'MasterAccount',
+        acc.RefName,
+        acc.Contact,
+        city.CityName,
+        eb.EndBalance , Case When Cast(Acc.OldAccountCode as Nvarchar(50))='0' then '' Else Acc.OldAccountCode End As OldAccountCode, Acc.IsActive,acc.MasterID
+    FROM EndBalances eb 
+    LEFT JOIN DetailAccounts acc ON eb.AccountID = acc.ID 
+    left Join MasterAccounts mas ON acc.MasterID = mas.ID
+    LEFT JOIN tblCity city ON acc.CityID = city.ID
+    WHERE MasterID IN (11,12) and (acc.AccountTitle Not Like N'نقد سیل') and acc.MasterID<>10 {(string.IsNullOrEmpty(groups) ? "" : $" and acc.MasterID in ({groups})")} {(string.IsNullOrEmpty(cities) ? "" : $" and city.ID in ({cities})")};";
                 DataTable dt = new DataTable();
+                DataTable dt2 = new DataTable();
                 using (var db = new db())
                 {
                     var reader = db.ExecuteReader(sql);
                     dt.Load(reader);
+                    var reader2 = db.ExecuteReader(sql2);
+                    dt2.Load(reader2);
                 }
-                if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0 || dt2.Rows.Count > 2)
                 {
-                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"));
+                    var report = new rptChithaFull(dt, dtp.Value.ToString("dd/MM/yyyy"), cmbSort.SelectedValue.toInt(), cmbType.SelectedValue.toInt(), title, dt2);
                     report.CreateDocument();
-                    ShowReport(report);
+                    ShowReport(report, 1.5f);
                 }
                 else
                 {
@@ -855,6 +1176,15 @@ Order By mas.id";
                 }
             }
 
+        }
+
+        private void SetGroups()
+        {
+            groups = string.Join(",",
+                        cmbGroups?.CheckedItems?
+                            .Cast<MasterAccounts>()
+                            .Where(acc => acc != null && acc.ID != null)
+                            .Select(acc => acc.ID.ToString()) ?? Enumerable.Empty<string>());
         }
 
         private void ShowLedger(int reportType)
@@ -878,7 +1208,7 @@ Order By mas.id";
              commandType: CommandType.StoredProcedure).ToList<clsLedger>();
 
                 System.Collections.Generic.List<clsLedger> FinalData = result;
-                if (reportType==1)
+                if (reportType == 1)
                 {
                     switch (acc.MasterID)
                     {
@@ -886,7 +1216,7 @@ Order By mas.id";
                                 // 1️⃣ Group Credit Entries
                             var creditGrouped4 = result
                                 .Where(x => x.Credit != 0)
-                                .GroupBy(x => new { x.VoucherDate.Date, x.VoucherTitle })
+                                .GroupBy(x => new { x.VoucherDate.Date, x.VoucherType, x.VoucherTitle })
                                 .Select(g => new clsLedger
                                 {
                                     VoucherDate = g.Key.Date,
@@ -977,11 +1307,11 @@ Order By mas.id";
                             }
                             FinalData = combined7;
                             break;
-                    } 
+                    }
                 }
 
 
-                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date,reportType,acc.MasterID);
+                var frm = new frmLedgerReport(FinalData, _pid.Text.Trim().toInt(), dtp.Value.Date, dtp2.Value.Date, reportType, acc.MasterID);
                 frm.Show();
             }
         }
@@ -999,6 +1329,47 @@ Order By mas.id";
 
         }
 
+        private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void uiButton1_Click_1(object sender, EventArgs e)
+        {
+            RefreshAgreements();
+        }
+
+        private void RefreshAgreements()
+        {
+            bsAgreements.DataSource = null;
+            bsAgreements.DataSource = new db().Query<vwAgreements>($"Select * from vwAgreements where PartyID={_pid.Text.Trim().toInt()};").OrderByDescending(x => x.AgreementID).ToList();
+            bsAgreements.ResetBindings(false);
+        }
+
+        private void AddNewAgreement(object sender, EventArgs e)
+        {
+            GetAgreementForm(null);
+        }
+
+        private void GetAgreementForm(object recordid)
+        {
+            tblAgreements agr = new tblAgreements();
+            if (recordid != null)
+            {
+                using (var db = new db())
+                {
+                    agr = db.Get<tblAgreements>(recordid) ?? new tblAgreements();
+                }
+            }
+            if (agr.AgreementID == 0)
+            {
+                agr.PartyID = _pid.Text.Trim().toInt();
+            }
+            using (var frm = new frmAgreementInfo(agr))
+            {
+                frm.ShowDialog(this);
+                RefreshAgreements();
+            }
+        }
     }
 }

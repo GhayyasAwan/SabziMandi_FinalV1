@@ -1,5 +1,6 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,18 @@ namespace MandiPOS.CLasses
         {
             string sql = $@"Select * from tblItems Where ItemType in ({itemTypes})";
             return new db().Query<tblItems>(sql).ToList();
+        }
+
+        internal static int GetItemStock(int v)
+        {
+            string sql=$"Select Sum(Cr-Dr) as Stock From [vwStockFlo] Where ItemID={v}";
+            return new db().ExecuteScalar<decimal>(sql).toInt();
+        }
+
+        internal static int GetItemWeightStock(int v)
+        {
+            string sql = $"Select Sum(wtCr-wtDr) as wtStock From [vwStockFlo] Where ItemID={v}";
+            return new db().ExecuteScalar<decimal>(sql).toInt();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿
+using Dapper;
 using DevExpress.XtraReports.UI;
 using Janus.Windows.GridEX;
 using MandiPOS.CLasses;
@@ -85,7 +86,7 @@ namespace MandiPOS.GUI
             XtraReport mainReport = null;
             foreach (string s in lst)
             {
-                if (s == "1495")
+                if (s.toInt() == SQL.NetSaleAccount)
                 {
                     continue;
                 }
@@ -100,7 +101,21 @@ namespace MandiPOS.GUI
                     mainReport.Pages.AddRange(rpt.Pages);
                 }
             }
-            mainReport.ShowPreview();
+                XtraForm1 frm = new XtraForm1(mainReport);
+           
+                frm.FormClosed += (s, e) =>
+                {
+                    mainReport?.Dispose();
+                    frm.Dispose();
+                };
+                frm.Show();
+                
+            
+        }
+
+        private void Frm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

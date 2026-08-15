@@ -1,10 +1,12 @@
-﻿using DevExpress.XtraReports.UI;
-using DevExpress.XtraRichEdit.Model;
+﻿
 
+using Dapper;
 using Janus.Windows.GridEX;
+
 using MandiPOS.CLasses;
 using MandiPOS.GUI;
 using MandiPOS.Reports.ReportClasses;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,7 +18,7 @@ namespace MandiPOS.Reports
     public partial class frmLedgerReport : Form
     {
         clsResize objres;
-        DateTime d1=DateTime.Today;
+        DateTime d1 = DateTime.Today;
         DateTime d2 = DateTime.Today;
         int partyID = 0;
         List<clsLedger> data;
@@ -32,7 +34,7 @@ namespace MandiPOS.Reports
             uiComboBox1.SelectedIndexChanged += UiComboBox1_SelectedIndexChanged;
             data = _data;
             reportTyype = reportType;
-            d1=date;d2=date1;
+            d1 = date; d2 = date1;
             partyID = PartyID;
             objres = new clsResize(this);
             this.Load += FrmLedgerReport_Load;
@@ -47,7 +49,7 @@ namespace MandiPOS.Reports
             lblRemarks.Text = acc.Remarks?.ToString();
             lblCommission.Text = acc.Commission.ToString("0.##");
             label1.Text = $"{group}";
-            lblTitle.Text = city + " " + acc.AccountTitle;
+            lblTitle.Text = acc.AccountTitle + " " + city;
             lblCreditLimit.Text = acc.CreditLimit.ToString("0.##");
             lblcontact.Text = acc.Contact;
             lblRef.Text = acc.RefName;
@@ -56,12 +58,13 @@ namespace MandiPOS.Reports
             dgvLedger.FormattingRow += DgvLedger_FormattingRow;
 
         }
-
+        List<clsLedger> filteredData = new List<clsLedger>();
         private void UiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (uiComboBox1.SelectedIndex == 0) //Complete
             {
-                clsLedgerBindingSource.DataSource = data;
+                filteredData = data;
+                clsLedgerBindingSource.DataSource = filteredData;
                 dgvLedger.RootTable.Columns["Balance"].Visible = true;
                 dgvLedger.RootTable.Columns["Credit"].Visible = true;
                 dgvLedger.RootTable.Columns["Debit"].Visible = true;
@@ -69,20 +72,38 @@ namespace MandiPOS.Reports
             }
             else if (uiComboBox1.SelectedIndex == 1) //
             {
-                var filteredData = data.Where(x => x.Debit != 0).ToList();
+                filteredData = data.Where(x => x.Debit != 0).ToList();
                 dgvLedger.RootTable.Columns["Balance"].Visible = false;
                 dgvLedger.RootTable.Columns["Credit"].Visible = false;
-                dgvLedger.RootTable.Columns["Debit"].Visible = true ;
+                dgvLedger.RootTable.Columns["Debit"].Visible = true;
                 dgvLedger.RootTable.Columns["Status"].Visible = false;
                 clsLedgerBindingSource.DataSource = filteredData;
             }
             else if (uiComboBox1.SelectedIndex == 2)
             {
-                var filteredData = data.Where(x => x.Credit != 0).ToList();
+                filteredData = data.Where(x => x.Credit != 0).ToList();
                 dgvLedger.RootTable.Columns["Balance"].Visible = false;
                 dgvLedger.RootTable.Columns["Credit"].Visible = true;
                 dgvLedger.RootTable.Columns["Debit"].Visible = false;
                 dgvLedger.RootTable.Columns["Status"].Visible = false;
+                clsLedgerBindingSource.DataSource = filteredData;
+            }
+            else if (uiComboBox1.SelectedIndex == 3)
+            {
+                filteredData = data.Where(x => x.TrxType == 3).ToList();
+                dgvLedger.RootTable.Columns["Balance"].Visible = true;
+                dgvLedger.RootTable.Columns["Credit"].Visible = true;
+                dgvLedger.RootTable.Columns["Debit"].Visible = true;
+                dgvLedger.RootTable.Columns["Status"].Visible = true;
+                clsLedgerBindingSource.DataSource = filteredData;
+            }
+            else if (uiComboBox1.SelectedIndex == 4)
+            {
+                filteredData = data.Where(x => x.TrxType == 5).ToList();
+                dgvLedger.RootTable.Columns["Balance"].Visible = true;
+                dgvLedger.RootTable.Columns["Credit"].Visible = true;
+                dgvLedger.RootTable.Columns["Debit"].Visible = true;
+                dgvLedger.RootTable.Columns["Status"].Visible = true;
                 clsLedgerBindingSource.DataSource = filteredData;
             }
             clsLedgerBindingSource.ResetBindings(false);
@@ -94,6 +115,15 @@ namespace MandiPOS.Reports
 
             if (e.Row.RowType == RowType.TotalRow)
             {
+                if (uiComboBox1.SelectedIndex == 0)
+                {
+                    string summary = new db().QuerySingle<string>($"Select dbo.fn_GetPartyItemSummary('{d1:yyyy-MM-dd}','{d2:yyyy-MM-dd}',{partyID}) as summary");
+                    e.Row.Cells["Narration"].Text = summary;
+                }
+                else
+                {
+                    e.Row.Cells["Narration"].Text = string.Empty;
+                }
                 decimal totalDebit = 0;
                 decimal totalCredit = 0;
 
@@ -124,7 +154,7 @@ namespace MandiPOS.Reports
             {
                 var entry = dgvLedger.CurrentRow.DataRow as clsLedger;
 
-                if (entry.TrxType == 0)
+                if (entry.TrxType != 4)
                 {
                     return; // No bill number to show
                 }
@@ -161,7 +191,7 @@ namespace MandiPOS.Reports
         private void uiButton1_Click(object sender, EventArgs e)
         {
             if (!data.Any()) { return; }
-            if (reportTyype!=0)
+            if (reportTyype != 0)
             {
                 var showdetails = this.Ask("کیا آپ تفصیل بھی پرنٹ  کرناچاہتے ہیں؟");
                 if (!showdetails)
@@ -177,7 +207,7 @@ namespace MandiPOS.Reports
                             item.Narration = string.Empty;
                         }
                     }
-                } 
+                }
             }
             if (uiComboBox1.SelectedIndex == 0)
             {
@@ -189,7 +219,7 @@ namespace MandiPOS.Reports
             }
             else if (uiComboBox1.SelectedIndex == 1)
             {
-                var filteredData = data.Where(x => x.Debit != 0).ToList();
+
                 var report = new rptPartyLedgerBanam(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
                 var frm = new XtraForm1(report);
                 frm.StartPosition = FormStartPosition.CenterScreen;
@@ -198,7 +228,23 @@ namespace MandiPOS.Reports
             }
             else if (uiComboBox1.SelectedIndex == 2)
             {
-                var filteredData = data.Where(x => x.Credit != 0).ToList();
+
+                var report = new rptPartyLedgerJama(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
+                var frm = new XtraForm1(report);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+            }
+            else if (uiComboBox1.SelectedIndex == 3)
+            {
+                var report = new rptPartyLedgerJama(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
+                var frm = new XtraForm1(report);
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.Show();
+            }
+            else if (uiComboBox1.SelectedIndex == 4)
+            {
                 var report = new rptPartyLedgerJama(d1.ToString("dd-MMM-yy"), d2.ToString("dd-MMM-yy"), partyID, filteredData, reportTyype);
                 var frm = new XtraForm1(report);
                 frm.StartPosition = FormStartPosition.CenterScreen;

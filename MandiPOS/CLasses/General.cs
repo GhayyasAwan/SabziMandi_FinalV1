@@ -1,11 +1,17 @@
-﻿using Dapper;
+﻿
+
+using Dapper;
 using DevExpress.XtraEditors;
 
 using Janus.Windows.GridEX;
 using Janus.Windows.GridEX.EditControls;
+
+using MandiPOS.CLasses;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,12 +50,29 @@ namespace MandiPOS
         public static int NetPaidAccount = 0;
         public static int LagaAccount = 0;
         internal static string dbSystemName;
-
+        internal static bool CheckIsApplicationLocked()
+        {
+            return SQL.IsLocked;
+        }
+        public static bool IsVerified(this Form f,int VerficationID = 1)
+        {
+            using (var frm = new frmVerfication(VerficationID))
+            { 
+                return frm.ShowDialog()== DialogResult.OK;
+            }
+        }
         public static string GetPartyBalance(this Form f, int AccountID)
         {
-            decimal bal = new db().ExecuteScalar<decimal>($"Select ISNULL(Sum(ISNULL(DebitAmount,0)-ISNULL(CreditAmount,0)),0) as Bal from vwTrx Where AccountID='{AccountID}'");
+            if (General.IsAdmin)
+            {
+                decimal bal = new db().ExecuteScalar<decimal>($"Select ISNULL(Sum(ISNULL(DebitAmount,0)-ISNULL(CreditAmount,0)),0) as Bal from vwTrx Where AccountID='{AccountID}'");
 
-            return $"{bal.ToString("#,0.##")}";
+                return $"{bal.ToString("#,0.##")}";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         public static void EnterToNext(this Control c, KeyEventArgs e)
@@ -183,6 +206,14 @@ namespace MandiPOS
                     continue;
                 }
                 col.SelectableCells = SelectableCells.FilterRowCells;
+                if (col.FormatString == "c")
+                {
+                    col.FormatString = "N2";
+                }
+                if (col.FormatString == "d")
+                {
+                    col.FormatString = "dd-MMM-yyyy";
+                }
             }
         }
         public static object RecordID(this GridEX dgv, int columIndex = 0)
@@ -197,6 +228,11 @@ namespace MandiPOS
         public static bool IsAdmin { get; internal set; }
         public static string UserName { get; internal set; }
         public static int MultanCityID { get; internal set; }
+        public static DateTime MinimumDate { get; internal set; }
+        public static DateTime ServerDate { get { return SQL.ServerDate; } }
+
+        public static tblSecurity Security { get; internal set; }
+
         internal static int GetMultanCityID()
         {
             var cities = SQL.GetCities();
@@ -233,13 +269,47 @@ namespace MandiPOS
         {
             return ShowMessage(ex.Message + $"{ex.Message}\r\nDetails:{ex.InnerException}", "Exception", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
         }
+        private static string ExtractCleanSqlErrorMessage(Exception ex)
+        {
+            if (ex == null || string.IsNullOrWhiteSpace(ex.Message))
+                return string.Empty;
+
+            string fullMessage = ex.Message;
+
+            // SQL Keywords jin ka index check karna hai
+            string[] sqlKeywords = new string[] { "SELECT", "INSERT", "UPDATE", "DELETE" };
+
+            int firstKeywordIndex = -1;
+
+            // Sabse pehle aane wale keyword ka index nikalen
+            foreach (var keyword in sqlKeywords)
+            {
+                int index = fullMessage.IndexOf(keyword, StringComparison.OrdinalIgnoreCase);
+
+                if (index != -1)
+                {
+                    if (firstKeywordIndex == -1 || index < firstKeywordIndex)
+                    {
+                        firstKeywordIndex = index;
+                    }
+                }
+            }
+
+            // Agar SQL Keyword mil jaye, toh us se pehle wala text return karein
+            if (firstKeywordIndex > 0)
+            {
+                return fullMessage.Substring(0, firstKeywordIndex).Trim();
+            }
+
+            return fullMessage.Trim();
+        }
         public static bool ExcError(this Exception ex, string errorPoint = "")
         {
-            string message = ex.Message;
-
-            if (ex.InnerException != null)
+            string message =ExtractCleanSqlErrorMessage(ex);
+            
+            if (ex.InnerException != null && ex.InnerException.Message.Length > 0)
             {
-                message += $"\r\nDetails: {ex.InnerException}";
+                message +="\n"+ ex.InnerException.ToString();
             }
 
             string caption = string.IsNullOrEmpty(errorPoint) ? "Exception" : $"Error on: {errorPoint}";
@@ -294,7 +364,28 @@ namespace MandiPOS
 
             return 0;
         }
-
+        public static string Decrypt(this string cipherText)
+        {
+            try
+            {
+                return Eramake.eCryptography.Decrypt(cipherText);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+        public static string Encrypt(this string simpleText)
+        {
+            try
+            {
+                return Eramake.eCryptography.Encrypt(simpleText);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
         public static decimal toDecimal(this object o)
         {
             decimal.TryParse(
@@ -304,6 +395,11 @@ namespace MandiPOS
                 out decimal result
             );
             return result;
+        }
+
+        public static decimal toRound(this decimal o)
+        {
+            return Math.Round(o, 0, MidpointRounding.AwayFromZero);
         }
 
         public static string ProperDecimals(this decimal d)

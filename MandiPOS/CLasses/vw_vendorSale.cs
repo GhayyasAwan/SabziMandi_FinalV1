@@ -33,18 +33,22 @@ namespace MandiPOS.CLasses
         {
             get
             {
-                return CommissionAmount + MazdooriAmount + MunshianaAmount + KarayaAmount;
+                return CommissionAmount + MazdooriAmount + MunshianaAmount ;
             }
         }
 
         public decimal SaleAmount2 { get; set; }
 
         public decimal PaidAmount { get; set; }
+        public decimal TotalPaidAmount { get 
+            {
+                return PaidAmount + KarayaAmount;
+            } }
         public decimal NetAmount
         {
             get
             {
-                return SaleAmount2 - Expenses - PaidAmount;
+                return SaleAmount2 - Expenses - TotalPaidAmount;
             }
         }
         public decimal Debit { get { return NetAmount<=0 ? Math.Abs(NetAmount) : 0; } }

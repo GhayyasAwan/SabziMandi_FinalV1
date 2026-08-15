@@ -1,8 +1,7 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using DevExpress.XtraEditors;
-
-using Janus.Data;
 
 using MandiPOS.CLasses;
 
@@ -15,11 +14,87 @@ using System.Linq;
 namespace MandiPOS
 {
 
-
-
-
+    public enum SettingKeys
+    { 
+        IsLocked
+    }
     public static class SQL
     {
+
+        
+        public static int LastArrivalNo
+        {
+            get
+            {
+                try
+                {
+                    string sql = "select isnull(max([ArrivalNo]),0) from [tblSale]";
+                    using (var xdb = new db())
+                    {
+                        return xdb.ExecuteScalar<int>(sql);
+                    }
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
+        public static bool IsLocked
+        {
+            get
+            {
+                var result = new db().ExecuteScalar<string>("SELECT ISNULL([Value],0) From Settings Where SettingKey like 'IsLocked'");
+                if (result!=null && ( result == "1" || result.ToLower() == "true"))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        internal static bool SaveSettingsByKey(string settingkey,string value)
+        {
+            Settings model = new Settings()
+            {
+                SettingKey = settingkey,
+                Value = value
+            };
+            string sql = $"Delete From Settings Where SettingKey=@SettingKey; Insert Into Settings (SettingKey,[Value]) Values (@settingkey,@Value);";
+            using (var xdb = new db())
+            {
+                using (var trx = xdb.BeginTransaction())
+                {
+                    try
+                    {
+                        xdb.Execute(sql, model, trx);
+                        trx.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        throw ex;
+                    }
+                }
+            }
+        }
+        public static T GetSettingByKey<T>(string key, T defaultValue = default)
+        {
+            using (var db = new db())
+            {
+                var rawResult = db.ExecuteScalar<object>(
+                    "SELECT TOP 1 Value FROM Settings WHERE SettingKey = @SettingKey",
+                    new { SettingKey = key }
+                );
+
+                if (rawResult == null || rawResult == DBNull.Value)
+                {
+                    return defaultValue;
+                }
+
+                return (T)Convert.ChangeType(rawResult, typeof(T));
+            }
+        }
         internal static bool DeleteCity(int iD)
         {
             try
@@ -64,6 +139,22 @@ namespace MandiPOS
                 control.ItemIndex = 0;
             }
         }
+        public static int NetSaleAccount
+        {
+            get
+            {
+                string sql = "SELECT dbo.fn_GetNetSaleAccount()";
+                return new db().ExecuteScalar<int>(sql);
+            }
+        }
+
+        public static DateTime ServerDate
+        {
+            get
+            {
+                return new db().ExecuteScalar<DateTime>("Select Cast(GetDate() as Date)");
+            }
+        }
 
         internal static List<tblItems> GetAllItems(string searchTerm = "")
         {
@@ -100,7 +191,7 @@ namespace MandiPOS
                 return default;
             }
         }
-        internal static tblCity GetCity(string whercondition="")
+        internal static tblCity GetCity(string whercondition = "")
         {
             try
             {
@@ -134,7 +225,7 @@ namespace MandiPOS
                     case "mazdoori": General.MazdooriAccount = c.ConfigValue.toInt(); break;
                     case "munshiana": General.MunshianaAccount = c.ConfigValue.toInt(); break;
                     case "netpaid": General.NetPaidAccount = c.ConfigValue.toInt(); break;
-                    case "pendingsale": General.PendingSaleAccount = c.ConfigValue.toInt(); break;
+                    case "pending": General.PendingSaleAccount = c.ConfigValue.toInt(); break;
                     case "store": General.StoreAccount = c.ConfigValue.toInt(); break;
                     case "laga": General.LagaAccount = c.ConfigValue.toInt(); break;
                 }
@@ -221,6 +312,7 @@ namespace MandiPOS
             }
         }
 
+        
         internal static bool SaveCity(tblCity city)
         {
             try
@@ -290,8 +382,77 @@ namespace MandiPOS
                     banam = data.TotalBanam;
                     jama = data.TotalJama;
                 }
-               income= db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
+                income = db.ExecuteScalar<decimal>($"SELECT dbo.ufn_GetCommissionLagaMazdooriMunshianaPendingSale('{date:yyyy-MM-dd}') AS Amount");
             }
+        }
+
+        internal static bool IsDateAssigned(DateTime date, int vType)
+        {
+            try
+            {
+                string Sql = "Select count(*) from Vouchers where VoucherDate=@date and VoucherType=@vType";
+                return new db().ExecuteScalar<int>(Sql, new { date = date.Date, vType }) > 0;
+            }
+            catch (Exception ex)
+            {
+                ex.ExcError();
+                return true;
+            }
+        }
+
+        internal static void ChangeVoucherDate(int vID, DateTime date)
+        {
+            try
+            {
+                string sql = "Update Vouchers set VoucherDate=@date where VoucherID=@vID";
+                new db().Execute(sql, new { date = date.Date, vID });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        internal static object GetNextVoucherNo(int vType)
+        {
+            return new db().ExecuteScalar<object>($"Select ISNULL(MAx(VoucherNo),0)+1 from Vouchers Where VoucherType=" + vType);
+        }
+
+        internal static bool ShiftAccount(object AccountID, int SourceMasterID, int TargetMasterID, bool IsActive)
+        {
+            using (var db = new db())
+            {
+                using (var trx = db.BeginTransaction())
+                {
+                    try
+                    {
+                        var account = db.QueryFirstOrDefault<DetailAccounts>($"Select Top 1 * from DetailAccounts Where AccountCode=@AccountCode", new { AccountCode = AccountID }, transaction: trx);
+                        if (account == null)
+                            throw new Exception("Account Not Found");
+                        if (account.MasterID != SourceMasterID)
+                            throw new Exception("Invalid Current Master ID.");
+                        account.MasterID = TargetMasterID;
+                        account.IsActive = IsActive;
+                        db.Update<DetailAccounts>(account, transaction: trx);
+                        trx.Commit(); return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        trx.Rollback();
+                        return ex.ExcError();
+                    }
+                }
+            }
+        }
+
+        internal static IEnumerable<vw_BardanaLedger> GetBardanaLedger(DateTime date1, DateTime date2, int itemID)
+        {
+            return new db().Query<vw_BardanaLedger>($"Select * from vw_BardanaLedger Where [Date] Between '{date1:yyyy-MM-dd}' and '{date2:yyyy-MM-dd}' and ItemID='{itemID}';");
+        }
+
+        internal static IEnumerable<tblItems> GetBardanaItems()
+        {
+            return new db().Query<tblItems>($"SELECT * FROM tblItems i WHERE i.ItemType LIKE N'%دیگر%';");
         }
     }
 

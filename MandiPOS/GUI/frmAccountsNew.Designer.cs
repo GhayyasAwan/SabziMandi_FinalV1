@@ -42,10 +42,10 @@
             this.txtDebit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.txtCredit = new Janus.Windows.GridEX.EditControls.NumericEditBox();
             this.grpRef = new Janus.Windows.EditControls.UIGroupBox();
-            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
-            this.txtRefName = new Janus.Windows.GridEX.EditControls.EditBox();
             this.cmbRefParty = new Janus.Windows.EditControls.UIComboBox();
             this.bss = new System.Windows.Forms.BindingSource(this.components);
+            this.uiButton1 = new Janus.Windows.EditControls.UIButton();
+            this.txtRefName = new Janus.Windows.GridEX.EditControls.EditBox();
             this.rbOther = new Janus.Windows.EditControls.UIRadioButton();
             this.rbCustomer = new Janus.Windows.EditControls.UIRadioButton();
             this.rbVendor = new Janus.Windows.EditControls.UIRadioButton();
@@ -64,6 +64,9 @@
             this.dgv = new Janus.Windows.GridEX.GridEX();
             this.bsAccount1 = new System.Windows.Forms.BindingSource(this.components);
             this.bsAccounts2 = new System.Windows.Forms.BindingSource(this.components);
+            this.txtOldAccNo = new Janus.Windows.GridEX.EditControls.NumericEditBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.uiCheckBox1 = new Janus.Windows.EditControls.UICheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpRef)).BeginInit();
             this.grpRef.SuspendLayout();
@@ -86,6 +89,7 @@
             // txtCode
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCode.BackColor = System.Drawing.Color.Lavender;
             this.txtCode.Location = new System.Drawing.Point(1234, 55);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(87, 39);
@@ -104,6 +108,7 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.BackColor = System.Drawing.Color.Lavender;
             this.txtName.Location = new System.Drawing.Point(904, 55);
             this.txtName.Name = "txtName";
             this.txtName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -114,6 +119,7 @@
             // 
             // txtContact
             // 
+            this.txtContact.BackColor = System.Drawing.Color.Lavender;
             this.txtContact.Location = new System.Drawing.Point(739, 54);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(159, 39);
@@ -123,6 +129,7 @@
             // 
             // cmbCity
             // 
+            this.cmbCity.BackColor = System.Drawing.Color.Lavender;
             this.cmbCity.DataSource = this.bsCity;
             this.cmbCity.DisplayMember = "CityName";
             this.cmbCity.Location = new System.Drawing.Point(549, 54);
@@ -139,6 +146,7 @@
             // 
             // txtDebit
             // 
+            this.txtDebit.BackColor = System.Drawing.Color.Lavender;
             this.txtDebit.Location = new System.Drawing.Point(395, 55);
             this.txtDebit.Name = "txtDebit";
             this.txtDebit.Size = new System.Drawing.Size(148, 39);
@@ -154,6 +162,7 @@
             // 
             // txtCredit
             // 
+            this.txtCredit.BackColor = System.Drawing.Color.Lavender;
             this.txtCredit.Location = new System.Drawing.Point(241, 55);
             this.txtCredit.Name = "txtCredit";
             this.txtCredit.Size = new System.Drawing.Size(148, 39);
@@ -185,6 +194,22 @@
             this.grpRef.Text = "معرفت";
             this.grpRef.VisualStyleManager = this.visualStyleManager1;
             // 
+            // cmbRefParty
+            // 
+            this.cmbRefParty.BackColor = System.Drawing.Color.Lavender;
+            this.cmbRefParty.DataSource = this.bss;
+            this.cmbRefParty.DisplayMember = "AccountTitle";
+            this.cmbRefParty.Location = new System.Drawing.Point(10, 136);
+            this.cmbRefParty.Name = "cmbRefParty";
+            this.cmbRefParty.Size = new System.Drawing.Size(207, 39);
+            this.cmbRefParty.TabIndex = 3;
+            this.cmbRefParty.ValueMember = "ID";
+            this.cmbRefParty.VisualStyleManager = this.visualStyleManager1;
+            // 
+            // bss
+            // 
+            this.bss.DataSource = typeof(MandiPOS.CLasses.DetailAccounts);
+            // 
             // uiButton1
             // 
             this.uiButton1.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -206,21 +231,6 @@
             this.txtRefName.TabIndex = 21;
             this.txtRefName.VisualStyleManager = this.visualStyleManager1;
             this.txtRefName.TextChanged += new System.EventHandler(this.txtRefName_TextChanged);
-            // 
-            // cmbRefParty
-            // 
-            this.cmbRefParty.DataSource = this.bss;
-            this.cmbRefParty.DisplayMember = "AccountTitle";
-            this.cmbRefParty.Location = new System.Drawing.Point(10, 136);
-            this.cmbRefParty.Name = "cmbRefParty";
-            this.cmbRefParty.Size = new System.Drawing.Size(207, 39);
-            this.cmbRefParty.TabIndex = 3;
-            this.cmbRefParty.ValueMember = "ID";
-            this.cmbRefParty.VisualStyleManager = this.visualStyleManager1;
-            // 
-            // bss
-            // 
-            this.bss.DataSource = typeof(MandiPOS.CLasses.DetailAccounts);
             // 
             // rbOther
             // 
@@ -317,10 +327,11 @@
             // 
             this.txtRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRemarks.Location = new System.Drawing.Point(549, 148);
+            this.txtRemarks.BackColor = System.Drawing.Color.Lavender;
+            this.txtRemarks.Location = new System.Drawing.Point(703, 148);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtRemarks.Size = new System.Drawing.Size(773, 39);
+            this.txtRemarks.Size = new System.Drawing.Size(619, 39);
             this.txtRemarks.TabIndex = 13;
             this.txtRemarks.VisualStyleManager = this.visualStyleManager1;
             // 
@@ -344,6 +355,7 @@
             // 
             // txtCommisionRatio
             // 
+            this.txtCommisionRatio.BackColor = System.Drawing.Color.Lavender;
             this.txtCommisionRatio.Location = new System.Drawing.Point(241, 148);
             this.txtCommisionRatio.Name = "txtCommisionRatio";
             this.txtCommisionRatio.Size = new System.Drawing.Size(148, 39);
@@ -359,6 +371,7 @@
             // 
             // txtCreditLimit
             // 
+            this.txtCreditLimit.BackColor = System.Drawing.Color.Lavender;
             this.txtCreditLimit.Location = new System.Drawing.Point(395, 148);
             this.txtCreditLimit.Name = "txtCreditLimit";
             this.txtCreditLimit.Size = new System.Drawing.Size(148, 39);
@@ -389,6 +402,7 @@
             this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv.BackColor = System.Drawing.Color.Lavender;
             this.dgv.ColumnAutoResize = true;
             this.dgv.DataSource = this.bsAccount1;
             dgv_DesignTimeLayout.LayoutString = resources.GetString("dgv_DesignTimeLayout.LayoutString");
@@ -414,10 +428,46 @@
             // 
             this.bsAccounts2.DataSource = typeof(MandiPOS.CLasses.DetailAccountView);
             // 
+            // txtOldAccNo
+            // 
+            this.txtOldAccNo.BackColor = System.Drawing.Color.Lavender;
+            this.txtOldAccNo.Location = new System.Drawing.Point(549, 148);
+            this.txtOldAccNo.Name = "txtOldAccNo";
+            this.txtOldAccNo.Size = new System.Drawing.Size(148, 39);
+            this.txtOldAccNo.TabIndex = 21;
+            this.txtOldAccNo.Text = "0";
+            this.txtOldAccNo.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center;
+            this.txtOldAccNo.Value = 0;
+            this.txtOldAccNo.ValueType = Janus.Windows.GridEX.NumericEditValueType.Int32;
+            this.txtOldAccNo.VisualStyleManager = this.visualStyleManager1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(624, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 32);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "پرانا کھاتہ نمبر";
+            // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.Location = new System.Drawing.Point(241, 98);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.uiCheckBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiCheckBox1.Size = new System.Drawing.Size(54, 38);
+            this.uiCheckBox1.TabIndex = 23;
+            this.uiCheckBox1.Text = " ایکٹو";
+            // 
             // frmAccountsNew
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1333, 732);
+            this.Controls.Add(this.uiCheckBox1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtOldAccNo);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label8);
@@ -490,5 +540,8 @@
         private System.Windows.Forms.BindingSource bss;
         private Janus.Windows.GridEX.EditControls.EditBox txtRefName;
         private Janus.Windows.EditControls.UIButton uiButton1;
+        private Janus.Windows.GridEX.EditControls.NumericEditBox txtOldAccNo;
+        private System.Windows.Forms.Label label10;
+        private Janus.Windows.EditControls.UICheckBox uiCheckBox1;
     }
 }

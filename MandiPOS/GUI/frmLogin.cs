@@ -1,15 +1,11 @@
-﻿using Dapper;
+﻿
 
+using Dapper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandiPOS.GUI
@@ -28,15 +24,27 @@ namespace MandiPOS.GUI
         private void FrmLogin_Shown(object sender, EventArgs e)
         {
             if (Debugger.IsAttached)
-            { var user=new db().GetList<CLasses.tblUsers>().ToList().First();
+            {
+                var user = new db().GetList<CLasses.tblUsers>().ToList().First();
                 if (user != null)
-                { 
+                {
                     editBox1.Text = user.UserName; // Default username for testing
                     editBox2.Text = user.UserPassword;
-                    
+
                 }
-                uiButton1.Focus();  
+                uiButton1.Focus();
             }
+            DateTime lastDate = new DateTime(2026, 08, 15);
+            if (DateTime.Now.Date > lastDate)
+            {
+                SQL.SaveSettingsByKey(SettingKeys.IsLocked.ToString(), "true");
+            }
+            else
+            {
+                SQL.SaveSettingsByKey(SettingKeys.IsLocked.ToString(), "false");
+            }
+            var isLocked = SQL.IsLocked;
+            lblLocked.Visible = isLocked;
         }
 
         private void LoadExeIcon()
@@ -62,13 +70,14 @@ namespace MandiPOS.GUI
         {
             string username = editBox1.Text.Trim();
             string password = editBox2.Text.Trim();
-            var users=new db().GetList<CLasses.tblUsers>().ToList();
+            var users = new db().GetList<CLasses.tblUsers>().ToList();
             if (users.Any())
             {
                 var user = users.FirstOrDefault(u => u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase) && u.UserPassword == password);
                 if (user != null)
                 {
-                   General.IsAdmin=user.IsAdmin;
+                    General.IsAdmin = user.IsAdmin;
+                    General.MinimumDate = new db().ExecuteScalar<DateTime>("Select Cast(ISNULL(Min(VoucherDate),GetDate()) as Date) as MinDate from Vouchers").Date;
                     General.UserName = user.UserName;
                     General.CurrentUserID = user.UserID;
                     this.DialogResult = DialogResult.OK;
@@ -81,15 +90,15 @@ namespace MandiPOS.GUI
                 }
             }
             else
-            { 
-            this.Error("Unable to login, no users found. Please create a user first.");
+            {
+                this.Error("Unable to login, no users found. Please create a user first.");
                 return;
             }
         }
 
         private void editBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(!string.IsNullOrEmpty(editBox1.Text) && e.KeyCode == Keys.Enter)
+            if (!string.IsNullOrEmpty(editBox1.Text) && e.KeyCode == Keys.Enter)
             {
                 editBox2.Focus();
             }
@@ -97,7 +106,7 @@ namespace MandiPOS.GUI
 
         private void editBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            if(!string.IsNullOrEmpty(editBox2.Text) && e.KeyCode == Keys.Enter)
+            if (!string.IsNullOrEmpty(editBox2.Text) && e.KeyCode == Keys.Enter)
             {
                 uiButton1.PerformClick(); // Simulate button click to login
             }
